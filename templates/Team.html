@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/x-icon" href="logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="navbar.js"></script>
+
+
+  <title>Team</title>
+
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+<script>
+  fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar-placeholder').innerHTML = data;
+
+      // Jetzt erst navbar.js nachladen, wenn DOM + Navbar vorhanden ist
+      const script = document.createElement("script");
+      script.src = "navbar.js";
+      document.body.appendChild(script);
+    });
+</script>
+
+  <h2>Unser Team</h2>
+  <div class="team-section">
+    <div class="team-member">
+      <img src="Passfoto.png" alt="Anna Müller">
+      <div class="team-info">
+        <h3>Anna Müller</h3>
+        <p>Projektmanagerin mit über 10 Jahren Erfahrung in digitalen Lösungen.</p>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="https://via.placeholder.com/100" alt="Max Mustermann">
+      <div class="team-info">
+        <h3>Max Mustermann</h3>
+        <p>Webentwickler mit Schwerpunkt auf Benutzerfreundlichkeit und moderne Frontends.</p>
+      </div>
+    </div>
+    <div class="team-member">
+      <img src="https://via.placeholder.com/100" alt="Max Mustermann">
+      <div class="team-info">
+        <h3>Max Mustermann</h3>
+        <p>Webentwickler mit Schwerpunkt auf Benutzerfreundlichkeit und moderne Frontends.</p>
+      </div>
+    </div>
+    <div class="team-member">
+      <img src="https://via.placeholder.com/100" alt="Max Mustermann">
+      <div class="team-info">
+        <h3>Max Mustermann</h3>
+        <p>Webentwickler mit Schwerpunkt auf Benutzerfreundlichkeit und moderne Frontends.</p>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <footer>
+    <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+    <p>© 2025 Kinderbuchverlag. Alle Rechte vorbehalten.</p>
+  </footer>
+
+  
+ <script>
+    let cartCount = 0;
+
+    function addToCart(bookName, price) {
+      cartCount++;
+      document.getElementById("cart-count").textContent = cartCount;
+      alert(`${bookName} wurde dem Warenkorb hinzugefügt.`);
+    }
+
+    function toggleMenu() {
+      const navLinks = document.getElementById('nav-links');
+      navLinks.classList.toggle('show');
+    }
+    
+
+
+
+  </script>
+
+
+
+</body>
+</html>

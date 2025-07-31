@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kinderbuchverlag</title>
+  <link rel="icon" type="image/x-icon" href="20250519_0944_Logo für Kinderbuchverlag_simple_compose_01jvkqyhcnfbca2467hrfzect7cop.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+    
+      color: #333;
+    }
+
+    header {
+      background-color: #f5eee2;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 1.5em;
+    }
+
+    nav {
+      position: relative;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: #7393B3;
+      font-weight: bold;
+    }
+
+    .cart a {
+      color: #7393B3;
+    }
+
+    .mobile-menu {
+      display: none;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+
+    main {
+      padding: 20px;
+      text-align: center;  }    
+
+    h1 {
+      padding-top: 20px;
+
+      margin-bottom: 20px;
+      color: #0c4d77
+    }
+
+    .book-list {
+      padding-top: 15px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .book {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .book img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+
+    .book button {
+      background-color: #7393B3;
+      border: none;
+      padding: 10px;
+      margin-top: 10px;
+      color: black;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .book button:hover {
+      background-color: #7393B3;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        background-color: #ffcbcb;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        display: none;
+        width: 200px;
+        padding: 10px;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+    }
+    
+
+  </style>
+</head>
+<body>
+
+  <header>
+     <div class="site-title" style="float: left;  font-size: 36px; color: #7393B3; font-weight: bolder; font-family: Montserrat ">
+       <img src="20250519_0944_Logo für Kinderbuchverlag_simple_compose_01jvkqyhcnfbca2467hrfzect7.png" width="120" height="150" style="vertical-align: middle; margin-right: 10px;"> 
+  </div>
+    <nav id="navbar">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Bücher</a></li>
+
+        <li><a href="#kontakt">Kontakt</a></li>
+        <li class="cart"><a href="#">🛒 <span id="cart-count">0</span></a></li>
+      </ul>
+      <div class="mobile-menu" onclick="toggleMenu()">☰</div>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Unsere Bücher</h1>
+    <div class="book-list">
+      <div class="book">
+        <img src="ChatGPT Image Feb 17, 2025, 12_34_20 PM.png" alt="Buch 1">
+        <h2>Abenteuer im Zauberwald</h2>
+        <p>9,99 €</p>
+        <button onclick="addToCart('Abenteuer im Zauberwald', 9.99)">In den Warenkorb</button>
+      </div>
+
+      <div class="book">
+        <img src="ChatGPT Image Feb 17, 2025, 12_34_20 PM.png" alt="Buch 2">
+        <h2>Der kleine Drache</h2>
+        <p>12,49 €</p>
+        <button onclick="addToCart('Der kleine Drache', 12.49)">In den Warenkorb</button>
+      </div>
+
+      <div class="book">
+        <img src="ChatGPT Image Feb 17, 2025, 12_34_20 PM.png" alt="Buch 3">
+        <h2>Märchenhafte Träume</h2>
+        <p>8,49 €</p>
+        <button onclick="addToCart('Märchenhafte Träume', 8.49)">In den Warenkorb</button>
+      </div>
+
+      <div class="book-list">
+      <div class="book">
+        <img src="axve.png" alt="Buch 1">
+        <h2>Abenteuer im Zauberwald</h2>
+        <p>9,99 €</p>
+        <button onclick="addToCart('Abenteuer im Zauberwald', 9.99)">In den Warenkorb</button>
+      </div>
+
+      <div class="book">
+        <img src="Hresh.png" alt="Buch 2">
+        <h2>Der kleine Drache</h2>
+        <p>12,49 €</p>
+        <button onclick="addToCart('Der kleine Drache', 12.49)">In den Warenkorb</button>
+      </div>
+
+      <div class="book">
+        <img src="ta.png" alt="Buch 3">
+        <h2>Märchenhafte Träume</h2>
+        <p>8,49 €</p>
+        <button onclick="addToCart('Märchenhafte Träume', 8.49)">In den Warenkorb</button>
+      </div>
+      <div class="book-list">
+      <div class="book">
+        <img src="axve.png" alt="Buch 1">
+        <h2>Abenteuer im Zauberwald</h2>
+        <p>9,99 €</p>
+        <button onclick="addToCart('Abenteuer im Zauberwald', 9.99)">In den Warenkorb</button>
+      </div>
+
+      <div class="book">
+        <img src="Hresh.png" alt="Buch 2">
+        <h2>Der kleine Drache</h2>
+        <p>12,49 €</p>
+        <button onclick="addToCart('Der kleine Drache', 12.49)">In den Warenkorb</button>
+      </div>
+
+      <div class="book">
+        <img src="ta.png" alt="Buch 3">
+        <h2>Märchenhafte Träume</h2>
+        <p>8,49 €</p>
+        <button onclick="addToCart('Märchenhafte Träume', 8.49)">In den Warenkorb</button>
+      </div>
+    </div>
+  </main>
+
+  <section id="kontakt" style="margin-top: 50px; padding: 40px; ackground-color: #f5eee2;">
+  <h2 style="color: #0c4d77; margin-bottom: 20px; text-align: center;">Kontaktformular</h2>
+  <form style="max-width: 600px; margin: 0 auto; text-align: left;">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;"><br>
+
+    <label for="email">E-Mail:</label><br>
+    <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;"><br>
+
+    <label for="nachricht">Nachricht:</label><br>
+    <textarea id="nachricht" name="nachricht" rows="5" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;"></textarea><br><br>
+
+    <button type="submit" style="background-color: #7393B3; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Absenden</button>
+  </form>
+
+
+  <div style="margin: 50px;">
+    <p style="font-weight: bold; margin: 30px; text-align: center;">Newsletter abonnieren</p>
+    <form onsubmit="event.preventDefault(); alert('Danke für Ihre Anmeldung zum Newsletter!');" style="max-width: 400px; margin: 0 auto;">
+      <input type="email" placeholder="Ihre E-Mail-Adresse" required
+             style="padding: 10px; width: 70%; border: 1px solid #ccc; border-radius: 5px 0 0 5px; outline: none;">
+      <button type="submit"
+              style="padding: 10px 20px; background-color: #7393B3; color: white; border: none; border-radius: 0 5px 5px 0; cursor: pointer;">
+        Anmelden
+      </button>
+    </form>
+  </div>
+
+  
+</section>
+
+<footer style="background-color: #f5eee2;  padding: 30px; text-align: center; color: #333;">
+  
+  <div style="margin: 15px 0;">
+    
+  <a href="https://www.facebook.com/" target="_blank" style="margin:  10px; color: #7393B3; font-size: 3em;">
+    <i class="fab fa-facebook"></i>
+  </a>
+
+  <a href="https://www.instagram.com/" target="_blank" style="margin:  10px; color: #7393B3; font-size: 3em;">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  
+  <p style="font-size: 0.9em;">© 2025 Kinderbuchverlag. Alle Rechte vorbehalten.</p>
+
+ </div>
+
+
+</footer>
+
+  <script>
+    let cartCount = 0;
+
+    function addToCart(bookName, price) {
+      cartCount++;
+      document.getElementById("cart-count").textContent = cartCount;
+      alert(`${bookName} wurde dem Warenkorb hinzugefügt.`);
+    }
+
+    function toggleMenu() {
+      const navLinks = document.getElementById('nav-links');
+      navLinks.classList.toggle('show');
+    }
+    
+
+
+  </script>
+
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unsere Vision - Kinderbuchverlag</title>
+  <link rel="icon" type="image/x-icon" href="logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+   <link rel="stylesheet" href="styles.css">
+   <script src="navbar.js"></script>
+
+ 
+
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+<script>
+  fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar-placeholder').innerHTML = data;
+
+      // Jetzt erst navbar.js nachladen, wenn DOM + Navbar vorhanden ist
+      const script = document.createElement("script");
+      script.src = "navbar.js";
+      document.body.appendChild(script);
+    });
+</script>
+
+  
+
+   
+
+
+ <section id="kontakt" style="margin-top: 20px; padding: 40px; ackground-color: #f5eee2;">
+  <h2 style="color: #0c4d77; margin-bottom: 20px; text-align: center;">Kontaktformular</h2>
+  <form action="/submit" method="POST" style="max-width: 600px; margin: 0 auto; text-align: left;">
+
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;"><br>
+
+    <label for="email">E-Mail:</label><br>
+    <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;"><br>
+
+    <label for="nachricht">Nachricht:</label><br>
+    <textarea id="nachricht" name="message" style="width: 100%; height: 120px; padding: 10px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
+
+    <button type="submit" style="background-color: #7393B3; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Absenden</button>
+  </form>
+
+  
+</section>
+  <!-- <div style="margin: 50px;">
+    <p style="font-weight: bold; margin: 30px; text-align: center;">Newsletter abonnieren</p>
+    <form onsubmit="event.preventDefault(); alert('Danke für Ihre Anmeldung zum Newsletter!');" style="max-width: 400px; margin: 0 auto;">
+      <input type="email" placeholder="Ihre E-Mail-Adresse" required
+             style="padding: 10px; width: 70%; border: 1px solid #ccc; border-radius: 5px 0 0 5px; outline: none;">
+      <button type="submit"
+              style="padding: 10px 20px; background-color: #7393B3; color: white; border: none; border-radius: 0 5px 5px 0; cursor: pointer;">
+        Anmelden
+      </button>
+    </form>
+  </div> -->
+<footer>
+    <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+    <p>© 2025 Kinderbuchverlag. Alle Rechte vorbehalten.</p>
+     </footer>
+   <script>
+    let cartCount = 0;
+
+    function addToCart(bookName, price) {
+      cartCount++;
+      document.getElementById("cart-count").textContent = cartCount;
+      alert(`${bookName} wurde dem Warenkorb hinzugefügt.`);
+    }
+
+    function toggleMenu() {
+      const navLinks = document.getElementById('nav-links');
+      navLinks.classList.toggle('show');
+    }
+    paypal.Buttons({
+  fundingSource: paypal.FUNDING.CARD, // Nur Kreditkarte anzeigen
+  ...
+}).render('#paypal-card-button');
+paypal.Buttons({
+  fundingSource: paypal.FUNDING.GOOGLEPAY,
+  ...
+}).render('#paypal-googlepay-button');
+
+    
+
+
+
+  </script>
+
+
+
+</body>
+</html>
