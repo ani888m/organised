@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="Kinderbuchverlag mit zauberhaften Geschichten für Kinder. Entdecken Sie unsere Bücher und erfahren Sie mehr über unser Team.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kinderbuchverlag</title>
+  <script src="script.js" defer></script>
+  <link rel="icon" type="image/x-icon" href="logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  
+</head>
+<body>
+<div id="navbar-placeholder"></div>
+<script>
+  fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar-placeholder').innerHTML = data;
+    });
+</script>
+
+ 
+  <div class="carousel">
+  <div class="slides">
+    <img src="Screenshot 2025-05-22 at 10.40.20.png" class="carousel-image active" alt="Slide 1">
+    <img src="ChatGPT Image Feb 17, 2025, 12_34_20 PM.png" class="carousel-image" alt="Slide 2">
+    <img src="Screenshot 2025-05-22 at 10.40.20.png" class="carousel-image" alt="Slide 3">
+   </div>
+  </div>
+
+  <section class="verlagsvorschau">
+  <h2>Verlagsvorschau</h2>
+  <div class="vorschau-container">
+    <div class="vorschau-item">
+      <img src="vorschau1.jpg" alt="Buchvorschau 1">
+      <!--<h3>„Zauberwald – Teil 2“</h3>
+      <p>Erscheint im Herbst 2025 – Das spannende Abenteuer geht weiter!</p>-->
+    </div>
+    <div class="vorschau-item">
+      <img src="vorschau2.jpg" alt="Autorin im Gespräch">
+      <!--<h3>Autorin Lisa Stern</h3>
+      <p>Ein exklusives Interview mit unserer beliebtesten Märchenerzählerin.</p>-->
+    </div>
+    <div class="vorschau-item">
+      <img src="vorschau3.jpg" alt="Making-of Illustration">
+      <!--<h3>Ein Blick hinter die Kulissen</h3>
+      <p>So entstehen unsere fantasievollen Illustrationen.</p>-->
+    </div>
+  </div>
+</section>
+
+  <main>
+  <h1>Unsere Bücher</h1>
+   <div class="book-list">
+      
+   
+      <div class="book">
+      	<div class="image-wrapper">
+         <img src="B1.jpg" alt="Buch 1">
+         <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
+        </div>
+        <h2>Abenteuer </h2>
+        <p>9,99 €</p>
+        <button onclick="addToCart('Abenteuer im Zauberwald', 9.99)">In den Warenkorb</button>
+      </div>
+
+      <div class="book">
+        <div class="image-wrapper">
+         <img src="B2.jpg" alt="Buch 2">
+         <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
+        </div>
+        <h2>Der kleine Drache</h2>
+        <p>12,49 €</p>
+        <button onclick="addToCart('Der kleine Drache', 12.49)">In den Warenkorb</button>
+      </div>
+
+      <div class="book">
+        <div class="image-wrapper">
+         <img src="B5.jpg" alt="Buch 3">
+         <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
+        </div>
+        <h2>Märchenhafte Träume</h2>
+        <p>8,49 €</p>
+        <button onclick="addToCart('Märchenhafte Träume', 8.49)">In den Warenkorb</button>
+      </div>
+      
+      <div class="book">
+        <div class="image-wrapper">
+         <img src="B6.jpg" alt="Buch 2">
+         <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
+        </div>
+        <h2>Der kleine Drache</h2>
+        <p>12,49 €</p>
+        <button onclick="addToCart('Der kleine Drache', 12.49)">In den Warenkorb</button>
+      </div>
+
+      <div class="book">
+        <div class="image-wrapper">
+         <img src="B7.jpg" alt="Buch 3">
+         <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
+        </div>
+        <h2>Märchenhafte Träume</h2>
+        <p>8,49 €</p>
+        <button onclick="addToCart('Märchenhafte Träume', 8.49)">In den Warenkorb</button>
+      </div>
+     
+     <div class="book">
+        <div class="image-wrapper">
+         <img src="B3.jpg" alt="Buch 2">
+         <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
+        </div>
+        <h2>Der kleine Drache</h2>
+        <p>12,49 €</p>
+        <button onclick="addToCart('Der kleine Drache', 12.49)">In den Warenkorb</button>
+      </div>
+    </div>
+    
+  </main>
+
+
+
+<div id="newsletter-inline"></div> <!-- Sichtbar unten auf der Seite -->
+<div id="newsletter-popup" class="popup-hidden"></div> <!-- Für das Popup -->
+
+<footer>
+    <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+    <p>© 2025 Kinderbuchverlag. Alle Rechte vorbehalten.</p>
+  </footer>
+
+<script>
+  fetch("nav.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("nav-placeholder").innerHTML = data;
+    });
+</script>
+
+
+
+</body>
+</html>
+
+
+  
