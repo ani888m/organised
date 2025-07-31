@@ -11,7 +11,22 @@
 
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Montserrat&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
-  
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+  <style type="text/css">
+    .book-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 Spalten */
+  gap: 20px; /* Abstand zwischen den Büchern */
+  padding: 20px;
+  max-width: 1000px;      /* Max-Breite des Grids */
+  margin: 0 auto;
+  padding: 120px 0px;
+}
+
+  </style>
+
 </head>
 <body>
 <div id="navbar-placeholder"></div>
@@ -36,17 +51,18 @@
   <h2>Verlagsvorschau</h2>
   <div class="vorschau-container">
     <div class="vorschau-item">
-      <img src="vorschau1.jpg" alt="Buchvorschau 1">
+      <img src="{{ url_for('static', filename='vorschau1.jpg') }}" alt="Logo">
+  
       <!--<h3>„Zauberwald – Teil 2“</h3>
       <p>Erscheint im Herbst 2025 – Das spannende Abenteuer geht weiter!</p>-->
     </div>
     <div class="vorschau-item">
-      <img src="vorschau2.jpg" alt="Autorin im Gespräch">
+      <img src="{{ url_for('static', filename='vorschau2.jpg') }}" alt="Logo">
       <!--<h3>Autorin Lisa Stern</h3>
       <p>Ein exklusives Interview mit unserer beliebtesten Märchenerzählerin.</p>-->
     </div>
     <div class="vorschau-item">
-      <img src="vorschau3.jpg" alt="Making-of Illustration">
+      <img src="{{ url_for('static', filename='vorschau3.jpg') }}" alt="Logo">
       <!--<h3>Ein Blick hinter die Kulissen</h3>
       <p>So entstehen unsere fantasievollen Illustrationen.</p>-->
     </div>
@@ -60,7 +76,7 @@
    
       <div class="book">
       	<div class="image-wrapper">
-         <img src="B1.jpg" alt="Buch 1">
+         <img src="{{ url_for('static', filename='B1.jpg') }}" alt="Buch 1">
          <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
         </div>
         <h2>Abenteuer </h2>
@@ -70,7 +86,7 @@
 
       <div class="book">
         <div class="image-wrapper">
-         <img src="B2.jpg" alt="Buch 2">
+          <img src="{{ url_for('static', filename='B2.jpg') }}" alt="Buch 2">
          <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
         </div>
         <h2>Der kleine Drache</h2>
@@ -80,7 +96,7 @@
 
       <div class="book">
         <div class="image-wrapper">
-         <img src="B5.jpg" alt="Buch 3">
+          <img src="{{ url_for('static', filename='B5.jpg') }}" alt="Buch 5">
          <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
         </div>
         <h2>Märchenhafte Träume</h2>
@@ -90,8 +106,8 @@
       
       <div class="book">
         <div class="image-wrapper">
-         <img src="B6.jpg" alt="Buch 2">
-         <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
+          <img src="{{ url_for('static', filename='B6.jpg') }}" alt="Buch 1">
+          <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
         </div>
         <h2>Der kleine Drache</h2>
         <p>12,49 €</p>
@@ -100,8 +116,8 @@
 
       <div class="book">
         <div class="image-wrapper">
-         <img src="B7.jpg" alt="Buch 3">
-         <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
+          <img src="{{ url_for('static', filename='B1.jpg') }}" alt="Buch 1">
+          <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
         </div>
         <h2>Märchenhafte Träume</h2>
         <p>8,49 €</p>
@@ -110,8 +126,8 @@
      
      <div class="book">
         <div class="image-wrapper">
-         <img src="B3.jpg" alt="Buch 2">
-         <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
+          <img src="{{ url_for('static', filename='B1.jpg') }}" alt="Buch 1">
+          <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
         </div>
         <h2>Der kleine Drache</h2>
         <p>12,49 €</p>
@@ -124,6 +140,7 @@
 
 
 <div id="newsletter-inline"></div> <!-- Sichtbar unten auf der Seite -->
+...
 <div id="newsletter-popup" class="popup-hidden"></div> <!-- Für das Popup -->
 
 <footer>
@@ -146,4 +163,3 @@
 </html>
 
 
-  
