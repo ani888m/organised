@@ -7,6 +7,17 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return render_template('kontact.html')
+def index():
+    return render_template('index.html')
+def index():
+    return render_template('navbar.html')
+def index():
+    return render_template('Team.html')
+def index():
+    return render_template('Team.html')
+def index():
+    return render_template('vision.html')
+
 
 @app.route('/submit', methods=['POST'])
 def submit():
