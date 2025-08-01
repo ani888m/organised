@@ -14,7 +14,7 @@ def navbar():
     return render_template('navbar.html')
 
 @app.route('/team')
-def team(/team):
+def team():
     return render_template('Team.html')
 
 @app.route('/vision')
