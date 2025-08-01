@@ -17,7 +17,7 @@ def index():
 def index():
     return render_template('vision.html')
 def index():
-    return render_template('kontact.html')
+    return render_template('kontakt.html')
 
 
 @app.route('/submit', methods=['POST'])
