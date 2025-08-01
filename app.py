@@ -22,7 +22,7 @@ def vision():
     return render_template('vision.html')
     
 @app.route('/presse')
-def vision():
+def presse():
     return render_template('presse.html')
     
 @app.route('/kontakt')
