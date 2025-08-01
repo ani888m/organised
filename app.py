@@ -21,6 +21,10 @@ def team():
 def vision():
     return render_template('vision.html')
     
+@app.route('/presse')
+def vision():
+    return render_template('presse.html')
+    
 @app.route('/kontakt')
 def kontakt():
     return render_template('kontakt.html')
