@@ -8,12 +8,16 @@ app = Flask(__name__)
 
 def index():
     return render_template('index.html')
-def index():
+    
+@app.route('/navbar')
+def navbar():
     return render_template('navbar.html')
-def index():
+
+@app.route('/team')
+def team(/team):
     return render_template('Team.html')
-def index():
-    return render_template('Team.html')
+
+@app.route('/vision')
 def vision():
     return render_template('vision.html')
     
