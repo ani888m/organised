@@ -14,11 +14,11 @@ def index():
     return render_template('Team.html')
 def index():
     return render_template('Team.html')
-def index():
+def vision():
     return render_template('vision.html')
     
 @app.route('/kontakt')
-def index():
+def kontakt():
     return render_template('kontakt.html')
 
 
