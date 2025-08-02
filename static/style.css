@@ -32,21 +32,21 @@
     }
 
      .logo {
-      height: 150px;
+      height: 250px;
       width: auto;
       transition: width 0.3s ease;
     }
 
     @media (max-width: 768px) {
      .logo {
-      height: 100px; /* kleiner für Tablets & Smartphones */
+      height: 200px; /* kleiner für Tablets & Smartphones */
   
       }
     }
 
     @media (max-width: 480px) {
      .logo {
-      height: 80px; /* noch kleiner für sehr kleine Bildschirme */
+      height: 180px; /* noch kleiner für sehr kleine Bildschirme */
       }
     }
 
