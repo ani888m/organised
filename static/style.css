@@ -39,7 +39,7 @@
 
     @media (max-width: 768px) {
      .logo {
-      width: 80x; /* kleiner für Tablets & Smartphones */
+      width: 80px; /* kleiner für Tablets & Smartphones */
   
       }
     }
