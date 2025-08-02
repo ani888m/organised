@@ -13,19 +13,10 @@
 
 </head>
 <body>
-  <div id="navbar-placeholder"></div>
-<script>
-  fetch('navbar.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('navbar-placeholder').innerHTML = data;
+  {% include 'navbar.html' %}
 
-      // Jetzt erst navbar.js nachladen, wenn DOM + Navbar vorhanden ist
-      const script = document.createElement("script");
-      script.src = "navbar.js";
-      document.body.appendChild(script);
-    });
-</script>
+<div id="navbar-placeholder"></div>
+
 
   
 
