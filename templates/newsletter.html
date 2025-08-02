@@ -1,0 +1,12 @@
+<!-- newsletter.html -->
+<section class="newsletter-section">
+  <!-- Wird nur im Popup sichtbar -->
+  <span class="close-popup" onclick="closePopup()">&times;</span>
+
+  <h2>Melde dich zu unserem Newsletter an!</h2>
+  <p>Erhalte exklusive Neuigkeiten und Angebote rund um unsere Kinderbücher.</p>
+  <form onsubmit="event.preventDefault(); alert('Danke für Ihre Anmeldung zum Newsletter!');">
+    <input type="email" placeholder="Ihre E-Mail-Adresse" required />
+    <button type="submit">Anmelden</button>
+  </form>
+</section>
