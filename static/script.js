@@ -60,11 +60,13 @@ window.addEventListener('load', () => {
 
 
 
-  fetch("newsletter.html")
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById("newsletter-inline").innerHTML = html;
-      document.getElementById("newsletter-popup").innerHTML = html;
-    });
+
+
+fetch("/newsletter-snippet")
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById("newsletter-inline").innerHTML = html;
+    document.getElementById("newsletter-popup").innerHTML = html;
+  });
 
 
