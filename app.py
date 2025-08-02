@@ -4,6 +4,11 @@ from email.mime.text import MIMEText
 
 app = Flask(__name__)
 
+
+
+
+
+
 @app.route('/')
 
 def index():
@@ -29,9 +34,10 @@ def presse():
 def kontakt():
     return render_template('kontakt.html')
 
-@app.route('/newsletter')
-def newsletter():
-    return render_template('newsletter.html')
+
+@app.route("/newsletter-snippet")
+def newsletter_snippet():
+    return render_template("newsletter.html")
 
 
 @app.route('/submit', methods=['POST'])
