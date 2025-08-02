@@ -6,24 +6,15 @@
   <title>Unsere Vision - Kinderbuchverlag</title>
   <link rel="icon" type="image/x-icon" href="logo.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="styles.css">
-  <script src="navbar.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </head>
 <body>
-  <div id="navbar-placeholder"></div>
-<script>
-  fetch('navbar.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('navbar-placeholder').innerHTML = data;
+  {% include 'navbar.html' %}
 
-      // Jetzt erst navbar.js nachladen, wenn DOM + Navbar vorhanden ist
-      const script = document.createElement("script");
-      script.src = "navbar.js";
-      document.body.appendChild(script);
-    });
-</script>
+<div id="navbar-placeholder"></div>
+
   
 
   <main style="text-align: center">
