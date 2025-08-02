@@ -29,6 +29,10 @@ def presse():
 def kontakt():
     return render_template('kontakt.html')
 
+@app.route('/newsletter')
+def newsletter():
+    return render_template('newsletter.html')
+
 
 @app.route('/submit', methods=['POST'])
 def submit():
