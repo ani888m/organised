@@ -330,25 +330,46 @@
   animation: slide 12s infinite;
 }
 
+.carousel {
+  position: relative;
+  max-width: 600px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
 .carousel-image {
   width: 100%;
-  margin: auto;
   flex-shrink: 0;
-  display: none;
+  display: none; /* Nur aktive sichtbar */
 }
 
 .carousel-image.active {
   display: block;
 }
 
-@keyframes slide {
-  0%   { transform: translateX(0); }
-  33%  { transform: translateX(0); }
-  36%  { transform: translateX(-100%); }
-  66%  { transform: translateX(-100%); }
-  69%  { transform: translateX(-200%); }
-  100% { transform: translateX(-200%); }
+button.prev,
+button.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 50%;
+  z-index: 10;
 }
+
+button.prev { left: 10px; }
+button.next { right: 10px; }
+
 
 
 footer {
