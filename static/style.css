@@ -31,24 +31,26 @@
       margin-left: 10px;
     }
 
-     .logo {
-      height: 250px;
-      width: auto;
-      transition: width 0.3s ease;
+    .logo {
+        height: 120px; /* Groß für Desktop */
+        width: auto;
+        transition: height 0.3s ease;
+        display: block;
+        object-fit: contain;
     }
 
-    @media (max-width: 768px) {
+   @media (max-width: 768px) {
      .logo {
-      height: 200px; /* kleiner für Tablets & Smartphones */
-  
-      }
+        height: 100px; /* Tablets */
     }
+  }
 
-    @media (max-width: 480px) {
+   @media (max-width: 480px) {
      .logo {
-      height: 180px; /* noch kleiner für sehr kleine Bildschirme */
-      }
-    }
+        height: 80px; /* Smartphones */
+   }
+  }
+
 
 
     nav {
