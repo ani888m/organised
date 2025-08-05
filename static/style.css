@@ -343,13 +343,18 @@
 }
 
 .carousel-image {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  position: absolute;
+  top: 0; left: 0;
   width: 100%;
-  flex-shrink: 0;
-  display: none; /* Nur aktive sichtbar */
+  height: auto;
 }
 
 .carousel-image.active {
-  display: block;
+  opacity: 1;
+  z-index: 1;
+  position: relative;
 }
 
 button.prev,
@@ -369,6 +374,7 @@ button.next {
 
 button.prev { left: 10px; }
 button.next { right: 10px; }
+
 
 
 
