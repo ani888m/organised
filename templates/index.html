@@ -36,11 +36,14 @@
  
   <div class="carousel">
   <div class="slides">
-    <img src="{{ url_for('static', filename='Screenshot 2025-05-22 at 10.40.20.png') }}"  class="carousel-image" alt="Slide 1">
-    <img src="{{ url_for('static', filename='ChatGPT Image Feb 17, 2025, 12_34_20 PM.png') }}"  class="carousel-image" alt="Slide 2">
-    <img src="{{ url_for('static', filename='Screenshot 2025-05-22 at 10.40.20.png') }}"  class="carousel-image" alt="Slide 3">
-   </div>
+    <img src="{{ url_for('static', filename='Screenshot 2025-05-22 at 10.40.20.png') }}" class="carousel-image active" alt="Slide 1">
+    <img src="{{ url_for('static', filename='ChatGPT Image Feb 17, 2025, 12_34_20 PM.png') }}" class="carousel-image" alt="Slide 2">
+    <img src="{{ url_for('static', filename='Screenshot 2025-05-22 at 10.40.20.png') }}" class="carousel-image" alt="Slide 3">
   </div>
+  <button class="prev">❮</button>
+  <button class="next">❯</button>
+</div>
+
 
   <section class="verlagsvorschau">
   <h2>Verlagsvorschau</h2>
