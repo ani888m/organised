@@ -13,9 +13,11 @@
     
 
    let currentSlide = 0;
+
+// ✅ Diese drei Zeilen haben bei dir gefehlt!
 const slides = document.querySelectorAll(".carousel-image");
-const prevBtn = document.querySelector(".prev");
 const nextBtn = document.querySelector(".next");
+const prevBtn = document.querySelector(".prev");
 
 function showSlide(index) {
   if (index < 0) index = slides.length - 1;
@@ -48,6 +50,10 @@ prevBtn.addEventListener("click", () => {
   showSlide(currentSlide - 1);
   resetInterval();
 });
+
+// 🚀 Starte mit erstem Slide
+showSlide(currentSlide);
+
 
 showSlide(currentSlide);
 
