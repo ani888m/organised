@@ -376,7 +376,23 @@ button.prev { left: 10px; }
 button.next { right: 10px; }
 
 
+/* ✅ Mobile-Friendly Anpassungen */
+@media (max-width: 768px) {
+  .prev,
+  .next {
+    font-size: 18px;
+    padding: 8px;
+  }
 
+  .carousel-image {
+    max-height: 50vh; /* Bildhöhe begrenzen */
+    object-fit: cover;
+  }
+
+  .carousel {
+    max-width: 100%;
+  }
+}
 
 footer {
       background-color: #ebebe3;
