@@ -317,12 +317,14 @@
     }
    
     .carousel {
-  width: 300%;
-
-  max-width: 700px;
-  margin: 0 auto 40px;
+  width: 500%;
+  margin: 0 auto 100px;
   overflow: hidden;
   border-radius: 10px;
+  position: relative;
+  max-width: 800px;
+  margin: auto;
+  overflow: hidden;
 }
 
 .slides {
@@ -330,19 +332,11 @@
   width: 100%;
   height: 100%;
   animation: slide 12s infinite;
-}
-
-.carousel {
-  position: relative;
-  max-width: 600px;
-  margin: auto;
-  overflow: hidden;
-}
-
-.slides {
-  display: flex;
   flex-wrap: nowrap;
 }
+
+
+
 
 .carousel-image {
   opacity: 0;
