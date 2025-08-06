@@ -109,8 +109,10 @@
     .cart a {
       color: #7393B3;
     }
-
-   
+.mobile-menu,
+.close-menu {
+  display: none;
+}  
 
 @media (max-width: 768px) {
   .nav-links {
@@ -156,10 +158,7 @@
     cursor: pointer;
   }
 }
-.mobile-menu,
-.close-menu {
-  display: none;
-}
+
 
 
 .carousel {
