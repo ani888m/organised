@@ -165,7 +165,7 @@
 .carousel {
   position: relative;
   z-index: 1;
-  max-width: 1000px;     /* oder 500px oder was du möchtest */
+  max-width: 1200px;     /* oder 500px oder was du möchtest */
   width: 100%;
   margin: 0 auto 100px; /* auto = zentriert */
   overflow: hidden;
@@ -183,7 +183,7 @@
   height: auto;
   pointer-events: none; /* verhindert Klicks */
   height: 800px;
-  width: 600px
+  width: 1200px
 }
 
 .carousel-image.active {
