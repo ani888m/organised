@@ -110,58 +110,7 @@
       color: #7393B3;
     }
 
-    .mobile-menu {
-      display: none;
-      font-size: 1.5em;
-      cursor: pointer;
-      margin-top: 55px;
-      z-index: 1001;
-      position: relative;
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        flex-direction: column;
-        background-color: #fdfdfc;
-        position: absolute;
-        top: 160px;
-        right: 0;
-        display: none;
-        width: 200px;
-      }
-
-      .nav-links.show {
-
-        display: flex;
-      }
-
-      .dropdown-content {
-        position: relative;
-        box-shadow: none;
-        background-color: transparent;
-        padding-left: 15px;
-      }
-
-      .dropdown-content li a {
-        background-color: transparent;
-        display: flex;
-      }
-
-      .dropdown.open .dropdown-content {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .mobile-menu {
-        display: block;
-      }
-    }
-    @media (min-width: 769px) {
-   .nav-links li {
-    display: flex;
-    align-items: center; /* Optional für vertikale Zentrierung */
-  }
-}
+   
 
 @media (max-width: 768px) {
   .nav-links {
