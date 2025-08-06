@@ -1,5 +1,5 @@
 <!-- navbar.html -->
-<header>
+<!-- <header>
 
 <div class="site-title" style="float: left; margin-left: 10px;">
   <a href="index.html">
@@ -7,6 +7,129 @@
   </a>
 </div>
 
+
+  <nav id="navbar">
+    <ul class="nav-links" id="nav-links">
+     
+      <li class="dropdown" onclick="toggleDropdown(this)">
+        <a href="#">Über uns <i class="fas fa-caret-down"></i></a>
+        <ul class="dropdown-content">
+          <li><a href="Team.html">AutorInnen</a></li>
+          <li><a href="{{ url_for('team') }}">Übersetzerinnen</a></li>
+          <li><a href="{{ url_for('vision') }}">Unsere Vision</a></li>
+          <li><a href="{{ url_for('presse') }}">Presse</a></li>
+        </ul>
+      </li>
+      <li><a href="{{ url_for('kontakt') }}">Kontakt</a></li>
+      <li class="cart"><a href="checkout.html">🛒 <span id="cart-count">0</span></a></li>
+    </ul>
+    <div class="mobile-menu" onclick="toggleMenu()">☰</div>
+  </nav>
+</header> -->
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deine Seite</title>
+
+  <!-- FontAwesome für Pfeil-Icons (optional) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    /* Deine bestehenden Styles hier (nur relevantes CSS unten) */
+
+    .mobile-fullscreen-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #fdfdfc;
+      flex-direction: column;
+      padding: 40px 20px;
+      z-index: 10000;
+      overflow-y: auto;
+    }
+
+    .mobile-fullscreen-menu.show {
+      display: flex;
+    }
+
+    .close-menu {
+      font-size: 2.5rem;
+      font-weight: bold;
+      align-self: flex-end;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      padding-left: 0;
+      width: 100%;
+    }
+
+    .mobile-nav-links li {
+      margin-bottom: 20px;
+    }
+
+    .mobile-nav-links li a {
+      text-decoration: none;
+      font-size: 1.6rem;
+      color: #7393B3;
+      display: block;
+    }
+
+    .mobile-nav-links .dropdown-content {
+      display: none;
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    .mobile-nav-links .dropdown.open > .dropdown-content {
+      display: block;
+    }
+
+    .mobile-nav-links .dropdown > a {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-nav-links .dropdown > a i {
+      margin-left: 10px;
+    }
+
+    /* Hamburger icon styles */
+    .mobile-menu {
+      display: none;
+      font-size: 1.5em;
+      cursor: pointer;
+      margin-top: 55px;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-menu {
+        display: block;
+      }
+
+      nav ul.nav-links {
+        display: none; /* verstecke das Desktop Menü auf kleineren Bildschirmen */
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="site-title" style="float: left; margin-left: 10px;">
+    <a href="index.html">
+      <img class="logo" src="{{ url_for('static', filename='LogoKinderbuchverlag.png') }}" alt="Logo" />
+    </a>
+  </div>
 
   <nav id="navbar">
     <ul class="nav-links" id="nav-links">
@@ -23,6 +146,44 @@
       <li><a href="{{ url_for('kontakt') }}">Kontakt</a></li>
       <li class="cart"><a href="checkout.html">🛒 <span id="cart-count">0</span></a></li>
     </ul>
+
     <div class="mobile-menu" onclick="toggleMenu()">☰</div>
   </nav>
 </header>
+
+<!-- Fullscreen Mobile Menu -->
+<div id="mobile-fullscreen-menu" class="mobile-fullscreen-menu">
+  <div class="close-menu" onclick="closeMobileMenu()">✕</div>
+  <ul class="mobile-nav-links">
+    <li class="dropdown" onclick="toggleDropdown(this)">
+      <a href="#">Über uns <i class="fas fa-caret-down"></i></a>
+      <ul class="dropdown-content">
+        <li><a href="Team.html">AutorInnen</a></li>
+        <li><a href="{{ url_for('team') }}">Übersetzerinnen</a></li>
+        <li><a href="{{ url_for('vision') }}">Unsere Vision</a></li>
+        <li><a href="{{ url_for('presse') }}">Presse</a></li>
+      </ul>
+    </li>
+    <li><a href="{{ url_for('kontakt') }}">Kontakt</a></li>
+    <li class="cart"><a href="checkout.html">🛒 <span id="cart-count">0</span></a></li>
+  </ul>
+</div>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('mobile-fullscreen-menu').classList.add('show');
+  }
+
+  function closeMobileMenu() {
+    document.getElementById('mobile-fullscreen-menu').classList.remove('show');
+  }
+
+  function toggleDropdown(element) {
+    element.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
+
+
