@@ -336,7 +336,7 @@
   height: auto;
   pointer-events: none; /* verhindert Klicks */
   max-height: 700px;
-max-bright: 500px
+ max-width: 600px
 }
 
 .carousel-image.active {
