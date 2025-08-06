@@ -6,18 +6,17 @@
       alert(`${bookName} wurde dem Warenkorb hinzugefügt.`);
     }
 
-function toggleMenu() {
-      const navLinks = document.getElementById('nav-links');
-      navLinks.classList.toggle('show');
-    }
-
 function toggleMobileMenu() {
-  const navLinks = document.querySelector('.nav-links');
-  const closeBtn = document.querySelector('.close-menu');
+  const nav = document.querySelector('.nav-links');
+  nav.classList.toggle('show');
 
-  navLinks.classList.toggle('show');
-  closeBtn.classList.toggle('show'); // optional, falls du separat steuern willst
+  if (nav.classList.contains('show')) {
+    document.body.style.overflow = 'hidden'; // Seite nicht scrollen
+  } else {
+    document.body.style.overflow = '';
+  }
 }
+
 
 
    let currentSlide = 0;
