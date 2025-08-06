@@ -6,7 +6,10 @@
       alert(`${bookName} wurde dem Warenkorb hinzugefügt.`);
     }
 
-    
+function toggleMenu() {
+      const navLinks = document.getElementById('nav-links');
+      navLinks.classList.toggle('show');
+    }
 
 function toggleMobileMenu() {
   const navLinks = document.querySelector('.nav-links');
