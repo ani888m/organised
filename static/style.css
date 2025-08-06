@@ -156,7 +156,10 @@
     cursor: pointer;
   }
 }
-
+.mobile-menu,
+.close-menu {
+  display: none;
+}
 
 
 .carousel {
