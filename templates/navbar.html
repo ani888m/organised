@@ -6,14 +6,12 @@
   </div>
 
   <!-- Mobile Buttons & Navigation müssen direkt nebeneinander sein -->
-  <div class="mobile-controls">
-    <div class="mobile-menu" onclick="toggleMobileMenu()">
-      <i class="fas fa-bars"></i>
-    </div>
+ <div class="nav-container">
+  <div class="mobile-menu" onclick="toggleMobileMenu()">☰</div>
+  <div class="close-menu" onclick="toggleMobileMenu()">✖</div>
+  <ul class="nav-links">…</ul>
+</div>
 
-    <div class="close-menu" onclick="toggleMobileMenu()">
-      <i class="fas fa-times"></i>
-    </div>
 
     <ul class="nav-links" id="nav-links">
       <li class="dropdown" onclick="toggleDropdown(this)">
