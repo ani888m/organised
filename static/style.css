@@ -324,6 +324,7 @@
 .carousel {
   position: relative;
   z-index: 1;
+ margin: 0 auto 100px;
 }
 
 .carousel-image {
@@ -336,7 +337,7 @@
   height: auto;
   pointer-events: none; /* verhindert Klicks */
   max-height: 700px;
- max-width: 600px
+  max-width: 600px
 }
 
 .carousel-image.active {
