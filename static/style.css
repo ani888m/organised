@@ -162,6 +162,68 @@
 }
 
 
+.carousel {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;     /* oder 500px oder was du möchtest */
+  width: 100%;
+  margin: 0 auto 100px; /* auto = zentriert */
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+
+.carousel-image {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  pointer-events: none; /* verhindert Klicks */
+  max-height: 900px;
+  max-width: 800px
+}
+
+.carousel-image.active {
+  opacity: 1;
+  z-index: 1;
+  position: relative;
+  pointer-events: auto;
+}
+
+
+.slides {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  animation: slide 12s infinite;
+  flex-wrap: nowrap;
+}
+
+
+
+button.prev,
+button.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+button.prev { left: 10px; }
+button.next { right: 10px; }
+
+
+
     main {
       padding: 100px 20px;
       background-color: transparent;
@@ -321,65 +383,6 @@
       }
     }
 
-.carousel {
-  position: relative;
-  z-index: 1;
-  max-width: 600px;     /* oder 500px oder was du möchtest */
-  width: 100%;
-  margin: 0 auto 100px; /* auto = zentriert */
-  overflow: hidden;
-  border-radius: 10px;
-}
-
-
-.carousel-image {
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
-  pointer-events: none; /* verhindert Klicks */
-  max-height: 700px;
-  max-width: 600px
-}
-
-.carousel-image.active {
-  opacity: 1;
-  z-index: 1;
-  position: relative;
-  pointer-events: auto;
-}
-
-
-.slides {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  animation: slide 12s infinite;
-  flex-wrap: nowrap;
-}
-
-
-
-button.prev,
-button.next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0,0,0,0.5);
-  color: white;
-  border: none;
-  padding: 12px;
-  cursor: pointer;
-  font-size: 18px;
-  border-radius: 50%;
-  z-index: 10;
-}
-
-button.prev { left: 10px; }
-button.next { right: 10px; }
 
 
 /* ✅ Mobile-Friendly Anpassungen */
