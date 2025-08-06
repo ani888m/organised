@@ -187,14 +187,16 @@
       margin-bottom: 20px;
     }
 
-
-.book-list {
+  .book-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(3, 1fr); /* 3 Spalten */
+  gap: 20px; /* Abstand zwischen den Büchern */
   padding: 20px;
-
-}
+  max-width: 1000px;      /* Max-Breite des Grids */
+  margin: 0 auto;
+  padding: 120px 0px;
+  }
+  
 
 
 .book {
