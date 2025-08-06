@@ -37,6 +37,7 @@
         transition: height 0.3s ease;
         display: block;
         object-fit: contain;
+       padding-left: 200px;
     }
 
    @media (max-width: 768px) {
