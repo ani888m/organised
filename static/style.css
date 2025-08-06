@@ -55,7 +55,7 @@
 
     nav {
       position: relative;
-    
+      z-index: 9999;
       }
 
    .nav-links {
@@ -319,15 +319,14 @@
       }
     }
    
-    .carousel {
+.carousel {
   width: 500%;
   margin: 0 auto 100px;
   overflow: hidden;
   border-radius: 10px;
   position: relative;
+  z-index: 9999;
   max-width: 800px;
-  margin: auto;
-  overflow: hidden;
 }
 
 .slides {
