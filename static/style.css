@@ -37,7 +37,7 @@
         transition: height 0.3s ease;
         display: block;
         object-fit: contain;
-       padding-left: 200px;
+        padding: 40px;
     }
 
    @media (max-width: 768px) {
@@ -45,6 +45,7 @@
         height: 100px; /* Tablets */
     }
   }
+
 
    @media (max-width: 480px) {
      .logo {
@@ -161,6 +162,52 @@
     align-items: center; /* Optional für vertikale Zentrierung */
   }
 }
+
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fdfdfc;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    z-index: 9998;
+    display: none;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .close-menu {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    color: #7393B3;
+    z-index: 9999;
+    display: none;
+    cursor: pointer;
+  }
+
+  .nav-links.show ~ .close-menu {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: block;
+    z-index: 10000;
+    position: relative;
+    font-size: 1.8rem;
+    color: #7393B3;
+    cursor: pointer;
+  }
+}
+
 
 
 .carousel {
