@@ -109,55 +109,57 @@
     .cart a {
       color: #7393B3;
     }
-.mobile-menu,
-.close-menu {
-  display: none;
-}  
+
+   
 
 @media (max-width: 768px) {
   .nav-links {
     position: fixed;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: white;
-    display: none;
+    background-color: #fdfdfc;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 9998;
     gap: 30px;
+    z-index: 9998;
+    display: none;
   }
 
   .nav-links.show {
     display: flex;
   }
 
-  .mobile-menu,
   .close-menu {
     position: fixed;
     top: 20px;
     right: 20px;
     font-size: 2rem;
+    color: #7393B3;
     z-index: 9999;
+    display: none;
     cursor: pointer;
-    display: none;
-  }
-
-  .mobile-menu {
-    display: block;
-  }
-
-  .nav-links.show ~ .mobile-menu {
-    display: none;
   }
 
   .nav-links.show ~ .close-menu {
     display: block;
   }
+
+  .mobile-menu {
+    display: block;
+    z-index: 10000;
+    position: relative;
+    font-size: 1.8rem;
+    color: #7393B3;
+    cursor: pointer;
+  }
 }
-
-
+.mobile-menu,
+.close-menu {
+  display: none;
+}
 
 
 .carousel {
