@@ -7,15 +7,13 @@
     }
 
 function toggleMobileMenu() {
-  const nav = document.querySelector('.nav-links');
-  nav.classList.toggle('show');
+  const navLinks = document.querySelector('.nav-links');
+  const closeBtn = document.querySelector('.close-menu');
 
-  if (nav.classList.contains('show')) {
-    document.body.style.overflow = 'hidden'; // Seite nicht scrollen
-  } else {
-    document.body.style.overflow = '';
-  }
+  navLinks.classList.toggle('show');
+  closeBtn.classList.toggle('show'); // optional, falls du separat steuern willst
 }
+
 
 
 
