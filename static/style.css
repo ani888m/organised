@@ -324,8 +324,13 @@
 .carousel {
   position: relative;
   z-index: 1;
- margin: 0 auto 100px;
+  max-width: 600px;     /* oder 500px oder was du möchtest */
+  width: 100%;
+  margin: 0 auto 100px; /* auto = zentriert */
+  overflow: hidden;
+  border-radius: 10px;
 }
+
 
 .carousel-image {
   opacity: 0;
