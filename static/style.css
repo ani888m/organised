@@ -113,6 +113,8 @@
       font-size: 1.5em;
       cursor: pointer;
       margin-top: 55px;
+      z-index: 1001;
+      position: relative;
     }
 
     @media (max-width: 768px) {
