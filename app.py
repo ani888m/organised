@@ -74,3 +74,29 @@ def send_email(name, email, message):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+from flask import Flask, request, redirect, flash, render_template
+import csv
+
+app = Flask(__name__)
+app.secret_key = 'irgendetwasgeheimes'  # wichtig für Flash-Messages
+
+@app.route('/newsletter', methods=['POST'])
+def newsletter():
+    email = request.form.get('email')
+
+    if not email:
+        flash('Bitte gib eine gültige E-Mail-Adresse ein.', 'error')
+        return redirect('/')
+
+    try:
+        with open('newsletter_anmeldungen.csv', mode='a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow([email])
+        flash('Danke für deine Anmeldung zum Newsletter!', 'success')
+    except Exception as e:
+        flash('Es gab ein Problem bei der Anmeldung.', 'error')
+
+    return redirect('/')
+
