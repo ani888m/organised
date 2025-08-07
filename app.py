@@ -1,19 +1,18 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, flash
 import smtplib
 from email.mime.text import MIMEText
+import csv
 
 app = Flask(__name__)
+app.secret_key = 'irgendetwasgeheimes'  # wichtig für Flash-Messages
 
 
-
-
-
-
+# Startseite
 @app.route('/')
-
 def index():
     return render_template('index.html')
-    
+
+# Unterseiten
 @app.route('/navbar')
 def navbar():
     return render_template('navbar.html')
@@ -25,21 +24,21 @@ def team():
 @app.route('/vision')
 def vision():
     return render_template('vision.html')
-    
+
 @app.route('/presse')
 def presse():
     return render_template('presse.html')
-    
+
 @app.route('/kontakt')
 def kontakt():
     return render_template('kontakt.html')
-
 
 @app.route("/newsletter-snippet")
 def newsletter_snippet():
     return render_template("newsletter.html")
 
 
+# 📬 Kontaktformular-Submit
 @app.route('/submit', methods=['POST'])
 def submit():
     name = request.form['name']
@@ -49,6 +48,7 @@ def submit():
     send_email(name, email, message)
 
     return "Danke! Deine Nachricht wurde gesendet."
+
 
 def send_email(name, email, message):
     sender = 'antonyan125@gmail.com'
@@ -72,16 +72,8 @@ def send_email(name, email, message):
     except Exception as e:
         print("Fehler beim Senden:", e)
 
-if __name__ == '__main__':
-    app.run(debug=True)
 
-
-from flask import Flask, request, redirect, flash, render_template
-import csv
-
-app = Flask(__name__)
-app.secret_key = 'irgendetwasgeheimes'  # wichtig für Flash-Messages
-
+# 📨 Newsletter-Submit
 @app.route('/newsletter', methods=['POST'])
 def newsletter():
     email = request.form.get('email')
@@ -100,3 +92,7 @@ def newsletter():
 
     return redirect('/')
 
+
+# 🔁 App starten
+if __name__ == '__main__':
+    app.run(debug=True)
