@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, flash
 import smtplib
 from email.mime.text import MIMEText
-import csv
 
 app = Flask(__name__)
 app.secret_key = 'irgendetwasgeheimes'  # wichtig für Flash-Messages
@@ -73,7 +72,7 @@ def send_email(name, email, message):
         print("Fehler beim Senden:", e)
 
 
-# 📨 Newsletter-Submit
+# 📨 Newsletter-Submit (nur E-Mail-Benachrichtigung)
 @app.route('/newsletter', methods=['POST'])
 def newsletter():
     email = request.form.get('email')
@@ -83,14 +82,36 @@ def newsletter():
         return redirect('/')
 
     try:
-        with open('newsletter_anmeldungen.csv', mode='a', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow([email])
+        send_newsletter_email(email)
         flash('Danke für deine Anmeldung zum Newsletter!', 'success')
     except Exception as e:
+        print("Fehler beim Newsletter-Versand:", e)
         flash('Es gab ein Problem bei der Anmeldung.', 'error')
 
     return redirect('/')
+
+
+def send_newsletter_email(email):
+    sender = 'antonyan125@gmail.com'
+    app_password = 'ffutcvkflhcgiijl'
+    recipient = 'antonyan125@gmail.com'
+
+    subject = 'Neue Newsletter-Anmeldung'
+    body = f'Neue Newsletter-Anmeldung:\n\n{email}'
+
+    msg = MIMEText(body)
+    msg['Subject'] = subject
+    msg['From'] = sender
+    msg['To'] = recipient
+
+    try:
+        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+        server.login(sender, app_password)
+        server.sendmail(sender, recipient, msg.as_string())
+        server.quit()
+        print("Newsletter-Benachrichtigung gesendet!")
+    except Exception as e:
+        print("Fehler beim Senden der Newsletter-Benachrichtigung:", e)
 
 
 # 🔁 App starten
