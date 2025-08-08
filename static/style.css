@@ -40,6 +40,8 @@
      .logo {
         height: 100px; /* Tablets */
     }
+               padding: 5px 10px;
+
   }
 
 
@@ -47,6 +49,8 @@
      .logo {
         height: 80px; /* Smartphones */
    }
+         padding: 5px 10px;
+
   }
 
 
