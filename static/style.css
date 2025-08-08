@@ -16,6 +16,7 @@
       justify-content: space-between;
       padding: 20px 110px;
       flex-wrap: wrap;
+
     }
 
     .site-title {
@@ -41,7 +42,7 @@
         height: 100px; /* Tablets */
     }
 header {
-         padding: 5px 10px;
+         padding: 25px;
       }
   }
 
@@ -51,7 +52,7 @@ header {
         height: 80px; /* Smartphones */
    }
       header {
-         padding: 5px 10px;
+         padding: 25px;
       }
   }
 
@@ -68,7 +69,7 @@ header {
       gap: 20px;
       position: relative;
       margin-top: 80px;
-
+      padding-right:40px;
       }
 
     .nav-links li {
