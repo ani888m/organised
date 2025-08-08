@@ -672,3 +672,29 @@ footer {
   font-size: 0.95rem;
   color: #666;
 }
+
+
+.thank-you-container {
+  max-width: 600px;
+  margin: 100px auto;
+  padding: 40px;
+  text-align: center;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-family: sans-serif;
+}
+
+.thank-you-container h1 {
+  color: #2c3e50;
+}
+
+.thank-you-container a {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  color: white;
+  background-color: #3498db;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
