@@ -88,7 +88,9 @@ def newsletter():
         print("Fehler beim Newsletter-Versand:", e)
         flash('Es gab ein Problem bei der Anmeldung.', 'error')
 
-    return redirect('/')
+@app.route('/danke')
+def danke():
+    return render_template('danke.html')
 
 
 def send_newsletter_email(email):
@@ -117,3 +119,7 @@ def send_newsletter_email(email):
 # 🔁 App starten
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+
