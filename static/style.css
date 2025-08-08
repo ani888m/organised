@@ -36,9 +36,7 @@
         width: auto;
         transition: height 0.3s ease;
         display: block;
-        object-fit: contain;
-        margin-left: 150px;
-        
+        object-fit: contain;        
     }
 
    @media (max-width: 768px) {
@@ -66,8 +64,7 @@
       display: flex;
       gap: 20px;
       position: relative;
-      margin-top: 90px;
-      margin: 100px;
+      margin: 90px 90px 20px 100px;
       }
 
     .nav-links li {
