@@ -254,7 +254,7 @@ button.next { right: 10px; }
   grid-template-columns: repeat(4, 1fr); /* 3 Spalten */
   gap: 20px; /* Abstand zwischen den Büchern */
   padding: 20px;
-  max-width: 1300px;      /* Max-Breite des Grids */
+  max-width: 1500px;      /* Max-Breite des Grids */
   margin: 0 auto;
   padding: 120px 0px;
   }
