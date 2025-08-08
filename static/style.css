@@ -57,7 +57,7 @@
     nav {
       position: relative;
       z-index: 9999;
-      margin-left: 100px;
+      margin: 0px 90px 0px 0px;
       }
 
    .nav-links {
@@ -65,7 +65,6 @@
       display: flex;
       gap: 20px;
       position: relative;
-      margin: 0px 90px 0px 0px;
       }
 
     .nav-links li {
