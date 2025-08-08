@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <title>Danke für Ihre Anmeldung</title>
+  <meta charset="UTF-8">
+  <title>Danke!</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <h1>Danke für Ihre Anmeldung zum Newsletter!</h1>
-  <p>Wir freuen uns, Sie bald mit Neuigkeiten versorgen zu dürfen.</p>
-  <a href="/">Zurück zur Startseite</a>
+  <div class="thank-you-container">
+    <h1>Vielen Dank für Ihre Anmeldung!</h1>
+    <p>Sie erhalten künftig Neuigkeiten rund um unsere Kinderbücher.</p>
+    <a href="/">Zurück zur Startseite</a>
+  </div>
 </body>
 </html>
