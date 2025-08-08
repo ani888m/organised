@@ -254,7 +254,7 @@ button.next { right: 10px; }
   grid-template-columns: repeat(4, 1fr); /* 4 Spalten */
   gap: 20px;
   padding: 20px;
-  max-width: 1300px; /* genug Platz für 4 Bücher */
+  max-width: 100%; /* genug Platz für 4 Bücher */
   margin: 0 auto;
   padding: 120px 0px;
 }
