@@ -11,6 +11,9 @@
 
 
    header {
+      position: sticky;
+      z-index: 1000;  /* Damit sie über anderen Inhalten liegt */
+      background-color: white; /* Hintergrundfarbe nicht vergessen */
       display: flex;
       align-items: center;
       justify-content: space-between;
