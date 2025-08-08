@@ -11,6 +11,7 @@ app.secret_key = 'irgendetwasgeheimes'  # wichtig für Flash-Messages
 def index():
     return render_template('index.html')
 
+
 # Unterseiten
 @app.route('/navbar')
 def navbar():
@@ -45,13 +46,12 @@ def submit():
     message = request.form['message']
 
     send_email(name, email, message)
-
     return "Danke! Deine Nachricht wurde gesendet."
 
 
 def send_email(name, email, message):
     sender = 'antonyan125@gmail.com'
-    app_password = 'ffutcvkflhcgiijl'
+    app_password = 'ffutcvkflhcgiijl'  # Achtung: Sicherheitsrisiko öffentlich
     recipient = 'antonyan125@gmail.com'
 
     subject = f'Neue Nachricht von {name}'
@@ -72,7 +72,7 @@ def send_email(name, email, message):
         print("Fehler beim Senden:", e)
 
 
-# 📨 Newsletter-Submit (nur E-Mail-Benachrichtigung)
+# 📨 Newsletter-Submit (mit Weiterleitung zur Danke-Seite)
 @app.route('/newsletter', methods=['POST'])
 def newsletter():
     email = request.form.get('email')
@@ -83,11 +83,14 @@ def newsletter():
 
     try:
         send_newsletter_email(email)
-        flash('Danke für deine Anmeldung zum Newsletter!', 'success')
+        return redirect('/danke')
     except Exception as e:
         print("Fehler beim Newsletter-Versand:", e)
         flash('Es gab ein Problem bei der Anmeldung.', 'error')
+        return redirect('/')
 
+
+# Danke-Seite anzeigen
 @app.route('/danke')
 def danke():
     return render_template('danke.html')
@@ -119,7 +122,3 @@ def send_newsletter_email(email):
 # 🔁 App starten
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
-
