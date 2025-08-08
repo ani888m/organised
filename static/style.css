@@ -14,7 +14,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 20px 100px;
+      padding: 20px 110px;
       margin-right: 40px;
       flex-wrap: wrap;
     }
@@ -62,7 +62,6 @@
       display: flex;
       gap: 20px;
       position: relative;
-     margin: 90px 90px 20px 90px;
 
       }
 
