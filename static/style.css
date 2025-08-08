@@ -37,7 +37,7 @@
         transition: height 0.3s ease;
         display: block;
         object-fit: contain;
-        left: 150px;
+        margin-left: 150px;
         
     }
 
@@ -67,7 +67,7 @@
       gap: 20px;
       position: relative;
       margin-top: 90px;
-      margin-right: 100px;
+      margin: 100px;
       }
 
     .nav-links li {
