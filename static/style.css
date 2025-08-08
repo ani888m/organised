@@ -40,8 +40,9 @@
      .logo {
         height: 100px; /* Tablets */
     }
-               padding: 5px 10px;
-
+header {
+         padding: 5px 10px;
+      }
   }
 
 
@@ -49,8 +50,9 @@
      .logo {
         height: 80px; /* Smartphones */
    }
+      header {
          padding: 5px 10px;
-
+      }
   }
 
 
