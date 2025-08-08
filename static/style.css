@@ -20,6 +20,7 @@
       justify-content: space-between;
       padding: 20px 110px;
       flex-wrap: wrap;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
     }
 
