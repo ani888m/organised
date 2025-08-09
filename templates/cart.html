@@ -46,9 +46,8 @@
         div.innerHTML = `
           <img src="${item.image}" alt="${item.title}" style="width:150px; height:auto; border:1px solid #ccc;">
           <div>
-            <strong>${item.title}</strong><br>
             ${item.price.toFixed(2)} € x ${item.quantity} = ${itemTotal.toFixed(2)} €
-            <br>
+            
             <button onclick="removeFromCart('${item.title}')">Entfernen</button>
           </div>
         `;
