@@ -39,6 +39,11 @@ def kontakt():
 @app.route("/newsletter-snippet")
 def newsletter_snippet():
     return render_template("newsletter.html")
+    
+@app.route('/checkout')
+def checkout():
+    return render_template('checkout.html')
+
 
 
 # ---------- KONTAKT ----------
