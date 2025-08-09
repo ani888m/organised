@@ -1,10 +1,25 @@
     let cartCount = 0;
 
-    function addToCart(bookName, price) {
-      cartCount++;
-      document.getElementById("cart-count").textContent = cartCount;
-      alert(`${bookName} wurde dem Warenkorb hinzugefügt.`);
-    }
+   function addToCart(bookName, price) {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  // Prüfen ob das Buch schon drin ist, dann Menge erhöhen
+  let existingItem = cart.find(item => item.title === bookName);
+  if (existingItem) {
+    existingItem.quantity++;
+  } else {
+    cart.push({title: bookName, price: price, quantity: 1});
+  }
+
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  // Gesamtanzahl der Bücher im Warenkorb zählen
+  let cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+  document.getElementById("cart-count").textContent = cartCount;
+
+  alert(`${bookName} wurde dem Warenkorb hinzugefügt.`);
+}
+
 
 function toggleMobileMenu() {
   const navLinks = document.querySelector('.nav-links');
