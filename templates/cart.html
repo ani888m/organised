@@ -24,56 +24,6 @@
 
 
 
-  <script>
-    function loadCart() {
-      let cart = JSON.parse(localStorage.getItem('cart')) || [];
-      let container = document.getElementById('cart-items');
-      container.innerHTML = '';
-
-      if(cart.length === 0) {
-        container.innerHTML = '<p>Dein Warenkorb ist leer.</p>';
-        document.getElementById('total-price').textContent = '0.00';
-        return;
-      }
-
-      let total = 0;
-
-      cart.forEach(item => {
-        let itemTotal = item.price * item.quantity;
-        total += itemTotal;
-
-        let div = document.createElement('div');
-        div.innerHTML = `
-          <strong>${item.title}</strong> - ${item.price.toFixed(2)} € x ${item.quantity} = ${itemTotal.toFixed(2)} €
-          <button onclick="removeFromCart('${item.title}')">Entfernen</button>
-        `;
-        container.appendChild(div);
-      });
-
-      document.getElementById('total-price').textContent = total.toFixed(2);
-    }
-
-    function removeFromCart(title) {
-      let cart = JSON.parse(localStorage.getItem('cart')) || [];
-      // Artikel entfernen, dessen Titel mit dem übergebenen übereinstimmt
-      cart = cart.filter(item => item.title !== title);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      loadCart(); // Warenkorb neu laden und anzeigen
-
-      // Optional: auch den Zähler auf der Hauptseite aktualisieren (wenn du dort ein Update willst)
-      if (window.opener) {
-        window.opener.updateCartCount && window.opener.updateCartCount();
-      }
-    }
-
-    window.onload = loadCart;
-
-    document.getElementById('checkout-btn').addEventListener('click', () => {
-  // Weiterleitung zur Flask-Route /checkout
-  window.location.href = '/checkout';
-});
-
-
-  </script>
+  
 </body>
 </html>
