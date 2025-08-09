@@ -7,7 +7,8 @@
 <body style="margin-left: 100px">
   <h1 style="margin:50px">Warenkorb</h1>
   <div id="cart-items" style="padding:20px; font-size: 20px"></div>
-  <h2 style="margin:50px">Gesamt: <span id="total-price">0.00</span> €</h2>
+  <div style="display: flex; align-items: center; gap: 20px; margin: 50px;">
+  <h2>Gesamt: <span id="total-price">0.00</span> €</h2>
   <button id="checkout-btn" style="
     background-color: #000;
     color: #fff;
@@ -15,9 +16,10 @@
     font-size: 1.1rem;
     border: none;
     padding: 20px 80px;
-    margin-left: 500px;
     cursor: pointer;
     transition: background-color 0.3s ease;">Zur Kasse</button>
+</div>
+
 
   <script>
     function loadCart() {
