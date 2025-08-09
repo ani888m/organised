@@ -1,17 +1,43 @@
-<h1>Warenkorb</h1>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Warenkorb</title>
+</head>
+<body>
+  <h1>Dein Warenkorb</h1>
+  <div id="cart-items"></div>
+  <h2>Gesamt: <span id="total-price">0.00</span> €</h2>
 
-{% for item in cart_items %}
-<div class="cart-item">
-    <img src="{{ item.image }}" alt="{{ item.title }}" width="100">
-    <h3>{{ item.title }}</h3>
-    <p>{{ item.quantity }} × {{ "%.2f"|format(item.price) }} €</p>
-</div>
-{% endfor %}
+  <script>
+    function loadCart() {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let container = document.getElementById('cart-items');
+      container.innerHTML = '';
 
-<hr>
-<h3>Zwischensumme: {{ "%.2f"|format(total) }} €</h3>
+      if(cart.length === 0) {
+        container.innerHTML = '<p>Dein Warenkorb ist leer.</p>';
+        document.getElementById('total-price').textContent = '0.00';
+        return;
+      }
 
-<!-- Bezahl-Button -->
-<form action="/checkout" method="POST">
-    <button type="submit">Kasse</button>
-</form>
+      let total = 0;
+
+      cart.forEach(item => {
+        let itemTotal = item.price * item.quantity;
+        total += itemTotal;
+
+        let div = document.createElement('div');
+        div.innerHTML = `
+          <strong>${item.title}</strong> - ${item.price.toFixed(2)} € x ${item.quantity} = ${itemTotal.toFixed(2)} €
+        `;
+        container.appendChild(div);
+      });
+
+      document.getElementById('total-price').textContent = total.toFixed(2);
+    }
+
+    window.onload = loadCart;
+  </script>
+</body>
+</html>
