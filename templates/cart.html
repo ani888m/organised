@@ -6,36 +6,73 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <script src="{{ url_for('static', filename='script.js') }}"></script>
-
-<title>Warenkorb</title>
+  <title>Warenkorb</title>
+  <style>
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-size: 1.2rem;
+      padding: 0 10px;
+    }
+    .quantity-btn {
+      background-color: #ddd;
+      border-radius: 4px;
+      padding: 5px 12px;
+      font-weight: bold;
+      user-select: none;
+      transition: background-color 0.2s ease;
+    }
+    .quantity-btn:hover {
+      background-color: #bbb;
+    }
+    .remove-btn {
+      color: red;
+      font-weight: bold;
+      font-size: 20px;
+      margin-left: 20px;
+      background: none;
+      border: none;
+    }
+    .remove-btn:hover {
+      color: darkred;
+    }
+    #cart-items div {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    #cart-items img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+  </style>
 </head>
-  
 <body>
   {% include 'navbar.html' %}
+  <div id="navbar-placeholder"></div>
 
-<div id="navbar-placeholder"></div>
-
-  
-
-
-<body>
   <main style="margin-left: 100px">
-  <h1 style="margin:50px">Warenkorb</h1>
-  <div id="cart-items" style="padding:20px; font-size: 20px"></div>
- <div style="display: flex; align-items: center; justify-content: space-between; margin: 50px; max-width: 800px;">
-  <h2>Zwischensumme: <span id="total-price">0.00</span> €</h2>
-  <button id="checkout-btn" style="
-    background-color: #ff7f50;
-    color: #fff;
-    font-weight: 700;
-    font-size: 1.1rem;
-    border: none;
-    border-radius:5px;
-    padding: 20px 150px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;">Zur Kasse</button>
-</div>
+    <h1 style="margin:50px">Warenkorb</h1>
+    <div id="cart-items" style="padding:20px; font-size: 20px"></div>
 
+    <div style="display: flex; align-items: center; justify-content: space-between; margin: 50px; max-width: 800px;">
+      <h2>Zwischensumme: <span id="total-price">0.00</span> €</h2>
+      <button id="checkout-btn" style="
+        background-color: #ff7f50;
+        color: #fff;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border: none;
+        border-radius:5px;
+        padding: 20px 150px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;">Zur Kasse</button>
+    </div>
   </main>
 
   <script>
@@ -57,32 +94,59 @@
         total += itemTotal;
 
         let div = document.createElement('div');
-        div.style.display = "flex";
-        div.style.alignItems = "enter";
-        div.style.gap = "20px";
-        div.style.marginBottom = "20px";
 
         div.innerHTML = `
-          <img src="${item.image}" alt="${item.title}" style="width:150px; height:150px; ">
+          <img src="${item.image}" alt="${item.title}">
           <div>
-            ${item.price.toFixed(2)} € x ${item.quantity} = ${itemTotal.toFixed(2)} €
-            
-            <button onclick="removeFromCart('${item.title}')">Entfernen</button>
+            <strong>${item.title}</strong><br>
+            ${item.price.toFixed(2)} € &nbsp;
+            <button class="quantity-btn" onclick="decreaseQuantity('${item.title}')">−</button>
+            &nbsp;${item.quantity}&nbsp;
+            <button class="quantity-btn" onclick="increaseQuantity('${item.title}')">+</button>
+            &nbsp;= ${itemTotal.toFixed(2)} €
+            <button class="remove-btn" onclick="removeFromCart('${item.title}')">×</button>
           </div>
         `;
+
         container.appendChild(div);
       });
 
       document.getElementById('total-price').textContent = total.toFixed(2);
     }
 
-    // Muss außerhalb von loadCart sein, damit onclick es findet
+    function increaseQuantity(title) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let item = cart.find(i => i.title === title);
+      if (item) {
+        item.quantity++;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        loadCart();
+        if (window.opener) {
+          window.opener.updateCartCount && window.opener.updateCartCount();
+        }
+      }
+    }
+
+    function decreaseQuantity(title) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let item = cart.find(i => i.title === title);
+      if (item && item.quantity > 1) {
+        item.quantity--;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        loadCart();
+        if (window.opener) {
+          window.opener.updateCartCount && window.opener.updateCartCount();
+        }
+      } else if (item && item.quantity === 1) {
+        removeFromCart(title);
+      }
+    }
+
     function removeFromCart(title) {
       let cart = JSON.parse(localStorage.getItem('cart')) || [];
       cart = cart.filter(item => item.title !== title);
       localStorage.setItem('cart', JSON.stringify(cart));
       loadCart();
-
       if (window.opener) {
         window.opener.updateCartCount && window.opener.updateCartCount();
       }
