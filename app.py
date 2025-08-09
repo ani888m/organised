@@ -40,10 +40,30 @@ def kontakt():
 def newsletter_snippet():
     return render_template("newsletter.html")
     
-@app.route('/checkout')
-def checkout():
-    return render_template('checkout.html')
 
+# GET und POST in einer Funktion: checkout-Seite und Zahlung starten
+@app.route('/checkout', methods=['GET', 'POST'])
+def checkout():
+    if request.method == 'POST':
+        session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[
+                {
+                    'price_data': {
+                        'currency': 'eur',
+                        'product_data': {'name': 'Reife Blessuren | Danilo Lučić'},
+                        'unit_amount': 2390,  # Preis in Cent
+                    },
+                    'quantity': 1,
+                },
+            ],
+            mode='payment',
+            success_url=url_for('success', _external=True),
+            cancel_url=url_for('cancel', _external=True),
+        )
+        return redirect(session.url, code=303)
+    else:
+        return render_template('checkout.html')
 
 
 # ---------- KONTAKT ----------
@@ -134,27 +154,6 @@ def cart():
     ]
     total = sum(item['price'] * item['quantity'] for item in cart_items)
     return render_template('cart.html', cart_items=cart_items, total=total)
-
-
-@app.route('/checkout', methods=['POST'])
-def checkout():
-    session = stripe.checkout.Session.create(
-        payment_method_types=['card'],
-        line_items=[
-            {
-                'price_data': {
-                    'currency': 'eur',
-                    'product_data': {'name': 'Reife Blessuren | Danilo Lučić'},
-                    'unit_amount': 2390,  # Preis in Cent
-                },
-                'quantity': 1,
-            },
-        ],
-        mode='payment',
-        success_url=url_for('success', _external=True),
-        cancel_url=url_for('cart', _external=True),
-    )
-    return redirect(session.url, code=303)
 
 
 @app.route('/success')
