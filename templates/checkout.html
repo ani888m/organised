@@ -1,11 +1,8 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
-
   <title>Bezahlung</title>
   <style>
     .payment-details {
@@ -14,15 +11,71 @@
     .hidden {
       display: none;
     }
-    
+    /* checkout.css */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+
+.container {
+  max-width: 500px;
+  background: white;
+  margin: 0 auto;
+  padding: 30px 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.product-info {
+  margin-bottom: 20px;
+}
+
+.product-info strong {
+  font-size: 1.2rem;
+}
+
+.price {
+  color: #27ae60;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+button#pay-button {
+  width: 100%;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 15px 0;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button#pay-button:hover {
+  background-color: #2980b9;
+}
+
+footer {
+  margin-top: 40px;
+  text-align: center;
+  color: #aaa;
+  font-size: 0.9rem;
+}
 
   </style>
 </head>
 <body>
-  
-  {% include 'navbar.html' %}
-
-<div id="navbar-placeholder"></div>
   <h1>Bezahlung</h1>
   <form id="payment-form">
     <label>
@@ -76,6 +129,70 @@
     <button type="submit">Bezahlen</button>
   </form>
 
- 
+  <script>
+    const paymentMethodSelect = document.getElementById('payment-method');
+    const rechnungDetails = document.getElementById('rechnung-details');
+    const paypalDetails = document.getElementById('paypal-details');
+    const kreditkarteDetails = document.getElementById('kreditkarte-details');
+
+    paymentMethodSelect.addEventListener('change', () => {
+      const method = paymentMethodSelect.value;
+
+      // Alle ausblenden
+      rechnungDetails.classList.add('hidden');
+      paypalDetails.classList.add('hidden');
+      kreditkarteDetails.classList.add('hidden');
+
+      if (method === 'rechnung') {
+        rechnungDetails.classList.remove('hidden');
+      } else if (method === 'paypal') {
+        paypalDetails.classList.remove('hidden');
+      } else if (method === 'kreditkarte') {
+        kreditkarteDetails.classList.remove('hidden');
+      }
+    });
+
+    document.getElementById('payment-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const method = paymentMethodSelect.value;
+      if (!method) {
+        alert('Bitte wählen Sie eine Zahlungsmethode.');
+        return;
+      }
+
+      // Simuliere Zahlungsprozess
+      if (method === 'paypal') {
+        alert('Weiterleitung zu PayPal (Simulation).');
+        // Hier könntest du redirecten oder API aufrufen
+      } else if (method === 'rechnung') {
+        alert('Vielen Dank! Sie erhalten die Rechnung per Post.');
+      } else if (method === 'kreditkarte') {
+        // Validierung Kreditkartendaten
+        const cardnumber = this.cardnumber.value.trim();
+        const expiry = this.expiry.value;
+        const cvv = this.cvv.value.trim();
+
+        if (!/^\d{16}$/.test(cardnumber)) {
+          alert('Bitte geben Sie eine gültige 16-stellige Kreditkartennummer ein.');
+          return;
+        }
+        if (!expiry) {
+          alert('Bitte geben Sie ein Ablaufdatum ein.');
+          return;
+        }
+        if (!/^\d{3}$/.test(cvv)) {
+          alert('Bitte geben Sie einen gültigen 3-stelligen CVV ein.');
+          return;
+        }
+
+        alert('Zahlung erfolgreich (Simulation). Vielen Dank!');
+      }
+
+      // Warenkorb leeren und zurück zur Startseite
+      localStorage.removeItem('cart');
+      window.location.href = 'index.html';
+    });
+  </script>
 </body>
 </html>
