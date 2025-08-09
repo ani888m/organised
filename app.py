@@ -1,18 +1,21 @@
-from flask import Flask, render_template, request, redirect, flash
+from flask import Flask, render_template, request, redirect, flash, url_for
 import smtplib
 from email.mime.text import MIMEText
+import stripe
+import os
 
 app = Flask(__name__)
 app.secret_key = 'irgendetwasgeheimes'  # wichtig für Flash-Messages
 
+# Stripe API Key aus Umgebungsvariable (nicht im Code speichern)
+stripe.api_key = os.getenv("STRIPE_SECRET_KEY", "DEIN_STRIPE_SECRET_KEY")
 
-# Startseite
+
+# ---------- SEITEN ----------
 @app.route('/')
 def index():
     return render_template('index.html')
 
-
-# Unterseiten
 @app.route('/navbar')
 def navbar():
     return render_template('navbar.html')
@@ -38,7 +41,7 @@ def newsletter_snippet():
     return render_template("newsletter.html")
 
 
-# 📬 Kontaktformular-Submit
+# ---------- KONTAKT ----------
 @app.route('/submit', methods=['POST'])
 def submit():
     name = request.form['name']
@@ -51,7 +54,7 @@ def submit():
 
 def send_email(name, email, message):
     sender = 'antonyan125@gmail.com'
-    app_password = 'ffutcvkflhcgiijl'  # Achtung: Sicherheitsrisiko öffentlich
+    app_password = 'ffutcvkflhcgiijl'
     recipient = 'antonyan125@gmail.com'
 
     subject = f'Neue Nachricht von {name}'
@@ -72,7 +75,7 @@ def send_email(name, email, message):
         print("Fehler beim Senden:", e)
 
 
-# 📨 Newsletter-Submit (mit Weiterleitung zur Danke-Seite)
+# ---------- NEWSLETTER ----------
 @app.route('/newsletter', methods=['POST'])
 def newsletter():
     email = request.form.get('email')
@@ -90,7 +93,6 @@ def newsletter():
         return redirect('/')
 
 
-# Danke-Seite anzeigen
 @app.route('/danke')
 def danke():
     return render_template('danke.html')
@@ -119,6 +121,46 @@ def send_newsletter_email(email):
         print("Fehler beim Senden der Newsletter-Benachrichtigung:", e)
 
 
-# 🔁 App starten
+# ---------- WARENKORB & ZAHLUNG ----------
+@app.route('/cart')
+def cart():
+    cart_items = [
+        {'title': 'Reife Blessuren | Danilo Lučić', 'price': 23.90, 'quantity': 1}
+    ]
+    total = sum(item['price'] * item['quantity'] for item in cart_items)
+    return render_template('cart.html', cart_items=cart_items, total=total)
+
+
+@app.route('/checkout', methods=['POST'])
+def checkout():
+    session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        line_items=[
+            {
+                'price_data': {
+                    'currency': 'eur',
+                    'product_data': {'name': 'Reife Blessuren | Danilo Lučić'},
+                    'unit_amount': 2390,  # Preis in Cent
+                },
+                'quantity': 1,
+            },
+        ],
+        mode='payment',
+        success_url=url_for('success', _external=True),
+        cancel_url=url_for('cart', _external=True),
+    )
+    return redirect(session.url, code=303)
+
+
+@app.route('/success')
+def success():
+    return "Danke für deinen Einkauf!"
+
+@app.route('/cancel')
+def cancel():
+    return "Bezahlung abgebrochen."
+
+
+# ---------- START ----------
 if __name__ == '__main__':
     app.run(debug=True)
