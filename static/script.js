@@ -16,11 +16,18 @@ function addToCart(title, price, image) {
   if (existing) {
     existing.quantity++;
   } else {
-    cart.push({ title, price, quantity: 1, image });
+    cart.push({ 
+      title: title, 
+      price: price, 
+      quantity: 1, 
+      image: image // <- schon fertiger URL-Pfad
+    });
   }
 
   localStorage.setItem('cart', JSON.stringify(cart));
+  updateCartCount();
 }
+
 
 
 // Mobile Menü umschalten
