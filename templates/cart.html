@@ -56,9 +56,11 @@
 
     window.onload = loadCart;
 
-     document.getElementById('checkout-btn').addEventListener('click', () => {
-    // Weiterleitung zur Zahlungsseite (checkout.html)
-    window.location.href = 'checkout.html';
+    document.getElementById('checkout-btn').addEventListener('click', () => {
+  // Weiterleitung zur Flask-Route /checkout
+  window.location.href = '/checkout';
+});
+
   });
   </script>
 </body>
