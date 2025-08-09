@@ -30,11 +30,25 @@
         let div = document.createElement('div');
         div.innerHTML = `
           <strong>${item.title}</strong> - ${item.price.toFixed(2)} € x ${item.quantity} = ${itemTotal.toFixed(2)} €
+          <button onclick="removeFromCart('${item.title}')">Entfernen</button>
         `;
         container.appendChild(div);
       });
 
       document.getElementById('total-price').textContent = total.toFixed(2);
+    }
+
+    function removeFromCart(title) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      // Artikel entfernen, dessen Titel mit dem übergebenen übereinstimmt
+      cart = cart.filter(item => item.title !== title);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      loadCart(); // Warenkorb neu laden und anzeigen
+
+      // Optional: auch den Zähler auf der Hauptseite aktualisieren (wenn du dort ein Update willst)
+      if (window.opener) {
+        window.opener.updateCartCount && window.opener.updateCartCount();
+      }
     }
 
     window.onload = loadCart;
