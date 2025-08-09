@@ -58,88 +58,86 @@
    <div class="book-list">
       
    
-      <div class="book">
-      	<div class="image-wrapper">
-         <img src="{{ url_for('static', filename='B1.jpg') }}" alt="Buch 1">
-         <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
-        </div>
-        <h2>Abenteuer </h2>
-        <p>9,99 €</p>
-        <button onclick="addToCart('Abenteuer im Zauberwald', 9.99)">In den Warenkorb</button>
-      </div>
+    <div class="book">
+  <div class="image-wrapper">
+    <img src="{{ url_for('static', filename='B1.jpg') }}" alt="Buch 1">
+    <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
+  </div>
+  <h2>Abenteuer</h2>
+  <p>9,99 €</p>
+  <button onclick="addToCart('Abenteuer im Zauberwald', 9.99, '{{ url_for('static', filename='B1.jpg') }}')">In den Warenkorb</button>
+</div>
 
-      <div class="book">
-        <div class="image-wrapper">
-          <img src="{{ url_for('static', filename='B2.jpg') }}" alt="Buch 2">
-         <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
-        </div>
-        <h2>Der kleine Drache</h2>
-        <p>12,49 €</p>
-        <button onclick="addToCart('Der kleine Drache', 12.49)">In den Warenkorb</button>
-      </div>
+<div class="book">
+  <div class="image-wrapper">
+    <img src="{{ url_for('static', filename='B2.jpg') }}" alt="Buch 2">
+    <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
+  </div>
+  <h2>Der kleine Drache</h2>
+  <p>12,49 €</p>
+  <button onclick="addToCart('Der kleine Drache', 12.49, '{{ url_for('static', filename='B2.jpg') }}')">In den Warenkorb</button>
+</div>
 
-      <div class="book">
-        <div class="image-wrapper">
-          <img src="{{ url_for('static', filename='B5.jpg') }}" alt="Buch 5">
-         <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
-        </div>
-        <h2>Märchenhafte Träume</h2>
-        <p>8,49 €</p>
-        <button onclick="addToCart('Märchenhafte Träume', 8.49)">In den Warenkorb</button>
-      </div>
-      
-      <div class="book">
-        <div class="image-wrapper">
-          <img src="{{ url_for('static', filename='B6.jpg') }}" alt="Buch 1">
-          <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
-        </div>
-        <h2>Der kleine Drache</h2>
-        <p>12,49 €</p>
-        <button onclick="addToCart('Der kleine Drache', 12.49)">In den Warenkorb</button>
-      </div>
+<div class="book">
+  <div class="image-wrapper">
+    <img src="{{ url_for('static', filename='B5.jpg') }}" alt="Buch 5">
+    <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
+  </div>
+  <h2>Märchenhafte Träume</h2>
+  <p>8,49 €</p>
+  <button onclick="addToCart('Märchenhafte Träume', 8.49, '{{ url_for('static', filename='B5.jpg') }}')">In den Warenkorb</button>
+</div>
 
-      <div class="book">
-        <div class="image-wrapper">
-          <img src="{{ url_for('static', filename='B1.jpg') }}" alt="Buch 1">
-          <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
-        </div>
-        <h2>Märchenhafte Träume</h2>
-        <p>8,49 €</p>
-        <button onclick="addToCart('Märchenhafte Träume', 8.49)">In den Warenkorb</button>
-      </div>
-     
-     <div class="book">
-        <div class="image-wrapper">
-          <img src="{{ url_for('static', filename='B1.jpg') }}" alt="Buch 1">
-          <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
-        </div>
-        <h2>Der kleine Drache</h2>
-        <p>12,49 €</p>
-        <button onclick="addToCart('Der kleine Drache', 12.49)">In den Warenkorb</button>
-      </div>
-    
+<div class="book">
+  <div class="image-wrapper">
+    <img src="{{ url_for('static', filename='B6.jpg') }}" alt="Buch 6">
+    <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
+  </div>
+  <h2>Der kleine Drache</h2>
+  <p>12,49 €</p>
+  <button onclick="addToCart('Der kleine Drache', 12.49, '{{ url_for('static', filename='B6.jpg') }}')">In den Warenkorb</button>
+</div>
 
-      <div class="book">
-        <div class="image-wrapper">
-          <img src="{{ url_for('static', filename='B1.jpg') }}" alt="Buch 1">
-          <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
-        </div>
-        <h2>Der kleine Drache</h2>
-        <p>12,49 €</p>
-        <button onclick="addToCart('Der kleine Drache', 12.49)">In den Warenkorb</button>
-      </div>
-    
+<div class="book">
+  <div class="image-wrapper">
+    <img src="{{ url_for('static', filename='B1.jpg') }}" alt="Buch 1">
+    <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
+  </div>
+  <h2>Märchenhafte Träume</h2>
+  <p>8,49 €</p>
+  <button onclick="addToCart('Märchenhafte Träume', 8.49, '{{ url_for('static', filename='B1.jpg') }}')">In den Warenkorb</button>
+</div>
 
-      <div class="book">
-        <div class="image-wrapper">
-          <img src="{{ url_for('static', filename='B1.jpg') }}" alt="Buch 1">
-          <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
-        </div>
-        <h2>Der kleine Drache</h2>
-        <p>12,49 €</p>
-        <button onclick="addToCart('Der kleine Drache', 12.49)">In den Warenkorb</button>
-      </div>
-    </div>
+<div class="book">
+  <div class="image-wrapper">
+    <img src="{{ url_for('static', filename='B1.jpg') }}" alt="Buch 1">
+    <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
+  </div>
+  <h2>Der kleine Drache</h2>
+  <p>12,49 €</p>
+  <button onclick="addToCart('Der kleine Drache', 12.49, '{{ url_for('static', filename='B1.jpg') }}')">In den Warenkorb</button>
+</div>
+
+<div class="book">
+  <div class="image-wrapper">
+    <img src="{{ url_for('static', filename='B1.jpg') }}" alt="Buch 1">
+    <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
+  </div>
+  <h2>Der kleine Drache</h2>
+  <p>12,49 €</p>
+  <button onclick="addToCart('Der kleine Drache', 12.49, '{{ url_for('static', filename='B1.jpg') }}')">In den Warenkorb</button>
+</div>
+
+<div class="book">
+  <div class="image-wrapper">
+    <img src="{{ url_for('static', filename='B1.jpg') }}" alt="Buch 1">
+    <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
+  </div>
+  <h2>Der kleine Drache</h2>
+  <p>12,49 €</p>
+  <button onclick="addToCart('Der kleine Drache', 12.49, '{{ url_for('static', filename='B1.jpg') }}')">In den Warenkorb</button>
+</div>
+
     
   </main>
 
