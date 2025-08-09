@@ -8,6 +8,9 @@
   <h1>Dein Warenkorb</h1>
   <div id="cart-items"></div>
   <h2>Gesamt: <span id="total-price">0.00</span> €</h2>
+  <button id="checkout-btn">Zur Kasse</button>
+
+
 
   <script>
     function loadCart() {
@@ -52,6 +55,11 @@
     }
 
     window.onload = loadCart;
+
+     document.getElementById('checkout-btn').addEventListener('click', () => {
+    // Weiterleitung zur Zahlungsseite (checkout.html)
+    window.location.href = 'checkout.html';
+  });
   </script>
 </body>
 </html>
