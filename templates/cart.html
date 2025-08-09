@@ -2,6 +2,28 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+  <title>Bezahlung</title>
+  <style>
+    .payment-details {
+      margin-top: 15px;
+    }
+    .hidden {
+      display: none;
+    }
+    
+
+  </style>
+</head>
+<body>
+  
+  {% include 'navbar.html' %}
+
+<div id="navbar-placeholder"></div>
+
   <title>Warenkorb</title>
 </head>
 <body>
