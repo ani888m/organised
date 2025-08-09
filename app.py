@@ -44,25 +44,6 @@ def newsletter_snippet():
 # GET und POST in einer Funktion: checkout-Seite und Zahlung starten
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
-    if request.method == 'POST':
-        session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            line_items=[
-                {
-                    'price_data': {
-                        'currency': 'eur',
-                        'product_data': {'name': 'Reife Blessuren | Danilo Lučić'},
-                        'unit_amount': 2390,  # Preis in Cent
-                    },
-                    'quantity': 1,
-                },
-            ],
-            mode='payment',
-            success_url=url_for('success', _external=True),
-            cancel_url=url_for('cancel', _external=True),
-        )
-        return redirect(session.url, code=303)
-    else:
         return render_template('checkout.html')
 
 
