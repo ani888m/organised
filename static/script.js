@@ -1,45 +1,52 @@
-    let cartCount = 0;
+// Funktion zum Aktualisieren des Warenkorb-Zählers
+function updateCartCount() {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const cartCountElem = document.getElementById("cart-count");
+  if (cartCountElem) {
+    cartCountElem.textContent = cartCount;
+  }
+}
 
-   function addToCart(bookName, price) {
+// Artikel in den Warenkorb legen und Zähler aktualisieren
+function addToCart(bookName, price) {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-  // Prüfen ob das Buch schon drin ist, dann Menge erhöhen
   let existingItem = cart.find(item => item.title === bookName);
   if (existingItem) {
     existingItem.quantity++;
   } else {
-    cart.push({title: bookName, price: price, quantity: 1});
+    cart.push({ title: bookName, price: price, quantity: 1 });
   }
 
   localStorage.setItem('cart', JSON.stringify(cart));
 
-  // Gesamtanzahl der Bücher im Warenkorb zählen
-  let cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-  document.getElementById("cart-count").textContent = cartCount;
+  updateCartCount();
 
   alert(`${bookName} wurde dem Warenkorb hinzugefügt.`);
 }
 
-
+// Mobile Menü umschalten
 function toggleMobileMenu() {
   const navLinks = document.querySelector('.nav-links');
   const closeBtn = document.querySelector('.close-menu');
 
-  navLinks.classList.toggle('show');
-  closeBtn.classList.toggle('show'); // optional, falls du separat steuern willst
+  if (navLinks) navLinks.classList.toggle('show');
+  if (closeBtn) closeBtn.classList.toggle('show');
 }
 
 
+// --- Carousel-Slider ---
 
+let currentSlide = 0;
 
-   let currentSlide = 0;
-
-// ✅ Diese drei Zeilen haben bei dir gefehlt!
 const slides = document.querySelectorAll(".carousel-image");
 const nextBtn = document.querySelector(".next");
 const prevBtn = document.querySelector(".prev");
 
 function showSlide(index) {
+  if (!slides.length) return;
+
   if (index < 0) index = slides.length - 1;
   if (index >= slides.length) index = 0;
 
@@ -61,57 +68,58 @@ function resetInterval() {
   }, 4000);
 }
 
-nextBtn.addEventListener("click", () => {
-  showSlide(currentSlide + 1);
-  resetInterval();
-});
+if (nextBtn) {
+  nextBtn.addEventListener("click", () => {
+    showSlide(currentSlide + 1);
+    resetInterval();
+  });
+}
 
-prevBtn.addEventListener("click", () => {
-  showSlide(currentSlide - 1);
-  resetInterval();
-});
+if (prevBtn) {
+  prevBtn.addEventListener("click", () => {
+    showSlide(currentSlide - 1);
+    resetInterval();
+  });
+}
 
-// 🚀 Starte mit erstem Slide
+// Starte mit dem ersten Slide
 showSlide(currentSlide);
 
 
-showSlide(currentSlide);
-
-showSlide(currentSlide);
-
-
-
-
-
-// Popup automatisch nach 5 Sekunden anzeigen
+// --- Newsletter-Popup ---
 
 window.addEventListener('load', () => {
-  // Prüfen, ob das Popup schon angezeigt wurde
   const popupShown = localStorage.getItem('newsletterPopupShown');
 
   if (!popupShown) {
-    // Nach 5 Sekunden anzeigen
     setTimeout(() => {
-      document.getElementById('newsletter-popup').classList.remove('popup-hidden');
-      localStorage.setItem('newsletterPopupShown', 'true'); // Merken, dass es gezeigt wurde
+      const popup = document.getElementById('newsletter-popup');
+      if (popup) {
+        popup.classList.remove('popup-hidden');
+        localStorage.setItem('newsletterPopupShown', 'true');
+      }
     }, 5000);
   }
+
+  // Beim Laden auch den Warenkorb-Zähler aktualisieren
+  updateCartCount();
 });
 
-
-  function closePopup() {
-    document.getElementById('newsletter-popup').classList.add('popup-hidden');
+// Popup schließen
+function closePopup() {
+  const popup = document.getElementById('newsletter-popup');
+  if (popup) {
+    popup.classList.add('popup-hidden');
   }
+}
 
-
-
-
-
+// Newsletter-Snippet dynamisch laden
 fetch("/newsletter-snippet")
   .then(res => res.text())
   .then(html => {
-    document.getElementById("newsletter-inline").innerHTML = html;
-    document.getElementById("newsletter-popup").innerHTML = html;
+    const inline = document.getElementById("newsletter-inline");
+    const popup = document.getElementById("newsletter-popup");
+
+    if (inline) inline.innerHTML = html;
+    if (popup) popup.innerHTML = html;
   });
-
-
