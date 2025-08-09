@@ -34,20 +34,30 @@
 
       let total = 0;
 
-      cart.forEach(item => {
-        let itemTotal = item.price * item.quantity;
-        total += itemTotal;
+   
 
-        let div = document.createElement('div');
-        div.innerHTML = `
-          <strong>${item.title}</strong> - ${item.price.toFixed(2)} € x ${item.quantity} = ${itemTotal.toFixed(2)} €
-          <button onclick="removeFromCart('${item.title}')">Entfernen</button>
-        `;
-        container.appendChild(div);
-      });
+    cart.forEach(item => {
+  let itemTotal = item.price * item.quantity;
+  total += itemTotal;
 
-      document.getElementById('total-price').textContent = total.toFixed(2);
-    }
+  let div = document.createElement('div');
+  div.style.display = "flex";
+  div.style.alignItems = "center";
+  div.style.gap = "20px";
+  div.style.marginBottom = "20px";
+
+  div.innerHTML = `
+    <img src="${item.image}" alt="${item.title}" style="width:80px; height:auto; border:1px solid #ccc; border-radius:5px;">
+    <div>
+      <strong>${item.title}</strong><br>
+      ${item.price.toFixed(2)} € x ${item.quantity} = ${itemTotal.toFixed(2)} €
+      <br>
+      <button onclick="removeFromCart('${item.title}')">Entfernen</button>
+    </div>
+  `;
+  container.appendChild(div);
+});
+
 
     function removeFromCart(title) {
       let cart = JSON.parse(localStorage.getItem('cart')) || [];
