@@ -1,0 +1,17 @@
+<h1>Warenkorb</h1>
+
+{% for item in cart_items %}
+<div class="cart-item">
+    <img src="{{ item.image }}" alt="{{ item.title }}" width="100">
+    <h3>{{ item.title }}</h3>
+    <p>{{ item.quantity }} × {{ "%.2f"|format(item.price) }} €</p>
+</div>
+{% endfor %}
+
+<hr>
+<h3>Zwischensumme: {{ "%.2f"|format(total) }} €</h3>
+
+<!-- Bezahl-Button -->
+<form action="/checkout" method="POST">
+    <button type="submit">Kasse</button>
+</form>
