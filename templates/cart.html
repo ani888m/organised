@@ -4,21 +4,20 @@
   <meta charset="UTF-8" />
   <title>Warenkorb</title>
 </head>
-<body style="margin-left: 100px" >
+<body style="margin-left: 100px">
   <h1 style="margin:100px 50px">Dein Warenkorb</h1>
   <div id="cart-items" style="padding:40px; font-size: 20px"></div>
   <h2 style="margin:100px 50px">Gesamt: <span id="total-price">0.00</span> €</h2>
-  <button id="checkout-btn" style=" background-color: #000;
-  color: #fff;
-  font-weight: 700;
-  font-size: 1.1rem;
-  border: none;
-  padding: 20px 80px;
-  margin-left: 200px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;">Zur Kasse</button>
-
-
+  <button id="checkout-btn" style="
+    background-color: #000;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border: none;
+    padding: 20px 80px;
+    margin-left: 200px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;">Zur Kasse</button>
 
   <script>
     function loadCart() {
@@ -26,7 +25,7 @@
       let container = document.getElementById('cart-items');
       container.innerHTML = '';
 
-      if(cart.length === 0) {
+      if (cart.length === 0) {
         container.innerHTML = '<p>Dein Warenkorb ist leer.</p>';
         document.getElementById('total-price').textContent = '0.00';
         return;
@@ -34,39 +33,38 @@
 
       let total = 0;
 
-   
+      cart.forEach(item => {
+        let itemTotal = item.price * item.quantity;
+        total += itemTotal;
 
-    cart.forEach(item => {
-  let itemTotal = item.price * item.quantity;
-  total += itemTotal;
+        let div = document.createElement('div');
+        div.style.display = "flex";
+        div.style.alignItems = "center";
+        div.style.gap = "20px";
+        div.style.marginBottom = "20px";
 
-  let div = document.createElement('div');
-  div.style.display = "flex";
-  div.style.alignItems = "center";
-  div.style.gap = "20px";
-  div.style.marginBottom = "20px";
+        div.innerHTML = `
+          <img src="${item.image}" alt="${item.title}" style="width:80px; height:auto; border:1px solid #ccc; border-radius:5px;">
+          <div>
+            <strong>${item.title}</strong><br>
+            ${item.price.toFixed(2)} € x ${item.quantity} = ${itemTotal.toFixed(2)} €
+            <br>
+            <button onclick="removeFromCart('${item.title}')">Entfernen</button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
 
-  div.innerHTML = `
-    <img src="${item.image}" alt="${item.title}" style="width:80px; height:auto; border:1px solid #ccc; border-radius:5px;">
-    <div>
-      <strong>${item.title}</strong><br>
-      ${item.price.toFixed(2)} € x ${item.quantity} = ${itemTotal.toFixed(2)} €
-      <br>
-      <button onclick="removeFromCart('${item.title}')">Entfernen</button>
-    </div>
-  `;
-  container.appendChild(div);
-});
+      document.getElementById('total-price').textContent = total.toFixed(2);
+    }
 
-
+    // Muss außerhalb von loadCart sein, damit onclick es findet
     function removeFromCart(title) {
       let cart = JSON.parse(localStorage.getItem('cart')) || [];
-      // Artikel entfernen, dessen Titel mit dem übergebenen übereinstimmt
       cart = cart.filter(item => item.title !== title);
       localStorage.setItem('cart', JSON.stringify(cart));
-      loadCart(); // Warenkorb neu laden und anzeigen
+      loadCart();
 
-      // Optional: auch den Zähler auf der Hauptseite aktualisieren (wenn du dort ein Update willst)
       if (window.opener) {
         window.opener.updateCartCount && window.opener.updateCartCount();
       }
@@ -75,11 +73,8 @@
     window.onload = loadCart;
 
     document.getElementById('checkout-btn').addEventListener('click', () => {
-  // Weiterleitung zur Flask-Route /checkout
-  window.location.href = '/checkout';
-});
-
-
+      window.location.href = '/checkout';
+    });
   </script>
 </body>
 </html>
