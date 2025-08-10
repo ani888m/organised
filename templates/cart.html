@@ -36,7 +36,7 @@
       display: flex;
       gap: 50px;
       margin-bottom: 20px;
-      align-items: center; /* sorgt für obere Ausrichtung */
+      lign-items: center;
 
     }
     #cart-items img {
@@ -97,7 +97,7 @@
             <button class="quantity-btn" onclick="decreaseQuantity('${item.title}')">−</button>
             &nbsp;${item.quantity}&nbsp;
             <button class="quantity-btn" onclick="increaseQuantity('${item.title}')">+</button>
-            &nbsp;= ${itemTotal.toFixed(2)} €
+            &nbsp; ${itemTotal.toFixed(2)} €
             <button class="remove-btn" onclick="removeFromCart('${item.title}')">×</button>
           </div>
         `;
