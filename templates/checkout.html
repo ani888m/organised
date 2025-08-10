@@ -2,7 +2,12 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
+<meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  
   <title>Bezahlung</title>
   <style>
     .payment-details {
@@ -50,21 +55,17 @@ h1 {
   font-size: 1.2rem;
 }
 
-button#pay-button {
-  width: 100%;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  padding: 15px 0;
-  font-size: 1.1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+    .button  {background-color: #ff7f50;
+        color: #fff;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border: none;
+        border-radius:5px;
+        padding: 20px 150px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;}
 
-button#pay-button:hover {
-  background-color: #2980b9;
-}
+
 
 footer {
   margin-top: 40px;
