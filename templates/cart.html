@@ -14,45 +14,52 @@
       background: none;
       font-size: 1.2rem;
       padding: 0 10px;
+      user-select: none;
+      outline: none; /* Kein Fokusrahmen */
     }
     .quantity-btn {
       font-size: 20px;
       user-select: none;
+      border: none;
+      background: none;
+      padding: 0 5px; /* bisschen Abstand links und rechts */
+      margin: 0;
+      outline: none;
+      line-height: 1;
     }
+    
     .remove-btn {
       color: red;
       font-size: 20px;
       margin-left: 20px;
       background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      outline: none;
+      user-select: none;
     }
+  
     #cart-items div {
       display: flex;
       gap: 50px;
       margin-bottom: 20px;
-      align-items: flex-start; /* Korrektur */
+      align-items: flex-start;
     }
+
     #cart-items img {
       width: 200px;
       height: 200px;
-      object-fit: cover; /* Korrektur */
+      object-fit: cover;
     }
+
     .cart-info {
       display: flex;
-      gap: 10px;
+      gap: 20px;
     }
+
     .cart-info strong {
-      line-height: 1; /* verhindert extra vertikalen Abstand */
-    }
-    /* Neue Styles für die Menge und Buttons */
-    .quantity-control {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px; /* Abstand zwischen Minus, Zahl und Plus */
-    }
-    .quantity-number {
-      min-width: 20px;
-      text-align: center;
-      display: inline-block;
+      line-height: 1;
     }
   </style>
 </head>
@@ -104,11 +111,9 @@
           <div>
             <strong>${item.title}</strong>
             ${item.price.toFixed(2)} € &nbsp;
-            <span class="quantity-control">
-              <button class="quantity-btn" onclick="decreaseQuantity('${item.title}')">−</button>
-              <span class="quantity-number">${item.quantity}</span>
-              <button class="quantity-btn" onclick="increaseQuantity('${item.title}')">+</button>
-            </span>
+            <button class="quantity-btn" onclick="decreaseQuantity('${item.title}')">−</button>
+            &nbsp;${item.quantity}&nbsp;
+            <button class="quantity-btn" onclick="increaseQuantity('${item.title}')">+</button>
             &nbsp; ${itemTotal.toFixed(2)} €
             <button class="remove-btn" onclick="removeFromCart('${item.title}')">×</button>
           </div>
