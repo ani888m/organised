@@ -231,6 +231,42 @@ button.next {
 button.prev { left: 10px; }
 button.next { right: 10px; }
 
+.verlagsvorschau {
+  padding: 60px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.verlagsvorschau h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.vorschau-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+
+
+.vorschau-item img {
+  width: 100%;
+  height: auto;
+}
+
+.vorschau-item h3 {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: #444;
+}
+
+.vorschau-item p {
+  font-size: 0.95rem;
+  color: #666;
+}
 
 
     main {
@@ -556,44 +592,7 @@ footer {
 }
 
 
-.verlagsvorschau {
-  padding: 60px 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-  text-align: center;
-}
 
-.verlagsvorschau h2 {
-  font-size: 2rem;
-  argin-bottom: 30px;
-  color: #333;
-}
-
-.vorschau-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-}
-
-
-
-
-
-.vorschau-item img {
-  width: 100%;
-  height: auto;
-}
-
-.vorschau-item h3 {
-  margin-top: 15px;
-  font-size: 1.2rem;
-  color: #444;
-}
-
-.vorschau-item p {
-  font-size: 0.95rem;
-  color: #666;
-}
 
 /* Das muss im Hauptdokument stehen, nicht in newsletter.html */
 .newsletter-section {
