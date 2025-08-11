@@ -1,201 +1,194 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
-  <link rel="icon" type="image/x-icon" href="logo.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
-  
-  <title>Bezahlung</title>
-  <style>
-    .payment-details {
-      margin-top: 15px;
-    }
-    .hidden {
-      display: none;
-    }
-    /* checkout.css */
+<link rel="icon" type="image/x-icon" href="logo.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<title>Bezahlung</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    max-width: 1800px;
+  }
 
-ody {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 20px;
-  color: #333;
-}
+  main {
+    margin-left: 100px;
+    max-width: 2000px;
+  }
 
-1 {
-  text-align: center;
-  color: #2c3e50;
-  margin: 80px;
-}
+  h1 {
+    margin: 50px;
+    color: #2c3e50;
+  }
 
-container {
-  max-width: 1500px;
-  background: white;
-  margin: 0 auto;
-  padding: 30px 40px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
+  form {
+    background: white;
+    padding: 30px 40px;
+    margin: 0 50px 50px 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-size: 18px;
+  }
 
-.product-info {
-  margin-bottom: 20px;
-}
+  label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
 
-.product-info strong {
-  font-size: 1.2rem;
-}
+  input, select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
 
-.price {
-  color: #27ae60;
-  font-weight: bold;
-  font-size: 1.2rem;
-}
+  .payment-details {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+  }
 
-    button  {background-color: #ff7f50;
-        color: #fff;
-        font-weight: 700;
-        font-size: 1.1rem;
-        border: none;
-        border-radius:5px;
-        padding: 20px 150px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;}
+  .hidden {
+    display: none;
+  }
 
+  button[type="submit"] {
+    background-color: #ff7f50;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    padding: 20px 150px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+  }
 
-
-footer {
-  margin-top: 40px;
-  text-align: center;
-  color: #aaa;
-  font-size: 0.9rem;
-}
-
-  </style>
+  button[type="submit"]:hover {
+    background-color: #e66e3f;
+  }
+</style>
 </head>
 <body>
   {% include 'navbar.html' %}
   <div id="navbar-placeholder"></div>
 
-  <h1>Bezahlung</h1>
-  <form id="payment-form">
-    <label>
-      Name:<br>
-      <input type="text" name="name" required>
-    </label><br><br>
-
-    <label>
-      Adresse:<br>
-      <input type="text" name="address" required>
-    </label><br><br>
-
-    <label>
-      Zahlungsmethode:<br>
-      <select id="payment-method" name="payment-method" required>
-        <option value="" disabled selected>Bitte wählen</option>
-        <option value="rechnung">Per Rechnung</option>
-        <option value="paypal">PayPal</option>
-        <option value="kreditkarte">Kreditkarte</option>
-      </select>
-    </label><br><br>
-
-    <!-- Rechnung: nur Info -->
-    <div id="rechnung-details" class="payment-details hidden">
-      <p>Sie erhalten die Rechnung per Post. Bitte zahlen Sie innerhalb von 14 Tagen.</p>
-    </div>
-
-    <!-- PayPal: Hinweis, evtl. später Redirect -->
-    <div id="paypal-details" class="payment-details hidden">
-      <p>Nach Absenden werden Sie zu PayPal weitergeleitet (Simulation).</p>
-    </div>
-
-    <!-- Kreditkarte: Eingabefelder -->
-    <div id="kreditkarte-details" class="payment-details hidden">
+  <main>
+    <h1>Bezahlung</h1>
+    <form id="payment-form">
       <label>
-        Kreditkartennummer:<br>
-        <input type="text" name="cardnumber" pattern="\d{16}" title="16-stellige Kreditkartennummer" >
-      </label><br><br>
+        Name:
+        <input type="text" name="name" required>
+      </label>
 
       <label>
-        Ablaufdatum:<br>
-        <input type="month" name="expiry" >
-      </label><br><br>
+        Adresse:
+        <input type="text" name="address" required>
+      </label>
 
       <label>
-        CVV:<br>
-        <input type="text" name="cvv" pattern="\d{3}" title="3-stelliger CVV" >
-      </label><br><br>
-    </div>
+        Zahlungsmethode:
+        <select id="payment-method" name="payment-method" required>
+          <option value="" disabled selected>Bitte wählen</option>
+          <option value="rechnung">Per Rechnung</option>
+          <option value="paypal">PayPal</option>
+          <option value="kreditkarte">Kreditkarte</option>
+        </select>
+      </label>
 
-    <button type="submit">Bezahlen</button>
-  </form>
+      <div id="rechnung-details" class="payment-details hidden">
+        <p>Sie erhalten die Rechnung per Post. Bitte zahlen Sie innerhalb von 14 Tagen.</p>
+      </div>
 
-  <script>
-    const paymentMethodSelect = document.getElementById('payment-method');
-    const rechnungDetails = document.getElementById('rechnung-details');
-    const paypalDetails = document.getElementById('paypal-details');
-    const kreditkarteDetails = document.getElementById('kreditkarte-details');
+      <div id="paypal-details" class="payment-details hidden">
+        <p>Nach Absenden werden Sie zu PayPal weitergeleitet (Simulation).</p>
+      </div>
 
-    paymentMethodSelect.addEventListener('change', () => {
-      const method = paymentMethodSelect.value;
+      <div id="kreditkarte-details" class="payment-details hidden">
+        <label>
+          Kreditkartennummer:
+          <input type="text" name="cardnumber" pattern="\d{16}" title="16-stellige Kreditkartennummer">
+        </label>
 
-      // Alle ausblenden
-      rechnungDetails.classList.add('hidden');
-      paypalDetails.classList.add('hidden');
-      kreditkarteDetails.classList.add('hidden');
+        <label>
+          Ablaufdatum:
+          <input type="month" name="expiry">
+        </label>
 
-      if (method === 'rechnung') {
-        rechnungDetails.classList.remove('hidden');
-      } else if (method === 'paypal') {
-        paypalDetails.classList.remove('hidden');
-      } else if (method === 'kreditkarte') {
-        kreditkarteDetails.classList.remove('hidden');
-      }
-    });
+        <label>
+          CVV:
+          <input type="text" name="cvv" pattern="\d{3}" title="3-stelliger CVV">
+        </label>
+      </div>
 
-    document.getElementById('payment-form').addEventListener('submit', function(e) {
-      e.preventDefault();
+      <button type="submit">Bezahlen</button>
+    </form>
+  </main>
 
-      const method = paymentMethodSelect.value;
-      if (!method) {
-        alert('Bitte wählen Sie eine Zahlungsmethode.');
+<script>
+  const paymentMethodSelect = document.getElementById('payment-method');
+  const rechnungDetails = document.getElementById('rechnung-details');
+  const paypalDetails = document.getElementById('paypal-details');
+  const kreditkarteDetails = document.getElementById('kreditkarte-details');
+
+  paymentMethodSelect.addEventListener('change', () => {
+    const method = paymentMethodSelect.value;
+
+    rechnungDetails.classList.add('hidden');
+    paypalDetails.classList.add('hidden');
+    kreditkarteDetails.classList.add('hidden');
+
+    if (method === 'rechnung') {
+      rechnungDetails.classList.remove('hidden');
+    } else if (method === 'paypal') {
+      paypalDetails.classList.remove('hidden');
+    } else if (method === 'kreditkarte') {
+      kreditkarteDetails.classList.remove('hidden');
+    }
+  });
+
+  document.getElementById('payment-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const method = paymentMethodSelect.value;
+    if (!method) {
+      alert('Bitte wählen Sie eine Zahlungsmethode.');
+      return;
+    }
+    if (method === 'paypal') {
+      alert('Weiterleitung zu PayPal (Simulation).');
+    } else if (method === 'rechnung') {
+      alert('Vielen Dank! Sie erhalten die Rechnung per Post.');
+    } else if (method === 'kreditkarte') {
+      const cardnumber = this.cardnumber.value.trim();
+      const expiry = this.expiry.value;
+      const cvv = this.cvv.value.trim();
+      if (!/^\d{16}$/.test(cardnumber)) {
+        alert('Bitte geben Sie eine gültige 16-stellige Kreditkartennummer ein.');
         return;
       }
-
-      // Simuliere Zahlungsprozess
-      if (method === 'paypal') {
-        alert('Weiterleitung zu PayPal (Simulation).');
-        // Hier könntest du redirecten oder API aufrufen
-      } else if (method === 'rechnung') {
-        alert('Vielen Dank! Sie erhalten die Rechnung per Post.');
-      } else if (method === 'kreditkarte') {
-        // Validierung Kreditkartendaten
-        const cardnumber = this.cardnumber.value.trim();
-        const expiry = this.expiry.value;
-        const cvv = this.cvv.value.trim();
-
-        if (!/^\d{16}$/.test(cardnumber)) {
-          alert('Bitte geben Sie eine gültige 16-stellige Kreditkartennummer ein.');
-          return;
-        }
-        if (!expiry) {
-          alert('Bitte geben Sie ein Ablaufdatum ein.');
-          return;
-        }
-        if (!/^\d{3}$/.test(cvv)) {
-          alert('Bitte geben Sie einen gültigen 3-stelligen CVV ein.');
-          return;
-        }
-
-        alert('Zahlung erfolgreich (Simulation). Vielen Dank!');
+      if (!expiry) {
+        alert('Bitte geben Sie ein Ablaufdatum ein.');
+        return;
       }
-
-      // Warenkorb leeren und zurück zur Startseite
-      localStorage.removeItem('cart');
-      window.location.href = 'index.html';
-    });
-  </script>
+      if (!/^\d{3}$/.test(cvv)) {
+        alert('Bitte geben Sie einen gültigen 3-stelligen CVV ein.');
+        return;
+      }
+      alert('Zahlung erfolgreich (Simulation). Vielen Dank!');
+    }
+    localStorage.removeItem('cart');
+    window.location.href = 'index.html';
+  });
+</script>
 </body>
 </html>
