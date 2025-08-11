@@ -191,7 +191,7 @@ header {
   width: 100%;
   height: auto;
   pointer-events: none; /* verhindert Klicks */
-  height: 800px;
+  height: 700px;
   width: 1200px
 }
 
