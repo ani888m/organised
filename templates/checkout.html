@@ -38,6 +38,11 @@
     font-weight: 600;
   }
 
+  label.half {
+  width: 48%;
+  display: inline-block;
+}
+
   input, select {
     width: 100%;
     padding: 10px 12px;
@@ -81,23 +86,27 @@
     <h1>Bezahlung</h1>
     <form id="payment-form">
       <label>
-        Vorname:
-        <input type="text" name="name" required>
-      </label>
-
-      <label>
-        Nachname:
-        <input type="text" name="name" required>
+        Name:
+        <input type="text" name="name" required placeholder="Vor- und Nachname">
       </label>
       
       <label>
         Anschrift:
-        <input type="text" name="address" required placeholder="Sttarßennummer">
+        <input type="text" name="address" required placeholder="Straße und Hausnnummer">
+      </label>
+      
+      <label>
+        <input type="text" name="address" required placeholder="Adressenzusatz">
       </label>
 
-      <label>
-        <input type="text" name="address" required placeholder="Postleitzahl">
-      </label>
+     <label class="half">
+        <input type="text" name="plz" required placeholder="Postleitzahl">
+     </label>
+     
+    <label class="half">
+        <input type="text" name="stadt" required placeholder="Stadt">
+    </label>
+
       
       <label>
         Zahlungsmethode:
