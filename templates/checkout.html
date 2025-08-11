@@ -8,22 +8,9 @@
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 <title>Bezahlung</title>
 <style>
-  ody {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #333;
-    max-width: 1800px;
-  }
-
   main {
     margin-left: 100px;
     max-width: 1000px;
-  }
-
-  1 {
-    margin: 50px;
-    color: #2c3e50;
   }
 
   form {
@@ -38,16 +25,17 @@
     font-weight: 600;
   }
 
-  label.half {
-  width: 49%;
-  display: inline-block;
-      box-sizing: border-box;
+  /* Flexbox Container für PLZ und Stadt */
+  .half-container {
+    display: flex;
+    gap: 2%;
+    margin-bottom: 15px;
+  }
 
-  margin-right: 2%;
-}
-  .half:last-child {
-  margin-right: 0;
-}
+  label.half {
+    flex: 1;
+    box-sizing: border-box;
+  }
 
   input, select {
     width: 100%;
@@ -98,7 +86,7 @@
 
       <label>
         E-Mail Adresse:
-        <input type="text" name="name" required placeholder="Ihre E-Mail">
+        <input type="text" name="email" required placeholder="Ihre E-Mail">
       </label>
       
       <label>
@@ -107,18 +95,18 @@
       </label>
       
       <label>
-        <input type="text" name="address" required placeholder="Adressenzusatz">
+        <input type="text" name="address-additional" placeholder="Adressenzusatz">
       </label>
 
-     <label class="half">
-        <input type="text" name="plz" required placeholder="Postleitzahl">
-     </label>
-     
-    <label class="half">
-        <input type="text" name="stadt" required placeholder="Stadt">
-    </label>
+      <div class="half-container">
+        <label class="half">
+          <input type="text" name="plz" required placeholder="Postleitzahl">
+        </label>
+        <label class="half">
+          <input type="text" name="stadt" required placeholder="Stadt">
+        </label>
+      </div>
 
-      
       <label>
         Zahlungsmethode:
         <select id="payment-method" name="payment-method" required>
