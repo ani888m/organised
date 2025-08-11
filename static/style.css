@@ -243,7 +243,6 @@ button.next { right: 10px; }
     h1 {
       text-align: center;
       color: #0c4d77;
-      margin-bottom: 30px;
     }
 
     h2 {
@@ -265,7 +264,7 @@ button.next { right: 10px; }
   padding: 20px;
   max-width: 1800px; /* genug Platz für 4 Bücher */
   margin: 0 auto;
-  padding: 120px 0px;
+  padding: 50px 0px;
 }
 
 /* Responsive Verhalten */
@@ -525,7 +524,7 @@ footer {
 }
 
 .newsletter-box p {
-  margin-bottom: 20px;
+  argin-bottom: 20px;
 }
 
 .newsletter-box form {
@@ -558,7 +557,7 @@ footer {
 
 
 .verlagsvorschau {
-  padding: 60px 20px;
+  adding: 60px 20px;
   max-width: 1000px;
   margin: 0 auto;
   text-align: center;
@@ -566,7 +565,7 @@ footer {
 
 .verlagsvorschau h2 {
   font-size: 2rem;
-  margin-bottom: 30px;
+  argin-bottom: 30px;
   color: #333;
 }
 
