@@ -39,33 +39,41 @@
       user-select: none;
     }
   
+    /* Gesamtes Item als 2-spaltiges Grid: Bild + Details */
     #cart-items div {
-      display: flex;
-      gap: 50px;
+      display: grid;
+      grid-template-columns: 220px 1fr; /* Bild und Rest */
+      gap: 20px;
+      align-items: center;
       margin-bottom: 20px;
-      align-items: flex-start;
+      min-height: 220px; /* gleiche Höhe für Items */
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 15px;
     }
 
     #cart-items img {
       width: 200px;
       height: 200px;
       object-fit: cover;
+      justify-self: start;
+      border-radius: 4px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
     }
 
-    /* Hier das Grid für die Spalten im inneren div */
+    /* Inneres Div mit den Details als Grid mit 4 Spalten */
     #cart-items div > div {
       display: grid;
       grid-template-columns: 2fr 3fr 1.5fr 0.5fr;
       align-items: center;
       gap: 10px;
       font-size: 18px;
+      height: 100%;
     }
 
     #cart-items div > div strong {
       grid-column: 1;
     }
 
-    /* Menge-Steuerung gruppieren */
     #cart-items div > div .quantity-controls {
       grid-column: 2;
       display: flex;
@@ -74,17 +82,16 @@
       font-size: 16px;
     }
 
-    /* Gesamtpreis in Spalte 3 */
     #cart-items div > div span.total-price {
       grid-column: 3;
       font-weight: bold;
       font-size: 18px;
     }
 
-    /* Entfernen Button in Spalte 4 */
     #cart-items div > div button.remove-btn {
       grid-column: 4;
       font-size: 22px;
+      justify-self: center;
     }
 
     /* Mobile Anpassungen */
@@ -96,9 +103,10 @@
       }
 
       #cart-items div {
-        gap: 15px;
+        grid-template-columns: 100px 1fr;
+        min-height: auto;
         margin-bottom: 15px;
-        align-items: center;
+        padding-bottom: 10px;
       }
 
       #cart-items img {
@@ -121,7 +129,7 @@
         padding: 0 4px;
       }
 
-      /* Zwischensumme und Button als Spalten, auf mobile als Spalten umwandeln */
+      /* Zwischensumme und Button untereinander */
       div[style*="display: flex; justify-content: space-between"] {
         flex-direction: column !important;
         gap: 10px;
