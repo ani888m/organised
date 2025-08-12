@@ -61,48 +61,56 @@
       line-height: 1;
     }
 
-    @media (max-width: 768px) {
+@media (max-width: 768px) {
+  /* Cart Items untereinander etwas kompakter */
   #cart-items div {
-    flex-direction: column; /* Bild und Infos untereinander */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 10px;
-    align-items: center;
-    text-align: center;
+    margin-bottom: 15px;
   }
 
+  /* Bild kleiner machen */
   #cart-items img {
-    width: 120px;
-    height: 120px;
+    width: 70px;
+    height: 70px;
   }
 
-  .cart-info {
+  /* Textbereich flexibler machen */
+  #cart-items div > div {
+    flex: 1;
+    display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 5px;
   }
 
-  main {
-    margin-left: 0 !important;
-    padding: 0 10px;
+  /* Titel kleiner und Text umbrechen */
+  #cart-items strong {
+    font-size: 14px;
+    word-break: break-word;
   }
 
-  #checkout-btn {
-    padding: 15px 40px;
-    font-size: 1rem;
-    width: 100%;
-  }
-}
-
-    @media (max-width: 480px) {
-  #cart-items img {
-    width: 100px;
-    height: 100px;
-  }
+  /* Mengensteuerung horizontal, wie im Screenshot */
   .quantity-btn {
-    font-size: 16px;
+    font-size: 18px;
+    padding: 0 8px;
   }
+
+  /* Entfernen-Button kompakter */
   .remove-btn {
     font-size: 18px;
+    margin-left: 10px;
+  }
+
+  /* Gesamtsumme und Kasse-Button auf volle Breite */
+  #checkout-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
   }
 }
+
 
   </style>
 </head>
