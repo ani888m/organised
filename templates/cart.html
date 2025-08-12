@@ -2,16 +2,51 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
   <title>Warenkorb</title>
   <style>
-    /* Grundlayout Desktop */
+    .button {
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-size: 1.2rem;
+      padding: 0 10px;
+      user-select: none;
+    }
+    .quantity-btn {
+      font-size: 20px;
+      user-select: none;
+      border: none;
+      background: none;
+      padding: 0 5px;
+      margin: 0;
+      outline: none;
+      line-height: 1;
+      cursor: pointer;
+    }
+    
+    .remove-btn {
+      color: red;
+      font-size: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      outline: none;
+      user-select: none;
+    }
+  
+    /* Gesamtes Item als 2-spaltiges Grid: Bild + Details */
     #cart-items div {
       display: grid;
-      grid-template-columns: 220px 1fr; /* Bild + Details */
+      grid-template-columns: 220px 1fr; /* Bild und Rest */
       gap: 20px;
       align-items: center;
       margin-bottom: 20px;
-      min-height: 220px;
+      min-height: 220px; /* gleiche Höhe für Items */
       border-bottom: 1px solid #ddd;
       padding-bottom: 15px;
     }
@@ -20,11 +55,12 @@
       width: 200px;
       height: 200px;
       object-fit: cover;
+      justify-self: start;
       border-radius: 4px;
       box-shadow: 0 0 5px rgba(0,0,0,0.1);
-      justify-self: start;
     }
 
+    /* Inneres Div mit den Details als Grid mit 4 Spalten */
     #cart-items div > div {
       display: grid;
       grid-template-columns: 2fr 3fr 1.5fr 0.5fr;
@@ -60,8 +96,14 @@
 
     /* Mobile Anpassungen */
     @media (max-width: 768px) {
+      main {
+        margin-left: 5px !important;
+        margin-right: 5px !important;
+        max-width: 100%;
+      }
+
       #cart-items div {
-        grid-template-columns: 100px 1fr; /* Bild + Details */
+        grid-template-columns: 100px 1fr; /* Bild links, Text rechts */
         min-height: auto;
         margin-bottom: 15px;
         padding-bottom: 10px;
@@ -72,8 +114,8 @@
         height: 100px;
       }
 
-      /* Details DIV wird hier umgestellt */
       #cart-items div > div {
+        /* 1 Spalte, 2 Zeilen: Titel + (Menge, Preis, Entfernen) */
         display: grid !important;
         grid-template-columns: 1fr;
         grid-template-rows: auto auto;
@@ -81,87 +123,168 @@
         font-size: 14px;
       }
 
-      /* Titel ganz oben */
       #cart-items div > div strong {
         grid-row: 1;
-        margin-bottom: 5px;
       }
 
-      /* Menge, Preis und Entfernen-Button nebeneinander in 2. Zeile */
+      /* Menge, Preis und Entfernen nebeneinander in Zeile 2 */
       #cart-items div > div .quantity-controls,
       #cart-items div > div span.total-price,
       #cart-items div > div button.remove-btn {
         grid-row: 2;
         display: inline-flex;
         align-items: center;
-        gap: 15px;
-        font-size: 14px;
-        vertical-align: middle;
-      }
-
-      /* Menge als flex container, Menge-Buttons nebeneinander */
-      #cart-items div > div .quantity-controls {
         gap: 10px;
+        font-size: 14px;
+        justify-self: start;
       }
 
-      /* Buttons etwas kleiner */
+      /* Kleiner Button- und Schriftgrößen */
       .quantity-btn,
       .remove-btn {
         font-size: 16px;
         padding: 0 4px;
-        cursor: pointer;
+      }
+
+      /* Zwischensumme und Button untereinander */
+      div[style*="display: flex; justify-content: space-between"] {
+        flex-direction: column !important;
+        gap: 10px;
+        margin: 50px 20px !important;
+      }
+
+      div[style*="display: flex; justify-content: space-between"] > h2 {
+        width: 100%;
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin: 0;
+      }
+
+      #checkout-btn {
+        width: 70% !important;
+        padding: 15px !important;
+        font-size: 1rem !important;
+        border-radius: 5px !important;
+        margin: 0 auto !important;
+        background-color: #ff7f50 !important;
+        color: #fff !important;
+        font-weight: 700 !important;
+        border: none !important;
+        cursor: pointer !important;
+        transition: background-color 0.3s ease !important;
+        display: block;
       }
     }
   </style>
 </head>
-<body>
-  <h1>Warenkorb</h1>
-  <div id="cart-items"></div>
+<body style="max-width: 1800px">
+  {% include 'navbar.html' %}
+  <div id="navbar-placeholder"></div>
+
+  <main style="margin-left: 100px; max-width: 2000px">
+    <h1 style="margin:50px">Warenkorb</h1>
+    <div id="cart-items" style="padding:20px; font-size: 20px"></div>
+
+    <div style="display: flex; justify-content: space-between; margin: 50px; max-width: 1800px;">
+      <h2>Zwischensumme: <span id="total-price">0.00</span> €</h2>
+      <button id="checkout-btn" style="
+        background-color: #ff7f50;
+        color: #fff;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border: none;
+        border-radius:5px;
+        padding: 20px 150px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;">Zur Kasse</button>
+    </div>
+  </main>
 
   <script>
-    // Beispiel-Daten für Test
-    const cart = [
-      {
-        title: "Produkt 1",
-        price: 12.99,
-        quantity: 2,
-        image: "https://via.placeholder.com/200"
-      },
-      {
-        title: "Produkt 2",
-        price: 7.50,
-        quantity: 1,
-        image: "https://via.placeholder.com/200"
-      }
-    ];
-
     function loadCart() {
-      const container = document.getElementById('cart-items');
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let container = document.getElementById('cart-items');
       container.innerHTML = '';
 
-      cart.forEach(item => {
-        const itemTotal = item.price * item.quantity;
+      if (cart.length === 0) {
+        container.innerHTML = '<p>Dein Warenkorb ist leer.</p>';
+        document.getElementById('total-price').textContent = '0.00';
+        return;
+      }
 
-        const div = document.createElement('div');
+      let total = 0;
+
+      cart.forEach(item => {
+        let itemTotal = item.price * item.quantity;
+        total += itemTotal;
+
+        let div = document.createElement('div');
+
         div.innerHTML = `
           <img src="${item.image}" alt="${item.title}">
           <div>
             <strong>${item.title}</strong>
             <span class="quantity-controls">
-              <button class="quantity-btn">−</button>
-              <span>${item.quantity}</span>
-              <button class="quantity-btn">+</button>
+              <button class="quantity-btn" onclick="decreaseQuantity('${item.title}')">−</button>
+              &nbsp;${item.quantity}&nbsp;
+              <button class="quantity-btn" onclick="increaseQuantity('${item.title}')">+</button>
             </span>
             <span class="total-price">${itemTotal.toFixed(2)} €</span>
-            <button class="remove-btn">×</button>
+            <button class="remove-btn" onclick="removeFromCart('${item.title}')">×</button>
           </div>
         `;
 
         container.appendChild(div);
       });
+
+      document.getElementById('total-price').textContent = total.toFixed(2);
     }
 
-    loadCart();
+    function increaseQuantity(title) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let item = cart.find(i => i.title === title);
+      if (item) {
+        item.quantity++;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        loadCart();
+        if (window.opener) {
+          window.opener.updateCartCount && window.opener.updateCartCount();
+        }
+      }
+    }
+
+    function decreaseQuantity(title) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let item = cart.find(i => i.title === title);
+      if (item && item.quantity > 1) {
+        item.quantity--;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        loadCart();
+        if (window.opener) {
+          window.opener.updateCartCount && window.opener.updateCartCount();
+        }
+      } else if (item && item.quantity === 1) {
+        removeFromCart(title);
+      }
+    }
+
+    function removeFromCart(title) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart = cart.filter(item => item.title !== title);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      loadCart();
+      if (window.opener) {
+        window.opener.updateCartCount && window.opener.updateCartCount();
+      }
+    }
+
+    window.onload = loadCart;
+
+    document.getElementById('checkout-btn').addEventListener('click', () => {
+      window.location.href = '/checkout';
+    });
   </script>
 </body>
 </html>
