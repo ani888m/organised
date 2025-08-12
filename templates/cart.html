@@ -62,55 +62,30 @@
     }
 
 @media (max-width: 768px) {
-  /* Cart Items untereinander etwas kompakter */
-  #cart-items div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 15px;
-  }
-
-  /* Bild kleiner machen */
-  #cart-items img {
-    width: 70px;
-    height: 70px;
-  }
-
-  /* Textbereich flexibler machen */
-  #cart-items div > div {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  /* Titel kleiner und Text umbrechen */
-  #cart-items strong {
-    font-size: 14px;
-    word-break: break-word;
-  }
-
-  /* Mengensteuerung horizontal, wie im Screenshot */
-  .quantity-btn {
-    font-size: 18px;
-    padding: 0 8px;
-  }
-
-  /* Entfernen-Button kompakter */
-  .remove-btn {
-    font-size: 18px;
-    margin-left: 10px;
-  }
-
-  /* Gesamtsumme und Kasse-Button auf volle Breite */
+  /* Trennlinie über dem Kassen-Button */
   #checkout-btn {
     width: 100%;
     padding: 15px;
     font-size: 1rem;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+
+  .checkout-section {
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Zwischensumme linksbündig */
+  .checkout-total {
+    font-size: 1.1rem;
+    font-weight: bold;
   }
 }
-
 
   </style>
 </head>
