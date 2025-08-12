@@ -63,10 +63,10 @@
 
 @media (max-width: 768px) {
   #cart-items div {
-    flex-wrap: nowrap; /* verhindern, dass Elemente umbrechen */
-    gap: 15px; /* kleinerer Abstand */
+    flex-wrap: nowrap; /* keine Zeilenumbrüche */
+    gap: 15px; /* engerer Abstand */
     margin-bottom: 15px;
-    align-items: center; /* vertikal zentrieren */
+    align-items: flex-start;
   }
 
   #cart-items img {
@@ -78,7 +78,7 @@
     font-size: 14px;
     display: flex;
     flex-wrap: nowrap;
-    align-items: center;
+    align-items: flex-start;
     gap: 5px;
   }
 
@@ -88,42 +88,37 @@
     padding: 0 4px;
   }
 
-  /* Zwischensumme und Button jeweils eigene Zeile */
-  .checkout-section {
-    border-top: none; /* nicht mehr nötig */
-    padding-top: 0;
-    margin-top: 0;
-    display: block;
+  /* Container für Zwischensumme und Button auf mobile als Spalten */
+  div[style*="display: flex; justify-content: space-between"] {
+    flex-direction: column !important;
+    gap: 10px;
+    margin: 50px 20px !important;
   }
 
-  /* Container um Zwischensumme und Button aufteilen */
-  #checkout-container {
-    max-width: 1800px;
-    margin: 50px 20px;
-  }
-
-  #total-price-container {
+  div[style*="display: flex; justify-content: space-between"] > h2 {
     width: 100%;
     border-top: 1px solid #ddd;
-    padding: 10px 0;
+    padding-top: 10px;
     font-size: 1.1rem;
     font-weight: bold;
+    margin: 0;
   }
 
   #checkout-btn {
-    width: 100%;
-    padding: 15px;
-    font-size: 1rem;
-    border-radius: 5px;
-    margin-top: 10px;
-    background-color: #ff7f50;
-    color: #fff;
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    width: 100% !important;
+    padding: 15px !important;
+    font-size: 1rem !important;
+    border-radius: 5px !important;
+    margin-top: 0 !important;
+    background-color: #ff7f50 !important;
+    color: #fff !important;
+    font-weight: 700 !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease !important;
   }
 }
+
 
   </style>
 </head>
