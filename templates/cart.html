@@ -62,28 +62,66 @@
     }
 
 @media (max-width: 768px) {
-  /* Trennlinie über dem Kassen-Button */
+  #cart-items div {
+    flex-wrap: nowrap; /* verhindern, dass Elemente umbrechen */
+    gap: 15px; /* kleinerer Abstand */
+    margin-bottom: 15px;
+    align-items: center; /* vertikal zentrieren */
+  }
+
+  #cart-items img {
+    width: 100px;
+    height: 100px;
+  }
+
+  #cart-items div > div {
+    font-size: 14px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .quantity-btn,
+  .remove-btn {
+    font-size: 16px;
+    padding: 0 4px;
+  }
+
+  /* Zwischensumme und Button jeweils eigene Zeile */
+  .checkout-section {
+    border-top: none; /* nicht mehr nötig */
+    padding-top: 0;
+    margin-top: 0;
+    display: block;
+  }
+
+  /* Container um Zwischensumme und Button aufteilen */
+  #checkout-container {
+    max-width: 1800px;
+    margin: 50px 20px;
+  }
+
+  #total-price-container {
+    width: 100%;
+    border-top: 1px solid #ddd;
+    padding: 10px 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
   #checkout-btn {
     width: 100%;
     padding: 15px;
     font-size: 1rem;
     border-radius: 5px;
     margin-top: 10px;
-  }
-
-  .checkout-section {
-    border-top: 1px solid #ddd;
-    padding-top: 15px;
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  /* Zwischensumme linksbündig */
-  .checkout-total {
-    font-size: 1.1rem;
-    font-weight: bold;
+    background-color: #ff7f50;
+    color: #fff;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   }
 }
 
