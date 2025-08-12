@@ -21,16 +21,16 @@
       user-select: none;
       border: none;
       background: none;
-      padding: 0 5px; /* gleiche Entfernung wie vorher */
+      padding: 0 5px;
       margin: 0;
       outline: none;
       line-height: 1;
+      cursor: pointer;
     }
     
     .remove-btn {
       color: red;
       font-size: 20px;
-      margin-left: 20px;
       background: none;
       border: none;
       cursor: pointer;
@@ -52,81 +52,105 @@
       object-fit: cover;
     }
 
-    .cart-info {
-      display: flex;
+    /* Hier das Grid für die Spalten im inneren div */
+    #cart-items div > div {
+      display: grid;
+      grid-template-columns: 2fr 3fr 1.5fr 0.5fr;
+      align-items: center;
       gap: 10px;
+      font-size: 18px;
     }
 
-    .cart-info strong {
-      line-height: 1;
+    #cart-items div > div strong {
+      grid-column: 1;
     }
 
-@media (max-width: 768px) {
+    /* Menge-Steuerung gruppieren */
+    #cart-items div > div .quantity-controls {
+      grid-column: 2;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 16px;
+    }
 
-  main {
-    margin-left: 7px !important; /* oder 0, je nach Wunsch */
-    margin-right: 7px !important; /* optional, für Symmetrie */
-    max-width: 100%; /* falls gewünscht */
-  }
-  
-  #cart-items div {
-    flex-wrap: nowrap; /* keine Zeilenumbrüche */
-    gap: 15px; /* engerer Abstand */
-    margin-bottom: 15px;
-    align-items: flex-start;
-  }
+    /* Gesamtpreis in Spalte 3 */
+    #cart-items div > div span.total-price {
+      grid-column: 3;
+      font-weight: bold;
+      font-size: 18px;
+    }
 
-  #cart-items img {
-    width: 100px;
-    height: 100px;
-  }
+    /* Entfernen Button in Spalte 4 */
+    #cart-items div > div button.remove-btn {
+      grid-column: 4;
+      font-size: 22px;
+    }
 
-  #cart-items div > div {
-    font-size: 10px;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: flex-start;
-    gap: 5px;
-  }
+    /* Mobile Anpassungen */
+    @media (max-width: 768px) {
+      main {
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+        max-width: 100%;
+      }
 
-  .quantity-btn,
-  .remove-btn {
-    font-size: 10px;
-    padding: 0 4px;
-  }
+      #cart-items div {
+        gap: 15px;
+        margin-bottom: 15px;
+        align-items: center;
+      }
 
-  /* Container für Zwischensumme und Button auf mobile als Spalten */
-  div[style*="display: flex; justify-content: space-between"] {
-    flex-direction: column !important;
-    gap: 10px;
-    margin: 50px 20px !important;
-  }
+      #cart-items img {
+        width: 100px;
+        height: 100px;
+      }
 
-  div[style*="display: flex; justify-content: space-between"] > h2 {
-    width: 100%;
-    border-top: 1px solid #ddd;
-    padding-top: 10px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    margin: 0;
-  }
+      #cart-items div > div {
+        font-size: 14px;
+        gap: 5px;
+      }
 
-  #checkout-btn {
-    width: 70% !important;
-    padding: 15px !important;
-    font-size: 0.8rem !important;
-    border-radius: 2px !important;
-    margin-top: 0 !important;
-    background-color: #ff7f50 !important;
-    color: #fff !important;
-    font-weight: 300 !important;
-    border: none !important;
-    cursor: pointer !important;
-    transition: background-color 0.3s ease !important;
-  }
-}
+      #cart-items div > div .quantity-controls {
+        font-size: 14px;
+      }
 
+      .quantity-btn,
+      .remove-btn {
+        font-size: 16px;
+        padding: 0 4px;
+      }
 
+      /* Zwischensumme und Button als Spalten, auf mobile als Spalten umwandeln */
+      div[style*="display: flex; justify-content: space-between"] {
+        flex-direction: column !important;
+        gap: 10px;
+        margin: 50px 20px !important;
+      }
+
+      div[style*="display: flex; justify-content: space-between"] > h2 {
+        width: 100%;
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin: 0;
+      }
+
+      #checkout-btn {
+        width: 100% !important;
+        padding: 15px !important;
+        font-size: 1rem !important;
+        border-radius: 5px !important;
+        margin-top: 0 !important;
+        background-color: #ff7f50 !important;
+        color: #fff !important;
+        font-weight: 700 !important;
+        border: none !important;
+        cursor: pointer !important;
+        transition: background-color 0.3s ease !important;
+      }
+    }
   </style>
 </head>
 <body style="max-width: 1800px">
@@ -176,11 +200,13 @@
           <img src="${item.image}" alt="${item.title}">
           <div>
             <strong>${item.title}</strong>
-            ${item.price.toFixed(2)} € &nbsp;
-            <button class="quantity-btn" onclick="decreaseQuantity('${item.title}')">−</button>
-            &nbsp;${item.quantity}&nbsp;
-            <button class="quantity-btn" onclick="increaseQuantity('${item.title}')">+</button>
-            &nbsp; ${itemTotal.toFixed(2)} €
+            <span class="quantity-controls">
+              ${item.price.toFixed(2)} € &nbsp;
+              <button class="quantity-btn" onclick="decreaseQuantity('${item.title}')">−</button>
+              &nbsp;${item.quantity}&nbsp;
+              <button class="quantity-btn" onclick="increaseQuantity('${item.title}')">+</button>
+            </span>
+            <span class="total-price">${itemTotal.toFixed(2)} €</span>
             <button class="remove-btn" onclick="removeFromCart('${item.title}')">×</button>
           </div>
         `;
