@@ -47,7 +47,7 @@
       align-items: center;
       margin-bottom: 20px;
       min-height: 220px; /* gleiche Höhe für Items */
-      order-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
       padding-bottom: 15px;
     }
 
@@ -115,12 +115,40 @@
       }
 
       #cart-items div > div {
-        font-size: 10px;
+        font-size: 14px;
+        /* Jetzt 2-zeilig: Titel erste Zeile, Rest zweite */
+        display: grid !important;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
         gap: 5px;
       }
 
-      #cart-items div > div .quantity-controls {
-        font-size: 10px;
+      /* Titel in der ersten Zeile */
+      #cart-items div > div strong {
+        grid-row: 1;
+        font-weight: 600;
+        font-size: 1rem;
+      }
+
+      /* Rest (Menge, Preis, Entfernen) in zweiter Zeile als Flex */
+      #cart-items div > div .quantity-controls,
+      #cart-items div > div span.total-price,
+      #cart-items div > div button.remove-btn {
+        grid-row: 2;
+      }
+
+      #cart-items div > div .quantity-controls,
+      #cart-items div > div span.total-price,
+      #cart-items div > div button.remove-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+      }
+
+      /* Damit die drei Elemente nebeneinander in der 2. Zeile stehen */
+      #cart-items div > div {
+        justify-content: start;
       }
 
       .quantity-btn,
@@ -150,13 +178,14 @@
         padding: 15px !important;
         font-size: 1rem !important;
         border-radius: 5px !important;
-        margin-top: 0 auto !important;
+        margin: 0 auto !important;
         background-color: #ff7f50 !important;
         color: #fff !important;
         font-weight: 700 !important;
         border: none !important;
         cursor: pointer !important;
         transition: background-color 0.3s ease !important;
+        display: block;
       }
     }
   </style>
