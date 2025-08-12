@@ -60,6 +60,50 @@
     .cart-info strong {
       line-height: 1;
     }
+
+    @media (max-width: 768px) {
+  #cart-items div {
+    flex-direction: column; /* Bild und Infos untereinander */
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+  }
+
+  #cart-items img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .cart-info {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  main {
+    margin-left: 0 !important;
+    padding: 0 10px;
+  }
+
+  #checkout-btn {
+    padding: 15px 40px;
+    font-size: 1rem;
+    width: 100%;
+  }
+}
+
+    @media (max-width: 480px) {
+  #cart-items img {
+    width: 100px;
+    height: 100px;
+  }
+  .quantity-btn {
+    font-size: 16px;
+  }
+  .remove-btn {
+    font-size: 18px;
+  }
+}
+
   </style>
 </head>
 <body style="max-width: 1800px">
