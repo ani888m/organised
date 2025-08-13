@@ -514,14 +514,9 @@ footer a {
     display: none;
   }
 
-  .hide { display: none; }
+  .hide { display: none !important;}
 }
 
-@media (min-width: 769px) {
-  /* Icons nur im Mobile-Modus anzeigen */
-  .hamburger-menu, .close-menu {
-    display: none !important;
-  }
 }
 
 @media (max-width: 600px) {
