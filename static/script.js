@@ -31,19 +31,26 @@ const hamburgerMenu = document.querySelector(".hamburger-menu");
 const navLinks = document.querySelector(".nav-links");
 const closeMenu = document.querySelector(".close-menu");
 
-if (hamburgerMenu && closeMenu && navLinks) {
-  hamburgerMenu.addEventListener("click", () => {
-    navLinks.classList.add("show");
-    hamburgerMenu.classList.add("hide");
-    closeMenu.classList.remove("hide");
-  });
+hamburgerMenu.addEventListener("click", () => {
+  navLinks.classList.add("show");
+  hamburgerMenu.classList.add("hide");
+  closeMenu.classList.remove("hide");
+});
 
-  closeMenu.addEventListener("click", () => {
-    navLinks.classList.remove("show");
-    hamburgerMenu.classList.remove("hide");
-    closeMenu.classList.add("hide");
-  });
+closeMenu.addEventListener("click", () => {
+  navLinks.classList.remove("show");
+  hamburgerMenu.classList.remove("hide");
+  closeMenu.classList.add("hide");
+});
+
+function toggleDropdown(el) {
+  el.classList.toggle("open");
+  const dropdownContent = el.querySelector(".dropdown-content");
+  if (dropdownContent) {
+    dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+  }
 }
+
 
 // --- Carousel ---
 const slides = $$(".carousel-image");
