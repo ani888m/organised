@@ -1,129 +1,74 @@
-// Funktion zum Aktualisieren des Warenkorb-Zählers
+// --- Hilfsfunktionen ---
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => document.querySelectorAll(selector);
+
+// --- Warenkorb ---
 function updateCartCount() {
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  let cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const cartCountElem = document.getElementById("cart-count");
-  if (cartCountElem) {
-    cartCountElem.textContent = cartCount;
-  }
+  const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const elem = $("#cart-count");
+  if (elem) elem.textContent = count;
 }
 
-// Artikel in den Warenkorb legen und Zähler aktualisieren
 function addToCart(title, price, image) {
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  let existing = cart.find(item => item.title === title);
+  const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  const existing = cart.find(item => item.title === title);
 
-  if (existing) {
-    existing.quantity++;
-  } else {
-    cart.push({ 
-      title: title, 
-      price: price, 
-      quantity: 1, 
-      image: image // <- schon fertiger URL-Pfad
-    });
-  }
+  if (existing) existing.quantity++;
+  else cart.push({ title, price, quantity: 1, image });
 
   localStorage.setItem('cart', JSON.stringify(cart));
   updateCartCount();
 }
 
-
-
-// Mobile Menü umschalten
+// --- Mobile Menü ---
 function toggleMobileMenu() {
-  const navLinks = document.querySelector('.nav-links');
-  const closeBtn = document.querySelector('.close-menu');
-
-  if (navLinks) navLinks.classList.toggle('show');
-  if (closeBtn) closeBtn.classList.toggle('show');
+  $(".nav-links")?.classList.toggle("show");
+  $(".close-menu")?.classList.toggle("show");
 }
 
-
-// --- Carousel-Slider ---
-
+// --- Carousel ---
+const slides = $$(".carousel-image");
 let currentSlide = 0;
-
-const slides = document.querySelectorAll(".carousel-image");
-const nextBtn = document.querySelector(".next");
-const prevBtn = document.querySelector(".prev");
+let slideInterval;
 
 function showSlide(index) {
   if (!slides.length) return;
-
-  if (index < 0) index = slides.length - 1;
-  if (index >= slides.length) index = 0;
-
-  slides.forEach((slide, i) => {
-    slide.classList.toggle("active", i === index);
-  });
-
-  currentSlide = index;
+  currentSlide = (index + slides.length) % slides.length;
+  slides.forEach((s, i) => s.classList.toggle("active", i === currentSlide));
 }
 
-let slideInterval = setInterval(() => {
-  showSlide(currentSlide + 1);
-}, 4000);
-
-function resetInterval() {
+function resetSlideInterval() {
   clearInterval(slideInterval);
-  slideInterval = setInterval(() => {
-    showSlide(currentSlide + 1);
-  }, 4000);
+  slideInterval = setInterval(() => showSlide(currentSlide + 1), 4000);
 }
 
-if (nextBtn) {
-  nextBtn.addEventListener("click", () => {
-    showSlide(currentSlide + 1);
-    resetInterval();
-  });
-}
+$(".next")?.addEventListener("click", () => { showSlide(currentSlide + 1); resetSlideInterval(); });
+$(".prev")?.addEventListener("click", () => { showSlide(currentSlide - 1); resetSlideInterval(); });
 
-if (prevBtn) {
-  prevBtn.addEventListener("click", () => {
-    showSlide(currentSlide - 1);
-    resetInterval();
-  });
-}
-
-// Starte mit dem ersten Slide
+slideInterval = setInterval(() => showSlide(currentSlide + 1), 4000);
 showSlide(currentSlide);
 
+// --- Newsletter Popup ---
+function showPopup() {
+  const popup = $("#newsletter-popup");
+  if (popup) popup.classList.remove("popup-hidden");
+  localStorage.setItem('newsletterPopupShown', 'true');
+}
 
-// --- Newsletter-Popup ---
+function closePopup() {
+  $("#newsletter-popup")?.classList.add("popup-hidden");
+}
 
-window.addEventListener('load', () => {
-  const popupShown = localStorage.getItem('newsletterPopupShown');
-
-  if (!popupShown) {
-    setTimeout(() => {
-      const popup = document.getElementById('newsletter-popup');
-      if (popup) {
-        popup.classList.remove('popup-hidden');
-        localStorage.setItem('newsletterPopupShown', 'true');
-      }
-    }, 5000);
-  }
-
-  // Beim Laden auch den Warenkorb-Zähler aktualisieren
+window.addEventListener("load", () => {
+  if (!localStorage.getItem('newsletterPopupShown')) setTimeout(showPopup, 5000);
   updateCartCount();
 });
 
-// Popup schließen
-function closePopup() {
-  const popup = document.getElementById('newsletter-popup');
-  if (popup) {
-    popup.classList.add('popup-hidden');
-  }
-}
-
-// Newsletter-Snippet dynamisch laden
+// --- Newsletter Snippet ---
 fetch("/newsletter-snippet")
   .then(res => res.text())
   .then(html => {
-    const inline = document.getElementById("newsletter-inline");
-    const popup = document.getElementById("newsletter-popup");
-
-    if (inline) inline.innerHTML = html;
-    if (popup) popup.innerHTML = html;
+    $("#newsletter-inline") && ($("#newsletter-inline").innerHTML = html);
+    $("#newsletter-popup") && ($("#newsletter-popup").innerHTML = html);
   });
