@@ -88,6 +88,12 @@ nav {
   color: #7393B3;
 }
 
+/* Standardmäßig auf Desktop: keine Icons */
+.hamburger-menu,
+.close-menu {
+  display: none;
+}
+
 /* ===== CAROUSEL ===== */
 .carousel {
   position: relative;
@@ -398,6 +404,7 @@ footer a {
   color: white;
 }
 
+/* ===== NEWSLETTER SECTION simple ===== */
 .newsletter-section {
   background-color: #ffffff;
   padding: 20px 20px;
@@ -447,10 +454,6 @@ footer a {
   background-color: #ff5722;
 }
 
-.newsletter-section .close-popup {
-  display: none;
-}
-
 /* ===== MEDIA QUERIES ===== */
 @media (max-width: 1024px) {
   .book-list {
@@ -461,29 +464,6 @@ footer a {
 @media (max-width: 768px) {
   .logo { height: 100px; }
   header { padding: 25px; }
-
-  .hamburger-menu {
-    display: block;
-    z-index: 10000;
-    position: relative;
-    font-size: 1.8rem;
-    color: #7393B3;
-    cursor: pointer;
-  }
-
-  .close-menu {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    font-size: 2rem;
-    color: #7393B3;
-    z-index: 10001;
-    cursor: pointer;
-  }
-
-  .hide {
-    display: none !important;
-  }
 
   .nav-links {
     position: fixed;
@@ -500,33 +480,31 @@ footer a {
     display: none;
   }
 
-  .nav-links.show {
-    display: flex;
+  .nav-links.show { display: flex; }
+
+  .hamburger-menu {
+    display: block;
+    position: relative;
+    font-size: 1.8rem;
+    color: #7393B3;
+    cursor: pointer;
+    z-index: 10000;
   }
 
-  .carousel-image {
-    max-height: 50vh;
-    object-fit: cover;
+  .close-menu {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    color: #7393B3;
+    z-index: 10001;
+    cursor: pointer;
   }
 
-  .carousel {
-    max-width: 100%;
-  }
+  .nav-links.show ~ .close-menu { display: block; }
 
-  .prev,
-  .next {
-    font-size: 18px;
-    padding: 8px;
-  }
-
-  .team-member {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .team-info {
-    text-align: center;
-  }
+  .hide { display: none !important; }
 }
 
 @media (max-width: 600px) {
