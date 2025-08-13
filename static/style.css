@@ -462,11 +462,18 @@ footer a {
   }
 }
 
-/* ===== MEDIA QUERIES ===== */
-@media (max-width: 768px) {
-  .logo { height: 100px; }
-  header { padding: 25px; }
+/* Hamburger & Close */
+.hamburger-menu,
+.close-menu {
+  display: none;
+  font-size: 1.8rem;
+  color: #7393B3;
+  cursor: pointer;
+  z-index: 10000;
+}
 
+/* Mobile Navigation */
+@media (max-width: 768px) {
   .nav-links {
     position: fixed;
     top: 0;
@@ -478,46 +485,22 @@ footer a {
     justify-content: center;
     align-items: center;
     gap: 30px;
-    z-index: 1000;
     display: none;
+    z-index: 9999;
   }
 
   .nav-links.show { display: flex; }
 
-  .hamburger-menu {
-    display: block;
-    position: relative;
-    font-size: 1.8rem;
-    color: #7393B3;
-    cursor: pointer;
-    z-index: 10000;
-  }
-
-  .close-menu {
-    display: none;
-    position: relative;
-    top: 20px;
-    right: 20px;
-    font-size: 2rem;
-    color: #7393B3;
-    z-index: 10001;
-    cursor: pointer;
-  }
+  .hamburger-menu { display: block; }
+  .close-menu.hide { display: none; }
 
   /* Kreuz anzeigen, wenn Menü offen */
-  .nav-links.show + .close-menu {
-    display: block;
-  }
+  .nav-links.show + .close-menu { display: block; }
 
   /* Hamburger verstecken, wenn Menü offen */
-  .nav-links.show ~ .hamburger-menu {
-    display: none;
-  }
-
-  .hide { display: none !important;}
+  .nav-links.show ~ .hamburger-menu { display: none; }
 }
 
-}
 
 @media (max-width: 600px) {
   .book-list {
