@@ -22,20 +22,18 @@ function addToCart(title, price, image) {
 }
 
 // --- Mobile Menü ---
-function toggleMobileMenu() {
-  const navLinks = $(".nav-links");
-  const hamburger = $(".hamburger-menu");
-  const closeIcon = $(".close-menu");
 
-  navLinks?.classList.toggle("show");
+const mobileMenu = document.querySelector(".mobile-menu");
+const closeMenu = document.querySelector(".close-menu");
+const navLinks = document.querySelector(".nav-links");
 
-  if (closeIcon && hamburger) {
-    // Wenn Menü offen, Hamburger ausblenden, Kreuz einblenden
-    const isOpen = navLinks.classList.contains("show");
-    hamburger.classList.toggle("hide", isOpen); // hide = true wenn offen
-    closeIcon.classList.toggle("hide", !isOpen); // hide = false wenn offen
-  }
-}
+mobileMenu.addEventListener("click", () => {
+  navLinks.classList.add("show");
+});
+
+closeMenu.addEventListener("click", () => {
+  navLinks.classList.remove("show");
+});
 
 
 // --- Carousel ---
