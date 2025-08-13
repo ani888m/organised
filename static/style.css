@@ -470,7 +470,7 @@ footer a {
 
 @media (max-width: 768px) {
   .logo { height: 100px; }
-  header { padding: 25px; }
+  header { padding: 5px; }
 
   .nav-links {
     position: fixed;
@@ -490,8 +490,8 @@ footer a {
   .nav-links.show { display: flex; }
   .close-menu {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 50px;
+    right: 50px;
     font-size: 2rem;
     color: #7393B3;
     z-index: 9999;
@@ -551,10 +551,4 @@ footer a {
    
 }
 
-.nav-links.show .close-menu {
-  display: block;
-}
-.nav-links.show ~ .close-menu {
-  display: block;
-}
 }
