@@ -219,7 +219,6 @@ p {
 
 .book {
   background: #f8f8f8;
-  border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -254,7 +253,6 @@ p {
   color: white;
   padding: 8px 12px;
   border: none;
-  border-radius: 5px;
   text-decoration: none;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -268,7 +266,6 @@ p {
   padding: 7px 15px;
   background-color: #7393B3;
   border: none;
-  border-radius: 6px;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -289,7 +286,6 @@ p {
   display: flex;
   background-color: #fff;
   padding: 20px;
-  border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   align-items: flex-start;
   gap: 20px;
@@ -298,7 +294,6 @@ p {
 .team-member img {
   width: 150px;
   height: 100px;
-  border-radius: 10px;
   object-fit: cover;
 }
 
@@ -333,7 +328,7 @@ footer a {
 
 .press-info a {
   color: #0c4d77;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 /* ===== NEWSLETTER SECTION (eigener Stil) ===== */
@@ -341,7 +336,6 @@ footer a {
 .popup-content {
   background: #fff;
   padding: 30px;
-  border-radius: 12px;
   max-width: 400px;
   width: 90%;
   text-align: center;
@@ -365,7 +359,6 @@ footer a {
   padding: 10px;
   width: 100%;
   border: 1px solid #ccc;
-  border-radius: 5px;
   outline: none;
 }
 
@@ -375,7 +368,6 @@ footer a {
   background-color: #7393B3;
   color: white;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -445,7 +437,6 @@ footer a {
   padding: 10px;
   width: 100%;
   border: 1px solid #ccc;
-  border-radius: 6px;
   font-size: 1rem;
 }
 
@@ -454,7 +445,6 @@ footer a {
   background-color: #ff7f50; /* Orange Button */
   color: white;
   border: none;
-  border-radius: 6px;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
