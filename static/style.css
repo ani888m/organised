@@ -517,6 +517,13 @@ footer a {
   .hide { display: none !important; }
 }
 
+@media (min-width: 769px) {
+  /* Icons nur im Mobile-Modus anzeigen */
+  .hamburger-menu, .close-menu {
+    display: none !important;
+  }
+}
+
 @media (max-width: 600px) {
   .book-list {
     grid-template-columns: 1fr;
