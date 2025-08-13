@@ -1,18 +1,16 @@
-
 <header>
-  <div class="site-title" ">
+  <div class="site-title">
     <a href="index.html">
-            <img class='logo' src="{{ url_for('static', filename='LogoKinderbuchverlag.png') }}" alt="Logo">
-
+      <img class='logo' src="{{ url_for('static', filename='LogoKinderbuchverlag.png') }}" alt="Logo">
     </a>
   </div>
 
   <nav id="navbar">
-
-    <!-- Hamburger & Close Icon -->
-    <div class="mobile-menu" onclick="toggleMobileMenu()">
+    <!-- Hamburger Icon -->
+    <div class="hamburger-menu" onclick="toggleMobileMenu()">
       <i class="fas fa-bars"></i>
     </div>
+    <!-- Close Icon -->
     <div class="close-menu hide" onclick="toggleMobileMenu()">
       <i class="fas fa-times"></i>
     </div>
@@ -29,13 +27,9 @@
         </ul>
       </li>
       <li><a href="{{ url_for('kontakt') }}">Kontakt</a></li>
-      <li class="cart"><a href="{{ url_for('cart') }}">🛒 <span id="cart-count">0</span></a></li>
-       <li class="close-menu hide" onclick="toggleMobileMenu()">
-       <i class="fas fa-times"></i>
+      <li class="cart">
+        <a href="{{ url_for('cart') }}">🛒 <span id="cart-count">0</span></a>
+      </li>
     </ul>
-
-
-   
   </nav>
-   
-</header> 
+</header>
