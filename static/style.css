@@ -490,8 +490,8 @@ footer a {
   .nav-links.show { display: flex; }
   .close-menu {
     position: fixed;
-    top: 50px;
-    right: 50px;
+    top: 20px;
+    right: 20px;
     font-size: 2rem;
     color: #7393B3;
     z-index: 9999;
