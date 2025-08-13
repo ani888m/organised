@@ -1,4 +1,15 @@
+/* ===== VARIABLES ===== */
+:root {
+  --primary-color: #0c4d77;
+  --secondary-color: #7393B3;
+  --accent-color: #ff7f50;
+  --bg-light: #f7f6f4;
+  --bg-footer: #ebebe3;
+  --text-dark: #333;
+  --text-light: #666;
+}
 
+/* ===== GLOBAL ===== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,7 +18,7 @@
 
 body {
   font-family: 'Segoe UI', sans-serif;
-  color: #333;
+  color: var(--text-dark);
 }
 
 /* ===== HEADER ===== */
@@ -15,7 +26,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 10000;
-  background-color: white;
+  background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -35,7 +46,6 @@ header {
   height: 120px;
   width: auto;
   transition: height 0.3s ease;
-  display: block;
   object-fit: contain;
 }
 
@@ -48,28 +58,22 @@ nav {
   list-style: none;
   display: flex;
   gap: 20px;
-  position: relative;
   margin-top: 80px;
   padding-right: 40px;
 }
 
-.nav-links li {
-  position: relative;
-}
-
 .nav-links li a {
   text-decoration: none;
-  color: #7393B3;
-  display: block;
+  color: var(--secondary-color);
   padding: 8px 10px;
   font-size: 20px;
-  font-family: 'DM Sans';
+  font-family: 'DM Sans', sans-serif;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f7f6f4;
+  background-color: var(--bg-light);
   min-width: 180px;
   top: 100%;
   left: 0;
@@ -81,26 +85,25 @@ nav {
   padding: 10px;
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown-content,
+.dropdown.open .dropdown-content {
   display: block;
 }
 
-.cart a {
-  color: #7393B3;
-}
-
-/* Standardmäßig auf Desktop: keine Icons */
+/* Hamburger & Close Menu */
 .hamburger-menu,
 .close-menu {
   display: none;
+  font-size: 1.8rem;
+  color: var(--secondary-color);
+  cursor: pointer;
+  z-index: 10000;
 }
 
 /* ===== CAROUSEL ===== */
 .carousel {
   position: relative;
-  z-index: 1;
   max-width: 1000px;
-  width: 100%;
   margin: 0 auto 100px;
   overflow: hidden;
   border-radius: 10px;
@@ -113,23 +116,14 @@ nav {
   top: 0;
   left: 0;
   pointer-events: none;
-  height: 700px;
-  width: 1200px;
+  width: 100%;
+  height: auto;
 }
 
 .carousel-image.active {
   opacity: 1;
-  z-index: 1;
   position: relative;
   pointer-events: auto;
-}
-
-.slides {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  animation: slide 12s infinite;
-  flex-wrap: nowrap;
 }
 
 button.prev,
@@ -138,7 +132,7 @@ button.next {
   top: 50%;
   transform: translateY(-50%);
   background-color: rgba(0,0,0,0.5);
-  color: white;
+  color: #fff;
   border: none;
   padding: 12px;
   cursor: pointer;
@@ -161,7 +155,7 @@ button.next { right: 10px; }
 .verlagsvorschau h2 {
   font-size: 2rem;
   margin-bottom: 30px;
-  color: #333;
+  color: var(--text-dark);
 }
 
 .vorschau-container {
@@ -183,20 +177,19 @@ button.next { right: 10px; }
 
 .vorschau-item p {
   font-size: 0.95rem;
-  color: #666;
+  color: var(--text-light);
 }
 
 /* ===== MAIN ===== */
 main {
   padding: 50px 20px;
-  background-color: transparent;
   max-width: 900px;
   margin: 0 auto;
 }
 
 h1, h2 {
   text-align: center;
-  color: #0c4d77;
+  color: var(--primary-color);
 }
 
 h2 {
@@ -204,7 +197,7 @@ h2 {
 }
 
 p {
-  font-size: 1.1em;
+  font-size: 1.1rem;
   line-height: 1.7;
   margin-bottom: 20px;
 }
@@ -212,7 +205,7 @@ p {
 /* ===== BOOK LIST ===== */
 .book-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   max-width: 1800px;
   margin: 0 auto;
@@ -222,12 +215,10 @@ p {
 .book {
   background: #f8f8f8;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   text-align: center;
   padding: 15px;
   transition: transform 0.3s ease;
-  width: 100%;
-  height: auto;
 }
 
 .book:hover {
@@ -252,7 +243,7 @@ p {
   left: 50%;
   transform: translateX(-50%);
   background-color: #060606;
-  color: white;
+  color: #fff;
   padding: 8px 12px;
   border: none;
   text-decoration: none;
@@ -266,7 +257,7 @@ p {
 
 .book button {
   padding: 7px 15px;
-  background-color: #7393B3;
+  background-color: var(--secondary-color);
   border: none;
   font-size: 1rem;
   cursor: pointer;
@@ -301,39 +292,24 @@ p {
 
 .team-info h3 {
   margin: 0 0 10px;
-  color: #0c4d77;
+  color: var(--primary-color);
 }
 
 /* ===== FOOTER ===== */
 footer {
-  background-color: #ebebe3;
+  background-color: var(--bg-footer);
   padding: 30px;
   text-align: center;
-  color: #333;
+  color: var(--text-dark);
 }
 
 footer a {
-  color: #7393B3;
+  color: var(--secondary-color);
   font-size: 2em;
   margin: 0 10px;
 }
 
-.press-info {
-  font-size: 1.1em;
-  line-height: 1.6;
-}
-
-.press-info h2 {
-  color: #7393B3;
-  margin-top: 30px;
-}
-
-.press-info a {
-  color: #0c4d77;
-  text-decoration: none;
-}
-
-/* ===== NEWSLETTER SECTION ===== */
+/* ===== NEWSLETTER ===== */
 .newsletter-box,
 .popup-content {
   background: #fff;
@@ -347,13 +323,8 @@ footer a {
 
 .newsletter-box h2,
 .popup-content h2 {
-  color: #0c4d77;
+  color: var(--primary-color);
   margin-bottom: 10px;
-}
-
-.newsletter-box p,
-.popup-content p {
-  margin-bottom: 20px;
 }
 
 .newsletter-box input,
@@ -361,13 +332,12 @@ footer a {
   padding: 10px;
   width: 100%;
   border: 1px solid #ccc;
-  outline: none;
 }
 
 .newsletter-box button,
 .popup-content button {
   padding: 10px;
-  background-color: #7393B3;
+  background-color: var(--secondary-color);
   color: white;
   border: none;
   cursor: pointer;
@@ -390,10 +360,14 @@ footer a {
   justify-content: center;
   align-items: center;
   z-index: 9999;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease;
 }
 
 #newsletter-popup.popup-hidden {
-  display: none;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .close-popup {
@@ -405,74 +379,11 @@ footer a {
   color: white;
 }
 
-/* ===== NEWSLETTER SECTION simple ===== */
-.newsletter-section {
-  background-color: #ffffff;
-  padding: 20px 20px;
-  text-align: center;
-  margin-top: 19px;
-}
-
-.newsletter-section h2 {
-  font-size: 2rem;
-  margin-bottom: 15px;
-  color: #333;
-}
-
-.newsletter-section p {
-  font-size: 1rem;
-  margin-bottom: 15px;
-  color: #555;
-}
-
-.newsletter-section form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.newsletter-section input[type="email"] {
-  padding: 10px;
-  width: 100%;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-}
-
-.newsletter-section button {
-  padding: 10px 20px;
-  background-color: #ff7f50;
-  color: white;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.newsletter-section button:hover {
-  background-color: #ff5722;
-}
-
 /* ===== MEDIA QUERIES ===== */
 @media (max-width: 1024px) {
-  .book-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .book-list { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* Hamburger & Close */
-.hamburger-menu,
-.close-menu {
-  display: none;
-  font-size: 1.8rem;
-  color: #7393B3;
-  cursor: pointer;
-  z-index: 10000;
-}
-
-/* Mobile Navigation */
 @media (max-width: 768px) {
   .nav-links {
     position: fixed;
@@ -488,23 +399,16 @@ footer a {
     display: none;
     z-index: 9999;
   }
-
   .nav-links.show { display: flex; }
 
   .hamburger-menu { display: block; }
   .close-menu.hide { display: none; }
 
-  /* Kreuz anzeigen, wenn Menü offen */
   .nav-links.show + .close-menu { display: block; }
-
-  /* Hamburger verstecken, wenn Menü offen */
   .nav-links.show ~ .hamburger-menu { display: none; }
 }
 
-
 @media (max-width: 600px) {
-  .book-list {
-    grid-template-columns: 1fr;
-  }
+  .book-list { grid-template-columns: 1fr; }
   .logo { height: 80px; }
 }
