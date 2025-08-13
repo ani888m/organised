@@ -23,17 +23,23 @@ function addToCart(title, price, image) {
 
 // --- Mobile Menü ---
 
-const mobileMenu = document.querySelector(".mobile-menu");
+// --- Mobile Menü ---
+const hamburgerMenu = document.querySelector(".hamburger-menu");
 const closeMenu = document.querySelector(".close-menu");
 const navLinks = document.querySelector(".nav-links");
 
-mobileMenu.addEventListener("click", () => {
+hamburgerMenu.addEventListener("click", () => {
   navLinks.classList.add("show");
+  hamburgerMenu.classList.add("hide");
+  closeMenu.classList.remove("hide");
 });
 
 closeMenu.addEventListener("click", () => {
   navLinks.classList.remove("show");
+  hamburgerMenu.classList.remove("hide");
+  closeMenu.classList.add("hide");
 });
+
 
 
 // --- Carousel ---
