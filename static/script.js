@@ -25,6 +25,7 @@ function addToCart(title, price, image) {
 function toggleMobileMenu() {
   $(".nav-links")?.classList.toggle("show");
   $(".close-menu")?.classList.toggle("show");
+  $(".hamburger-menu")?.classList.toggle("hide"); // Hamburger ein/ausblenden
 }
 
 // --- Carousel ---
@@ -69,6 +70,6 @@ window.addEventListener("load", () => {
 fetch("/newsletter-snippet")
   .then(res => res.text())
   .then(html => {
-    $("#newsletter-inline") && ($("#newsletter-inline").innerHTML = html);
-    $("#newsletter-popup") && ($("#newsletter-popup").innerHTML = html);
+    if ($("#newsletter-inline")) $("#newsletter-inline").innerHTML = html;
+    if ($("#newsletter-popup")) $("#newsletter-popup").innerHTML = html;
   });
