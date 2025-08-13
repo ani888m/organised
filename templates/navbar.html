@@ -7,12 +7,13 @@
 
   <nav id="navbar">
     <!-- Hamburger Icon -->
-    <div class="hamburger-menu">
+
+<!--  <div class="hamburger-menu">
       <i class="fas fa-bars"></i>
     </div>
     <div class="close-menu hide">
       <i class="fas fa-times"></i>
-    </div>
+    </div>-->
 
     <!-- Nav Links -->
     <ul class="nav-links" id="nav-links">
@@ -33,5 +34,51 @@
   </nav>
 </header>
 
+<script type="text/javascript">
+
+
+ document.addEventListener("DOMContentLoaded", function () {
+  const header = document.querySelector(".nav-links");
+  const footer = document.querySelector("#contact");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        header.style.display = "none";
+      } else {
+        header.style.display = "block";
+      }
+    });
+  }, { threshold: 0 });
+
+  if (footer) {
+    observer.observe(footer);
+  }
+});
+
+
+function myFunction() {
+  var x = document.getElementById("nav-links");
+  if (x.className === "nav-links") {
+    x.className += " responsive";
+  } else {
+    x.className = "nav-links";
+  }
+}
+
+function myFunction() {
+  var x = document.getElementById("nav-links");
+  var icon = document.getElementById("navToggle");
+
+  if (x.className === "nav-links") {
+    x.className += " responsive";
+    icon.innerHTML = "&#10006;"; // Unicode für "X"
+  } else {
+    x.className = "nav-links";
+    icon.innerHTML = "&#9776;"; // Unicode für Burger-Menü
+  }
+}//
+
+</script>
 <!-- Font Awesome CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
