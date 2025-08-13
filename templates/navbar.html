@@ -1,3 +1,4 @@
+
 <header>
   <div class="site-title" ">
     <a href="index.html">
@@ -12,8 +13,8 @@
     <div class="mobile-menu" onclick="toggleMobileMenu()">
       <i class="fas fa-bars"></i>
     </div>
-    <div class="mobile-menu" onclick="toggleMobileMenu()">
-      <i class=="fas fa-times"></i>
+    <div class="close-menu" onclick="toggleMobileMenu()">
+      <i class="fas fa-times"></i>
     </div>
 
     <!-- Mobile & Desktop Nav Links -->
@@ -29,6 +30,8 @@
       </li>
       <li><a href="{{ url_for('kontakt') }}">Kontakt</a></li>
       <li class="cart"><a href="{{ url_for('cart') }}">🛒 <span id="cart-count">0</span></a></li>
+       <li class="close-menu" onclick="toggleMobileMenu()">
+       <i class="fas fa-times"></i>
     </ul>
 
 
