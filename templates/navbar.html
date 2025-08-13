@@ -1,21 +1,20 @@
 <header>
   <div class="site-title">
     <a href="index.html">
-      <img class='logo' src="{{ url_for('static', filename='LogoKinderbuchverlag.png') }}" alt="Logo">
+      <img class="logo" src="{{ url_for('static', filename='LogoKinderbuchverlag.png') }}" alt="Logo">
     </a>
   </div>
 
   <nav id="navbar">
     <!-- Hamburger Icon -->
- <div class="hamburger-menu" >
-  <i class="fas fa-bars"></i>
-</div>
-<div class="close-menu hide">
-  <i class="fas fa-times"></i>
-</div>
+    <div class="hamburger-menu">
+      <i class="fas fa-bars"></i>
+    </div>
+    <div class="close-menu hide">
+      <i class="fas fa-times"></i>
+    </div>
 
-
-    <!-- Mobile & Desktop Nav Links -->
+    <!-- Nav Links -->
     <ul class="nav-links" id="nav-links">
       <li class="dropdown" onclick="toggleDropdown(this)">
         <a href="#">Über uns <i class="fas fa-caret-down"></i></a>
@@ -33,3 +32,6 @@
     </ul>
   </nav>
 </header>
+
+<!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
