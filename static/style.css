@@ -538,39 +538,25 @@ footer a {
     grid-template-columns: 1fr;
   }
   .logo { height: 80px; }
+  
+.nav-links .close-menu {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 2rem;
+  color: #7393B3;
+  display: block;
+   
+}
+
+.nav-links.show .close-menu {
+  display: block;
+}
+.nav-links.show ~ .close-menu {
+  display: block;
+}
 }
 
 
-/* Mobile Menü - volle Seite */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #fdfdfc;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    z-index: 9999; /* hoch genug, um alles zu überdecken */
-  }
 
-  .nav-links.show {
-    display: flex;
-  }
-
-  /* Close-Kreuz immer oben rechts */
-  .close-menu {
-    display: block;
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    font-size: 2rem;
-    color: #7393B3;
-    z-index: 10000; /* über dem Menü */
-    cursor: pointer;
-  }
-}
