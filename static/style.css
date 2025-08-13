@@ -540,21 +540,6 @@ footer a {
   .logo { height: 80px; }
 }
 
-.nav-links .close-menu {
-  display: none;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 2rem;
-  color: #7393B3;
-}
-
-.nav-links.show .close-menu {
-  display: block;
-}
-.nav-links.show ~ .close-menu {
-  display: block;
-}
 
 /* Mobile Menü - volle Seite */
 @media (max-width: 768px) {
