@@ -552,3 +552,6 @@ footer a {
 .nav-links.show .close-menu {
   display: block;
 }
+.nav-links.show ~ .close-menu {
+  display: block;
+}
