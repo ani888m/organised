@@ -23,10 +23,20 @@ function addToCart(title, price, image) {
 
 // --- Mobile Menü ---
 function toggleMobileMenu() {
-  $(".nav-links")?.classList.toggle("show");
-  $(".close-menu")?.classList.toggle("show");
-  $(".hamburger-menu")?.classList.toggle("hide"); // Hamburger ein/ausblenden
+  const navLinks = $(".nav-links");
+  const hamburger = $(".hamburger-menu");
+  const closeIcon = $(".close-menu");
+
+  navLinks?.classList.toggle("show");
+
+  if (closeIcon && hamburger) {
+    // Wenn Menü offen, Hamburger ausblenden, Kreuz einblenden
+    const isOpen = navLinks.classList.contains("show");
+    hamburger.classList.toggle("hide", isOpen); // hide = true wenn offen
+    closeIcon.classList.toggle("hide", !isOpen); // hide = false wenn offen
+  }
 }
+
 
 // --- Carousel ---
 const slides = $$(".carousel-image");
