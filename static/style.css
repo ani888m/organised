@@ -470,7 +470,7 @@ footer a {
 
 @media (max-width: 768px) {
   .logo { height: 100px; }
-  header { padding: 5px; }
+  header { padding: 25px; }
 
   .nav-links {
     position: fixed;
@@ -551,10 +551,13 @@ footer a {
    
 }
 
+.nav-links.show .close-menu {
+  display: block;
 }
-
-/* Mobile Menü Icons */
+.nav-links.show ~ .close-menu {
+  display: block;
+}
+}
 .hide {
   display: none;
 }
-
