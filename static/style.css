@@ -514,7 +514,7 @@ footer a {
     display: none;
   }
 
-  .hide { display: none !important; }
+  .hide { display: none; }
 }
 
 @media (min-width: 769px) {
