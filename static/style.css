@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -476,7 +477,7 @@ footer a {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 200vh;
+    height: 100vh;
     background-color: #fdfdfc;
     flex-direction: column;
     justify-content: center;
@@ -489,7 +490,7 @@ footer a {
   .nav-links.show { display: flex; }
   .close-menu {
     position: fixed;
-    op: 20px;
+    top: 20px;
     right: 20px;
     font-size: 2rem;
     color: #7393B3;
@@ -557,6 +558,3 @@ footer a {
   display: block;
 }
 }
-
-
-
