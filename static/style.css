@@ -1,4 +1,3 @@
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -87,11 +86,6 @@ nav {
 
 .cart a {
   color: #7393B3;
-}
-
-.mobile-menu,
-.close-menu {
-  display: none;
 }
 
 /* ===== CAROUSEL ===== */
@@ -332,7 +326,7 @@ footer a {
   text-decoration: none;
 }
 
-/* ===== NEWSLETTER SECTION (eigener Stil) ===== */
+/* ===== NEWSLETTER SECTION ===== */
 .newsletter-box,
 .popup-content {
   background: #fff;
@@ -378,7 +372,6 @@ footer a {
   background-color: #527a9b;
 }
 
-/* Popup Overlay */
 #newsletter-popup {
   position: fixed;
   top: 0;
@@ -405,7 +398,6 @@ footer a {
   color: white;
 }
 
-/* ===== NEWSLETTER SECTION (eigener Stil, nicht mehr doppelt) ===== */
 .newsletter-section {
   background-color: #ffffff;
   padding: 20px 20px;
@@ -443,7 +435,7 @@ footer a {
 
 .newsletter-section button {
   padding: 10px 20px;
-  background-color: #ff7f50; /* Orange Button */
+  background-color: #ff7f50;
   color: white;
   border: none;
   font-size: 1rem;
@@ -455,11 +447,9 @@ footer a {
   background-color: #ff5722;
 }
 
-/* Standardmäßig ausblenden */
 .newsletter-section .close-popup {
   display: none;
 }
-
 
 /* ===== MEDIA QUERIES ===== */
 @media (max-width: 1024px) {
@@ -472,6 +462,29 @@ footer a {
   .logo { height: 100px; }
   header { padding: 25px; }
 
+  .hamburger-menu {
+    display: block;
+    z-index: 10000;
+    position: relative;
+    font-size: 1.8rem;
+    color: #7393B3;
+    cursor: pointer;
+  }
+
+  .close-menu {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    color: #7393B3;
+    z-index: 10001;
+    cursor: pointer;
+  }
+
+  .hide {
+    display: none !important;
+  }
+
   .nav-links {
     position: fixed;
     top: 0;
@@ -483,30 +496,12 @@ footer a {
     justify-content: center;
     align-items: center;
     gap: 30px;
-    z-index: 10000;
+    z-index: 1000;
     display: none;
   }
 
-  .nav-links.show { display: flex; }
-  .close-menu {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    font-size: 2rem;
-    color: #7393B3;
-    z-index: 9999;
-    cursor: pointer;
-    display: none;
-  }
-  .nav-links.show ~ .close-menu { display: block; }
-
-  .mobile-menu {
-    display: block;
-    z-index: 10000;
-    position: relative;
-    font-size: 1.8rem;
-    color: #7393B3;
-    cursor: pointer;
+  .nav-links.show {
+    display: flex;
   }
 
   .carousel-image {
@@ -539,25 +534,4 @@ footer a {
     grid-template-columns: 1fr;
   }
   .logo { height: 80px; }
-  
-.nav-links .close-menu {
-  display: none;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 2rem;
-  color: #7393B3;
-  display: block;
-   
-}
-
-.nav-links.show .close-menu {
-  display: block;
-}
-.nav-links.show ~ .close-menu {
-  display: block;
-}
-}
-.hide {
-  display: none;
 }
