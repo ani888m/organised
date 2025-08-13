@@ -1,4 +1,3 @@
-
 // --- Hilfsfunktionen ---
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => document.querySelectorAll(selector);
@@ -23,10 +22,22 @@ function addToCart(title, price, image) {
 }
 
 // --- Mobile Menü ---
-function toggleMobileMenu() {
-  $(".nav-links")?.classList.toggle("show");
-  $(".close-menu")?.classList.toggle("show");
-  $(".hamburger-menu")?.classList.toggle("hide"); // Hamburger ein/ausblenden
+const hamburgerMenu = document.querySelector(".hamburger-menu");
+const closeMenu = document.querySelector(".close-menu");
+const navLinks = document.querySelector(".nav-links");
+
+if (hamburgerMenu && closeMenu && navLinks) {
+  hamburgerMenu.addEventListener("click", () => {
+    navLinks.classList.add("show");
+    hamburgerMenu.classList.add("hide");
+    closeMenu.classList.remove("hide");
+  });
+
+  closeMenu.addEventListener("click", () => {
+    navLinks.classList.remove("show");
+    hamburgerMenu.classList.remove("hide");
+    closeMenu.classList.add("hide");
+  });
 }
 
 // --- Carousel ---
