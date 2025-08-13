@@ -20,6 +20,11 @@ function addToCart(title, price, image) {
   localStorage.setItem('cart', JSON.stringify(cart));
   updateCartCount();
 }
+function toggleDropdown(el) {
+    el.classList.toggle("open");
+    const dropdownContent = el.querySelector(".dropdown-content");
+    if (dropdownContent) dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+}
 
 // --- Mobile Menü ---
 const hamburgerMenu = document.querySelector(".hamburger-menu");
