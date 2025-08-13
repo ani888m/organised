@@ -476,7 +476,7 @@ footer a {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 200vh;
     background-color: #fdfdfc;
     flex-direction: column;
     justify-content: center;
@@ -489,7 +489,7 @@ footer a {
   .nav-links.show { display: flex; }
   .close-menu {
     position: fixed;
-    top: 20px;
+    op: 20px;
     right: 20px;
     font-size: 2rem;
     color: #7393B3;
