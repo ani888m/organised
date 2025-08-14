@@ -326,10 +326,17 @@ button.next { right: 10px; }
   .book-list {
     grid-template-columns: 1fr; /* 1 Spalte auf Smartphones */
   }
+   .book-item {
+    width: 80%;           /* ganze Karte kleiner */
+    max-width: 200px;     /* maximale Breite */
+    padding: 10px;        /* Innenabstand kleiner */
+    font-size: 0.9rem;    /* Schrift kleiner */
+    box-sizing: border-box;
+  }
 }
 
 .book-item {
-    width: 90%;           /* ganze Karte kleiner */
+    width: 100%;           /* ganze Karte kleiner */
     max-width: 200px;     /* maximale Breite */
     padding: 10px;        /* Innenabstand kleiner */
     font-size: 0.9rem;    /* Schrift kleiner */
