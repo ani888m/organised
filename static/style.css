@@ -125,6 +125,8 @@ header {
   display: none;
 }   
 
+@media (max-width: 768px) {
+
 .nav-links {
   list-style: none;
   margin: 0;
@@ -173,7 +175,7 @@ header {
 .mobile-menu.hide {
   display: none;
 }
-
+}
 
 
 
