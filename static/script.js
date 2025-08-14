@@ -35,9 +35,11 @@ function addToCart(title, price, image) {
 function toggleMobileMenu() {
   const navLinks = document.querySelector('.nav-links');
   const closeBtn = document.querySelector('.close-menu');
+  const hamburger = document.querySelector('.mobile-menu');
 
   if (navLinks) navLinks.classList.toggle('show');
   if (closeBtn) closeBtn.classList.toggle('show');
+  if (hamburger) hamburger.classList.toggle('hide'); 
 }
 
 
