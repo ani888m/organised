@@ -1,44 +1,71 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
-body {
-  font-family: 'Segoe UI', sans-serif;
-  color: #333;
-}
 
-/* ===== HEADER ===== */
+    *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+    }
+
+
+   header {
+      position: sticky;
+      top: 0;
+      z-index: 10000;  /* Damit sie über anderen Inhalten liegt */
+      background-color: white; /* Hintergrundfarbe nicht vergessen */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 110px;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);}
+    }
+
+    .site-title {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      min-width: 0;
+
+    }
+
+  
+    .logo {
+        height: 120px; /* Groß für Desktop */
+        width: auto;
+        transition: height 0.3s ease;
+        display: block;
+        object-fit: contain;        
+
+    }
+
+   @media (max-width: 768px) {
+     .logo {
+        height: 100px; /* Tablets */
+    }
 header {
-  position: sticky;
-  top: 0;
-  z-index: 10000;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 110px;
-  flex-wrap: wrap;
-  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
-}
+         padding: 25px;
+      }
+  }
 
-.site-title {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  min-width: 0;
-}
 
-.logo {
-  height: 120px;
-  width: auto;
-  transition: height 0.3s ease;
-  display: block;
-  object-fit: contain;
-}
+   @media (max-width: 480px) {
+     .logo {
+        height: 80px; /* Smartphones */
+   }
+      header {
+         padding: 25px;
+      }
+  }
 
- nav {
+
+
+    nav {
       position: relative;
       z-index: 9999;
       }
@@ -151,16 +178,21 @@ header {
   }
 
 
-/* ===== CAROUSEL ===== */
+
+}
+
+
+
 .carousel {
   position: relative;
   z-index: 1;
-  max-width: 1000px;
+  max-width: 1000px;     /* oder 500px oder was du möchtest */
   width: 100%;
-  margin: 0 auto 100px;
+  margin: 0 auto 100px; /* auto = zentriert */
   overflow: hidden;
   border-radius: 10px;
 }
+
 
 .carousel-image {
   opacity: 0;
@@ -168,9 +200,11 @@ header {
   position: absolute;
   top: 0;
   left: 0;
-  pointer-events: none;
+  width: 100%;
+  height: auto;
+  pointer-events: none; /* verhindert Klicks */
   height: 700px;
-  width: 1200px;
+  width: 1200px
 }
 
 .carousel-image.active {
@@ -180,6 +214,7 @@ header {
   pointer-events: auto;
 }
 
+
 .slides {
   display: flex;
   width: 100%;
@@ -187,6 +222,8 @@ header {
   animation: slide 12s infinite;
   flex-wrap: nowrap;
 }
+
+
 
 button.prev,
 button.next {
@@ -206,7 +243,6 @@ button.next {
 button.prev { left: 10px; }
 button.next { right: 10px; }
 
-/* ===== VORSCHAU ===== */
 .verlagsvorschau {
   padding: 60px 20px;
   max-width: 1000px;
@@ -226,6 +262,8 @@ button.next { right: 10px; }
   gap: 30px;
 }
 
+
+
 .vorschau-item img {
   width: 100%;
   height: auto;
@@ -242,48 +280,72 @@ button.next { right: 10px; }
   color: #666;
 }
 
-/* ===== MAIN ===== */
-main {
-  padding: 50px 20px;
-  background-color: transparent;
-  max-width: 900px;
-  margin: 0 auto;
-}
 
-h1, h2 {
-  text-align: center;
-  color: #0c4d77;
-}
+    main {
+      padding: 50px 20px;
+      background-color: transparent;
+      max-width: 900px;
+      margin: 0 auto;
+    }
 
-h2 {
-  font-family: 'DM Sans';
-}
+    h1 {
+      text-align: center;
+      color: #0c4d77;
+    }
 
-p {
-  font-size: 1.1em;
-  line-height: 1.7;
-  margin-bottom: 20px;
-}
+    h2 {
+      color: #0c4d77;
+      text-align: center;
+      font-family: 'DM Sans'
+    }
 
-/* ===== BOOK LIST ===== */
-.book-list {
+    p {
+      font-size: 1.1em;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+  .book-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr); /* 4 Spalten */
   gap: 20px;
-  max-width: 1800px;
+  padding: 20px;
+  max-width: 1800px; /* genug Platz für 4 Bücher */
   margin: 0 auto;
-  padding: 50px 0;
+  padding: 50px 0px;
 }
+
+/* Responsive Verhalten */
+@media (max-width: 1024px) {
+  .book-list {
+    grid-template-columns: repeat(2, 1fr); /* 2 Spalten auf Tablets */
+  }
+}
+
+@media (max-width: 600px) {
+  .book-list {
+    grid-template-columns: 1fr; /* 1 Spalte auf Smartphones */
+  }
+}
+
+.book-item {
+    width: 90%;           /* ganze Karte kleiner */
+    max-width: 200px;     /* maximale Breite */
+    padding: 10px;        /* Innenabstand kleiner */
+    font-size: 0.9rem;    /* Schrift kleiner */
+    box-sizing: border-box;
+  }
+  
+
 
 .book {
   background: #f8f8f8;
+  border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   padding: 15px;
   transition: transform 0.3s ease;
-  width: 100%;
-  height: auto;
 }
 
 .book:hover {
@@ -311,6 +373,7 @@ p {
   color: white;
   padding: 8px 12px;
   border: none;
+  border-radius: 5px;
   text-decoration: none;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -323,119 +386,119 @@ p {
 .book button {
   padding: 7px 15px;
   background-color: #7393B3;
-  border: none;
+   border: none;
+  border-radius: 6px;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-/* ===== TEAM ===== */
-.team-section {
-  margin-top: 60px;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+
+
+     .team-section {
+      margin-top: 60px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .team-member {
+      display: flex;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .team-member img {
+      width: 150px;
+      height: 100px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .team-info {
+      text-align: left;
+    }
+
+    .team-info h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #0c4d77;
+    }
+
+    .team-info p {
+      margin: 0;
+    }
+
+    @media (max-width: 600px) {
+      .team-member {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .team-info {
+        text-align: center;
+      }
+    }
+
+
+
+/* ✅ Mobile-Friendly Anpassungen */
+@media (max-width: 768px) {
+  .prev,
+  .next {
+    font-size: 18px;
+    padding: 8px;
+  }
+
+  .carousel-image {
+    max-height: 50vh; /* Bildhöhe begrenzen */
+    object-fit: cover;
+  }
+
+  .carousel {
+    max-width: 100%;
+  }
 }
 
-.team-member {
-  display: flex;
-  background-color: #fff;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  align-items: flex-start;
-  gap: 20px;
-}
-
-.team-member img {
-  width: 150px;
-  height: 100px;
-  object-fit: cover;
-}
-
-.team-info h3 {
-  margin: 0 0 10px;
-  color: #0c4d77;
-}
-
-/* ===== FOOTER ===== */
 footer {
-  background-color: #ebebe3;
-  padding: 30px;
-  text-align: center;
-  color: #333;
-}
+      background-color: #ebebe3;
+      padding: 30px;
+      text-align: center;
+      color: #333;
+      bottom: 0;
+    }
 
-footer a {
-  color: #7393B3;
-  font-size: 2em;
-  margin: 0 10px;
-}
+    footer a {
+      color: #7393B3;
+      font-size: 2em;
+      margin: 0 10px;
+    }
 
-.press-info {
-  font-size: 1.1em;
-  line-height: 1.6;
-}
+    .press-info {
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
 
-.press-info h2 {
-  color: #7393B3;
-  margin-top: 30px;
-}
+    .press-info h2 {
+      color: #7393B3;
+      margin-top: 30px;
+    }
 
-.press-info a {
-  color: #0c4d77;
-  text-decoration: none;
-}
+    .press-info a {
+      color: #0c4d77;
+      text-decoration: underline;
+    }
 
-/* ===== NEWSLETTER SECTION (eigener Stil) ===== */
-.newsletter-box,
-.popup-content {
-  background: #fff;
-  padding: 30px;
-  max-width: 400px;
-  width: 90%;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  margin: 10px auto;
-}
 
-.newsletter-box h2,
-.popup-content h2 {
-  color: #0c4d77;
-  margin-bottom: 10px;
-}
-
-.newsletter-box p,
-.popup-content p {
-  margin-bottom: 20px;
-}
-
-.newsletter-box input,
-.popup-content input {
-  padding: 10px;
-  width: 100%;
-  border: 1px solid #ccc;
-  outline: none;
-}
-
-.newsletter-box button,
-.popup-content button {
-  padding: 10px;
-  background-color: #7393B3;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.newsletter-box button:hover,
-.popup-content button:hover {
-  background-color: #527a9b;
-}
-
-/* Popup Overlay */
+/* Newsletter-Popup */
 #newsletter-popup {
   position: fixed;
   top: 0;
@@ -453,6 +516,42 @@ footer a {
   display: none;
 }
 
+.popup-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.popup-content h2 {
+  color: #0c4d77;
+  margin-bottom: 10px;
+}
+
+.popup-content p {
+  margin-bottom: 20px;
+}
+
+.popup-content input {
+  padding: 10px;
+  width: 70%;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+}
+
+.popup-content button {
+  padding: 10px;
+  background-color: #7393B3;
+  color: white;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
 .close-popup {
   position: absolute;
   top: 20px;
@@ -462,7 +561,59 @@ footer a {
   color: white;
 }
 
-/* ===== NEWSLETTER SECTION (eigener Stil, nicht mehr doppelt) ===== */
+
+.newsletter-box {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  margin: 10px auto;
+}
+
+.newsletter-box h2 {
+  color: #0c4d77;
+  margin-bottom: 10px;
+}
+
+.newsletter-box p {
+  argin-bottom: 20px;
+}
+
+.newsletter-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.newsletter-box input[type="email"] {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.newsletter-box button {
+  padding: 10px;
+  background-color: #7393B3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.newsletter-box button:hover {
+  background-color: #527a9b;
+}
+
+
+
+
+/* Das muss im Hauptdokument stehen, nicht in newsletter.html */
 .newsletter-section {
   background-color: #ffffff;
   padding: 20px 20px;
@@ -495,14 +646,16 @@ footer a {
   padding: 10px;
   width: 100%;
   border: 1px solid #ccc;
+  border-radius: 6px;
   font-size: 1rem;
 }
 
 .newsletter-section button {
   padding: 10px 20px;
-  background-color: #ff7f50; /* Orange Button */
+  background-color: #ff7f50;
   color: white;
   border: none;
+  border-radius: 6px;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -517,49 +670,59 @@ footer a {
   display: none;
 }
 
-
-/* ===== MEDIA QUERIES ===== */
-@media (max-width: 1024px) {
-  .book-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* Nur im Popup sichtbar machen */
+#newsletter-popup .close-popup {
+  display: block;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
 }
 
-@media (max-width: 768px) {
-  .logo { height: 100px; }
-  header { padding: 25px; }
 
-  
-  .carousel-image {
-    max-height: 50vh;
-    object-fit: cover;
-  }
 
-  .carousel {
-    max-width: 100%;
-  }
 
-  .prev,
-  .next {
-    font-size: 18px;
-    padding: 8px;
-  }
 
-  .team-member {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .team-info {
-    text-align: center;
-  }
+.book {
+  width: 100%;
+  height: auto;
 }
 
-@media (max-width: 600px) {
-  .book-list {
-    grid-template-columns: 1fr;
-  }
-  .logo { height: 80px; }
+.vorschau-item h3 {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: #444;
 }
 
- diesen ganzen meine ich
+.vorschau-item p {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+
+.thank-you-container {
+  max-width: 600px;
+  margin: 100px auto;
+  padding: 40px;
+  text-align: center;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-family: sans-serif;
+}
+
+.thank-you-container h1 {
+  color: #2c3e50;
+}
+
+.thank-you-container a {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  color: white;
+  background-color: #3498db;
+  padding: 10px 20px;
+  border-radius: 5px;
+} 
