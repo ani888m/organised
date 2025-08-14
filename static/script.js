@@ -33,13 +33,15 @@ function addToCart(title, price, image) {
 
 // Mobile Menü umschalten
 function toggleMobileMenu() {
-  const navLinks = document.querySelector('.nav-links');
+
   const closeBtn = document.querySelector('.close-menu');
+   const navLinks = document.querySelector('.nav-links');
   const hamburger = document.querySelector('.mobile-menu');
 
-  if (navLinks) navLinks.classList.toggle('show');
+  
   if (closeBtn) closeBtn.classList.toggle('show');
   if (hamburger) hamburger.classList.toggle('hide'); 
+  if (navLinks) navLinks.classList.toggle('show');
 }
 
 
