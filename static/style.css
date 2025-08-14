@@ -142,6 +142,10 @@ header {
     z-index: 9998;
     display: none;
   }
+.mobile-menu.hide {
+  display: none;
+}
+
 
   .nav-links.show {
     display: flex;
