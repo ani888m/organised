@@ -1,19 +1,23 @@
+
 <header>
-  <div class="site-title">
+  <div class="site-title" ">
     <a href="index.html">
-      <img class="logo" src="{{ url_for('static', filename='LogoKinderbuchverlag.png') }}" alt="Logo">
+            <img class='logo' src="{{ url_for('static', filename='LogoKinderbuchverlag.png') }}" alt="Logo">
+
     </a>
   </div>
 
   <nav id="navbar">
-    <!-- Hamburger Icon -->
-    <div class="mobile-menu" id="mobile-menu" onclick="toggleMobileMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
+
+    <!-- Hamburger & Close Icon -->
+    <div class="mobile-menu" onclick="toggleMobileMenu()">
+      <i class="fas fa-bars"></i>
+    </div>
+    <div class="close-menu" onclick="toggleMobileMenu()">
+      <i class="fas fa-times"></i>
     </div>
 
-    <!-- Nav Links -->
+    <!-- Mobile & Desktop Nav Links -->
     <ul class="nav-links" id="nav-links">
       <li class="dropdown" onclick="toggleDropdown(this)">
         <a href="#">Über uns <i class="fas fa-caret-down"></i></a>
@@ -27,33 +31,9 @@
       <li><a href="{{ url_for('kontakt') }}">Kontakt</a></li>
       <li class="cart"><a href="{{ url_for('cart') }}">🛒 <span id="cart-count">0</span></a></li>
     </ul>
+
+
+   
   </nav>
+   
 </header>
-
-<script>
-  const mobileMenu = document.getElementById('mobile-menu');
-  const navLinks = document.getElementById('nav-links');
-
-  function toggleMobileMenu() {
-    mobileMenu.classList.toggle('active'); // Hamburger zu Kreuz
-    navLinks.classList.toggle('show'); // Menü ein/ausblenden
-  }
-
-  // Dropdown-Funktion für mobile
-  function toggleDropdown(dropdown) {
-    const dropdownContent = dropdown.querySelector('.dropdown-content');
-    if (dropdownContent.style.display === 'block') {
-      dropdownContent.style.display = 'none';
-    } else {
-      dropdownContent.style.display = 'block';
-    }
-  }
-
-  // Optional: Dropdown schließen, wenn außerhalb geklickt
-  document.addEventListener('click', function(e) {
-    const isDropdown = e.target.closest('.dropdown');
-    if (!isDropdown) {
-      document.querySelectorAll('.dropdown-content').forEach(dc => dc.style.display = 'none');
-    }
-  });
-</script>
