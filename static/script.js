@@ -38,9 +38,9 @@ function toggleMobileMenu() {
    const navLinks = document.querySelector('.nav-links');
   const hamburger = document.querySelector('.mobile-menu');
 
-  
+    if (hamburger) hamburger.classList.toggle('hide'); 
   if (closeBtn) closeBtn.classList.toggle('show');
-  if (hamburger) hamburger.classList.toggle('hide'); 
+
   if (navLinks) navLinks.classList.toggle('show');
 }
 
