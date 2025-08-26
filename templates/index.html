@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -60,12 +61,12 @@
    
     <div class="book">
   <div class="image-wrapper">
-    <img src="{{ url_for('static', filename='Monster.jpg') }}" alt="Buch 1">
+    <img src="{{ url_for('static', filename='B1.jpg') }}" alt="Buch 1">
     <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
   </div>
   <h2>Abenteuer</h2>
   <p>9,99 €</p>
-  <button onclick="addToCart('Abenteuer', 9.99, '{{ url_for('static', filename='einewinzigekleinesekunde.jpg') }}')">In den Warenkorb</button>
+  <button onclick="addToCart('Abenteuer im Zauberwald', 9.99, '{{ url_for('static', filename='B1.jpg') }}')">In den Warenkorb</button>
 </div>
 
 <div class="book">
@@ -75,7 +76,7 @@
   </div>
   <h2>Der kleine Drache</h2>
   <p>12,49 €</p>
-  <button onclick="addToCart('Der kleine Drache', 12.49, '{{ url_for('static', filename='jacominus.jpg') }}')">In den Warenkorb</button>
+  <button onclick="addToCart('Der kleine Drache', 12.49, '{{ url_for('static', filename='B2.jpg') }}')">In den Warenkorb</button>
 </div>
 
 <div class="book">
@@ -157,6 +158,3 @@
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
-
-
-
