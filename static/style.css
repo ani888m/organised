@@ -249,29 +249,8 @@ button.next {
 button.prev { left: 10px; }
 button.next { right: 10px; }
 
-@media (min-width: 769px) {
-  .carousel {
-    min-height: 700px; /* Desktop Höhe passend zu Bildern */
-  }
-}
 
-.carousel-image {
-  width: 100%;
-  height: auto;       /* Bild skaliert mit der Breite */
-  object-fit: cover;  /* optional, falls Bildbereich gefüllt werden soll */
-  position: absolute; /* inactive Bilder überlagert */
-  top: 0;
-  left: 0;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
 
-.carousel-image.active {
-  opacity: 1;
-  position: relative; /* aktives Bild bestimmt Höhe */
-  pointer-events: auto;
-  z-index: 1;
-}
 
 .carousel-btn {
   position: absolute;
@@ -552,6 +531,7 @@ button.next { right: 10px; }
 
   .carousel {
     max-width: 100%;
+    min-height: 250px;
   }
 }
 
