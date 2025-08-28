@@ -217,7 +217,9 @@ header {
   display: inline-flex;        /* sichtbar + zentrierbare Inhalte */
   align-items: center;
   justify-content: center;
-  pointer-events: auto;        /* sicherheitshalber klickbar */
+  pointer-events: auto;
+     position: relative;
+/* sicherheitshalber klickbar */
 }
 
 .slides {
