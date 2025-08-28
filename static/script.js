@@ -46,7 +46,7 @@ function toggleMobileMenu() {
 
 let currentSlide = 0;
 
-const slides = document.querySelectorAll(".carousel-image");
+const slides = document.querySelectorAll(".carousel-slide");
 const nextBtn = document.querySelector(".next");
 const prevBtn = document.querySelector(".prev");
 
