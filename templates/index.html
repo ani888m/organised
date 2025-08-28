@@ -23,13 +23,30 @@
  
 <div class="carousel">
   <div class="slides">
-    <img src="{{ url_for('static', filename='Screenshot 2025-05-22 at 10.40.20.png') }}" class="carousel-image active" alt="Slide 1">
-    <img src="{{ url_for('static', filename='ChatGPT Image Feb 17, 2025, 12_34_20 PM.png') }}" class="carousel-image" alt="Slide 2">
-    <img src="{{ url_for('static', filename='Screenshot 2025-05-22 at 10.40.20.png') }}" class="carousel-image" alt="Slide 3">
+
+    <div class="slide">
+      <img src="{{ url_for('static', filename='Screenshot 2025-05-22 at 10.40.20.png') }}" 
+           class="carousel-image active" alt="Slide 1">
+      <a href="/seite1" class="carousel-btn">Jetzt entdecken</a>
+    </div>
+
+    <div class="slide">
+      <img src="{{ url_for('static', filename='ChatGPT Image Feb 17, 2025, 12_34_20 PM.png') }}" 
+           class="carousel-image" alt="Slide 2">
+      <a href="/seite2" class="carousel-btn">Mehr erfahren</a>
+    </div>
+
+    <div class="slide">
+      <img src="{{ url_for('static', filename='Screenshot 2025-05-22 at 10.40.20.png') }}" 
+           class="carousel-image" alt="Slide 3">
+      <a href="/seite3" class="carousel-btn">Zur Vorschau</a>
+    </div>
+
   </div>
   <button class="prev">❮</button>
   <button class="next">❯</button>
-</div> 
+</div>
+
 
 
   <section class="verlagsvorschau">
