@@ -1,5 +1,6 @@
 
 
+
     *{
       box-sizing: border-box;
       margin: 0;
@@ -213,12 +214,7 @@ header {
   position: relative;
   pointer-events: auto;
 }
-.carousel-image.active + .carousel-btn {
-  display: inline-flex;        /* sichtbar + zentrierbare Inhalte */
-  align-items: center;
-  justify-content: center;
-  pointer-events: auto; /* sicherheitshalber klickbar */
-}
+
 
 .slides {
   display: flex;
@@ -226,7 +222,6 @@ header {
   height: 100%;
   animation: slide 12s infinite;
   flex-wrap: nowrap;
-  position: relative;
 }
 
 
@@ -248,59 +243,6 @@ button.next {
 
 button.prev { left: 10px; }
 button.next { right: 10px; }
-
-
-
-
-.carousel-btn {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #ff6f61;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 20px;
-  text-decoration: none;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: bold;
-  font-size: 1rem;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  transition: background 0.3s;
-
-  /* ✅ Ergänzung: sicherstellen, dass Button über dem Bild liegt */
-  z-index: 10;  
-  white-space: nowrap; /* ✅ Text bleibt in einer Zeile */
-    display: none;
-}
-
-.carousel-btn:hover {
-  background: #ff3b2e;
-}
-
-/* Mobile Optimierung */
-@media (max-width: 768px) {
-  .carousel-btn {
-    font-size: 0.9rem;
-    padding: 8px 16px;
-    bottom: 10px;
-
-    /* ✅ Buttons nicht zu breit auf kleineren Screens */
-    max-width: 70%;
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .carousel-btn {
-    font-size: 0.8rem;
-    padding: 6px 12px;
-    bottom: 8px;
-
-    /* ✅ ganz kleine Screens */
-    max-width: 90%;
-  }
-}
 
 .verlagsvorschau {
   padding: 60px 20px;
@@ -531,7 +473,6 @@ button.next { right: 10px; }
 
   .carousel {
     max-width: 100%;
-    min-height: 250px;
   }
 }
 
