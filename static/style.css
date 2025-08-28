@@ -243,6 +243,48 @@ button.next {
 button.prev { left: 10px; }
 button.next { right: 10px; }
 
+
+
+/* Grunddesign siehe vorher */
+.carousel-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff6f61;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: background 0.3s;
+  z-index: 10; /* Sicherstellen, dass der Button über dem Bild liegt */
+}
+
+.carousel-btn:hover {
+  background: #ff3b2e;
+}
+
+/* ✅ Mobile Anpassungen */
+@media (max-width: 768px) {
+  .carousel-btn {
+    font-size: 0.9rem;   /* etwas kleiner */
+    padding: 8px 16px;   /* kompakter */
+    bottom: 10px;        /* näher am Rand */
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-btn {
+    font-size: 0.8rem;   /* noch kompakter */
+    padding: 6px 12px;
+    bottom: 8px;
+  }
+}
+
 .verlagsvorschau {
   padding: 60px 20px;
   max-width: 1000px;
