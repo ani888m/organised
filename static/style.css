@@ -213,7 +213,12 @@ header {
   position: relative;
   pointer-events: auto;
 }
-
+.carousel-image.active + .carousel-btn {
+  display: inline-flex;        /* sichtbar + zentrierbare Inhalte */
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;        /* sicherheitshalber klickbar */
+}
 
 .slides {
   display: flex;
@@ -221,6 +226,7 @@ header {
   height: 100%;
   animation: slide 12s infinite;
   flex-wrap: nowrap;
+  position: relative;
 }
 
 
@@ -264,6 +270,7 @@ button.next { right: 10px; }
   /* ✅ Ergänzung: sicherstellen, dass Button über dem Bild liegt */
   z-index: 10;  
   white-space: nowrap; /* ✅ Text bleibt in einer Zeile */
+    display: none;
 }
 
 .carousel-btn:hover {
