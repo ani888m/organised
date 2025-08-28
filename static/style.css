@@ -245,42 +245,52 @@ button.next { right: 10px; }
 
 
 
-/* Grunddesign siehe vorher */
 .carousel-btn {
   position: absolute;
   bottom: 20px;
-  left: 80%;
+  left: 50%;
   transform: translateX(-50%);
   background: #ff6f61;
   color: white;
-  padding: 20px 30px;
+  padding: 10px 20px;
+  border-radius: 20px;
   text-decoration: none;
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
   font-size: 1rem;
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
   transition: background 0.3s;
-  z-index: 10; /* Sicherstellen, dass der Button über dem Bild liegt */
+
+  /* ✅ Ergänzung: sicherstellen, dass Button über dem Bild liegt */
+  z-index: 10;  
+  white-space: nowrap; /* ✅ Text bleibt in einer Zeile */
 }
 
 .carousel-btn:hover {
   background: #ff3b2e;
 }
 
-/* ✅ Mobile Anpassungen */
+/* Mobile Optimierung */
 @media (max-width: 768px) {
   .carousel-btn {
-    font-size: 0.9rem;   /* etwas kleiner */
-    padding: 8px 16px;   /* kompakter */
-    bottom: 10px;        /* näher am Rand */
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    bottom: 10px;
+
+    /* ✅ Buttons nicht zu breit auf kleineren Screens */
+    max-width: 80%;
+    text-align: center;
   }
 }
 
 @media (max-width: 480px) {
   .carousel-btn {
-    font-size: 0.8rem;   /* noch kompakter */
+    font-size: 0.8rem;
     padding: 6px 12px;
     bottom: 8px;
+
+    /* ✅ ganz kleine Screens */
+    max-width: 90%;
   }
 }
 
