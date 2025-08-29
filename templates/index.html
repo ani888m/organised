@@ -75,6 +75,7 @@
 <main>
   <h1>Unsere Bücher</h1>
   <div class="book-list">
+    
     {% for produkt in produkte %}
       <div class="book">
         <div class="image-wrapper">
@@ -85,8 +86,7 @@
         <p>{{ produkt.preis }} €</p>
         <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}')">In den Warenkorb</button>
       </div>
-    {% endfor %}
-  </div>
+  
 
   
 <div class="book">
@@ -158,7 +158,9 @@
   <p>12,49 €</p>
   <button onclick="addToCart('Der kleine Drache', 12.49, '{{ url_for('static', filename='B1.jpg') }}')">In den Warenkorb</button>
 </div>
-
+    
+  {% endfor %}
+</div>
     
   </main>
 
