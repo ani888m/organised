@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Reife Blessuren | Danilo Lučić",
+    "beschreibung": "Ein berührendes Buch über das Erwachsenwerden.",
+    "preis": 23.90
+  },
+  {
+    "id": 2,
+    "name": "Die Stille Zeit",
+    "beschreibung": "Ein poetisches Werk über Einsamkeit und Hoffnung.",
+    "preis": 18.50
+  }
+]
