@@ -1,12 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-    <title>{{ produkt.name }}</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ produkt.name }} | Kinderbuchverlag</title>
+  <meta name="description" content="Details zum Buch '{{ produkt.name }}'. Jetzt entdecken und bestellen.">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='buch.css') }}" />
+  <script src="{{ url_for('static', filename='buch.js') }}" defer></script>
 </head>
 <body>
-    <h1>{{ produkt.name }}</h1>
-    <p>{{ produkt.beschreibung }}</p>
-    <p><strong>Preis:</strong> {{ produkt.preis }} €</p>
-    <a href="{{ url_for('index') }}">Zurück zur Übersicht</a>
+
+  <header>
+    <a href="{{ url_for('index') }}" class="back-link">← Zurück zur Übersicht</a>
+  </header>
+
+  <main class="book-detail">
+    <div class="book-container">
+      <div class="book-cover">
+        <div class="carousel">
+          {% for bild in produkt.bilder %}
+            <img src="{{ url_for('static', filename=bild) }}" alt="Cover {{ loop.index }}" class="carousel-image {% if loop.first %}active{% endif %}">
+          {% endfor %}
+          <button class="prev" onclick="prevImage()">❮</button>
+          <button class="next" onclick="nextImage()">❯</button>
+        </div>
+      </div>
+
+      <div class="book-info">
+        <h1>{{ produkt.name }}</h1>
+        <p class="author">von {{ produkt.autor }}</p>
+        <p class="price">{{ produkt.preis | round(2) }} €</p>
+        <p class="release"><strong>Erscheinungsdatum:</strong> {{ produkt.erscheinungsdatum }}</p>
+
+        <p class="description">
+          {{ produkt.beschreibung }}
+        </p>
+
+        <label for="quantity">Anzahl:</label>
+        <input type="number" id="quantity" value="1" min="1">
+
+        <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }})">In den Warenkorb 🛒</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Kinderbuchverlag</p>
+  </footer>
+
 </body>
 </html>
