@@ -12,4 +12,46 @@
       "B3.jpg"
     ]
   }
+
+  {
+    "id": 1,
+    "name": "Das Stundenbuch des Jacominus Gainsborough",
+    "autor": "Rébecca Dautremer",
+    "beschreibung": "Ein spannendes Abenteuer voller Magie, sprechender Tiere und geheimer Pfade. Ideal für kleine Entdecker ab 6 Jahren.",
+    "preis": 24.00,
+    "erscheinungsdatum": "01.09.2025",
+    "bilder": [
+      "B1.jpg",
+      "B2.jpg",
+      "B3.jpg"
+    ]
+  }
+
+  {
+    "id": 2,
+    "name": "Das Stundenbuch des Jacominus Gainsborough",
+    "autor": "Rébecca Dautremer",
+    "beschreibung": "Ein spannendes Abenteuer voller Magie, sprechender Tiere und geheimer Pfade. Ideal für kleine Entdecker ab 6 Jahren.",
+    "preis": 24.00,
+    "erscheinungsdatum": "01.09.2025",
+    "bilder": [
+      "Psst.jpg",
+      "B2.jpg",
+      "B3.jpg"
+    ]
+  }
+   {
+    "id": 3,
+    "name": "Das Stundenbuch des Jacominus Gainsborough",
+    "autor": "Rébecca Dautremer",
+    "beschreibung": "Ein spannendes Abenteuer voller Magie, sprechender Tiere und geheimer Pfade. Ideal für kleine Entdecker ab 6 Jahren.",
+    "preis": 24.00,
+    "erscheinungsdatum": "01.09.2025",
+    "bilder": [
+      "Tortengeschichte.jpg",
+      "B2.jpg",
+      "B3.jpg"
+    ]
+  }
+
 ]
