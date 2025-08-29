@@ -71,21 +71,24 @@
   </div>
 </section>
 
-  <main>
+  
+<main>
   <h1>Unsere Bücher</h1>
-   <div class="book-list">
-      
-   
-    <div class="book">
-  <div class="image-wrapper">
-    <img src="{{ url_for('static', filename='jacominus.jpg') }}" alt="Buch 1">
-    <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
+  <div class="book-list">
+    {% for produkt in produkte %}
+      <div class="book">
+        <div class="image-wrapper">
+          <img src="{{ url_for('static', filename=produkt.bilder[0]) }}" alt="{{ produkt.name }}">
+          <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}" class="hover-btn">Mehr erfahren</a>
+        </div>
+        <h2>{{ produkt.name }}</h2>
+        <p>{{ produkt.preis }} €</p>
+        <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}')">In den Warenkorb</button>
+      </div>
+    {% endfor %}
   </div>
-  <h2>Abenteuer</h2>
-  <p>9,99 €</p>
-  <button onclick="addToCart('Abenteuer im Zauberwald', 9.99, '{{ url_for('static', filename='B1.jpg') }}')">In den Warenkorb</button>
-</div>
 
+  
 <div class="book">
   <div class="image-wrapper">
     <img src="{{ url_for('static', filename='einewinzigekleinesekunde.jpg') }}" alt="Buch 2">
