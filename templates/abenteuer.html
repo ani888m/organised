@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abenteuer im Zauberwald | Kinderbuchverlag</title>
+  <meta name="description" content="Details zum Buch 'Abenteuer im Zauberwald'. Jetzt entdecken und bestellen.">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="buch.css" />
+  <script src="buch.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <a href="../index.html" class="back-link">← Zurück zur Übersicht</a>
+  </header>
+
+  <main class="book-detail">
+    <div class="book-container">
+      <div class="book-cover">
+       <div class="carousel">
+         <img src="B1.jpg" alt="Cover 1" class="carousel-image active">
+         <img src="B2.jpg" alt="Cover 2" class="carousel-image">
+         <img src="B3.jpg" alt="Cover 3" class="carousel-image">
+         <button class="prev" onclick="prevImage()">❮</button>
+         <button class="next" onclick="nextImage()">❯</button>
+  </div>
+</div>
+
+
+      <div class="book-info">
+        <h1>Das Stundenbuch des Jacominus Gainsborough</h1>
+        <p class="author">von Rébecca Dautremer</p>
+        <p class="price"> 24,00€</p>
+        <p class="release"><strong>Erscheinungsdatum:</strong> 01.09.2025</p>
+
+        <p class="description">
+          Ein spannendes Abenteuer voller Magie, sprechender Tiere und geheimer Pfade. Ideal für kleine Entdecker ab 6 Jahren.
+        </p>
+
+        <label for="quantity">Anzahl:</label>
+        <input type="number" id="quantity" value="1" min="1">
+
+        <button onclick="addToCart('Abenteuer im Zauberwald', 9.99)">In den Warenkorb 🛒</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Kinderbuchverlag</p>
+  </footer>
+
+</body>
+</html>
