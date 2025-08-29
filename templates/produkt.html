@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ produkt.name }}</title>
+</head>
+<body>
+    <h1>{{ produkt.name }}</h1>
+    <p>{{ produkt.beschreibung }}</p>
+    <p><strong>Preis:</strong> {{ produkt.preis }} €</p>
+    <a href="{{ url_for('index') }}">Zurück zur Übersicht</a>
+</body>
+</html>
