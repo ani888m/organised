@@ -129,3 +129,40 @@ fetch("/newsletter-snippet")
     if (inline) inline.innerHTML = html;
     if (popup) popup.innerHTML = html;
   });
+
+
+
+// --- Produktbilder-Slider (nur für Produktseite) ---
+document.addEventListener("DOMContentLoaded", () => {
+  const productImages = document.querySelectorAll(".carousel-image");
+  const prevBtn = document.querySelector(".product-prev");
+  const nextBtn = document.querySelector(".product-next");
+
+  if (productImages.length === 0) return;
+
+  let currentIndex = 0;
+
+  function showImage(index) {
+    productImages.forEach((img, i) => {
+      img.classList.toggle("active", i === index);
+    });
+    currentIndex = index;
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      const nextIndex = (currentIndex + 1) % productImages.length;
+      showImage(nextIndex);
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      const prevIndex = (currentIndex - 1 + productImages.length) % productImages.length;
+      showImage(prevIndex);
+    });
+  }
+
+  showImage(0); // Startbild anzeigen
+});
+
