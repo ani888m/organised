@@ -184,16 +184,15 @@
 
 
 
-.carousel {
-  position: relative;
-  z-index: 1;
-  max-width: 800px;     /* oder 500px oder was du möchtest */
-  width: 100%;
-  margin: 0 auto 100px; /* auto = zentriert */
-  overflow: hidden;
-  border-radius: 10px;
-}
 
+.carousel { 
+   position: relative; 
+   z-index: 1; 
+   max-width: 1000px; /* oder 500px oder was du möchtest */
+   width: 100%;
+   margin: 0 auto 100px; /* auto = zentriert */ 
+   overflow: hidden; 
+   border-radius: 10px; }
 
 .carousel-slide {
   position: relative;
