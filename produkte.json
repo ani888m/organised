@@ -1,14 +1,15 @@
 [
   {
     "id": 1,
-    "name": "Reife Blessuren | Danilo Lučić",
-    "beschreibung": "Ein berührendes Buch über das Erwachsenwerden.",
-    "preis": 23.90
-  },
-  {
-    "id": 2,
-    "name": "Die Stille Zeit",
-    "beschreibung": "Ein poetisches Werk über Einsamkeit und Hoffnung.",
-    "preis": 18.50
+    "name": "Das Stundenbuch des Jacominus Gainsborough",
+    "autor": "Rébecca Dautremer",
+    "beschreibung": "Ein spannendes Abenteuer voller Magie, sprechender Tiere und geheimer Pfade. Ideal für kleine Entdecker ab 6 Jahren.",
+    "preis": 24.00,
+    "erscheinungsdatum": "01.09.2025",
+    "bilder": [
+      "images/B1.jpg",
+      "images/B2.jpg",
+      "images/B3.jpg"
+    ]
   }
 ]
