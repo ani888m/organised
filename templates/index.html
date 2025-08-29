@@ -89,75 +89,79 @@
   
 
   
-<div class="book">
-  <div class="image-wrapper">
-    <img src="{{ url_for('static', filename='einewinzigekleinesekunde.jpg') }}" alt="Buch 2">
-    <a href="abenteuer.html" class="hover-btn">Mehr erfahren</a>
-  </div>
-  <h2>Der kleine Drache</h2>
-  <p>12,49 €</p>
-  <button onclick="addToCart('Der kleine Drache', 12.49, '{{ url_for('static', filename='B2.jpg') }}')">In den Warenkorb</button>
-</div>
+  <div class="book">
+        <div class="image-wrapper">
+          <img src="{{ url_for('static', filename=produkt.bilder[0]) }}" alt="{{ produkt.name }}">
+          <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}" class="hover-btn">Mehr erfahren</a>
+        </div>
+        <h2>{{ produkt.name }}</h2>
+        <p>{{ produkt.preis }} €</p>
+        <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}')">In den Warenkorb</button>
+ </div>
 
-<div class="book">
-  <div class="image-wrapper">
-    <img src="{{ url_for('static', filename='Monster.jpg') }}" alt="Buch 5">
-    <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
-  </div>
-  <h2>Märchenhafte Träume</h2>
-  <p>8,49 €</p>
-  <button onclick="addToCart('Märchenhafte Träume', 8.49, '{{ url_for('static', filename='B5.jpg') }}')">In den Warenkorb</button>
-</div>
+     <div class="book">
+        <div class="image-wrapper">
+          <img src="{{ url_for('static', filename=produkt.bilder[0]) }}" alt="{{ produkt.name }}">
+          <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}" class="hover-btn">Mehr erfahren</a>
+        </div>
+        <h2>{{ produkt.name }}</h2>
+        <p>{{ produkt.preis }} €</p>
+        <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}')">In den Warenkorb</button>
+      </div>
+  
+  <div class="book">
+        <div class="image-wrapper">
+          <img src="{{ url_for('static', filename=produkt.bilder[0]) }}" alt="{{ produkt.name }}">
+          <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}" class="hover-btn">Mehr erfahren</a>
+        </div>
+        <h2>{{ produkt.name }}</h2>
+        <p>{{ produkt.preis }} €</p>
+        <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}')">In den Warenkorb</button>
+      </div>
 
-<div class="book">
-  <div class="image-wrapper">
-    <img src="{{ url_for('static', filename='B6.jpg') }}" alt="Buch 6">
-    <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
-  </div>
-  <h2>Der kleine Drache</h2>
-  <p>12,49 €</p>
-  <button onclick="addToCart('Der kleine Drache', 12.49, '{{ url_for('static', filename='B6.jpg') }}')">In den Warenkorb</button>
-</div>
+    
+  <div class="book">
+        <div class="image-wrapper">
+          <img src="{{ url_for('static', filename=produkt.bilder[0]) }}" alt="{{ produkt.name }}">
+          <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}" class="hover-btn">Mehr erfahren</a>
+        </div>
+        <h2>{{ produkt.name }}</h2>
+        <p>{{ produkt.preis }} €</p>
+        <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}')">In den Warenkorb</button>
+      </div>
 
-<div class="book">
-  <div class="image-wrapper">
-    <img src="{{ url_for('static', filename='B1.jpg') }}" alt="Buch 1">
-    <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
-  </div>
-  <h2>Märchenhafte Träume</h2>
-  <p>8,49 €</p>
-  <button onclick="addToCart('Märchenhafte Träume', 8.49, '{{ url_for('static', filename='B1.jpg') }}')">In den Warenkorb</button>
-</div>
+    
+  <div class="book">
+        <div class="image-wrapper">
+          <img src="{{ url_for('static', filename=produkt.bilder[0]) }}" alt="{{ produkt.name }}">
+          <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}" class="hover-btn">Mehr erfahren</a>
+        </div>
+        <h2>{{ produkt.name }}</h2>
+        <p>{{ produkt.preis }} €</p>
+        <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}')">In den Warenkorb</button>
+      </div>
 
-<div class="book">
-  <div class="image-wrapper">
-    <img src="{{ url_for('static', filename='B1.jpg') }}" alt="Buch 1">
-    <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
-  </div>
-  <h2>Der kleine Drache</h2>
-  <p>12,49 €</p>
-  <button onclick="addToCart('Der kleine Drache', 12.49, '{{ url_for('static', filename='B1.jpg') }}')">In den Warenkorb</button>
-</div>
+  <div class="book">
+        <div class="image-wrapper">
+          <img src="{{ url_for('static', filename=produkt.bilder[0]) }}" alt="{{ produkt.name }}">
+          <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}" class="hover-btn">Mehr erfahren</a>
+        </div>
+        <h2>{{ produkt.name }}</h2>
+        <p>{{ produkt.preis }} €</p>
+        <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}')">In den Warenkorb</button>
+      </div>
 
-<div class="book">
-  <div class="image-wrapper">
-    <img src="{{ url_for('static', filename='B1.jpg') }}" alt="Buch 1">
-    <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
-  </div>
-  <h2>Der kleine Drache</h2>
-  <p>12,49 €</p>
-  <button onclick="addToCart('Der kleine Drache', 12.49, '{{ url_for('static', filename='B1.jpg') }}')">In den Warenkorb</button>
-</div>
 
-<div class="book">
-  <div class="image-wrapper">
-    <img src="{{ url_for('static', filename='B1.jpg') }}" alt="Buch 1">
-    <a href="Buch detailierter Ansicht/abenteuer.html" class="hover-btn">Mehr erfahren</a>
-  </div>
-  <h2>Der kleine Drache</h2>
-  <p>12,49 €</p>
-  <button onclick="addToCart('Der kleine Drache', 12.49, '{{ url_for('static', filename='B1.jpg') }}')">In den Warenkorb</button>
-</div>
+    
+  <div class="book">
+        <div class="image-wrapper">
+          <img src="{{ url_for('static', filename=produkt.bilder[0]) }}" alt="{{ produkt.name }}">
+          <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}" class="hover-btn">Mehr erfahren</a>
+        </div>
+        <h2>{{ produkt.name }}</h2>
+        <p>{{ produkt.preis }} €</p>
+        <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}')">In den Warenkorb</button>
+      </div>
     
   {% endfor %}
 </div>
