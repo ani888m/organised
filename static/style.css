@@ -187,9 +187,8 @@
 .carousel {
   position: relative;
   z-index: 1;
-  max-width: 1000px;     /* oder 500px oder was du möchtest */
+  max-width: 800px;     /* oder 500px oder was du möchtest */
   width: 100%;
-  height: 600px;
   margin: 0 auto 100px; /* auto = zentriert */
   overflow: hidden;
   border-radius: 10px;
@@ -209,7 +208,6 @@
   width: 100%;
   height: auto;
   display: block;
-object-fit: contain;
 }
 
 
