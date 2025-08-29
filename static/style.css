@@ -1,6 +1,7 @@
 
 
 
+
     *{
       box-sizing: border-box;
       margin: 0;
@@ -45,24 +46,24 @@
 
     }
 
-    @media (max-width: 768px) {
+   @media (max-width: 768px) {
      .logo {
         height: 100px; /* Tablets */
     }
-    header {
+header {
          padding: 25px;
       }
-   }
+  }
 
 
-    @media (max-width: 480px) {
+   @media (max-width: 480px) {
      .logo {
         height: 80px; /* Smartphones */
-    }
+   }
       header {
          padding: 25px;
       }
-   }
+  }
 
 
 
@@ -122,12 +123,12 @@
       color: #7393B3;
     }
 
-    .mobile-menu,
-    .close-menu {
-      display: none;
-    }   
+.mobile-menu,
+.close-menu {
+  display: none;
+}   
 
-    @media (max-width: 768px) {
+@media (max-width: 768px) {
 
  .mobile-menu {
     display: block; /* nur auf Mobile sichtbar */
@@ -184,15 +185,16 @@
 
 
 
+.carousel {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;     /* oder 500px oder was du möchtest */
+  width: 100%;
+  margin: 0 auto 100px; /* auto = zentriert */
+  overflow: hidden;
+  border-radius: 10px;
+}
 
-.carousel { 
-   position: relative; 
-   z-index: 1; 
-   max-width: 1000px; /* oder 500px oder was du möchtest */
-   width: 100%;
-   margin: 0 auto 100px; /* auto = zentriert */ 
-   overflow: hidden; 
-   border-radius: 10px; }
 
 .carousel-slide {
   position: relative;
@@ -208,7 +210,23 @@
   height: auto;
   display: block;
 }
+button.prev,
+button.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 50%;
+  z-index: 10;
+}
 
+button.prev { left: 10px; }
+button.next { right: 10px; }
 
 /* Buttons */
 .slide-btn {
@@ -229,25 +247,6 @@
 .slide-btn:hover {
   background: rgba(0,0,0,0.8);
 }
-
-button.prev,
-button.next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0,0,0,0.5);
-  color: white;
-  border: none;
-  padding: 12px;
-  cursor: pointer;
-  font-size: 18px;
-  border-radius: 50%;
-  z-index: 10;
-}
-
-button.prev { left: 10px; }
-button.next { right: 10px; }
-
 
 /* Mobile optimiert */
 @media (max-width: 768px) {
