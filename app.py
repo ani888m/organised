@@ -1,8 +1,19 @@
-from flask import Flask, render_template, request, redirect, flash, url_for
+from flask import Flask, render_template, request, redirect, flash, url_for, abort
 import smtplib
 from email.mime.text import MIMEText
 import stripe
 import os
+import json
+
+
+
+# JSON-Datei laden (einmalig)
+basedir = os.path.abspath(os.path.dirname(__file__))
+json_path = os.path.join(basedir, 'produkte.json')
+
+with open(json_path, encoding='utf-8') as f:
+    produkte = json.load(f)
+
 
 app = Flask(__name__)
 app.secret_key = 'irgendetwasgeheimes'  # wichtig für Flash-Messages
@@ -14,7 +25,14 @@ stripe.api_key = os.getenv("STRIPE_SECRET_KEY", "DEIN_STRIPE_SECRET_KEY")
 # ---------- SEITEN ----------
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', produkte=produkte)
+
+@app.route('/produkt/<int:produkt_id>')
+def produkt_detail(produkt_id):
+    produkt = next((p for p in produkte if p['id'] == produkt_id), None)
+    if produkt is None:
+        abort(404)
+    return render_template('produkt.html', produkt=produkt)
 
 @app.route('/navbar')
 def navbar():
