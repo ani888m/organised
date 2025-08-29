@@ -19,13 +19,14 @@
   <main class="book-detail">
     <div class="book-container">
       <div class="book-cover">
-        <div class="carousel">
+       <div class="carousel">
           {% for bild in produkt.bilder %}
-            <img src="{{ url_for('static', filename=bild) }}" alt="Cover {{ loop.index }}" class="carousel-image {% if loop.first %}active{% endif %}">
+          <img src="{{ url_for('static', filename=bild) }}" class="carousel-image {% if loop.first %}active{% endif %}" alt="{{ produkt.name }}">
           {% endfor %}
-          <button class="prev" onclick="prevImage()">❮</button>
-          <button class="next" onclick="nextImage()">❯</button>
-        </div>
+         <button class="product-prev">❮</button>
+         <button class="product-next">❯</button>
+      </div>
+
       </div>
 
       <div class="book-info">
