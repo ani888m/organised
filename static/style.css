@@ -210,6 +210,11 @@
   height: auto;
   display: block;
 }
+.carousel-slide img {
+  width: 100%;
+  max-height: 400px;  /* maximale Höhe */
+  object-fit: cover;
+}
 
 /* Buttons */
 .slide-btn {
