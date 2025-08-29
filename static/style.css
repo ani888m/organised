@@ -776,3 +776,13 @@ footer {
   padding: 10px 20px;
   border-radius: 5px;
 } 
+
+.carousel-image {
+  display: none;
+  width: 100%;
+}
+
+.carousel-image.active {
+  display: block;
+}
+
