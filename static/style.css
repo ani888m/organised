@@ -416,16 +416,18 @@ button.next { right: 10px; }
   transform: translateY(-5px);
 }
 
+
 .image-wrapper {
   position: relative;
   overflow: hidden;
+  width: 100%;
+  aspect-ratio: 3 / 4; /* Einheitliches Seitenverhältnis, z.B. Buchformat */
 }
 
 .image-wrapper img {
   width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 5px;
+  height: 100%;
+  object-fit: cover; /* füllt den Container und schneidet überstehende Teile ab */
 }
 
 .hover-btn {
