@@ -81,6 +81,8 @@ display: block;
 padding: 8px 10px;
 font-size: 20px;
 font-family: 'DM Sans';
+font-family: 'Cormorant', serif; /* Cormorant für Header-Menü */
+font-weight: 300;    
 }
 
 .dropdown-content {
