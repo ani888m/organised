@@ -1,10 +1,10 @@
 [
   {
     "id": 1,
-    "name": "Das Stundenbuch des Jacominus Gainsborough |",
+    "name": "Das Stundenbuch des Jacominus Gainsborough|",
     "autor": "Rébecca Dautremer",
    "beschreibung": "Ein Leben in Bildern – das Stundenbuch des Jacominus Gainsborough\n\nJacominus Gainsborough träumt sich zum Mond, geht an Bord eines großen Schiffs, verliebt sich, verliert, erinnert – und findet wieder. Er lebt still und laut, voller Fragen, voller Augenblicke. Kein außergewöhnliches Leben. Und doch ein ganz besonderes.\n\nRébecca Dautremer erzählt in ihrem kunstvoll illustrierten Buch von den kostbaren Momenten des Daseins – von Aufbruch, Abschied, Nähe und Neubeginn. Mit feinem Gespür öffnet sie einen Raum für das, was uns alle bewegt: das Leben selbst.\n\nWas ein Stundenbuch ist?\nVielleicht ein stiller Begleiter.\nVielleicht die Summe vieler kleiner Augenblicke.\nVielleicht einfach: ein Leben.\n\nEin Blatt im Wind. Ein leiser Regen. Das Zurückweichen der Flut.\nEin Purzelbaum. Ein letzter Gruß am Kai. Ein Wiedersehen im Garten.\nEin Picknick im Gras. Kinderlachen. Ein neuer Schatten unter dem Mandelbaum.\n\nAll das.\nEin Leben.",
-    "preis": 24.00,
+    "preis": 24,00,
     "bilder": [
       "jacominus.jpg",
       "B2.jpg",
