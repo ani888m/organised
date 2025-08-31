@@ -3,11 +3,29 @@
     "id": 1,
     "name": "Das Stundenbuch des Jacominus Gainsborough",
     "autor": "Rébecca Dautremer",
-    "beschreibung": "Ein spannendes Abenteuer voller Magie, sprechender Tiere und geheimer Pfade. Ideal für kleine Entdecker ab 6 Jahren.",
+    "beschreibung": "Ein Leben in Bildern – das Stundenbuch des Jacominus Gainsborough
+
+Jacominus Gainsborough träumt sich zum Mond, 
+geht an Bord eines großen Schiffs, verliebt sich, verliert, erinnert – und findet wieder. 
+Er lebt still und laut, voller Fragen, voller Augenblicke. Kein außergewöhnliches Leben. 
+Und doch ein ganz besonderes.
+
+Rébecca Dautremer erzählt in ihrem kunstvoll illustrierten Buch von den kostbaren Momenten des Daseins – von Aufbruch, Abschied, Nähe und Neubeginn. Mit feinem Gespür öffnet sie einen Raum für das, was uns alle bewegt: das Leben selbst.
+
+Was ein Stundenbuch ist?
+Vielleicht ein stiller Begleiter.
+Vielleicht die Summe vieler kleiner Augenblicke.
+Vielleicht einfach: ein Leben.
+
+Ein Blatt im Wind. Ein leiser Regen. Das Zurückweichen der Flut.
+Ein Purzelbaum. Ein letzter Gruß am Kai. Ein Wiedersehen im Garten.
+Ein Picknick im Gras. Kinderlachen. Ein neuer Schatten unter dem Mandelbaum.
+
+All das.
+Ein Leben.",
     "preis": 24.00,
-    "erscheinungsdatum": "01.09.2025",
     "bilder": [
-      "B1.jpg",
+      "jacominus.jpg",
       "B2.jpg",
       "B3.jpg"
     ]
