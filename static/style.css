@@ -196,24 +196,7 @@ object-fit: cover;
 display: block;
 }
 
-.slide-btn {
-position: absolute;
-bottom: 20px;
-left: 50%;
-transform: translateX(-50%);
-padding: 12px 24px;
-background: rgba(0,0,0,0.6);
-color: white;
-border: none;
-border-radius: 8px;
-font-size: 16px;
-cursor: pointer;
-z-index: 5;
-}
 
-.slide-btn:hover {
-background: rgba(0,0,0,0.8);
-}
 
 @media (max-width: 768px) {
 .slide-btn {
@@ -233,10 +216,10 @@ bottom: 8px;
 
 .slide-btn {
 position: absolute;
-bottom: 50px;
+bottom: 90px;
 left: 80%;
 transform: translateX(-50%);
-padding: 32px 54px;
+padding: 32px 84px;
 background: rgba(0, 0, 0, 0.6);
 color: white;
 border: none;
