@@ -81,7 +81,7 @@ text-decoration: none;
 color: #7393B3;
 display: block;
 padding: 8px 10px;
-font-size: 30px;
+font-size: 25px;
 font-family: 'DM Sans';
 font-family: 'Cormorant', serif; /* Cormorant für Header-Menü */
 font-weight: 300;    
@@ -330,12 +330,15 @@ margin: 0 auto;
 h1 {
 text-align: center;
 color: #0c4d77;
+font-family: 'Cormorant', serif; /* Cormorant für Header-Menü */
 }
 
 h2 {
 color: #0c4d77;
 text-align: center;
 font-family: 'DM Sans'
+font-family: 'Cormorant', serif; /* Cormorant für Header-Menü */
+
 }
 
 p {
