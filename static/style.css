@@ -793,6 +793,7 @@ right: 10px;
 flex: 1 1 300px;
 max-width: 500px;
 display: flex;
+flex-direction: column;
 gap: 15px;
 }
 
