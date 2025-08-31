@@ -867,3 +867,14 @@ background-color: #527a9b;
 .back-link {
 display: inline-block;
 margin: 20px 110px 0 
+
+
+.book-description {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+}
+
