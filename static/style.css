@@ -803,6 +803,7 @@ font-family: 'Cormorant', serif;
 color: #0c4d77;
 font-size: 2.4rem;
 margin-bottom: 5px;
+text-align: left;
 }
 
 .book-info .author {
@@ -870,8 +871,8 @@ display: inline-block;
 margin: 20px 110px 0;
 text-decoration: none;
 color: #7393B3;
- font-family: 'Cormorant', serif;
-
+font-family: 'Cormorant', serif;
+font-size: 1.2rem;
 }
 
 
