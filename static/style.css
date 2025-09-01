@@ -823,6 +823,7 @@ color: #444;
 
 .book-info .description {
 font-size: 1.1rem;
+font-family: 'Varela', serif; 
 line-height: 1.6;
 color: #333;
 margin-top: 10px;
@@ -910,6 +911,7 @@ margin: 20px 110px 0
     max-width: 100%;
     padding: 0 10px;
     font-size: 1rem;
+    
     margin: 20px auto 40px;
   }
 
