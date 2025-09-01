@@ -146,6 +146,9 @@ background-color: #527a9b;
 display: inline-block;
 margin: 20px 110px 0;
 text-decoration: none;
+color: #7393B3;
+ font-family: 'Cormorant', serif;
+
 }
 
 
@@ -157,7 +160,6 @@ text-decoration: none;
   line-height: 1.8;
   color: #333;
   font-family: 'Cormorant', serif;
-
 }
 
 
@@ -191,7 +193,6 @@ text-decoration: none;
     max-width: 100%;
     padding: 0 10px;
     font-size: 1rem;
-    
     margin: 20px auto 40px;
   }
 
