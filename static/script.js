@@ -92,9 +92,41 @@ if (prevBtn) {
 showSlide(currentSlide);
 
 
+// --- Newsletter-Popup ---
 
+window.addEventListener('load', () => {
+  const popupShown = localStorage.getItem('newsletterPopupShown');
 
+  if (!popupShown) {
+    setTimeout(() => {
+      const popup = document.getElementById('newsletter-popup');
+      if (popup) {
+        popup.classList.remove('popup-hidden');
+        localStorage.setItem('newsletterPopupShown', 'true');
+      }
+    }, 5000);
+  }
 
+  // Beim Laden auch den Warenkorb-Zähler aktualisieren
+  updateCartCount();
+});
+
+// Popup schließen
+function closePopup() {
+  const popup = document.getElementById('newsletter-popup');
+  if (popup) {
+    popup.classList.add('popup-hidden');
+  }
+}
+
+// Newsletter-Snippet dynamisch laden
+fetch("/newsletter-snippet")
+  .then(res => res.text())
+  .then(html => {
+    const inline = document.getElementById("newsletter-inline");
+
+    if (inline) inline.innerHTML = html;
+  });
 
 
 
@@ -131,4 +163,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
   showImage(0); // Startbild anzeigen
 });
-
