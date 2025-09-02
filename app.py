@@ -33,6 +33,10 @@ def produkt_detail(produkt_id):
     if produkt is None:
         abort(404)
     return render_template('produkt.html', produkt=produkt)
+    
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 @app.route('/navbar')
 def navbar():
