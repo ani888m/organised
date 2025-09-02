@@ -1,3 +1,7 @@
+
+
+
+
 /* =========================================
    1. IMPORTS & RESET
 ========================================= */
@@ -8,18 +12,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-/* =========================================
-   2. ROOT / VARIABLES
-========================================= */
-:root {
-  --color-primary: #7393B3;
-  --color-secondary: #0c4d77;
-  --color-accent: #ff7f50;
-  --font-heading: 'Cormorant', serif;
-  --font-body: 'Segoe UI', sans-serif;
-  --font-menu: 'DM Sans', sans-serif;
 }
 
 /* =========================================
@@ -35,8 +27,8 @@ h1, h2, h3 {
   color: var(--color-secondary);
 }
 
-h1 { text-align: center; }
-h2 { text-align: center; }
+h1, h2 { text-align: center; }
+
 
 p {
   font-size: 1.1em;
@@ -55,221 +47,10 @@ img {
   display: block;
 }
 
+
 /* =========================================
    4. LAYOUT / STRUKTUR
 ========================================= */
-/* Header */
-header {
-  position: sticky;
-  top: 0;
-  z-index: 10000;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 10px 110px;
-  box-shadow: 0 4px 6px -2px rgba(0,0,0,0.1);
-}
-
-.site-title { display: flex; align-items: center; flex: 1; min-width: 0; }
-
-.logo {
-  height: 120px;
-  width: auto;
-  object-fit: contain;
-  transition: height 0.3s ease;
-}
-
-/* Navigation */
-nav { position: relative; z-index: 9999; }
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-  position: relative;
-  margin-top: 100px;
-  padding-right: 40px;
-}
-
-.nav-links li a {
-  text-decoration: none;
-  color: var(--color-primary);
-  display: block;
-  padding: 8px 10px;
-  font-size: 25px;
-  font-family: var(--font-menu);
-  font-weight: 300;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f7f6f4;
-  min-width: 180px;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  border-radius: 5px;
-}
-
-.dropdown-content li a { padding: 10px; }
-.dropdown:hover .dropdown-content { display: block; }
-
-/* Footer */
-footer {
-  background-color: #ebebe3;
-  padding: 30px;
-  text-align: center;
-  color: #333;
-}
-
-footer a {
-  color: var(--color-primary);
-  font-size: 2em;
-  margin: 0 10px;
-}
-
-/* Main */
-main {
-  padding: 50px 20px;
-  background-color: transparent;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-/* =========================================
-   5. KOMPONENTEN / MODULE
-========================================= */
-/* Carousel */
-.carousel {
-  position: relative;
-  max-width: 1000px;
-  margin: 0 auto 100px;
-  overflow: hidden;
-  border-radius: 10px;
-}
-
-.carousel-slide { position: relative; display: none; }
-.carousel-slide.active { display: block; }
-.carousel-slide img { width: 100%; height: 700px; object-fit: cover; }
-
-.slide-btn {
-  position: absolute;
-  bottom: 90px;
-  left: 80%;
-  transform: translateX(-50%);
-  padding: 22px 104px;
-  background: rgba(0,0,0,0.6);
-  color: white;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-  z-index: 5;
-  transition: background 0.3s ease;
-}
-
-button.prev, button.next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0,0,0,0.5);
-  color: white;
-  border: none;
-  padding: 12px;
-  cursor: pointer;
-  font-size: 18px;
-  border-radius: 50%;
-  z-index: 10;
-}
-
-button.prev { left: 10px; }
-button.next { right: 10px; }
-
-/* Verlagsvorschau */
-.verlagsvorschau { padding: 60px 20px; max-width: 1000px; margin: 0 auto; text-align: center; }
-.vorschau-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-.vorschau-item img { width: 100%; height: auto; }
-
-/* Book List */
-.book-list { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; max-width: 1800px; margin: 0 auto; padding: 50px 0; }
-.book { background: #f8f8f8; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; padding: 15px; transition: transform 0.3s ease; }
-.book:hover { transform: translateY(-5px); }
-
-.image-wrapper { position: relative; overflow: hidden; width: 100%; aspect-ratio: 3/4; }
-.image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-.hover-btn {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #060606;
-  color: white;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 5px;
-  text-decoration: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.image-wrapper:hover .hover-btn { opacity: 1; }
-
-/* Newsletter */
-.newsletter-section, .newsletter-box, #newsletter-popup { /* Styles hier ... */ }
-
-/* Team Section */
-.team-section { margin-top: 60px; max-width: 800px; margin-left:auto; margin-right:auto; display:flex; flex-direction:column; gap:30px; }
-.team-member { display:flex; background-color:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.1); align-items:flex-start; gap:20px; }
-.team-member img { width:150px; height:100px; border-radius:10px; object-fit:cover; }
-.team-info h3 { margin:0 0 10px; color: var(--color-secondary); }
-.team-info p { margin:0; }
-
-/* Book Detail */
-.book-detail, .book-container, .book-info, .book-description { /* Styles hier ... */ }
-
-/* =========================================
-   6. UTILITIES / HELPER
-========================================= */
-/* Optional: .hidden, .text-center, .mt-20 etc. */
-
-/* =========================================
-   7. RESPONSIVE / MEDIA QUERIES
-========================================= */
-@media (max-width: 1024px) { .book-list { grid-template-columns: repeat(2,1fr); } }
-@media (max-width: 768px) {
-  .logo { height: 100px; }
-  header { padding: 25px; }
-  .slide-btn { font-size: 14px; padding: 10px 18px; bottom: 12px; }
-  .book-container { flex-direction: column; gap:20px; }
-  .book-cover, .book-info { max-width:100%; flex:none; }
-}
-@media (max-width: 600px) {
-  .logo { height: 80px; }
-  .slide-btn { font-size: 12px; padding: 8px 14px; bottom:10px; }
-  .book-list { grid-template-columns: 1fr; }
-  .book-item { width: 80%; max-width:200px; padding:10px; font-size:0.9rem; }
-  .team-member { flex-direction: column; align-items: center; text-align:center; }
-}
-@media (max-width: 480px) {
-  header { padding:25px; }
-}
-
-
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Varela&display=swap');
-
-*{
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-}
-
-body {
-font-family: 'Segoe UI', sans-serif;
-color: #333;
-}
 
 header {
 position: sticky;
@@ -318,6 +99,10 @@ padding: 25px;
 }
 }
 
+
+/* Navigation */
+
+
 nav {
 position: relative;
 z-index: 9999;
@@ -342,7 +127,6 @@ color: #7393B3;
 display: block;
 padding: 8px 10px;
 font-size: 25px;
-font-family: 'DM Sans';
 font-family: 'Cormorant', serif; /* Cormorant für Header-Menü */
 font-weight: 300;    
 }
@@ -390,7 +174,6 @@ cursor: pointer;
 }
 
 .nav-links {
-list-style: none;
 margin: 0;
 padding: 0;
 position: fixed;
@@ -429,6 +212,37 @@ display: block;
 display: none;
 }
 }
+
+/* Footer */
+
+footer {
+background-color: #ebebe3;
+padding: 30px;
+text-align: center;
+color: #333;
+bottom: 0;
+}
+
+footer a {
+color: #7393B3;
+font-size: 2em;
+margin: 0 10px;
+}
+
+/* Main */
+
+main {
+padding: 50px 20px;
+background-color: transparent;
+max-width: 900px;
+margin: 0 auto;
+}
+
+/* =========================================
+   5. KOMPONENTEN / MODULE
+========================================= */
+/* Carousel */
+
 
 .carousel {
 position: relative;
@@ -512,31 +326,10 @@ bottom: 10px;
 }
 }
 
-main {
-padding: 50px 20px;
-background-color: transparent;
-max-width: 900px;
-margin: 0 auto;
-}
 
-h1 {
-text-align: center;
-color: #0c4d77;
-font-family: 'Cormorant', serif; /* Cormorant für Header-Menü */
-}
 
-h2 {
-color: #0c4d77;
-text-align: center;
-font-family: 'Cormorant', serif; /* Cormorant für Header-Menü */
-}
 
-p {
-font-size: 1.1em;
-line-height: 1.7;
-margin-bottom: 20px;
-}
-
+/* Verlagsvorschau */
 
 .verlagsvorschau {
 padding: 60px 20px;
@@ -558,12 +351,12 @@ height: auto;
 }
 
 
+/* Book List */
 
 .book-list {
 display: grid;
 grid-template-columns: repeat(4, 1fr);
 gap: 20px;
-padding: 20px;
 max-width: 1800px;
 margin: 0 auto;
 padding: 50px 0px;
@@ -586,14 +379,6 @@ padding: 10px;
 font-size: 0.9rem;
 box-sizing: border-box;
 }
-}
-
-.book-item {
-width: 100%;
-max-width: 200px;
-padding: 10px;
-font-size: 0.9rem;
-box-sizing: border-box;
 }
 
 .book {
@@ -652,6 +437,10 @@ cursor: pointer;
 transition: background-color 0.3s ease;
 }
 
+
+/* Teamsection */
+
+
 .team-section {
 margin-top: 60px;
 max-width: 800px;
@@ -705,19 +494,7 @@ text-align: center;
 }
 }
 
-footer {
-background-color: #ebebe3;
-padding: 30px;
-text-align: center;
-color: #333;
-bottom: 0;
-}
-
-footer a {
-color: #7393B3;
-font-size: 2em;
-margin: 0 10px;
-}
+/* Presssection */
 
 .press-info {
 font-size: 1.1em;
@@ -734,67 +511,9 @@ color: #0c4d77;
 text-decoration: underline;
 }
 
-#newsletter-popup {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(0,0,0,0.6);
-display: flex;
-justify-content: center;
-align-items: center;
-z-index: 9999;
-}
 
-#newsletter-popup.popup-hidden {
-display: none;
-}
+/* Newsletter */
 
-.popup-content {
-background: #fff;
-padding: 30px;
-border-radius: 12px;
-max-width: 400px;
-width: 90%;
-text-align: center;
-box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-.popup-content h2 {
-color: #0c4d77;
-margin-bottom: 10px;
-}
-
-.popup-content p {
-margin-bottom: 20px;
-}
-
-.popup-content input {
-padding: 10px;
-width: 70%;
-border: 1px solid #ccc;
-border-radius: 5px 0 0 5px;
-outline: none;
-}
-
-.popup-content button {
-padding: 10px;
-background-color: #7393B3;
-color: white;
-border: none;
-border-radius: 0 5px 5px 0;
-cursor: pointer;
-}
-
-.close-popup {
-position: absolute;
-top: 20px;
-right: 30px;
-font-size: 24px;
-cursor: pointer;
-color: white;
-}
 
 .newsletter-box {
 background: #fff;
@@ -851,17 +570,7 @@ text-align: center;
 margin-top: 19px;
 }
 
-.newsletter-section h2 {
-font-size: 2rem;
-margin-bottom: 15px;
-color: #333;
-}
 
-.newsletter-section p {
-font-size: 1rem;
-margin-bottom: 15px;
-color: #555;
-}
 
 .newsletter-section form {
 display: flex;
@@ -899,15 +608,7 @@ background-color: #ff5722;
 display: none;
 }
 
-#newsletter-popup .close-popup {
-display: block;
-position: absolute;
-top: 20px;
-right: 30px;
-font-size: 24px;
-cursor: pointer;
-color: white;
-}
+
 
 .book {
 width: 100%;
@@ -925,30 +626,9 @@ font-size: 0.95rem;
 color: #666;
 }
 
-.thank-you-container {
-max-width: 600px;
-margin: 100px auto;
-padding: 40px;
-text-align: center;
-background-color: #f7f7f7;
-border-radius: 8px;
-box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-font-family: sans-serif;
-}
-
-.thank-you-container h1 {
-color: #2c3e50;
-}
-
-.thank-you-container a {
-display: inline-block;
-margin-top: 20px;
-text-decoration: none;
-color: white;
-background-color: #3498db;
-padding: 10px 20px;
-border-radius: 5px;
-}
+/* =========================================
+   Bookdetail
+========================================= */
 
 .book-detail {
 max-width: 1000px;
