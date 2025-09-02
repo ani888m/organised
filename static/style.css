@@ -279,13 +279,17 @@ object-fit: cover;
 display: block;
 }
 
-
-
-
+.carousel-slide h2 {
+position: absolute;
+bottom: 200px;
+font-size: 40px;
+z-index: 5;
+color: white;
+}
 .slide-btn {
 position: absolute;
 bottom: 90px;
-left: 80%;
+left: 20%;
 transform: translateX(-50%);
 padding: 22px 104px;
 background: rgba(0, 0, 0, 0.6);
