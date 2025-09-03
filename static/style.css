@@ -286,6 +286,7 @@ bottom: 200px;
 font-size: 80px;
 z-index: 5;
 color: white;
+text-align: left;
 }
 .slide-btn {
 position: absolute;
