@@ -282,7 +282,7 @@ display: block;
 .carousel-slide h2 {
 margin-left: 100px;
 position: absolute;
-bottom: 200px;
+bottom: 250px;
 font-size: 80px;
 z-index: 5;
 color: white;
@@ -290,7 +290,7 @@ text-align: left;
 }
 .slide-btn {
 position: absolute;
-bottom: 90px;
+bottom: 150px;
 left: 20%;
 transform: translateX(-50%);
 padding: 22px 104px;
