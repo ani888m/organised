@@ -280,9 +280,10 @@ display: block;
 }
 
 .carousel-slide h2 {
+margin-left: 100px;
 position: absolute;
 bottom: 200px;
-font-size: 40px;
+font-size: 80px;
 z-index: 5;
 color: white;
 }
