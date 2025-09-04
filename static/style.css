@@ -291,10 +291,10 @@ text-align: left;
 .slide-btn {
 position: absolute;
 bottom: 150px;
-left: 20%;
+left: 80%;
 transform: translateX(-50%);
-padding: 22px 104px;
-background-color: #ff7f50;
+padding: 22px 84px;
+background-color: #ac345c;
 color: white;
 border: none;
 border-radius:5px;
