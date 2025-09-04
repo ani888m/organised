@@ -163,3 +163,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   showImage(0); // Startbild anzeigen
 });
+
+
+<div class="carousel-slide">
+  <video class="carousel-image" autoplay muted playsinline>
+    <source src="{{ url_for('static', filename='videos/intro.mp4') }}" type="video/mp4">
+    Dein Browser unterstützt kein HTML5-Video.
+  </video>
+  <button class="slide-btn" onclick="window.location.href='/seiteVideo'">Video entdecken</button>
+</div>
