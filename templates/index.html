@@ -30,7 +30,13 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
       <img src="{{ url_for('static', filename='Screenshot 2025-05-22 at 10.40.20.png') }}" class="carousel-image" alt="Slide 1">
       <button class="slide-btn" onclick="window.location.href='/seite1'">Kinderbücher nach Ländern </button>
     </div>
-
+    <div class="carousel-slide">
+        <video class="carousel-image" autoplay muted playsinline>
+        <source src="{{ url_for('static', filename='images/Slide.mp4') }}" type="video/mp4">
+         Dein Browser unterstützt kein HTML5-Video.
+        </video>
+      <button class="slide-btn" onclick="window.location.href='/seiteVideo'">Video entdecken</button>
+</div>
     <!-- Folie 2 -->
     <div class="carousel-slide">
       <img src="{{ url_for('static', filename='ChatGPT Image Feb 17, 2025, 12_34_20 PM.png') }}" class="carousel-image" alt="Slide 2">
