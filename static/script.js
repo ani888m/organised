@@ -7,7 +7,7 @@ function updateCartCount() {
   if (cartCountElem) {
     cartCountElem.textContent = cartCount;
   }
-}
+} 
 
 // Artikel in den Warenkorb legen und Zähler aktualisieren
 function addToCart(title, price, image) {
