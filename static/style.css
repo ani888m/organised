@@ -291,7 +291,7 @@ text-align: left;
 .slide-btn {
 position: absolute;
 bottom: 60px;
-left: 70%;
+left: 60%;
 transform: translateX(-50%);
 padding: 22px 84px;
 background-color: #ac345c;
