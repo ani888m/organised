@@ -405,6 +405,8 @@ box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 text-align: center;
 padding: 15px;
 transition: transform 0.3s ease;
+   display: flex;
+  flex-direction: column;
 }
 
 .book:hover {
@@ -437,6 +439,7 @@ border-radius: 5px;
 text-decoration: none;
 opacity: 0;
 transition: opacity 0.3s ease;
+   margin-top: auto; 
 }
 
 .image-wrapper:hover .hover-btn {
