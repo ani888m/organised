@@ -290,7 +290,7 @@ text-align: left;
 }
 .slide-btn {
 position: absolute;
-bottom: 150px;
+bottom: 80px;
 left: 80%;
 transform: translateX(-50%);
 padding: 22px 84px;
