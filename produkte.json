@@ -34,9 +34,9 @@
     "preis": 17.00,
     "erscheinungsdatum": "01.09.2025",
     "bilder": [
-      "Angsthasecover.jpg",
-      "Angsthase.jpg",
-      "Angsthase1.jpg"
+      "images/Angsthasecover.jpg",
+      "images/Angsthase.jpg",
+      "images/Angsthase1.jpg"
     ]
   },
     {
