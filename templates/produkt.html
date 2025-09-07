@@ -45,7 +45,7 @@
       <div class="book-info">
         <h1>{{ produkt.name }}</h1>
         <p class="author"> {{ produkt.autor }}</p>
-        <p class="price">{{ produkt.preis | round(3) }} €</p>
+        <p class="price">{{ "%.2f"|format(produkt.preis) }} €</p>
          
         <a href="{{ url_for('static', filename='leseproben/' ~ produkt.leseprobe_pdf) }}" target="_blank">
           <button type="button">📖 Leseprobe</button>
