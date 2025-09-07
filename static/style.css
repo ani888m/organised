@@ -308,6 +308,14 @@ transition: background 0.3s ease;
 background: rgba(0, 0, 0, 0.8);
 }
 
+
+
+.slide-2 .slide-btn {
+  bottom: 100px;
+  left: 80%;
+}
+
+
 button.prev,
 button.next {
 position: absolute;
