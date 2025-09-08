@@ -92,7 +92,6 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
 <main>
   <h2>Unsere Bücher</h2>
   <div class="book-list">
-    
     {% for produkt in produkte %}
       <div class="book">
         <div class="image-wrapper">
@@ -101,14 +100,15 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
         </div>
         <h3>{{ produkt.name }}</h3>
         <p>{{ produkt.preis }} €</p>
-        <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}')">In den Warenkorb</button>
+        <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}')">
+          In den Warenkorb
+        </button>
       </div>
-  
-  {% endfor %}
+    {% endfor %}
+  </div> <!-- erste Liste sauber geschlossen -->
 
   <h2>Neuerscheinungen</h2>
   <div class="book-list">
-    
     {% for produkt in produkte %}
       <div class="book">
         <div class="image-wrapper">
@@ -117,14 +117,13 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
         </div>
         <h3>{{ produkt.name }}</h3>
         <p>{{ produkt.preis }} €</p>
-        <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}')">In den Warenkorb</button>
+        <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}')">
+          In den Warenkorb
+        </button>
       </div>
-  
-  {% endfor %}
-</div>
-
+    {% endfor %}
+  </div> <!-- zweite Liste geschlossen -->
 </main>
-
 
 
 <div id="newsletter-inline"></div> <!-- Sichtbar unten auf der Seite -->
