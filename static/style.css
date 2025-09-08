@@ -326,25 +326,58 @@ z-index: 10;
 button.prev { left: 10px; }
 button.next { right: 10px; }
 
-@media (max-width: 768px) {
-.slide-btn {
-font-size: 14px;
-padding: 10px 18px;
-bottom: 12px;
-}
-}
-
+/* Smartphones (bis 480px) */
 @media (max-width: 480px) {
-.slide-btn {
-font-size: 12px;
-padding: 8px 14px;
-bottom: 10px;
+  .carousel-slide h2 {
+    font-size: 28px;
+    bottom: 100px;
+    margin-left: 20px;
+  }
+
+  .slide-btn {
+    font-size: 12px;
+    padding: 8px 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+  }
+
+  .carousel-slide img {
+    height: 300px;
+  }
+}
+
+/* Tablets (481px – 1024px) */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .carousel-slide h2 {
+    font-size: 48px;
+    bottom: 160px;
+    margin-left: 40px;
+  }
+
+  .slide-btn {
+    font-size: 14px;
+    padding: 12px 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 35px;
+  }
+
+  .carousel-slide img {
+    height: 600px;
+  }
+}
+
+@media (min-width: 1200px){
+.carousel {
+position: relative;
+z-index: 1;
+max-width: 1500px;
+width: 90%;
+margin: 0 auto 100px;
+overflow: hidden;
 }
 }
-
-
-
-
 /* Verlagsvorschau */
 
 .verlagsvorschau {
