@@ -349,6 +349,26 @@ padding: 8px 14px;
 bottom: 10px;
 }
 }
+
+@media (max-width: 1124px) {
+  .carousel-slide h2 {
+    font-size: 48px;
+    bottom: 160px;
+    margin-left: 40px;
+  }
+
+  .slide-btn {
+    font-size: 14px;
+    padding: 12px 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 35px;
+  }
+
+  .carousel-slide img {
+    height: 800px;
+  }
+}
 /* Smartphones (bis 480px) */
 @media (max-width: 480px) {
   .carousel-slide h2 {
