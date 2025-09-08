@@ -338,7 +338,7 @@ button.next { right: 10px; }
     font-size: 12px;
     padding: 8px 14px;
     transform: translateX(-50%);
-    bottom: 20px;
+    bottom: 50px;
   }
 
   .carousel-slide img {
