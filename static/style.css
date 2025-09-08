@@ -337,7 +337,6 @@ button.next { right: 10px; }
   .slide-btn {
     font-size: 12px;
     padding: 8px 14px;
-    left: 50%;
     transform: translateX(-50%);
     bottom: 20px;
   }
