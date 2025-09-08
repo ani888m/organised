@@ -368,7 +368,7 @@ button.next { right: 10px; }
   }
 }
 
-@media (min-width: 1200px){
+@media (min-width: 1800px){
 .carousel {
 position: relative;
 z-index: 1;
