@@ -332,6 +332,7 @@ button.next { right: 10px; }
     font-size: 28px;
     bottom: 100px;
     margin-left: 20px;
+    width: auto;
   }
 
   .slide-btn {
