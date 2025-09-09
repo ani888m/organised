@@ -339,11 +339,9 @@ button.next { right: 10px; }
     font-size: 12px;
     padding: 8px 14px;
     transform: translateX(-50%);
-    bottom: 50px;
+    bottom: 25px;
   }
-   .carousel-slide img {
-    height: 300px;
-  }
+
 .carousel-slide img {
   width: 100%;
   height: auto;
