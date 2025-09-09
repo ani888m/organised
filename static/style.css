@@ -259,7 +259,6 @@ position: relative;
 z-index: 1;
 max-width: 1300px;
 width: 100%;
-hight:100%;
 margin: 0 auto 100px;
 overflow: hidden;
 }
@@ -275,7 +274,7 @@ display: block;
 
 .carousel-slide img {
 width: 100%;
-height: 600px; /* feste Höhe, kannst du anpassen */
+height: 800px; /* feste Höhe, kannst du anpassen */
 object-fit: cover;
 display: block;
 }
