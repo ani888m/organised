@@ -162,9 +162,23 @@ color: #7393B3;
   font-family: 'Cormorant', serif;
 }
 
+/* Oberer Bereich für Zurück-Link und Warenkorb */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px auto 0;
+  padding: 0 20px;
+}
 
 /* ------------- MOBILE VERSION ------------- */
 @media (max-width: 480px) {
+ .top-bar {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 10px;
+    margin: 15px auto 0;
+  }
 
   .book-container {
     flex-direction: column;
@@ -205,36 +219,12 @@ color: #7393B3;
 
   .back-link {
     margin: 15px 10px 0;
-  }
-
-}
-/* Oberer Bereich für Zurück-Link und Warenkorb */
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 20px auto 0;
-  padding: 0 20px;
-}
-
-
-
-/* Mobile Anpassung */
-@media (max-width: 480px) {
-  .top-bar {
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0 10px;
-    margin: 15px auto 0;
-  }
-
-  .back-link {
     margin: 0;
     font-size: 1rem;
   }
 
-  .nav-links a {
-    font-size: 1.4rem;
-  }
 }
+
+
+
 
