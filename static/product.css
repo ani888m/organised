@@ -164,7 +164,7 @@ color: #7393B3;
 
 
 /* ------------- MOBILE VERSION ------------- */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
 
   .book-container {
     flex-direction: column;
