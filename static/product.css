@@ -207,19 +207,4 @@ color: #7393B3;
     margin: 15px 10px 0;
   }
 
-  .top-bar {
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0 10px;
-    margin: 15px auto 0;
-  }
-
-  .back-link {
-    margin: 0;
-    font-size: 1rem;
-  }
-
-  .nav-links a {
-    font-size: 1.4rem;
-  }
 }
