@@ -18,16 +18,20 @@
 
 </head>
 <body>
-
-  <header>
-    <a href="{{ url_for('index') }}" class="back-link">← Zurück zur Übersicht</a>
   
-   
-   <ul class="nav-links" id="nav-links">
-      <li class="cart"><a href="{{ url_for('cart') }}">🛒 <span id="cart-count">0</span></a></li>
+<header>
+  <div class="top-bar">
+    <a href="{{ url_for('index') }}" class="back-link">← Zurück zur Übersicht</a>
+
+    <ul class="nav-links" id="nav-links">
+      <li class="cart">
+        <a href="{{ url_for('cart') }}">🛒 <span id="cart-count">0</span></a>
+      </li>
     </ul>
-   
-  </header>
+  </div>
+</header>
+
+
 
   <main class="book-detail">
     <div class="book-container">
