@@ -922,3 +922,50 @@ font-size: 1.2rem;
     margin: 15px 10px 0;
   }
 }
+
+@media (max-width: 480px) {
+
+  .book-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .book-cover,
+  .book-info {
+    max-width: 100%;
+    flex: none;
+  }
+
+  .book-info {
+    align-items: flex-start;
+  }
+
+  .book-info h1 {
+    font-size: 2rem;
+  }
+
+  .book-info .price {
+    font-size: 1.3rem;
+  }
+
+  .book-description {
+    max-width: 100%;
+    padding: 0 10px;
+    font-size: 1rem;
+    margin: 20px auto 40px;
+  }
+
+  .book-info button {
+    width: 100%;
+    max-width: none;
+    padding: 14px 0;
+    font-size: 1.1rem;
+  }
+
+  .back-link {
+    margin: 15px 10px 0;
+    margin: 0;
+    font-size: 1rem;
+  }
+
+}
