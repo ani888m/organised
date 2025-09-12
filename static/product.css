@@ -6,7 +6,7 @@ header {
   position: sticky;
   top: 0;                         /* am oberen Rand kleben */
   background: white;              /* Hintergrund, sonst durchsichtig */
-  box-shadow: 0 0px 4px rgba(0,0,0,0.1); /* leichter Schatten unten */
+  box-shadow: 0 2px 0px rgba(0,0,0,0.1); /* leichter Schatten unten */
   padding: 0.5rem 1rem;
 }
 
