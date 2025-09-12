@@ -924,6 +924,13 @@ font-size: 1.2rem;
 }
 
 @media (max-width: 480px) {
+   .top-bar {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 10px;
+    margin: 15px auto 0;
+  }
+
 
   .book-container {
     flex-direction: column;
