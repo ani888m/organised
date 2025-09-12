@@ -1,3 +1,21 @@
+header {
+  display: flex;
+  justify-content: space-between; /* Link links, Icon rechts */
+  align-items: center;
+
+  position: sticky;
+  top: 0;                         /* am oberen Rand kleben */
+  background: white;              /* Hintergrund, sonst durchsichtig */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* leichter Schatten unten */
+  padding: 0.5rem 1rem;
+}
+
+.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .book-detail {
 max-width: 1000px;
 margin: 50px auto;
