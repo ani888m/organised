@@ -42,15 +42,13 @@
   },
     {
     "id": 1,
-    "name": "Das Stundenbuch des Jacominus Gainsborough",
-    "autor": "Rébecca Dautremer",
-    "beschreibung": "Ein spannendes Abenteuer voller Magie, sprechender Tiere und geheimer Pfade. Ideal für kleine Entdecker ab 6 Jahren.",
-    "preis": 24.00,
-    "erscheinungsdatum": "01.09.2025",
+    "name": "Die Brücke",
+    "autor": "Heinz Janisch (Text) | Helga Bansch (Illustration)",
+    "beschreibung": "Eine schmale Hängebrücke spannt sich über den Fluss, so eng, dass niemand nebeneinander gehen kann. Eines Tages begegnen sich dort der Bär und der Riese genau in der Mitte. Keiner von beiden ist bereit, zurückzuweichen. Doch wie sollen sie nun weiterkommen?Die ersten Versuche führen zu keiner Lösung – immer wäre einer benachteiligt. Schließlich kommt dem Riesen ein Einfall: Anstatt gegeneinander anzukämpfen, könnten sie kooperieren. So fassen sie sich fest, bewegen sich behutsam Schritt für Schritt umeinander herum und schaffen es gemeinsam.",
+    "preis": 17.00,
+    "leseprobe_pdf": "Die Brücke.pdf",
     "bilder": [
-      "B1.jpg",
-      "B2.jpg",
-      "B3.jpg"
+      "images/dieBrücke.jpg"
     ]
   }
 ]
