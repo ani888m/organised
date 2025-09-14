@@ -85,8 +85,21 @@
     "leseprobe_pdf": "wennannaangsthat.pdf",
     "bilder": [
       "images/wennannaangsthat.jpg",
-      "images/ennannaangsthat1.jpg",
-      "images/ennannaangsthat2.jpg"
+      "images/wennannaangsthat1.jpg",
+      "images/wennannaangsthat2.jpg"
+    ]
+  },
+
+   {
+    "id": 8,
+    "name": "Monstergeburtstag",
+    "autor": "Helga Bansch",
+    "beschreibung": "Wenn ein kleines Monster seine Freund*innen zur Geburtstagsfeier einlädt, ist das turbulente Chaos nicht weit. Zwischen kreativer Unordnung, lustigem Durcheinander und einer ausgelassenen Tortenschlacht wird gemeinsam ein ganz besonderes Geschenk aufgebaut. Mit leuchtenden Farben und humorvollen Details fängt Helga Bansch den Reiz des wilden Durcheinanders ein – und macht deutlich, wie sehr Kinder es schätzen, wenn ihre Eltern ihnen Raum zum freien Entfalten lassen.",
+    "preis": 18.00,
+    "leseprobe_pdf": "Monstergeburtstag.pdf",
+    "bilder": [
+      "images/Monstergeburtstag.jpg",
+      "images/Monstergeburtstag1.jpg"
     ]
   }
 ]
