@@ -53,13 +53,13 @@
   },
    {
     "id": 5,
-    "name": "Die Brücke",
-    "autor": "Heinz Janisch (Text) | Helga Bansch (Illustration)",
-    "beschreibung": "Eine schmale Hängebrücke spannt sich über den Fluss, so eng, dass niemand nebeneinander gehen kann. Eines Tages begegnen sich dort der Bär und der Riese genau in der Mitte. Keiner von beiden ist bereit, zurückzuweichen. Doch wie sollen sie nun weiterkommen?Die ersten Versuche führen zu keiner Lösung – immer wäre einer benachteiligt. Schließlich kommt dem Riesen ein Einfall: Anstatt gegeneinander anzukämpfen, könnten sie kooperieren. So fassen sie sich fest, bewegen sich behutsam Schritt für Schritt umeinander herum und schaffen es gemeinsam.",
+    "name": "Der Pupu",
+    "autor": "Helga Bansch",
+    "beschreibung": "Ziegen und Schafe lebten friedlich zusammen auf einer Weide. Doch eines Tages tauchte ein seltsames Ding mitten auf der Wiese auf. Niemand wusste, was es war, also nannten sie es einfach „PUPU“. Zuerst kümmerten sich alle gemeinsam darum, aber schon bald wollte jede Gruppe es für sich allein haben.\n\nDer Hammel und der Bock begannen zu streiten. Sie zogen so heftig an dem PUPU, dass es schließlich in zwei Stücke riss. Von da an wollten Schafe und Ziegen nichts mehr miteinander zu tun haben und gingen getrennte Wege.\n\nDoch als der Winter kam, wurde es kalt, und in der Ferne heulte ein Wolf. Da erinnerten sich die Tiere daran, wie schön und sicher das gemeinsame Leben früher gewesen war. Sie fanden wieder zueinander – und der PUPU geriet in Vergessenheit.\n\nIm Frühling entdeckte eine alte Ziege plötzlich ein Stück des zerrissenen PUPU auf der Wiese. Sofort rannten Hammel und Bock darauf zu, jeder wollte es zuerst haben. Doch die Ziege war schneller – und warf den halben PUPU entschlossen in die Schlucht.",
     "preis": 17.00,
-    "leseprobe_pdf": "Die Bruecke.pdf",
+    "leseprobe_pdf": "DerPupu.pdf",
     "bilder": [
-      "images/dieBruecke.jpg"
+      "images/pupu.jpg"
     ]
   }
 ]
