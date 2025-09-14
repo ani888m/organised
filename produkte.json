@@ -51,4 +51,28 @@
       "images/dieBruecke.jpg"
     ]
   }
+   {
+    "id": 4,
+    "name": "Die Brücke",
+    "autor": "Heinz Janisch (Text) | Helga Bansch (Illustration)",
+    "beschreibung": "Eine schmale Hängebrücke spannt sich über den Fluss, so eng, dass niemand nebeneinander gehen kann. Eines Tages begegnen sich dort der Bär und der Riese genau in der Mitte. Keiner von beiden ist bereit, zurückzuweichen. Doch wie sollen sie nun weiterkommen?Die ersten Versuche führen zu keiner Lösung – immer wäre einer benachteiligt. Schließlich kommt dem Riesen ein Einfall: Anstatt gegeneinander anzukämpfen, könnten sie kooperieren. So fassen sie sich fest, bewegen sich behutsam Schritt für Schritt umeinander herum und schaffen es gemeinsam.",
+    "preis": 17.00,
+    "leseprobe_pdf": "Die Bruecke.pdf",
+    "bilder": [
+      "images/dieBruecke.jpg"
+    ]
+  }
+]
+ [
+   {
+    "id": 4,
+    "name": "Die Brücke",
+    "autor": "Heinz Janisch (Text) | Helga Bansch (Illustration)",
+    "beschreibung": "Eine schmale Hängebrücke spannt sich über den Fluss, so eng, dass niemand nebeneinander gehen kann. Eines Tages begegnen sich dort der Bär und der Riese genau in der Mitte. Keiner von beiden ist bereit, zurückzuweichen. Doch wie sollen sie nun weiterkommen?Die ersten Versuche führen zu keiner Lösung – immer wäre einer benachteiligt. Schließlich kommt dem Riesen ein Einfall: Anstatt gegeneinander anzukämpfen, könnten sie kooperieren. So fassen sie sich fest, bewegen sich behutsam Schritt für Schritt umeinander herum und schaffen es gemeinsam.",
+    "preis": 17.00,
+    "leseprobe_pdf": "Die Bruecke.pdf",
+    "bilder": [
+      "images/dieBruecke.jpg"
+    ]
+  }
 ]
