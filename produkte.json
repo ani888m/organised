@@ -62,6 +62,18 @@
       "images/pupu.jpg",
       "images/Pupu2.jpg"
     ]
+  },
+  {
+    "id": 6,
+    "name": "Die Rabenrosa",
+    "autor": "Helga Bansch",
+    "beschreibung": "Im Rabennest, hoch oben in den Baumwipfeln, herrscht reges Treiben – die Küken schlüpfen! Sie werden gefüttert, wachsen heran und wetteifern lautstark miteinander. Doch eines der Kleinen fällt aus der Reihe: Es sieht ganz anders aus, hat keine Federn und kann nicht fliegen. „Unsere kleine Rosa“, sagt die Mutter zärtlich.\n\nDie Tiere aus der Umgebung geben viele gut gemeinte Ratschläge, wie Rosa so werden kann wie ihre Geschwister. Doch irgendwann hat Rosa genug davon. Sie merkt, dass sie ganz eigene Talente besitzt. Und als sie beginnt, offen auf andere zuzugehen, erkennt sie: Es gibt viele Wege, die Welt zu entdecken – ganz auf ihre eigene Art.",
+    "preis": 16.00,
+    "leseprobe_pdf": "dierabenrosa.pdf",
+    "bilder": [
+      "images/dierabenrosa.jpg",
+      "images/dierabenrosa1.jpg"
+    ]
   }
 ]
  
