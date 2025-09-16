@@ -25,10 +25,13 @@ stripe.api_key = os.getenv("STRIPE_SECRET_KEY", "DEIN_STRIPE_SECRET_KEY")
 # ---------- SEITEN ----------
 @app.route('/')
 def index():
-  neuerscheinungen = produkte[4:8]
+    neuerscheinungen = produkte[4:8]
+    return render_template(
+        'index.html',
+        produkte=produkte,
+        neuerscheinungen=neuerscheinungen
+    )
 
-    return render_template('index.html', produkte=produkte, neuerscheinungen=neuerscheinungen
-)
 
 @app.route('/produkt/<int:produkt_id>')
 def produkt_detail(produkt_id):
