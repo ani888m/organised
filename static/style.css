@@ -363,7 +363,7 @@ button.next { right: 10px; }
     padding: 12px 24px;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 35px;
+    bottom: 65px;
   }
 
   .carousel-slide img {
