@@ -25,12 +25,14 @@ stripe.api_key = os.getenv("STRIPE_SECRET_KEY", "DEIN_STRIPE_SECRET_KEY")
 # ---------- SEITEN ----------
 @app.route('/')
 def index():
-    neuerscheinungen = produkte[4:8]
+    neuerscheinungen = produkte[4:8]  # Neue Bücher
+    unsere_buecher = [p for p in produkte if p not in neuerscheinungen]  # Rest ohne Neuerscheinungen
     return render_template(
         'index.html',
-        produkte=produkte,
+        produkte=unsere_buecher,
         neuerscheinungen=neuerscheinungen
     )
+
 
 
 @app.route('/produkt/<int:produkt_id>')
