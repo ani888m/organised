@@ -42,7 +42,7 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
       <img src="{{ url_for('static', filename='images/slider1.jpg') }}" class="carousel-image" alt="Slide 3">
             <h2> Bücherreihe <br> Jacominus <br> Ginsburgh </h2>
 
-      <button class="slide-btn" onclick="window.location.href='https://learningapps.org/watch?v=p389fh94k25'">Jetzt entdecken</button>
+      <button class="slide-btn" onclick="window.location.href='#1'">Jetzt entdecken</button>
     </div>
     <!-- Folie 2 -->
 
@@ -90,7 +90,7 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
 
   
 <main>
-  <h2>Unsere Bücher</h2>
+  <h2 id="1">Unsere Bücher</h2>
   <div class="book-list">
     {% for produkt in produkte %}
       <div class="book">
