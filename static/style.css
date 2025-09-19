@@ -61,15 +61,15 @@ img {
 /* =========================================
    4. LAYOUT / STRUKTUR
 ========================================= */
-header.shrink {
-  padding-top: 5px;
-  padding-bottom: 5px;
+header {
+  padding: 3cm 110px;
   transition: padding 0.3s ease;
 }
 
-header {
-  transition: padding 0.3s ease;
+header.shrink {
+  padding: 1cm 110px;
 }
+
 
 
 header {
