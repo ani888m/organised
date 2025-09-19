@@ -164,3 +164,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   showImage(0); // Startbild anzeigen
 });
+
+
+  window.addEventListener("scroll", function () {
+    const header = document.querySelector("header");
+    if (window.scrollY > 80) {
+      header.classList.add("shrink");
+    } else {
+      header.classList.remove("shrink");
+    }
+  });
