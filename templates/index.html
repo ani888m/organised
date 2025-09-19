@@ -109,7 +109,7 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
 
   <h2>Neuerscheinungen</h2>
   <div class="book-list">
-    {% for produkt in neuerscheinungen %}
+    {% for produkt in neuerscheinungen [4:6] %}
       <div class="book">
         <div class="image-wrapper">
           <img src="{{ url_for('static', filename=produkt.bilder[0]) }}" alt="{{ produkt.name }}">
