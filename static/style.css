@@ -62,13 +62,15 @@ img {
    4. LAYOUT / STRUKTUR
 ========================================= */
 header.shrink {
-  padding: 5px 60px;
-  transition: padding 0.3s ease, box-shadow 0.3s ease;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  transition: padding 0.3s ease;
 }
 
-header.shrink .logo {
-  height: 70px; /* kleineres Logo beim Scrollen */
+header {
+  transition: padding 0.3s ease;
 }
+
 
 header {
 position: sticky;
