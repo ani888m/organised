@@ -95,10 +95,10 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
   ("Über Angst", neuerscheinungen)  <!-- Beispiel -->
 ] %}
 
-{% for titel, liste in kategorien %}
+{% for titel, produkte in kategorien %}
   <h2>{{ titel }}</h2>
   <div class="book-list">
-    {% for produkt in liste %}
+    {% for produkt in produkte %}
       <div class="book">
         <div class="image-wrapper">
           <img src="{{ url_for('static', filename=produkt.bilder[0]) }}" alt="{{ produkt.name }}">
