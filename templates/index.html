@@ -92,10 +92,10 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
   {% set kategorien = [
   ("Unsere Bücher", produkte),
   ("Neuerscheinungen", neuerscheinungen),
-  ("Über Angst", neuerscheinungen)  <!-- Beispiel -->
+  ("Über Angst", neuerscheinungen) 
 ] %}
 
-{% for titel, produkte in kategorien %}
+{% for titel, liste in kategorien %}
   <h2>{{ titel }}</h2>
   <div class="book-list">
     {% for produkt in produkte %}
