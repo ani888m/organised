@@ -63,7 +63,7 @@
   },
   
   {
-    "id": 4,
+    "id": 5,
     "name": "Angsthase",
     "autor": " Heinz Janisch (Text) | Helga Bansch (Illustration)",
     "beschreibung": "Gänse, Esel, Hasen … oft werden Tiere herangezogen, um Menschen mit negativen Eigenschaften zu beschreiben. Das finden die Hasen ungerecht – und sie wollen etwas ändern. Deshalb treffen sie sich zu einer großen Vollversammlung im internationalen Hasenhauptquartier.\n\nDie Hasen beschließen: Kinder sollen nicht länger „Angsthasen“ genannt werden! Das ist ein völlig falsches Bild von Hasen. Denn Hasen sind klug, geschickt, einfühlsam und gewitzt. Und ihre Schnelligkeit kommt nicht von Angst, sondern von Mut und Verstand.\n\nAls dies geklärt ist, liegt der nächste Schritt auf der Hand: Kinder, die so flink, clever und tapfer wie Hasen sind, sollen ab sofort den stolzen Titel „Muthase“ tragen.",
@@ -77,7 +77,7 @@
   "kategorie": "Über Angst"
   },
     {
-    "id": 4,
+    "id": 6,
     "name": "Die Brücke",
     "autor": "Heinz Janisch (Text) | Helga Bansch (Illustration)",
     "beschreibung": "Eine schmale Hängebrücke spannt sich über den Fluss, so eng, dass niemand nebeneinander gehen kann. Eines Tages begegnen sich dort der Bär und der Riese genau in der Mitte. Keiner von beiden ist bereit, zurückzuweichen. Doch wie sollen sie nun weiterkommen?Die ersten Versuche führen zu keiner Lösung – immer wäre einer benachteiligt. Schließlich kommt dem Riesen ein Einfall: Anstatt gegeneinander anzukämpfen, könnten sie kooperieren. So fassen sie sich fest, bewegen sich behutsam Schritt für Schritt umeinander herum und schaffen es gemeinsam.",
@@ -88,7 +88,7 @@
     ]
   },
    {
-    "id": 5,
+    "id": 7,
     "name": "Der Pupu",
     "autor": "Helga Bansch",
     "beschreibung": "Ziegen und Schafe lebten friedlich zusammen auf einer Weide. Doch eines Tages tauchte ein seltsames Ding mitten auf der Wiese auf. Niemand wusste, was es war, also nannten sie es einfach „PUPU“. Zuerst kümmerten sich alle gemeinsam darum, aber schon bald wollte jede Gruppe es für sich allein haben.\n\nDer Hammel und der Bock begannen zu streiten. Sie zogen so heftig an dem PUPU, dass es schließlich in zwei Stücke riss. Von da an wollten Schafe und Ziegen nichts mehr miteinander zu tun haben und gingen getrennte Wege.\n\nDoch als der Winter kam, wurde es kalt, und in der Ferne heulte ein Wolf. Da erinnerten sich die Tiere daran, wie schön und sicher das gemeinsame Leben früher gewesen war. Sie fanden wieder zueinander – und der PUPU geriet in Vergessenheit.\n\nIm Frühling entdeckte eine alte Ziege plötzlich ein Stück des zerrissenen PUPU auf der Wiese. Sofort rannten Hammel und Bock darauf zu, jeder wollte es zuerst haben. Doch die Ziege war schneller – und warf den halben PUPU entschlossen in die Schlucht.",
@@ -100,7 +100,7 @@
     ]
   },
   {
-    "id": 6,
+    "id": 8,
     "name": "Die Rabenrosa",
     "autor": "Helga Bansch",
     "beschreibung": "Im Rabennest, hoch oben in den Baumwipfeln, herrscht reges Treiben – die Küken schlüpfen! Sie werden gefüttert, wachsen heran und wetteifern lautstark miteinander. Doch eines der Kleinen fällt aus der Reihe: Es sieht ganz anders aus, hat keine Federn und kann nicht fliegen. „Unsere kleine Rosa“, sagt die Mutter zärtlich.\n\nDie Tiere aus der Umgebung geben viele gut gemeinte Ratschläge, wie Rosa so werden kann wie ihre Geschwister. Doch irgendwann hat Rosa genug davon. Sie merkt, dass sie ganz eigene Talente besitzt. Und als sie beginnt, offen auf andere zuzugehen, erkennt sie: Es gibt viele Wege, die Welt zu entdecken – ganz auf ihre eigene Art.",
@@ -114,7 +114,7 @@
   },
   
    {
-    "id": 7,
+    "id": 9,
     "name": "Wenn Anna Angst hat...",
     "autor": "Heinz Janisch (Text) | Barbara Jung (Illustration)",
     "beschreibung": "Wie viele andere Kinder hat auch Anna manchmal abends im Dunkeln Angst, wenn sie allein in ihrem Bett liegt. Doch sie ist nicht wirklich allein – sie ruft ihre Fantasiefreunde zu sich: den riesengroßen Riesen, der niemals müde wird, die 33 tapferen Ritter, die in kleinen Nussschalen leben, die Glückskatze, deren Schnurren alle beruhigt, den Wasserfall, der ihr Gesicht sanft erfrischt – und noch viele mehr.\n\nMit ihrer Hilfe fühlt sich Anna plötzlich sicher und merkt: Die Angst ist verschwunden. Bald schläft sie ein – und mit ihr ihre Freunde. Nur einer bleibt wach: der große Riese, der die ganze Nacht über sie wacht.",
@@ -129,7 +129,7 @@
   },
 
    {
-    "id": 8,
+    "id": 10,
     "name": "Monstergeburtstag",
     "autor": "Helga Bansch",
     "beschreibung": "Wenn ein kleines Monster seine Freund*innen zur Geburtstagsfeier einlädt, ist das turbulente Chaos nicht weit. Zwischen kreativer Unordnung, lustigem Durcheinander und einer ausgelassenen Tortenschlacht wird gemeinsam ein ganz besonderes Geschenk aufgebaut. Mit leuchtenden Farben und humorvollen Details fängt Helga Bansch den Reiz des wilden Durcheinanders ein – und macht deutlich, wie sehr Kinder es schätzen, wenn ihre Eltern ihnen Raum zum freien Entfalten lassen.",
