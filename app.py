@@ -1,38 +1,36 @@
-from flask import Flask, render_template, request, redirect, flash, url_for, abort
+from flask import Flask, render_template, request, redirect, flash, abort
 import smtplib
 from email.mime.text import MIMEText
 import stripe
 import os
 import json
 
-
-
-# JSON-Datei laden (einmalig)
+# ---------- SETUP ----------
 basedir = os.path.abspath(os.path.dirname(__file__))
 json_path = os.path.join(basedir, 'produkte.json')
 
 with open(json_path, encoding='utf-8') as f:
     produkte = json.load(f)
 
-
 app = Flask(__name__)
-app.secret_key = 'irgendetwasgeheimes'  # wichtig für Flash-Messages
+app.secret_key = 'irgendetwasgeheimes'
 
-# Stripe API Key aus Umgebungsvariable (nicht im Code speichern)
+# Stripe API Key (aus Umgebungsvariable, nicht hardcoden!)
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY", "DEIN_STRIPE_SECRET_KEY")
 
 
 # ---------- SEITEN ----------
 @app.route('/')
 def index():
-    neuerscheinungen = produkte[4:8]  # Neue Bücher
-    unsere_buecher = [p for p in produkte if p not in neuerscheinungen]  # Rest ohne Neuerscheinungen
-    return render_template(
-        'index.html',
-        produkte=unsere_buecher,
-        neuerscheinungen=neuerscheinungen
-    )
+    kategorienamen = ["Unsere Bücher", "Neuerscheinungen", "Über Angst"]
 
+    # Produkte aus JSON nach Kategorie gruppieren
+    kategorien = [
+        (k, [p for p in produkte if p.get("kategorie") == k])
+        for k in kategorienamen
+    ]
+
+    return render_template("index.html", kategorien=kategorien)
 
 
 @app.route('/produkt/<int:produkt_id>')
@@ -47,31 +45,35 @@ def produkt_detail(produkt_id):
 def navbar():
     return render_template('navbar.html')
 
+
 @app.route('/team')
 def team():
     return render_template('Team.html')
+
 
 @app.route('/vision')
 def vision():
     return render_template('vision.html')
 
+
 @app.route('/presse')
 def presse():
     return render_template('presse.html')
+
 
 @app.route('/kontakt')
 def kontakt():
     return render_template('kontakt.html')
 
+
 @app.route("/newsletter-snippet")
 def newsletter_snippet():
     return render_template("newsletter.html")
-    
 
-# GET und POST in einer Funktion: checkout-Seite und Zahlung starten
+
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
-        return render_template('checkout.html')
+    return render_template('checkout.html')
 
 
 # ---------- KONTAKT ----------
@@ -154,7 +156,7 @@ def send_newsletter_email(email):
         print("Fehler beim Senden der Newsletter-Benachrichtigung:", e)
 
 
-# ---------- WARENKORB & ZAHLUNG ----------
+# ---------- WARENKORB ----------
 @app.route('/cart')
 def cart():
     cart_items = [
@@ -167,6 +169,7 @@ def cart():
 @app.route('/success')
 def success():
     return "Danke für deinen Einkauf!"
+
 
 @app.route('/cancel')
 def cancel():
