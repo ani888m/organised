@@ -10,7 +10,8 @@
       "images/jacominus.jpg",
       "images/Jacominus1.jpg",
       "images/Jacominus2.jpg"
-    ]
+    ],
+    "kategorie": "Unsere Bücher"
   },
 
   {
@@ -26,7 +27,8 @@
       "images/punkt-12(3).jpg",
       "images/punkt-12(4).jpg",
       "images/punkt-12(5).jpg"
-    ]
+    ],
+    "kategorie": "Unsere Bücher"
   },
   
    {
@@ -42,7 +44,8 @@
       "images/eine-winzig-kleine-sekunde3.jpg",
       
       "images/eine-winzig-kleine-sekunde6.jpg"
-    ]
+    ],
+    "kategorie": "Unsere Bücher"
   },
   
    {
@@ -55,7 +58,8 @@
       "images/eine-wunderbare-sache_cover.jpg",
       "images/eine-wunderbare-sache1.jpg",
       "images/eine-wunderbare-sache2.jpg"
-    ]
+    ],
+    "kategorie": "Unsere Bücher"
   },
   
   {
@@ -69,7 +73,8 @@
       "images/Angsthasecover.jpg",
       "images/Angsthase4.jpg",
       "images/Angsthase6.jpg"
-    ]
+    ],
+  "kategorie": "Über Angst"
   },
     {
     "id": 4,
@@ -104,7 +109,8 @@
     "bilder": [
       "images/dierabenrosa.jpg",
       "images/dierabenrosa1.jpg"
-    ]
+    ],
+  
   },
   
    {
@@ -118,7 +124,8 @@
       "images/wennannaangsthat.jpg",
       "images/wennannaangsthat1.jpg",
       "images/wennannaangsthat2.jpg"
-    ]
+    ],
+  "kategorie": "Über Angst"
   },
 
    {
