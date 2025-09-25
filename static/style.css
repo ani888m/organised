@@ -231,65 +231,60 @@ display: none;
 
 /* Footer */
 
-/* ============================
-   Footer Styles
-============================ */
 
 footer {
   background-color: #ebebe3;
-  padding: 30px 20px;
-  text-align: center;
+  padding: 20px 30px;
   color: #333;
   font-size: 0.95rem;
 }
 
-footer .footer-links {
-  margin-bottom: 15px;
+.footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* verteilt links – mitte – rechts */
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-footer .footer-links a {
-  margin: 0 15px;
+.footer-social a {
+  color: #7393B3;
+  font-size: 1.6rem;
+  margin-right: 10px;
+  transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: #0c4d77;
+}
+
+.footer-links a {
   color: #0c4d77;
   font-size: 1rem;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
-footer .footer-links a:hover {
-  color: #7393B3; /* sanfte Hoverfarbe */
-}
-
-footer .footer-social {
-  margin-bottom: 15px;
-}
-
-footer .footer-social a {
+.footer-links a:hover {
   color: #7393B3;
-  font-size: 1.6rem;
-  margin: 0 8px;
-  transition: color 0.3s ease;
-}
-
-footer .footer-social a:hover {
-  color: #0c4d77;
 }
 
 footer p {
+  margin: 0;
   font-size: 0.85rem;
   color: #555;
-  margin-top: 10px;
 }
 
-/* Mobile Footer */
+/* Mobile Ansicht: alles untereinander */
 @media (max-width: 600px) {
-  footer .footer-links {
-    display: flex;
+  .footer-container {
     flex-direction: column;
-    gap: 8px;
+    align-items: center;
+    text-align: center;
   }
 
-  footer .footer-links a {
-    margin: 0;
+  .footer-links {
+    margin-top: 10px;
   }
 }
 
