@@ -175,6 +175,9 @@ def success():
 def cancel():
     return "Bezahlung abgebrochen."
 
+@app.route("/agb-datenschutz")
+def agb_datenschutz():
+    return render_template("agb_datenschutz.html")
 
 # ---------- START ----------
 if __name__ == '__main__':
