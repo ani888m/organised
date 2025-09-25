@@ -345,8 +345,8 @@ button.next { right: 10px; }
   }
 
   .slide-btn {
-    font-size: 12px;
-    padding: 8px 14px;
+    font-size: 6px;
+    padding: 4px 7px;
     transform: translateX(-50%);
     bottom: 25px;
   }
