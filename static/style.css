@@ -240,11 +240,12 @@ color: #333;
 bottom: 0;
 }
 
-footer a {
+.social-icons {
 color: #7393B3;
 font-size: 2em;
 margin: 0 10px;
 }
+
 
 /* Main */
 
