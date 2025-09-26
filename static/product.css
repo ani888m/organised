@@ -246,13 +246,15 @@ font-size:20px;
   margin: 50px 180px 
 }
 
-.rechtliches h2 h3 {
+.rechtliches h2 {
   font-family: 'Cormorant', serif; 
   color: black;
   font-size: 2.4rem;
   margin-bottom: 5px;
 }
 .rechtliches h3 {
+  font-family: 'Cormorant', serif; 
+  color: black;
   font-size: 2rem;}
   
 .rechtliches p {
