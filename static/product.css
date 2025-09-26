@@ -128,7 +128,7 @@ color: #444;
 }
 
 .book-info .description {
-font-size: 1.1rem;
+font-size: 1.3rem;
 font-family: 'Cormorant', serif;
 line-height: 1.6;
 color: #333;
@@ -191,6 +191,9 @@ font-size:20px;
   font-family: 'Cormorant', serif;
 }
 
+  .nav-links { list-style: none; display: flex; align-items: center; gap: 20px; padding: 0; margin: 0; }
+  .nav-links li { list-style: none; }
+  .nav-links a { text-decoration: none; color: inherit; display: flex; align-items: center; gap: 5px; }
 
 /* ------------- MOBILE VERSION ------------- */
 @media (max-width: 480px) {
@@ -236,3 +239,26 @@ font-size:20px;
     margin: 15px 10px 0;
   }
 }
+
+
+
+.rechtliches { 
+  margin: 100px 50px
+}
+
+.rechtliches h2 {
+  font-family: 'Cormorant', serif; 
+  color: #0c4d77;
+  font-size: 2.4rem;
+  margin-bottom: 5px;
+}
+
+.rechtliches p {
+font-size: 1.3rem;
+font-family: 'Cormorant', serif;
+line-height: 1.6;
+color: #333;
+margin-top: 10px;
+}
+  
+
