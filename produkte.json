@@ -35,7 +35,7 @@
     "id": 3,
     "name": "Eine winzig kleine Sekunde",
     "autor": "Rébecca Dautremer",
-    "beschreibung": "Eine winzig kleine Sekunde.n\nDas ist nicht viel, denkt ihr?n\nAber manche kleinen Sekunden zählen mehr als alles sonst.n\nFür Jacominus ganz gewiss, aber auch für die anderen, und es sind viele.n\nEine winzig kleine Sekunde also für 1 oder 10 oder gar 100 Figuren auf einem Fresko, das größer ist als ihr, nein, das ist keine Kleinigkeit.",
+    "beschreibung": "Eine winzig kleine Sekunde.n\nDas ist nicht viel, denkt ihr?n\nAber manche kleinen Sekunden zählen mehr als alles sonst.n\nFür Jacominus ganz gewiss, aber auch für die anderen, und es sind viele.\n\nEine winzig kleine Sekunde also für 1 oder 10 oder gar 100 Figuren auf einem Fresko, das größer ist als ihr, nein, das ist keine Kleinigkeit.",
     "preis": 29.90,
     "bilder": [
       "images/eine-winzig-kleine-sekunde_cover.jpg",
@@ -52,7 +52,7 @@
     "id": 4,
     "name": "Eine wunderbare Sache",
     "autor": "Rébecca Dautremer",
-    "beschreibung": "Als Jacominus aus einem Nickerchen erwacht, kann er sich nicht mehr erinnern, wovon er geträumt hat. Eine wunderbare Sache war es ganz bestimmt, eine ferne Erinnerung – doch welche genau, das will ihm einfach nicht mehr einfallen. Gemeinsam mit seinem Freund Polikarp sitzt er im Garten und die beiden überlegen angestrengt. Ist ihm vielleicht die Melodie des Lieds wieder eingefallen, das die beiden so gerne zusammen gesungen haben? Der Witz, den Jacominus immer erzählt hat, um alle aufzuheitern? Oder das Rezept für den leckeren Apfelkuchen seiner Großmutter? Doch all das war es nicht, da ist Jacominus ganz sicher.  Da fällt es ihm wieder ein: Sein Traum hat ihn weit in die Vergangenheit getragen, zu dem Tag, an dem er Polikarp kennenlernte, als die beiden noch ganz klein waren …n\nEin traumhaft schön illustriertes Bilderbuch über den Zauber der großen und kleinen Momente einer Freundschaft – und eine Erinnerung daran, dass nicht die Erlebnisse zählen, sondern die Menschen, mit denen wir sie teilen.",
+    "beschreibung": "Als Jacominus aus einem Nickerchen erwacht, kann er sich nicht mehr erinnern, wovon er geträumt hat. Eine wunderbare Sache war es ganz bestimmt, eine ferne Erinnerung – doch welche genau, das will ihm einfach nicht mehr einfallen. Gemeinsam mit seinem Freund Polikarp sitzt er im Garten und die beiden überlegen angestrengt. Ist ihm vielleicht die Melodie des Lieds wieder eingefallen, das die beiden so gerne zusammen gesungen haben? Der Witz, den Jacominus immer erzählt hat, um alle aufzuheitern? Oder das Rezept für den leckeren Apfelkuchen seiner Großmutter? Doch all das war es nicht, da ist Jacominus ganz sicher.  Da fällt es ihm wieder ein: Sein Traum hat ihn weit in die Vergangenheit getragen, zu dem Tag, an dem er Polikarp kennenlernte, als die beiden noch ganz klein waren …\n\nEin traumhaft schön illustriertes Bilderbuch über den Zauber der großen und kleinen Momente einer Freundschaft – und eine Erinnerung daran, dass nicht die Erlebnisse zählen, sondern die Menschen, mit denen wir sie teilen.",
     "preis": 24.00,
     "bilder": [
       "images/eine-wunderbare-sache_cover.jpg",
@@ -80,7 +80,7 @@
     "id": 6,
     "name": "Die Brücke",
     "autor": "Heinz Janisch (Text) | Helga Bansch (Illustration)",
-    "beschreibung": "Eine schmale Hängebrücke spannt sich über den Fluss, so eng, dass niemand nebeneinander gehen kann. Eines Tages begegnen sich dort der Bär und der Riese genau in der Mitte. Keiner von beiden ist bereit, zurückzuweichen. Doch wie sollen sie nun weiterkommen?Die ersten Versuche führen zu keiner Lösung – immer wäre einer benachteiligt. Schließlich kommt dem Riesen ein Einfall: Anstatt gegeneinander anzukämpfen, könnten sie kooperieren. So fassen sie sich fest, bewegen sich behutsam Schritt für Schritt umeinander herum und schaffen es gemeinsam.",
+    "beschreibung": "Eine schmale Hängebrücke spannt sich über den Fluss, so eng, dass niemand nebeneinander gehen kann. Eines Tages begegnen sich dort der Bär und der Riese genau in der Mitte. Keiner von beiden ist bereit, zurückzuweichen. Doch wie sollen sie nun weiterkommen? Die ersten Versuche führen zu keiner Lösung – immer wäre einer benachteiligt. Schließlich kommt dem Riesen ein Einfall: Anstatt gegeneinander anzukämpfen, könnten sie kooperieren. So fassen sie sich fest, bewegen sich behutsam Schritt für Schritt umeinander herum und schaffen es gemeinsam.",
     "preis": 17.00,
     "leseprobe_pdf": "Die Bruecke.pdf",
     "bilder": [
