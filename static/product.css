@@ -264,7 +264,7 @@ margin-top: 10px;
 /* Mobile Anpassung */
 @media screen and (max-width: 768px) {
   .rechtliches {
-    margin: 20px 15px; /* weniger Abstand an den Seiten */
+    margin: 20px 35px; /* weniger Abstand an den Seiten */
   }
 
   .rechtliches h2 {
