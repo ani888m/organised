@@ -246,13 +246,15 @@ font-size:20px;
   margin: 50px 180px 
 }
 
-.rechtliches h2 {
+.rechtliches h2 h3 {
   font-family: 'Cormorant', serif; 
   color: black;
   font-size: 2.4rem;
   margin-bottom: 5px;
 }
-
+.rechtliches h3 {
+  font-size: 2rem;}
+  
 .rechtliches p {
 font-size: 1.3rem;
 font-family: 'Cormorant', serif;
@@ -271,6 +273,9 @@ margin-top: 10px;
     font-size: 1.8rem; /* kleinerer Titel */
   }
 
+  .rechtliches h3 {
+    font-size: 1.2rem; /* kleinerer Titel */
+  }
   .rechtliches p {
     font-size: 1.1rem; /* kleinere Schrift für besseren Lesefluss */
     line-height: 1.4; /* engerer Zeilenabstand */
