@@ -260,5 +260,20 @@ line-height: 1.6;
 color: #333;
 margin-top: 10px;
 }
-  
+
+/* Mobile Anpassung */
+@media screen and (max-width: 768px) {
+  .rechtliches {
+    margin: 20px 15px; /* weniger Abstand an den Seiten */
+  }
+
+  .rechtliches h2 {
+    font-size: 1.8rem; /* kleinerer Titel */
+  }
+
+  .rechtliches p {
+    font-size: 1.1rem; /* kleinere Schrift für besseren Lesefluss */
+    line-height: 1.4; /* engerer Zeilenabstand */
+  }
+}
 
