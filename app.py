@@ -176,21 +176,11 @@ def cancel():
     return "Bezahlung abgebrochen."
 
 
-@app.route("/impressum")
-def impressum():
-    return render_template("impressum.html")
+@app.route("/rechtliches")
+def rechtliches():
+    return render_template("rechtliches.html")
 
-@app.route("/agb")
-def abg():
-    return render_template("agb.html")
 
-@app.route("/datenschutz")
-def datenschutz():
-    return render_template("datenschutz.html")
-
-@app.route("/services")
-def services():
-    return render_template("services.html")
 
 
 
