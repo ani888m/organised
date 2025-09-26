@@ -10,10 +10,44 @@
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 <style>
+
+.kontakt-form {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.kontakt-form input[type="text"],
+.kontakt-form input[type="email"],
+.kontakt-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.kontakt-form textarea {
+  height: 120px;
+}
+
+.kontakt-form button {
+  background-color: #7393B3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.kontakt-form button:hover {
+  background-color: #5b7a95; /* dunklerer Ton beim Hover */
+}
+
 @media (max-width: 768px) {
   #kontakt {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
     padding: 20px;
   }
 
@@ -44,19 +78,19 @@
     Telefon: +49(0)381/492050<br></p>
 
   <h3> Senden Sie uns eine Nachricht! </h3><br> 
-  <form action="/submit" method="POST" style="max-width: 600px; argin: 0 auto; text-align: left;">
+ <form action="/submit" method="POST" class="kontakt-form">
+  <label for="name">Name:</label><br>
+  <input type="text" id="name" name="name" required><br>
 
-    <label for="name">Name:</label><br>
-    <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;"><br>
+  <label for="email">E-Mail:</label><br>
+  <input type="email" id="email" name="email" required><br>
 
-    <label for="email">E-Mail:</label><br>
-    <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;"><br>
+  <label for="nachricht">Nachricht:</label><br>
+  <textarea id="nachricht" name="message"></textarea>
 
-    <label for="nachricht">Nachricht:</label><br>
-    <textarea id="nachricht" name="message" style="width: 100%; height: 120px; padding: 10px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
+  <button type="submit">Absenden</button>
+</form>
 
-    <button type="submit" style="background-color: #7393B3; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Absenden</button>
-  </form>
 
   
 </section>
