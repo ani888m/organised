@@ -3,56 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ produkt.name }} Der Blaue Reiter | Kunstvoll gestaltete Kinderbücher </title>
-  <meta name="description" content="Details zum Buch '{{ produkt.name }}'. Jetzt entdecken und bestellen.">
+  <title>Impressum | Der Blaue Reiter | Kunstvoll gestaltete Kinderbücher</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='product.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
   <script src="{{ url_for('static', filename='script.js') }}" defer></script>
   
-<style>
-  .nav-links { list-style: none; display: flex; align-items: center; gap: 20px; padding: 0; margin: 0; }
-  .nav-links li { list-style: none; }
-  .nav-links a { text-decoration: none; color: inherit; display: flex; align-items: center; gap: 5px; }
-</style>
 
 </head>
 <body>
   
-<header>
-    <a href="{{ url_for('index') }}" class="back-link">← Zurück zur Übersicht</a>
 
-    <ul class="nav-links" id="nav-links">
-      <li class="cart">
-        <a href="{{ url_for('cart') }}">🛒 <span id="cart-count">0</span></a>
-      </li>
-    </ul>
-</header>
-
-
-
-  <main class="book-detail">
-
-    <!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ produkt.name }} Der Blaue Reiter | Kunstvoll gestaltete Kinderbücher </title>
-  <meta name="description" content="Details zum Buch '{{ produkt.name }}'. Jetzt entdecken und bestellen.">
-
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='product.css') }}" />
-  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
-  
-<style>
-  .nav-links { list-style: none; display: flex; align-items: center; gap: 20px; padding: 0; margin: 0; }
-  .nav-links li { list-style: none; }
-  .nav-links a { text-decoration: none; color: inherit; display: flex; align-items: center; gap: 5px; }
-</style>
-
-</head>
-<body>
   
 <header>
     <a href="{{ url_for('index') }}" class="back-link">← Zurück zur Übersicht</a>
