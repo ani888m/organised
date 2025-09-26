@@ -9,8 +9,20 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 
- 
+<style>
+@media (max-width: 768px) {
+  #kontakt {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 20px;
+  }
 
+  #kontakt form {
+    width: 100%;
+  }
+}
+
+</style>
 </head>
 <body>
   {% include 'navbar.html' %}
@@ -24,7 +36,7 @@
 
 
  <section id="kontakt" style="padding: 40px; margin-left:100px">
-  <h2 style="color: #0c4d77; margin: 20px; text-align: left;">Kontakt</h2>
+  <h2 style="color: #0c4d77; text-align: left;">Kontakt</h2>
    <p> welt blauer reiter<br>
     Wismarsche Straße 6/7<br>
     13403 Berlin<br>
