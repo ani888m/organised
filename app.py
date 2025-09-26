@@ -181,15 +181,15 @@ def impressum():
     return render_template("impressum.html")
 
 @app.route("/agb")
-def impressum():
+def abg():
     return render_template("agb.html")
 
 @app.route("/datenschutz")
-def impressum():
+def datenschutz():
     return render_template("datenschutz.html")
 
 @app.route("/services")
-def impressum():
+def services():
     return render_template("services.html")
 
 
