@@ -16,7 +16,6 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
  
 
-
 </head>
 
   {% include 'navbar.html' %}
@@ -27,16 +26,7 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
  
 <div class="carousel">
   <div class="slides">
-    <!-- Folie 1 -->
-    <!-- <div class="carousel-slide active">
-      <img src="{{ url_for('static', filename='Screenshot 2025-05-22 at 10.40.20.png') }}" class="carousel-image" alt="Slide 1">
-      <button class="slide-btn" onclick="window.location.href='/seite1'">Kinderbücher nach Ländern </button>
-    </div>
-
-    <div class="carousel-slide">
-      <img src="{{ url_for('static', filename='ChatGPT Image Feb 17, 2025, 12_34_20 PM.png') }}" class="carousel-image" alt="Slide 2">
-      <button class="slide-btn" onclick="window.location.href='/seite2'"> Kinderbücher nach Gefühlen</button>
-    </div> -->
+    
 
     <!-- Folie 1 -->
     <div class="carousel-slide active">
@@ -65,6 +55,51 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
 </div>
 
 
+
+<main>
+  {% for titel, liste in kategorien %}
+    <h2 id="{{ titel|replace(' ', '_') }}">{{ titel }}</h2>
+    <div class="book-list">
+      {% for produkt in liste %}
+        <div class="book">
+          <div class="image-wrapper">
+            <img src="{{ url_for('static', filename=produkt.bilder[0]) }}" alt="{{ produkt.name }}">
+            <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}" class="hover-btn">Mehr erfahren</a>
+          </div>
+          <h3>{{ produkt.name }}</h3>
+          <p>{{ produkt.preis }} €</p>
+          <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}')">
+            In den Warenkorb
+          </button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+  
+
+ <section class="newsletter-section">
+
+  <h2>Melde dich zu unserem Newsletter an!</h2>
+  <p>Erhalte exklusive Neuigkeiten und Angebote rund um unsere Kinderbücher.</p>
+  <form action="/newsletter" method="POST">
+    <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required /><br>
+    <button type="submit">Anmelden</button>
+  </form>
+</section>
+
+</main>
+
+
+ {% include 'footer.html' %}
+
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
+
+
  <!-- <section class="verlagsvorschau">
   <h2>Verlagsvorschau</h2>
   <div class="vorschau-container">
@@ -88,61 +123,13 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
 </section>-->
 
 
-<main>
-  {% for titel, liste in kategorien %}
-    <h2 id="{{ titel|replace(' ', '_') }}">{{ titel }}</h2>
-    <div class="book-list">
-      {% for produkt in liste %}
-        <div class="book">
-          <div class="image-wrapper">
-            <img src="{{ url_for('static', filename=produkt.bilder[0]) }}" alt="{{ produkt.name }}">
-            <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}" class="hover-btn">Mehr erfahren</a>
-          </div>
-          <h3>{{ produkt.name }}</h3>
-          <p>{{ produkt.preis }} €</p>
-          <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}')">
-            In den Warenkorb
-          </button>
-        </div>
-      {% endfor %}
+<!-- Folie 1 -->
+    <!-- <div class="carousel-slide active">
+      <img src="{{ url_for('static', filename='Screenshot 2025-05-22 at 10.40.20.png') }}" class="carousel-image" alt="Slide 1">
+      <button class="slide-btn" onclick="window.location.href='/seite1'">Kinderbücher nach Ländern </button>
     </div>
-  {% endfor %}
-  
 
-
- <section class="newsletter-section">
-  <!-- Wird nur im Popup sichtbar -->
-  <span class="close-popup" onclick="closePopup()">&times;</span>
-
-  <h2>Melde dich zu unserem Newsletter an!</h2>
-  <p>Erhalte exklusive Neuigkeiten und Angebote rund um unsere Kinderbücher.</p>
-  <form action="/newsletter" method="POST">
-    <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required /><br>
-    <button type="submit">Anmelden</button>
-  </form>
-</section>
-
-</main>
-
-
- {% include 'footer.html' %}
- 
-
-
-<!--<footer>
-  <div class="social-icons">
-    <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
-    <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
-  </div>
-    <p>© 2025 Welt Blauer Reiter | 
-      <a href="{{ url_for('rechtliches') }}">Rechtliches</a> | 
-      <a href="">Services</a> | 
-      <a href="{{ url_for('kontakt') }}">Kontakt</a>
-     </p>
-</footer> -->
-
-
-
-<script src="{{ url_for('static', filename='script.js') }}"></script>
-</body>
-</html>
+    <div class="carousel-slide">
+      <img src="{{ url_for('static', filename='ChatGPT Image Feb 17, 2025, 12_34_20 PM.png') }}" class="carousel-image" alt="Slide 2">
+      <button class="slide-btn" onclick="window.location.href='/seite2'"> Kinderbücher nach Gefühlen</button>
+    </div> -->
