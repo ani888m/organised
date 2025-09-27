@@ -251,6 +251,7 @@ margin: 10px;
 /* Main */
 
 main {
+margin-left: 100px;
 padding: 50px 20px;
 background-color: transparent;
 max-width: 900px;
