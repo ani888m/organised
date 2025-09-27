@@ -494,7 +494,7 @@ transition: opacity 0.3s ease;
 opacity: 1;
 }
 
-.book button {
+.bok button {
 padding: 7px 15px;
 background-color: #7393B3;
 border: none;
@@ -505,7 +505,15 @@ transition: background-color 0.3s ease;
 bottom: 15px;
 }
 
-
+button {
+padding: 10px;
+background-color: #7393B3;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+)
 /* Teamsection 
 
 
