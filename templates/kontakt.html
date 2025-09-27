@@ -10,54 +10,7 @@
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 <style>
-/*#kontakt{
-  padding: 40px; 
-  margin-left:100px}
-  
-.kontakt-form {
-  max-width: 600px;
-  text-align: left;
-}
 
-.kontakt-form input[type="text"],
-.kontakt-form input[type="email"],
-.kontakt-form textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
-.kontakt-form textarea {
-  height: 120px;
-}
-
-.kontakt-form button {
-  background-color: #7393B3;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.kontakt-form button:hover {
-  background-color: #5b7a95;
-}
-/*
-@media (max-width: 768px) {
-  #kontakt {
-    margin-left: 10px;
-    padding: 20px;
-  }
-
-  #kontakt form {
-    width: 100%;
-  }
-}
-*/
 
 
 #kontakt {
@@ -167,6 +120,11 @@
  
 </section>
 
+  {% include 'footer.html' %}
+
+</body>
+</html>
+
   <!-- <div style="margin: 50px;">
     <p style="font-weight: bold; margin: 30px; text-align: center;">Newsletter abonnieren</p>
     <form onsubmit="event.preventDefault(); alert('Danke für Ihre Anmeldung zum Newsletter!');" style="max-width: 400px; margin: 0 auto;">
@@ -178,19 +136,8 @@
       </button>
     </form>
   </div> -->
-<footer>
-  <div class="social-icons">
-    <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
-    <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
-  </div>
-    <p>© 2025 Welt Blauer Reiter | 
-      <a href="#">Impressum</a> | 
-      <a href="#">AGB</a> | 
-      <a href="#">Datenschutz</a> | 
-      <a href="#">Hinweisgebersystem</a> | 
-      <a href="#">Sitemap</a>
-     </p>
-</footer>
+
+
   <!-- <script>
     let cartCount = 0;
 
@@ -214,12 +161,58 @@ paypal.Buttons({
 }).render('#paypal-googlepay-button');
 
     
+/*#kontakt{
+  padding: 40px; 
+  margin-left:100px}
+  
+.kontakt-form {
+  max-width: 600px;
+  text-align: left;
+}
 
+.kontakt-form input[type="text"],
+.kontakt-form input[type="email"],
+.kontakt-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.kontakt-form textarea {
+  height: 120px;
+}
+
+.kontakt-form button {
+  background-color: #7393B3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.kontakt-form button:hover {
+  background-color: #5b7a95;
+}
+/*
+@media (max-width: 768px) {
+  #kontakt {
+    margin-left: 10px;
+    padding: 20px;
+  }
+
+  #kontakt form {
+    width: 100%;
+  }
+}
+*/
 
 
   </script>-->
 
 
 
-</body>
-</html>
+
