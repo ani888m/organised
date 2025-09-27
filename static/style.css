@@ -68,9 +68,6 @@ img {
 ========================================= */
 
 
-
-
-
 header {
 position: sticky;
 top: 0;
@@ -119,8 +116,9 @@ padding: 25px;
 }
 
 
-/* Navigation */
-
+/* =========================================
+   NAVIGATION
+========================================= */
 
 nav {
 position: relative;
@@ -232,8 +230,9 @@ display: none;
 }
 }
 
-/* Footer */
-
+/* =========================================
+   FOOTER
+========================================= */
 footer {
 background-color: #ebebe3;
 padding: 30px;
@@ -414,8 +413,9 @@ height: auto;
 }
 
 
-/* Book List */
-
+/* =========================================
+   BOOKLIST
+========================================= */
 .book-list {
 display: grid;
 grid-template-columns: repeat(4, 1fr);
@@ -626,7 +626,49 @@ border-radius: 5px;
 outline: none;
 }
 */
-   
+
+
+/* =========================================
+   NEWSLETTEER
+========================================= */
+
+.newsletter-section {
+  padding: 20px;
+  text-align: center;
+  margin-top: 19px;
+}
+
+.newsletter-section form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.newsletter-section input[type="email"] {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.newsletter-section button {
+  background-color: #e66e3f;
+}
+
+.newsletter-section button:hover {
+  background-color: #ff5722;
+}
+
+
+
+
+
+/*
+
 .newsletter-section button {
 background-color: #e66e3f;
 margin: 0 auto;
@@ -667,10 +709,12 @@ margin: 0 auto;
 
 .newsletter-section button:hover {
 background-color: #ff5722;
-}
+}*/
 
 
-
+/* =========================================
+   THANK YOU
+========================================= */
 
 .thank-you-container {
   max-width: 600px;
