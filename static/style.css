@@ -629,9 +629,12 @@ outline: none;
    
 .newsletter-section button {
 background-color: #e66e3f;
-   margin: 0 auto;
+margin: 0 auto;
 }
-
+   
+.newsletter-section p {
+margin: 0 auto
+}
 
 .newsletter-section {
 background-color: #ffffff;
