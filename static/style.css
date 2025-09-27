@@ -335,7 +335,61 @@ z-index: 10;
 button.prev { left: 10px; }
 button.next { right: 10px; }
 
-/* Smartphones (bis 480px) */
+/* Smartphones (max-width: 480px) */
+@media (max-width: 480px) {
+  .carousel-slide img {
+    height: auto;
+    max-height: 300px;
+  }
+
+  .carousel-slide h2 {
+    font-size: 24px;
+    margin-left: 15px;
+    bottom: 90px;
+  }
+
+  .slide-btn {
+    font-size: 12px;
+    padding: 8px 16px;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  button.prev,
+  button.next {
+    padding: 8px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 481px) {
+  .carousel-slide img {
+    height: auto;
+    max-height: 500px;
+  }
+
+  .carousel-slide h2 {
+    font-size: 36px;
+    margin-left: 30px;
+    bottom: 120px;
+  }
+
+  .slide-btn {
+    font-size: 14px;
+    padding: 10px 24px;
+    bottom: 40px;
+  }
+
+  button.prev,
+  button.next {
+    font-size: 16px;
+    padding: 10px;
+  }
+}
+
+
+/* Smartphones (bis 480px) 
 @media (max-width: 480px) {
   .carousel-slide h2 {
     font-size: 28px;
@@ -359,7 +413,7 @@ button.next { right: 10px; }
   
 }
 
-/* Tablets (481px – 1024px) */
+Tablets (481px – 1024px)
 @media (min-width: 481px) and (max-width: 1024px) {
   .carousel-slide h2 {
     font-size: 48px;
@@ -411,7 +465,7 @@ gap: 30px;
 width: 100%;
 height: auto;
 }
-
+*/
 
 /* =========================================
    BOOKLIST
