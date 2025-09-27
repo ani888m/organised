@@ -66,9 +66,7 @@ def kontakt():
     return render_template('kontakt.html')
 
 
-@app.route("/newsletter-snippet")
-def newsletter_snippet():
-    return render_template("newsletter.html")
+
 
 
 @app.route('/checkout', methods=['GET', 'POST'])
