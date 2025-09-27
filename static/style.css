@@ -588,7 +588,7 @@ text-decoration: underline;
 }
 */
 
-/* Newsletter */
+/* Newsletter 
 
 
 .newsletter-box {
@@ -615,7 +615,7 @@ argin-bottom: 20px;
 display: flex;
 flex-direction: column;
 gap: 10px;
-}
+
 
 .newsletter-box input[type="email"] {
 padding: 10px;
@@ -624,20 +624,12 @@ border: 1px solid #ccc;
 border-radius: 5px;
 outline: none;
 }
-
-.newsletter-box button {
-padding: 10px;
+*/
+   
+.newsletter-section button {
 background-color: #e66e3f;
-color: white;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-transition: background-color 0.3s ease;
 }
 
-.newsletter-box button:hover {
-background-color: #527a9b;
-}
 
 .newsletter-section {
 background-color: #ffffff;
@@ -680,9 +672,7 @@ transition: background-color 0.3s ease;
 background-color: #ff5722;
 }
 
-.newsletter-section .close-popup {
-display: none;
-}
+
 
 
 .thank-you-container {
