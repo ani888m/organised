@@ -821,7 +821,11 @@ color: #666;
     max-width: 800px;
   }
 
-  form {
+.form h2{
+   text-align: left;
+   color: #0c4d77; 
+}
+form {
     font-size: 18px;
   }
 
