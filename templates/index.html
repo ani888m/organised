@@ -160,12 +160,26 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
       </div>
     {% endfor %}
   </div> <!-- zweite Liste geschlossen -->
-  
+
+ <section class="newsletter-section">
+  <!-- Wird nur im Popup sichtbar -->
+  <span class="close-popup" onclick="closePopup()">&times;</span>
+
+  <h2>Melde dich zu unserem Newsletter an!</h2>
+  <p>Erhalte exklusive Neuigkeiten und Angebote rund um unsere Kinderbücher.</p>
+  <form action="/newsletter" method="POST">
+    <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required />
+    <button type="submit">Anmelden</button>
+  </form>
+</section>
+
 </main>
 
 
-<div id="newsletter-inline"></div> <!-- Sichtbar unten auf der Seite -->
-<div id="newsletter-popup" class="popup-hidden"></div> <!-- Für das Popup -->
+<!-- <div id="newsletter-inline"></div> Sichtbar unten auf der Seite 
+<div id="newsletter-popup" class="popup-hidden"></div>  -->
+
+  
 
 
 <footer>
