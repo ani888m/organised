@@ -878,7 +878,7 @@ form {
  
 
     @media (max-width: 768px) {
-      #kontakt {
+      .form {
         margin: 25px !important;
         max-width: 100%;
       }
