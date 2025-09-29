@@ -87,7 +87,7 @@ def submit():
 
 def send_email(name, email, message):
     sender = 'antonyan125@gmail.com'
-    app_password = 'ffutcvkflhcgiijl'
+    app_password = 'cbvunlrsizkvtveb'
     recipient = 'antonyan125@gmail.com'
 
     subject = f'Neue Nachricht von {name}'
