@@ -133,7 +133,7 @@ def danke():
 
 def send_newsletter_email(email):
     sender = 'antonyan125@gmail.com'
-    app_password = 'ffutcvkflhcgiijl'
+    app_password = 'cbvunlrsizkvtveb'
     recipient = 'antonyan125@gmail.com'
 
     subject = 'Neue Newsletter-Anmeldung'
