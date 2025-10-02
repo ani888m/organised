@@ -85,8 +85,10 @@
     "leseprobe_pdf": "Die Bruecke.pdf",
     "bilder": [
       "images/dieBruecke.jpg"
-    ]
+    ],
+      "kategorie": "Helga Bansch"
   },
+  
    {
     "id": 7,
     "name": "Der Pupu",
@@ -98,6 +100,7 @@
       "images/pupu.jpg",
       "images/Pupu2.jpg"
     ]
+     "kategorie": "Helga Bansch"
   },
   {
     "id": 8,
@@ -110,7 +113,7 @@
       "images/dierabenrosa.jpg",
       "images/dierabenrosa1.jpg"
     ]
-  
+  "kategorie": "Helga Bansch"
   },
   
    {
@@ -138,7 +141,9 @@
     "bilder": [
       "images/Monstergeburtstag.jpg",
       "images/Monstergeburtstag1.jpg"
-    ]
+    ],
+     "kategorie": "Helga Bansch"
   }
+  
 ]
  
