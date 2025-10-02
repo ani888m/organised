@@ -163,6 +163,26 @@
       "images/wildeKerle8.jpg"
     ],
      "kategorie": "Klassiker"
+  },
+
+   {
+    "id": 12,
+    "name": "What color is the wind",
+    "autor": "Anne Herbauts",
+    "beschreibung": "Maurice Sendaks Kinderbuchklassiker: Die Geschichte vom wilden Max, der von seiner Mutter ohne Essen ins Bett geschickt wird und darauf das Reich der wilden Kerle erobert.\n\nMaurice Sendak, geboren 1928 in New York als Kind polnisch-jüdischer Einwanderer, revolutionierte mit Büchern wie ›Wo die wilden Kerle wohnen‹, ›Die Nachtküche‹ und ›Higgelti Piggelti Pop!‹ die Kinderliteratur. Sendak wurde u.a. mit der Caldecott-Medal, dem internationalen Hans-Christian-Andersen-Preis und dem Astrid-Lindgren-Gedächtnis-Preis ausgezeichnet. Spike Jonzes Verfilmung von ›Wo die wilden Kerle wohnen‹ (Drehbuch: Spike Jonze und Dave Eggers) war 2009 ein großer Kinoerfolg. Maurice Sendak starb 2012 in Danbury, Connecticut.",
+    "preis": 20.00,
+    "bilder": [
+      "images/windcolor.jpg",
+      "images/wildeKerle1.jpg",
+      "images/wildeKerle2.jpg",
+      "images/wildeKerle3.jpg",
+      "images/wildeKerle4.jpg",
+      "images/wildeKerle5.jpg",
+      "images/wildeKerle6.jpg",
+      "images/wildeKerle7.jpg",
+      "images/wildeKerle8.jpg"
+    ],
+     "kategorie": "Über Farben"
   }
   
 ]
