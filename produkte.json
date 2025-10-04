@@ -198,6 +198,30 @@
       "images/Monster-Ich-min5.jpg"
     ],
     "kategorie": "Monstergeschichten"
-  }
+  },
+  {
+  "id": 14,
+  "name": "Der große und der kleine Igel: Weihnachten",
+  "autor": "Britta Teckentrup",
+  "beschreibung": "Der große und der kleine Igel feiern Weihnachten. Der kleine Igel kann es kaum abwarten, seinen Wunschzettel zu schreiben und den schönsten Weihnachtsbaum zu finden und zu schmücken. Und – endlich – dürfen abends die Geschenke ausgepackt werden. Aber halt! Für einige seiner Freunde, nämlich die Grauhörnchen, die Waschbären und den Nutria aus Amerika, werden am Abend des 24. Dezember nur leere Socken an den Kamin gehängt. Diese befüllt Santa Claus in der Nacht mit Geschenken. Und das Auspacken beginnt erst am Weihnachtsmorgen. Das erweist sich aber gar nicht als Problem: Der kleine Igel kann mit seinen Freunden gleich zweimal Bescherung feiern. Ein Buch, das es leicht macht, über die großen Erwartungen zu sprechen, die ein Kind vor und an Weihnachten haben kann. Und ganz nebenbei zeigt das Buch, dass Weihnachten zwar fast überall, aber oft ein bisschen anders gefeiert wird.",
+  "preis": 15.00,
+  "bilder": [
+    "images/Igelweihnachten.jpg",
+    "images/Igelweihnachten1.jpg",
+    "images/Igelweihnachten2.jpg",
+    "images/Igelweihnachten3.jpg",
+    "images/Igelweihnachten4.jpg",
+    "images/Igelweihnachten5.jpg"
+  ],
+  "kategorie": "Weihnachten",
+  "seitenzahl": 32,
+  "format": {
+    "breite_cm": 21,
+    "höhe_cm": 28
+  },
+  "einband": "Hardcover",
+  "zielalter": "ab 3 Jahren",
+  "isbn": "978-3-96428-284-2"
+}
 ]
  
