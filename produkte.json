@@ -164,12 +164,11 @@
     ],
      "kategorie": "Klassiker"
   },
-
-   {
+  {
     "id": 12,
     "name": "What color is the wind",
     "autor": "Anne Herbauts",
-    "beschreibung": "Maurice Sendaks Kinderbuchklassiker: Die Geschichte vom wilden Max, der von seiner Mutter ohne Essen ins Bett geschickt wird und darauf das Reich der wilden Kerle erobert.\n\nMaurice Sendak, geboren 1928 in New York als Kind polnisch-jüdischer Einwanderer, revolutionierte mit Büchern wie ›Wo die wilden Kerle wohnen‹, ›Die Nachtküche‹ und ›Higgelti Piggelti Pop!‹ die Kinderliteratur. Sendak wurde u.a. mit der Caldecott-Medal, dem internationalen Hans-Christian-Andersen-Preis und dem Astrid-Lindgren-Gedächtnis-Preis ausgezeichnet. Spike Jonzes Verfilmung von ›Wo die wilden Kerle wohnen‹ (Drehbuch: Spike Jonze und Dave Eggers) war 2009 ein großer Kinoerfolg. Maurice Sendak starb 2012 in Danbury, Connecticut.",
+    "beschreibung": "Ein poetisches Bilderbuch über das Unsichtbare: Was Farbe hat der Wind? Ein kleines Kind stellt große Fragen und erlebt die Welt mit allen Sinnen.",
     "preis": 20.00,
     "bilder": [
       "images/windcolor.jpg",
@@ -182,15 +181,14 @@
       "images/wildeKerle7.jpg",
       "images/wildeKerle8.jpg"
     ],
-     "kategorie": "Über Farben"
+    "kategorie": "Über Farben"
   },
-
-    {
+  {
     "id": 13,
     "preis": 18.00,
     "name": "Mein Monster-Ich",
     "autor": "Catarina Knüvener",
-    "beschreibung": "Gefühls-Monster bändigen: ein humorvolles Bilderbuch über Emotionen Der Große Hunger, das Schüchtern oder der Schreck – diese und andere monstermäßigen Emotionen begegnen Kindern jeden Tag und machen ihnen manchmal das Leben schwer. Deswegen hat Catarina Knüvener Gefühle und Situationen aus dem Kinderalltag als lustige Monster visualisiert. So erfahren kleine Leser mehr über ihre Gefühlswelt und lernen, was man tun kann, wenn der Wüterich im Sechseck hüpft, einen die Schadenfreude überkommt oder sich die lilablauen Schimmelsporen der schlechten Laune verteilen.n\n\Gefühle aus dem Alltag kennenlernen\n\n16 emotionale Monster auf jeweils einer Doppelseite\n\nMit vielen Tipps gegen schlechte Laune, Wut, Traurigkeit & Co.\n\nInklusive Ausmalseiten für eigene kreative Kritzel-Monster\n\nVorlesebuch mit altersgerechten Illustrationen für Kinder ab 5 Jahren\n\nThematische Unterstützung für Kita & Grundschule\n\nEmpathie vermitteln: In Kita und Grundschule über Gefühle sprechen\n\nLaute Monster, leise Monster, lustige Monster und verfressene Monster – Catarina Knüvener verpasst den Gefühls-Monstern nicht nur ein lustiges Aussehen, sondern kennt auch allerhand Tipps und Tricks, wie man mit diesen Emotionen umgeht. Am Ende des Buches wartet ein Mitmach-Angebot zum Malen und Basteln eigener Monster. So gelingt es ganz spielerisch, Empathie und Resilienz bei Kindern zu stärken!n\n\Sie sind überall, die kleinen Monster! Der Große Hunger, die Schlechte Laune, die Schadenfreude, der Wüterich ... Wir begegnen ihnen jeden Tag und müssen lernen, sie zu zähmen. Kleine Tricks helfen kleinen wie großen Monsterbändigern dabei, sich nicht unterkriegen zu lassen. Die Monster in diesen Büchern symbolisieren Gefühle oder Situationen, die Kinder kennen, aber oft nicht benennen können. Hier erfahren sie spielerisch und humorvoll mehr über die Monster, und erhalten Tipps, wie man sie wieder loswerden kann. Mit Ausmalseiten, auf denen Kinder ihren eigenen Monstern ein Gesicht geben können. Für Kinder ab 5 Jahren.",
+    "beschreibung": "Gefühls-Monster bändigen: ein humorvolles Bilderbuch über Emotionen. Der Große Hunger, das Schüchtern oder der Schreck – diese und andere monstermäßigen Emotionen begegnen Kindern jeden Tag und machen ihnen manchmal das Leben schwer. Deswegen hat Catarina Knüvener Gefühle und Situationen aus dem Kinderalltag als lustige Monster visualisiert. So erfahren kleine Leser mehr über ihre Gefühlswelt und lernen, was man tun kann, wenn der Wüterich im Sechseck hüpft, einen die Schadenfreude überkommt oder sich die lilablauen Schimmelsporen der schlechten Laune verteilen.\n\nMit vielen Tipps gegen schlechte Laune, Wut, Traurigkeit & Co.\nInklusive Ausmalseiten für eigene kreative Kritzel-Monster.\nVorlesebuch mit Illustrationen für Kinder ab 5 Jahren.\nThematische Unterstützung für Kita & Grundschule.",
     "bilder": [
       "images/Monster-Ich-min.jpg",
       "images/Monster-Ich-min1.jpg",
@@ -199,8 +197,7 @@
       "images/Monster-Ich-min4.jpg",
       "images/Monster-Ich-min5.jpg"
     ],
-     "kategorie": "Monstergeschichten"
+    "kategorie": "Monstergeschichten"
   }
-  
 ]
  
