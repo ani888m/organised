@@ -171,15 +171,18 @@
     "beschreibung": "Ein poetisches Bilderbuch über das Unsichtbare: Was Farbe hat der Wind? Ein kleines Kind stellt große Fragen und erlebt die Welt mit allen Sinnen.",
     "preis": 20.00,
     "bilder": [
-      "images/windcolor.jpg",
-      "images/wildeKerle1.jpg",
-      "images/wildeKerle2.jpg",
-      "images/wildeKerle3.jpg",
-      "images/wildeKerle4.jpg",
-      "images/wildeKerle5.jpg",
-      "images/wildeKerle6.jpg",
-      "images/wildeKerle7.jpg",
-      "images/wildeKerle8.jpg"
+      "images/wind/windcolor.jpg",
+      "images/wind/wind1.jpg",
+      "images/wind/wind2.jpg",
+      "images/wind/wind3.jpg",
+      "images/wind/wind4.jpg",
+      "images/wind/wind5.jpg",
+      "images/wind/wind6.jpg",
+      "images/wind/wind7.jpg",
+      "images/wind/wind8.jpg",
+      "images/wind/wind9.jpg",
+      "images/wind/wind10.jpg",
+      "images/wind/wind11.jpg"
     ],
     "kategorie": "Über Farben"
   },
