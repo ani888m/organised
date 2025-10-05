@@ -276,7 +276,34 @@
     "titel": "Kinder und ihre Gefühle",
     "band": 1
   }
+},
+
+{
+  "id": 17,
+  "name": "Mutig",
+  "autor": "Britta Teckentrup",
+  "beschreibung": "Was wir nicht kennen, kann ganz schön furchteinflößend sein. In diesem ausdrucksstarken Bilderbuch geht Britta Teckentrup der Frage nach, was es bedeutet, mutig zu sein. Sie erzählt die Geschichte eines Mädchens, das alleine durch einen dunklen Wald wandert und sich vor einem Bären fürchtet. Zuerst macht der Bär ihr Angst, er wirkt riesig und fremd. Doch als sie sich ihm nähert, wird der Bär ihr Begleiter und schließlich ihr Freund. Dieses Buch eignet sich perfekt für die Behandlung von Angst für Kinder im Kindergarten- und Grundschulalter. Es zeigt, wie lähmend sich Angst manchmal anfühlen kann, aber auch, wie gut es tut, sich mit seinen Ängsten zu konfrontieren und sie damit zu überwinden.",  
+  "preis": 18.00,
+  "bilder": [
+    "mutig.jpg"
+  ],
+  "leseprobe_pdf": "mutig.pdf",
+  "kategorie": "Kinder und ihre Gefühle",
+  "seitenzahl": 40,
+  "format": {
+    "breite_cm": 21.5,
+    "höhe_cm": 28.0
+  },
+  "einband": "Hardcover / Pappband",
+  "erscheinungsjahr": 2024,
+  "isbn": "978-3-7913-7575-5",
+  "reihe": {
+    "titel": "Kinder und ihre Gefühle",
+    "band": 2
+  },
+  "zielalter": "ab 4 Jahren"
 }
+
 
 ]
  
