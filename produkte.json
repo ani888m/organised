@@ -330,6 +330,30 @@
   "zielalter": "ab 4 Jahren",
   "verlag": "Prestel junior",
   "erscheinungstermin": "22.10.2025"
+},
+
+{
+  "id": 19,
+  "name": "Die Schaukel",
+  "autor": "Britta Teckentrup",
+  "beschreibung": "Die Schaukel ist ein philosophisches Bilderbuch, das Kinder behutsam an die Höhen und Tiefen des Lebens heranführt. In vielen kleinen Miniatur-Erzählungen spielt die Schaukel eine tragende Rolle – sie weiß von Kinderträumen, Freundschaften, Sorgen und Zeiten des Wachsens. Wer sind wir, was bewegt uns gerade? Dieses Buch lädt dazu ein, über das Leben ins Gespräch zu kommen. (Ab 5 Jahren)",
+  "preis": 25.00,
+  "bilder": [
+    "images/schaukel/schaukel.jpg"
+  ],
+  "leseprobe_pdf": "schaukel.pdf",
+  "kategorie": "Kinder & Gefühle / Philosophisches Bilderbuch",
+  "seitenzahl": 160,
+  "format": {
+    "breite_cm": 21.0,
+    "höhe_cm": 21.0
+  },
+  "einband": "Hardcover / Pappband",
+  "erscheinungsjahr": 2023,
+  "isbn": "978-3-7913-7531-1",
+  "verlag": "Prestel junior",
+  "zielalter": "ab 5 Jahren",
+  "lieferstatus": "lieferbar"
 }
 
 
