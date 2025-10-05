@@ -250,5 +250,33 @@
   "zielalter": "ab 3 Jahren",
   "isbn": "978-3-96428-284-2"
 }
+
+
+{
+  "id": 16,
+  "name": "Wütend",
+  "autor": "Britta Teckentrup",
+  "beschreibung": "Wut ist ein kraftvolles Gefühl. Wie ein Sturm in einem dunklen Wald packt die Heldin dieses wunderbare Bilderbuch die Wut. Sie reißt sie mit sich, und sie donnert und heult. Die Wut nimmt sie mit auf einen wilden Ritt und ihre Gefühle entladen sich wie Naturgewalten. Dieses Buch zeigt, wie Wut überwältigend, isolierend oder beängstigend sein kann – aber auch, wie sie eine Quelle von Kraft und Veränderung sein kann. (Kinder und ihre Gefühle, Band 1)\"",
+  "preis": 18.00,
+  "leseprobe_pdf": "wuetend/wuetend.pdf",
+  "bilder": [
+    "images/wuetend/wuetend.jpg"
+  ],
+  "kategorie": "Kinder und ihre Gefühle",
+  "seitenzahl": 48,
+  "format": {
+    "breite_cm": 21.5,
+    "höhe_cm": 28.0
+  },
+  "einband": "Hardcover / Pappband",
+  "erscheinungsjahr": 2021,
+  "isbn": "978-3-7913-7493-2",
+  "zielalter": "ab 4 Jahren",
+  "reihe": {
+    "titel": "Kinder und ihre Gefühle",
+    "band": 1
+  }
+}
+
 ]
  
