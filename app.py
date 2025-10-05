@@ -22,7 +22,7 @@ stripe.api_key = os.getenv("STRIPE_SECRET_KEY", "DEIN_STRIPE_SECRET_KEY")
 # ---------- SEITEN ----------
 @app.route('/')
 def index():
-    kategorienamen = ["Unsere Bücher", "Neuerscheinungen", "Über Angst", "Helga Bansch", "Klassiker", "Monstergeschichten", "Über Farben", "Weihnachten"]
+    kategorienamen = ["Unsere Bücher", "Neuerscheinungen", "Über Angst", "Helga Bansch", "Klassiker", "Monstergeschichten", "Über Farben", "Weihnachten","Kinder und ihre Gefühle"]
 
     # Produkte aus JSON nach Kategorie gruppieren
     kategorien = [
