@@ -483,7 +483,7 @@ align-items: stretch;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
-  max-width: 1800px;
+  max-width: 2200px;
   margin-left: 100px;
   padding: 50px 0;
 }
