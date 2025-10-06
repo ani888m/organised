@@ -1,16 +1,34 @@
+// -----------------------------
+// Helper für Cookies (optional für späteres Tracking)
+// -----------------------------
+function setCookie(name, value, days) {
+  let expires = "";
+  if (days) {
+    const date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/; Secure; SameSite=Lax";
+}
 
+function getCookie(name) {
+  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  return match ? decodeURIComponent(match[2]) : null;
+}
 
-// Funktion zum Aktualisieren des Warenkorb-Zählers
+// -----------------------------
+// Warenkorb-Funktionen (technisch notwendig, DSGVO-konform)
+// -----------------------------
 function updateCartCount() {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
   let cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   const cartCountElem = document.getElementById("cart-count");
-  if (cartCountElem) {
-    cartCountElem.textContent = cartCount;
-  }
+  if (cartCountElem) cartCountElem.textContent = cartCount;
+
+  // Optional: auch als Cookie speichern, falls serverseitig genutzt werden soll
+  // setCookie("cart", JSON.stringify(cart), 7); // 7 Tage
 }
 
-// Artikel in den Warenkorb legen und Zähler aktualisieren
 function addToCart(title, price, image) {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
   let existing = cart.find(item => item.title === title);
@@ -18,21 +36,16 @@ function addToCart(title, price, image) {
   if (existing) {
     existing.quantity++;
   } else {
-    cart.push({ 
-      title: title, 
-      price: price, 
-      quantity: 1, 
-      image: image // <- schon fertiger URL-Pfad
-    });
+    cart.push({ title, price, quantity: 1, image });
   }
 
   localStorage.setItem('cart', JSON.stringify(cart));
   updateCartCount();
 }
 
-
-
-// Mobile Menü umschalten
+// -----------------------------
+// Mobile Menü
+// -----------------------------
 function toggleMobileMenu() {
   const navLinks = document.querySelector('.nav-links');
   const closeBtn = document.querySelector('.close-menu');
@@ -40,13 +53,13 @@ function toggleMobileMenu() {
 
   if (navLinks) navLinks.classList.toggle('show');
   if (closeBtn) closeBtn.classList.toggle('show');
-  if (hamburger) hamburger.classList.toggle('hide'); // <-- Hamburger ausblenden
+  if (hamburger) hamburger.classList.toggle('hide');
 }
 
-// --- Carousel-Slider ---
-
+// -----------------------------
+// Carousel-Slider
+// -----------------------------
 let currentSlide = 0;
-
 const slides = document.querySelectorAll(".carousel-slide");
 const nextBtn = document.querySelector(".next");
 const prevBtn = document.querySelector(".prev");
@@ -64,74 +77,21 @@ function showSlide(index) {
   currentSlide = index;
 }
 
-let slideInterval = setInterval(() => {
-  showSlide(currentSlide + 1);
-}, 4000);
+let slideInterval = setInterval(() => showSlide(currentSlide + 1), 4000);
 
 function resetInterval() {
   clearInterval(slideInterval);
-  slideInterval = setInterval(() => {
-    showSlide(currentSlide + 1);
-  }, 4000);
+  slideInterval = setInterval(() => showSlide(currentSlide + 1), 4000);
 }
 
-if (nextBtn) {
-  nextBtn.addEventListener("click", () => {
-    showSlide(currentSlide + 1);
-    resetInterval();
-  });
-}
+if (nextBtn) nextBtn.addEventListener("click", () => { showSlide(currentSlide + 1); resetInterval(); });
+if (prevBtn) prevBtn.addEventListener("click", () => { showSlide(currentSlide - 1); resetInterval(); });
 
-if (prevBtn) {
-  prevBtn.addEventListener("click", () => {
-    showSlide(currentSlide - 1);
-    resetInterval();
-  });
-}
-
-// Starte mit dem ersten Slide
 showSlide(currentSlide);
 
-
-// --- Newsletter-Popup ---
-
-window.addEventListener('load', () => {
-  const popupShown = localStorage.getItem('newsletterPopupShown');
-
-  if (!popupShown) {
-    setTimeout(() => {
-      const popup = document.getElementById('newsletter-popup');
-      if (popup) {
-        popup.classList.remove('popup-hidden');
-        localStorage.setItem('newsletterPopupShown', 'true');
-      }
-    }, 5000);
-  }
-
-  // Beim Laden auch den Warenkorb-Zähler aktualisieren
-  updateCartCount();
-});
-
-// Popup schließen
-function closePopup() {
-  const popup = document.getElementById('newsletter-popup');
-  if (popup) {
-    popup.classList.add('popup-hidden');
-  }
-}
-
-// Newsletter-Snippet dynamisch laden
-fetch("/newsletter-snippet")
-  .then(res => res.text())
-  .then(html => {
-    const inline = document.getElementById("newsletter-inline");
-
-    if (inline) inline.innerHTML = html;
-  });
-
-
-
-// --- Produktbilder-Slider (nur für Produktseite) ---
+// -----------------------------
+// Produktbilder-Slider (Produktseite)
+// -----------------------------
 document.addEventListener("DOMContentLoaded", () => {
   const productImages = document.querySelectorAll(".carousel-image");
   const prevBtn = document.querySelector(".product-prev");
@@ -142,39 +102,31 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
 
   function showImage(index) {
-    productImages.forEach((img, i) => {
-      img.classList.toggle("active", i === index);
-    });
+    productImages.forEach((img, i) => img.classList.toggle("active", i === index));
     currentIndex = index;
   }
 
-  if (nextBtn) {
-    nextBtn.addEventListener("click", () => {
-      const nextIndex = (currentIndex + 1) % productImages.length;
-      showImage(nextIndex);
-    });
-  }
-
-  if (prevBtn) {
-    prevBtn.addEventListener("click", () => {
-      const prevIndex = (currentIndex - 1 + productImages.length) % productImages.length;
-      showImage(prevIndex);
-    });
-  }
-
-  showImage(0); // Startbild anzeigen
-});
-
-
-window.addEventListener("scroll", function () {
-    const header = document.querySelector("header");
-    if (window.scrollY > 50) {
-      header.classList.add("shrink");
-    } else {
-      header.classList.remove("shrink");
-    }
+  if (nextBtn) nextBtn.addEventListener("click", () => {
+    showImage((currentIndex + 1) % productImages.length);
   });
 
+  if (prevBtn) prevBtn.addEventListener("click", () => {
+    showImage((currentIndex - 1 + productImages.length) % productImages.length);
+  });
 
+  showImage(0);
+});
 
+// -----------------------------
+// Header scroll-Effekt
+// -----------------------------
+window.addEventListener("scroll", () => {
+  const header = document.querySelector("header");
+  if (window.scrollY > 50) header.classList.add("shrink");
+  else header.classList.remove("shrink");
+});
 
+// -----------------------------
+// Beim Laden: Warenkorb-Zähler aktualisieren
+// -----------------------------
+window.addEventListener('load', updateCartCount);
