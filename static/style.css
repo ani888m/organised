@@ -470,7 +470,7 @@ height: auto;
 /* =========================================
    BOOKLIST
 ========================================= */
-.book-list {
+/* .book-list {
 display: grid;
 grid-template-columns: repeat(4, 1fr);
 gap: 20px;
@@ -478,6 +478,14 @@ max-width: 1800px;
 margin-left: 100px;
 padding: 50px 0px;
 align-items: stretch;
+} */
+.book-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 1800px;
+  margin-left: 100px;
+  padding: 50px 0;
 }
 
 @media (max-width: 1024px) {
