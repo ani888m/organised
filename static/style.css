@@ -497,6 +497,7 @@ grid-template-columns: repeat(2, 1fr);
 @media (max-width: 600px) {
 .book-list {
 grid-template-columns: 1fr;
+margin: 50px;
 }
 .book-item {
 width: 80%;
