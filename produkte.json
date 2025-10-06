@@ -354,7 +354,60 @@
   "verlag": "Prestel junior",
   "zielalter": "ab 5 Jahren",
   "lieferstatus": "lieferbar"
+},
+
+{
+  "id": 20,
+  "name": "There Was An Old Lady",
+  "autor": "Abner Graboff",
+  "beschreibung": "One day an old lady swallows a fly and the only way she can get rid of it is to swallow a wriggling, tickling spider ... For over a century this subversive rhyme has delighted children and parents alike. Graboff's bright and startling illustrations combine beautifully with the traditional verse to bring this classic tale to life.",
+  "preis": 12.99,
+  "bilder": [
+    "images/anoldlady/anonldlady.jpg",
+    "images/anoldlady/anonldlady1.jpg",
+    "images/anoldlady/anonldlady2.jpg",
+    "images/anoldlady/anonldlady3.jpg",
+    "images/anoldlady/anonldlady4.jpg",
+    "images/anoldlady/anonldlady5.jpg",
+    "images/anoldlady/anonldlady6.jpg",
+    "images/anoldlady/anonldlady7.jpg",
+    "images/anoldlady/anonldlady8.jpg"
+  ],
+  "kategorie": "Klassiker",
+  "seitenzahl": 36,
+  "format": {
+    "breite_cm": 20.3,
+    "höhe_cm": 25.4
+  },
+  "einband": "Hardcover",
+  "erscheinungsjahr": null,
+  "isbn": null,
+  "zielalter": "ab 3 Jahren"
+},
+
+{
+  "id": 21,
+  "name": "Hungry Goat",
+  "autor": "Alan Mills & Abner Graboff",
+  "beschreibung": "The (very) hungry goat has a big appetite which gets him into all kinds of adventures. He’ll eat anything, from pig swill to frying pans and even barbed wire. As a result he grows fatter and fatter until one day he gobbles up something that sends him on the biggest adventure of all. Abner Graboff’s timeless illustrations bring this greedy animal to life in a comic rhyming tale for younger children.",
+  "preis": 12.99,
+  "bilder": [
+     "images/hungrygoat/hungrygoat.jpg",
+     "images/hungrygoat/hungrygoat1.jpg",
+     "images/hungrygoat/hungrygoat2.jpg",
+     "images/hungrygoat/hungrygoat3.jpg",
+     "images/hungrygoat/hungrygoat4.jpg",
+     "images/hungrygoat/hungrygoat5.jpg",
+     "images/hungrygoat/hungrygoat6.jpg",
+     "images/hungrygoat/hungrygoat7.jpg"
+  ],
+  "kategorie": "Klassiker"",
+  "seitenzahl": 52,
+  "einband": "Hardback",
+  "zielalter": null,
+  "isbn": null
 }
+
 
 
 
