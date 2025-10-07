@@ -408,6 +408,32 @@
   "isbn": null
 }
 
+{
+  "id": 22,
+  "name": "Monster trinken keine Erdbeermilch",
+  "autor": "Marie-Hélène Versini & Vincent Boudgourd",
+  "übersetzer": "Felicia Bomhoff",
+  "beschreibung": "Monster sind wirklich merkwürdige Wesen. Und sie haben eigenartige Gewohnheiten: Sie gehen nie zum Friseur, tragen keine Schuhe, spielen nicht Klavier. Und auch leckere Erdbeermilch trinken sie nie. Doch warum tun sie all das nicht? Dieses Buch liefert die erstaunliche Antwort – und zeigt, dass man sich vor Monstern gar nicht gruseln muss. Mit knallbunten Bildern und witzigen Texten vertreibt dieses Buch die Angst vor Monstern im Nu. Empfohlen ab 3 Jahren. :contentReference[oaicite:0]{index=0}",
+  "preis": 16.95,
+  "bilder": [
+    "images/monstermilch/monstermilch,jpg",
+    "images/monstermilch/monstermilch1,jpg", 
+    "images/monstermilch/monstermilch2,jpg"
+  ],
+  "kategorie": "Monstergeschichten",
+  "seitenzahl": 36,
+  "format": {
+    "breite_cm": 24.3,
+    "höhe_cm": 30.9,
+    "tiefe_cm": 1.0
+  },
+  "einband": "Fester Einband (Hardcover)",
+  "erscheinungsjahr": 2024,
+  "isbn": "978-3-458-64385-2",
+  "zielalter": "ab 3 Jahren",
+  "originaltitel": "Les monstres ne boivent pas de lait fraise",
+  "verlag": "Insel Verlag (Teil des Suhrkamp Verlags)‎"
+}
 
 
 
