@@ -1,13 +1,12 @@
 from flask import Flask, render_template, request, redirect, flash, abort
 import smtplib
 from email.mime.text import MIMEText
-import stripe
 import os
 import json
-from dotenv import load_dotenv  # optional für lokales Testen
+from dotenv import load_dotenv  # optional für lokale Tests
 
 # ---------- SETUP ----------
-load_dotenv()  # lokal .env laden (Render ignoriert das automatisch)
+load_dotenv()  # nur lokal .env laden
 basedir = os.path.abspath(os.path.dirname(__file__))
 json_path = os.path.join(basedir, 'produkte.json')
 
@@ -15,15 +14,12 @@ with open(json_path, encoding='utf-8') as f:
     produkte = json.load(f)
 
 app = Flask(__name__)
-app.secret_key = os.getenv("FLASK_SECRET_KEY", "irgendetwasgeheimes")
-
-# Stripe API Key (aus Umgebungsvariable)
-stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
+# Secret Key für Sessions & Flash
+app.secret_key = os.getenv("FLASK_SECRET_KEY", "fallback-secret-key")
 
 # Gmail-Zugangsdaten aus Environment Variables
 EMAIL_SENDER = os.getenv("EMAIL_SENDER")
 EMAIL_APP_PASSWORD = os.getenv("EMAIL_APP_PASSWORD")
-
 
 # ---------- SEITEN ----------
 @app.route('/')
