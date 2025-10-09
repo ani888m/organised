@@ -1,104 +1,59 @@
-from flask import Flask, render_template, request, redirect, flash, abort
+from flask import Flask, render_template, request
 import smtplib
 from email.mime.text import MIMEText
-import os
-import json
-from dotenv import load_dotenv  # optional für lokale Tests
-
-# ---------- SETUP ----------
-load_dotenv()  # nur lokal .env laden
-basedir = os.path.abspath(os.path.dirname(__file__))
-json_path = os.path.join(basedir, 'produkte.json')
-
-with open(json_path, encoding='utf-8') as f:
-    produkte = json.load(f)
 
 app = Flask(__name__)
-# Secret Key für Sessions & Flash
-app.secret_key = os.getenv("FLASK_SECRET_KEY", "fallback-secret-key")
 
-# Gmail-Zugangsdaten aus Environment Variables
-EMAIL_SENDER = os.getenv("EMAIL_SENDER")
-EMAIL_APP_PASSWORD = os.getenv("EMAIL_APP_PASSWORD")
 
-# ---------- SEITEN ----------
+
+
+
+
 @app.route('/')
+
 def index():
-    kategorienamen = [
-        "Unsere Bücher", "Neuerscheinungen", "Über Angst", "Helga Bansch",
-        "Klassiker", "Monstergeschichten", "Über Farben", "Weihnachten",
-        "Kinder und ihre Gefühle"
-    ]
-
-    kategorien = [
-        (k, [p for p in produkte if p.get("kategorie") == k])
-        for k in kategorienamen
-    ]
-
-    return render_template("index.html", kategorien=kategorien)
-
-
-@app.route('/produkt/<int:produkt_id>')
-def produkt_detail(produkt_id):
-    produkt = next((p for p in produkte if p['id'] == produkt_id), None)
-    if produkt is None:
-        abort(404)
-    return render_template('produkt.html', produkt=produkt)
-
-
+    return render_template('index.html')
+    
 @app.route('/navbar')
 def navbar():
     return render_template('navbar.html')
-
 
 @app.route('/team')
 def team():
     return render_template('Team.html')
 
-
 @app.route('/vision')
 def vision():
     return render_template('vision.html')
-
-
+    
 @app.route('/presse')
 def presse():
     return render_template('presse.html')
-
-
+    
 @app.route('/kontakt')
 def kontakt():
     return render_template('kontakt.html')
 
 
-@app.route('/checkout', methods=['GET', 'POST'])
-def checkout():
-    return render_template('checkout.html')
+@app.route("/newsletter-snippet")
+def newsletter_snippet():
+    return render_template("newsletter.html")
 
 
-# ---------- KONTAKT ----------
 @app.route('/submit', methods=['POST'])
 def submit():
     name = request.form['name']
     email = request.form['email']
     message = request.form['message']
 
-    try:
-        send_email(name, email, message)
-        flash("Danke! Deine Nachricht wurde gesendet.", "success")
-        return redirect('/kontakt')
-    except Exception as e:
-        flash(f"Fehler beim Senden der Nachricht: {e}", "error")
-        return redirect('/kontakt')
+    send_email(name, email, message)
 
+    return "Danke! Deine Nachricht wurde gesendet."
 
 def send_email(name, email, message):
-    sender = EMAIL_SENDER
-    app_password = EMAIL_APP_PASSWORD
-    recipient = EMAIL_SENDER
-
-    if not sender or not app_password:
-        raise ValueError("EMAIL_SENDER oder EMAIL_APP_PASSWORD ist nicht gesetzt!")
+    sender = 'antonyan125@gmail.com'
+    app_password = 'ffutcvkflhcgiijl'
+    recipient = 'antonyan125@gmail.com'
 
     subject = f'Neue Nachricht von {name}'
     body = f"Von: {name} <{email}>\n\nNachricht:\n{message}"
@@ -109,17 +64,24 @@ def send_email(name, email, message):
     msg['To'] = recipient
 
     try:
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
-            server.login(sender, app_password)
-            server.sendmail(sender, recipient, msg.as_string())
-        print("E-Mail erfolgreich gesendet!")
-    except smtplib.SMTPAuthenticationError:
-        raise RuntimeError("SMTP Authentication Error: Überprüfe EMAIL_SENDER und EMAIL_APP_PASSWORD!")
+        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+        server.login(sender, app_password)
+        server.sendmail(sender, recipient, msg.as_string())
+        server.quit()
+        print("E-Mail gesendet!")
     except Exception as e:
-        raise RuntimeError(f"Fehler beim Senden der E-Mail: {e}")
+        print("Fehler beim Senden:", e)
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 
-# ---------- NEWSLETTER ----------
+from flask import Flask, request, redirect, flash, render_template
+import csv
+
+app = Flask(__name__)
+app.secret_key = 'irgendetwasgeheimes'  # wichtig für Flash-Messages
+
 @app.route('/newsletter', methods=['POST'])
 def newsletter():
     email = request.form.get('email')
@@ -129,73 +91,11 @@ def newsletter():
         return redirect('/')
 
     try:
-        send_newsletter_email(email)
-        flash("Danke! Newsletter-Anmeldung erfolgreich.", "success")
-        return redirect('/danke')
+        with open('newsletter_anmeldungen.csv', mode='a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow([email])
+        flash('Danke für deine Anmeldung zum Newsletter!', 'success')
     except Exception as e:
-        flash(f"Fehler beim Newsletter-Versand: {e}", "error")
-        return redirect('/')
+        flash('Es gab ein Problem bei der Anmeldung.', 'error')
 
-
-@app.route('/danke')
-def danke():
-    return render_template('danke.html')
-
-
-def send_newsletter_email(email):
-    sender = EMAIL_SENDER
-    app_password = EMAIL_APP_PASSWORD
-    recipient = EMAIL_SENDER
-
-    if not sender or not app_password:
-        raise ValueError("EMAIL_SENDER oder EMAIL_APP_PASSWORD ist nicht gesetzt!")
-
-    subject = 'Neue Newsletter-Anmeldung'
-    body = f'Neue Newsletter-Anmeldung:\n\n{email}'
-
-    msg = MIMEText(body)
-    msg['Subject'] = subject
-    msg['From'] = sender
-    msg['To'] = recipient
-
-    try:
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
-            server.login(sender, app_password)
-            server.sendmail(sender, recipient, msg.as_string())
-        print("Newsletter-Benachrichtigung erfolgreich gesendet!")
-    except smtplib.SMTPAuthenticationError:
-        raise RuntimeError("SMTP Authentication Error: Überprüfe EMAIL_SENDER und EMAIL_APP_PASSWORD!")
-    except Exception as e:
-        raise RuntimeError(f"Fehler beim Senden der Newsletter-Benachrichtigung: {e}")
-
-
-# ---------- WARENKORB ----------
-@app.route('/cart')
-def cart():
-    cart_items = [
-        {'title': 'Reife Blessuren | Danilo Lučić', 'price': 23.90, 'quantity': 1}
-    ]
-    total = sum(item['price'] * item['quantity'] for item in cart_items)
-    return render_template('cart.html', cart_items=cart_items, total=total)
-
-
-@app.route('/success')
-def success():
-    return "Danke für deinen Einkauf!"
-
-
-@app.route('/cancel')
-def cancel():
-    return "Bezahlung abgebrochen."
-
-
-@app.route("/rechtliches")
-def rechtliches():
-    return render_template("rechtliches.html")
-
-
-# ---------- START ----------
-if __name__ == '__main__':
-    app.run(debug=True)
-import logging
-logging.basicConfig(level=logging.DEBUG)
+    return redirect('/')
