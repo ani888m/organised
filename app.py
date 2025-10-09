@@ -197,3 +197,5 @@ def rechtliches():
 # ---------- START ----------
 if __name__ == '__main__':
     app.run(debug=True)
+import logging
+logging.basicConfig(level=logging.DEBUG)
