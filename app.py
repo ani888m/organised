@@ -83,14 +83,22 @@ def submit():
     email = request.form['email']
     message = request.form['message']
 
-    send_email(name, email, message)
-    return "Danke! Deine Nachricht wurde gesendet."
+    try:
+        send_email(name, email, message)
+        flash("Danke! Deine Nachricht wurde gesendet.", "success")
+        return redirect('/kontakt')
+    except Exception as e:
+        flash(f"Fehler beim Senden der Nachricht: {e}", "error")
+        return redirect('/kontakt')
 
 
 def send_email(name, email, message):
     sender = EMAIL_SENDER
     app_password = EMAIL_APP_PASSWORD
     recipient = EMAIL_SENDER
+
+    if not sender or not app_password:
+        raise ValueError("EMAIL_SENDER oder EMAIL_APP_PASSWORD ist nicht gesetzt!")
 
     subject = f'Neue Nachricht von {name}'
     body = f"Von: {name} <{email}>\n\nNachricht:\n{message}"
@@ -104,9 +112,11 @@ def send_email(name, email, message):
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
             server.login(sender, app_password)
             server.sendmail(sender, recipient, msg.as_string())
-        print("E-Mail gesendet!")
+        print("E-Mail erfolgreich gesendet!")
+    except smtplib.SMTPAuthenticationError:
+        raise RuntimeError("SMTP Authentication Error: Überprüfe EMAIL_SENDER und EMAIL_APP_PASSWORD!")
     except Exception as e:
-        print("Fehler beim Senden:", e)
+        raise RuntimeError(f"Fehler beim Senden der E-Mail: {e}")
 
 
 # ---------- NEWSLETTER ----------
@@ -120,10 +130,10 @@ def newsletter():
 
     try:
         send_newsletter_email(email)
+        flash("Danke! Newsletter-Anmeldung erfolgreich.", "success")
         return redirect('/danke')
     except Exception as e:
-        print("Fehler beim Newsletter-Versand:", e)
-        flash('Es gab ein Problem bei der Anmeldung.', 'error')
+        flash(f"Fehler beim Newsletter-Versand: {e}", "error")
         return redirect('/')
 
 
@@ -137,6 +147,9 @@ def send_newsletter_email(email):
     app_password = EMAIL_APP_PASSWORD
     recipient = EMAIL_SENDER
 
+    if not sender or not app_password:
+        raise ValueError("EMAIL_SENDER oder EMAIL_APP_PASSWORD ist nicht gesetzt!")
+
     subject = 'Neue Newsletter-Anmeldung'
     body = f'Neue Newsletter-Anmeldung:\n\n{email}'
 
@@ -149,9 +162,11 @@ def send_newsletter_email(email):
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
             server.login(sender, app_password)
             server.sendmail(sender, recipient, msg.as_string())
-        print("Newsletter-Benachrichtigung gesendet!")
+        print("Newsletter-Benachrichtigung erfolgreich gesendet!")
+    except smtplib.SMTPAuthenticationError:
+        raise RuntimeError("SMTP Authentication Error: Überprüfe EMAIL_SENDER und EMAIL_APP_PASSWORD!")
     except Exception as e:
-        print("Fehler beim Senden der Newsletter-Benachrichtigung:", e)
+        raise RuntimeError(f"Fehler beim Senden der Newsletter-Benachrichtigung: {e}")
 
 
 # ---------- WARENKORB ----------
