@@ -4,8 +4,10 @@ from email.mime.text import MIMEText
 import stripe
 import os
 import json
+from dotenv import load_dotenv  # optional für lokales Testen
 
 # ---------- SETUP ----------
+load_dotenv()  # lokal .env laden (Render ignoriert das automatisch)
 basedir = os.path.abspath(os.path.dirname(__file__))
 json_path = os.path.join(basedir, 'produkte.json')
 
@@ -13,18 +15,25 @@ with open(json_path, encoding='utf-8') as f:
     produkte = json.load(f)
 
 app = Flask(__name__)
-app.secret_key = 'irgendetwasgeheimes'
+app.secret_key = os.getenv("FLASK_SECRET_KEY", "irgendetwasgeheimes")
 
-# Stripe API Key (aus Umgebungsvariable, nicht hardcoden!)
-stripe.api_key = os.getenv("STRIPE_SECRET_KEY", "DEIN_STRIPE_SECRET_KEY")
+# Stripe API Key (aus Umgebungsvariable)
+stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
+
+# Gmail-Zugangsdaten aus Environment Variables
+EMAIL_SENDER = os.getenv("EMAIL_SENDER")
+EMAIL_APP_PASSWORD = os.getenv("EMAIL_APP_PASSWORD")
 
 
 # ---------- SEITEN ----------
 @app.route('/')
 def index():
-    kategorienamen = ["Unsere Bücher", "Neuerscheinungen", "Über Angst", "Helga Bansch", "Klassiker", "Monstergeschichten", "Über Farben", "Weihnachten","Kinder und ihre Gefühle"]
+    kategorienamen = [
+        "Unsere Bücher", "Neuerscheinungen", "Über Angst", "Helga Bansch",
+        "Klassiker", "Monstergeschichten", "Über Farben", "Weihnachten",
+        "Kinder und ihre Gefühle"
+    ]
 
-    # Produkte aus JSON nach Kategorie gruppieren
     kategorien = [
         (k, [p for p in produkte if p.get("kategorie") == k])
         for k in kategorienamen
@@ -66,9 +75,6 @@ def kontakt():
     return render_template('kontakt.html')
 
 
-
-
-
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
     return render_template('checkout.html')
@@ -86,9 +92,9 @@ def submit():
 
 
 def send_email(name, email, message):
-    sender = 'antonyan125@gmail.com'
-    app_password = 'cbvunlrsizkvtveb'
-    recipient = 'antonyan125@gmail.com'
+    sender = EMAIL_SENDER
+    app_password = EMAIL_APP_PASSWORD
+    recipient = EMAIL_SENDER
 
     subject = f'Neue Nachricht von {name}'
     body = f"Von: {name} <{email}>\n\nNachricht:\n{message}"
@@ -99,10 +105,9 @@ def send_email(name, email, message):
     msg['To'] = recipient
 
     try:
-        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-        server.login(sender, app_password)
-        server.sendmail(sender, recipient, msg.as_string())
-        server.quit()
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+            server.login(sender, app_password)
+            server.sendmail(sender, recipient, msg.as_string())
         print("E-Mail gesendet!")
     except Exception as e:
         print("Fehler beim Senden:", e)
@@ -132,9 +137,9 @@ def danke():
 
 
 def send_newsletter_email(email):
-    sender = 'antonyan125@gmail.com'
-    app_password = 'cbvunlrsizkvtveb'
-    recipient = 'antonyan125@gmail.com'
+    sender = EMAIL_SENDER
+    app_password = EMAIL_APP_PASSWORD
+    recipient = EMAIL_SENDER
 
     subject = 'Neue Newsletter-Anmeldung'
     body = f'Neue Newsletter-Anmeldung:\n\n{email}'
@@ -145,10 +150,9 @@ def send_newsletter_email(email):
     msg['To'] = recipient
 
     try:
-        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-        server.login(sender, app_password)
-        server.sendmail(sender, recipient, msg.as_string())
-        server.quit()
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+            server.login(sender, app_password)
+            server.sendmail(sender, recipient, msg.as_string())
         print("Newsletter-Benachrichtigung gesendet!")
     except Exception as e:
         print("Fehler beim Senden der Newsletter-Benachrichtigung:", e)
@@ -177,10 +181,6 @@ def cancel():
 @app.route("/rechtliches")
 def rechtliches():
     return render_template("rechtliches.html")
-
-
-
-
 
 
 # ---------- START ----------
