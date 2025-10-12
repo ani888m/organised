@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, redirect, flash, abort
 import smtplib
 from email.mime.text import MIMEText
@@ -77,7 +76,9 @@ def checkout():
     return render_template('checkout.html')
 
 
-# ---------- KONTAKT ----------
+# ------------------------------------
+# ---------- KONTAKT FUNKTIONEN ----------
+# ------------------------------------
 @app.route('/submit', methods=['POST'])
 def submit():
     name = request.form['name']
@@ -89,6 +90,7 @@ def submit():
         flash("Danke! Deine Nachricht wurde gesendet.", "success")
         return redirect('/kontakt')
     except Exception as e:
+        # Fängt jeden Fehler ab, einschließlich des Timeouts
         flash(f"Fehler beim Senden der Nachricht: {e}", "error")
         return redirect('/kontakt')
 
@@ -110,17 +112,22 @@ def send_email(name, email, message):
     msg['To'] = recipient
 
     try:
-        with smtplib.SMTP_SSL('smtp.gmail.com', 587) as server:
+        # *** ANPASSUNG HIER: Wechsel zu Port 587 und starttls() ***
+        with smtplib.SMTP('smtp.gmail.com', 587) as server:
+            server.starttls()  # Starte die verschlüsselte Verbindung
             server.login(sender, app_password)
             server.sendmail(sender, recipient, msg.as_string())
         print("E-Mail erfolgreich gesendet!")
     except smtplib.SMTPAuthenticationError:
         raise RuntimeError("SMTP Authentication Error: Überprüfe EMAIL_SENDER und EMAIL_APP_PASSWORD!")
     except Exception as e:
-        raise RuntimeError(f"Fehler beim Senden der E-Mail: {e}")
+        # Fängt den Verbindungsfehler (Timeout) ab
+        raise RuntimeError(f"Fehler beim Senden der E-Mail (wahrscheinlich Verbindung): {e}")
 
 
-# ---------- NEWSLETTER ----------
+# ------------------------------------
+# ---------- NEWSLETTER FUNKTIONEN ----------
+# ------------------------------------
 @app.route('/newsletter', methods=['POST'])
 def newsletter():
     email = request.form.get('email')
@@ -160,17 +167,22 @@ def send_newsletter_email(email):
     msg['To'] = recipient
 
     try:
-        with smtplib.SMTP_SSL('smtp.gmail.com', 587) as server:
+        # *** ANPASSUNG HIER: Wechsel zu Port 587 und starttls() ***
+        with smtplib.SMTP('smtp.gmail.com', 587) as server:
+            server.starttls()  # Starte die verschlüsselte Verbindung
             server.login(sender, app_password)
             server.sendmail(sender, recipient, msg.as_string())
         print("Newsletter-Benachrichtigung erfolgreich gesendet!")
     except smtplib.SMTPAuthenticationError:
         raise RuntimeError("SMTP Authentication Error: Überprüfe EMAIL_SENDER und EMAIL_APP_PASSWORD!")
     except Exception as e:
-        raise RuntimeError(f"Fehler beim Senden der Newsletter-Benachrichtigung: {e}")
+        # Fängt den Verbindungsfehler (Timeout) ab
+        raise RuntimeError(f"Fehler beim Senden der Newsletter-Benachrichtigung (wahrscheinlich Verbindung): {e}")
 
 
-# ---------- WARENKORB ----------
+# ------------------------------------
+# ---------- WARENKORB & RECHTLICHES ----------
+# ------------------------------------
 @app.route('/cart')
 def cart():
     cart_items = [
@@ -197,6 +209,7 @@ def rechtliches():
 
 # ---------- START ----------
 if __name__ == '__main__':
+    # Fügt Logging hinzu, um die Fehlerbehebung zu erleichtern
+    import logging
+    logging.basicConfig(level=logging.INFO) 
     app.run(debug=True)
-import logging
-logging.basicConfig(level=logging.DEBUG)
