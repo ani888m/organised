@@ -110,7 +110,7 @@ def send_email(name, email, message):
     msg['To'] = recipient
 
     try:
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+        with smtplib.SMTP_SSL('smtp.gmail.com', 587) as server:
             server.login(sender, app_password)
             server.sendmail(sender, recipient, msg.as_string())
         print("E-Mail erfolgreich gesendet!")
@@ -160,7 +160,7 @@ def send_newsletter_email(email):
     msg['To'] = recipient
 
     try:
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+        with smtplib.SMTP_SSL('smtp.gmail.com', 587) as server:
             server.login(sender, app_password)
             server.sendmail(sender, recipient, msg.as_string())
         print("Newsletter-Benachrichtigung erfolgreich gesendet!")
