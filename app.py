@@ -142,7 +142,7 @@ def danke():
     return render_template('danke.html')
 
 @app.route('/kontaktdanke')
-def danke():
+def kontaktdanke():
     return render_template('kontaktdanke.html')
     
 @app.route('/cart')
