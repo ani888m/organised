@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, redirect, flash, abort
-import smtplib
-from email.mime.text import MIMEText
 import os
 import json
 from dotenv import load_dotenv
 import logging
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
 # ---------- SETUP ----------
 load_dotenv()  # nur lokal .env laden
@@ -23,29 +23,29 @@ with open(json_path, encoding='utf-8') as f:
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "fallback-secret-key")
 
-# Gmail-Zugangsdaten aus Environment Variables
+# SendGrid und E-Mail
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 EMAIL_SENDER = os.getenv("EMAIL_SENDER")
-EMAIL_APP_PASSWORD = os.getenv("EMAIL_APP_PASSWORD")
 
 
 # ---------- HILFSFUNKTIONEN ----------
 def send_email(subject, body, recipient=EMAIL_SENDER):
-    if not EMAIL_SENDER or not EMAIL_APP_PASSWORD:
-        raise ValueError("EMAIL_SENDER oder EMAIL_APP_PASSWORD ist nicht gesetzt!")
+    if not SENDGRID_API_KEY or not EMAIL_SENDER:
+        raise ValueError("SENDGRID_API_KEY oder EMAIL_SENDER ist nicht gesetzt!")
 
-    msg = MIMEText(body)
-    msg['Subject'] = subject
-    msg['From'] = EMAIL_SENDER
-    msg['To'] = recipient
+    message = Mail(
+        from_email=EMAIL_SENDER,
+        to_emails=recipient,
+        subject=subject,
+        plain_text_content=body
+    )
 
     try:
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
-            server.login(EMAIL_SENDER, EMAIL_APP_PASSWORD)
-            server.sendmail(EMAIL_SENDER, recipient, msg.as_string())
-        logger.info(f"E-Mail erfolgreich an {recipient} gesendet: {subject}")
-    except smtplib.SMTPAuthenticationError:
-        raise RuntimeError("SMTP Authentication Error: Überprüfe EMAIL_SENDER und EMAIL_APP_PASSWORD!")
+        sg = SendGridAPIClient(SENDGRID_API_KEY)
+        response = sg.send(message)
+        logger.info(f"E-Mail erfolgreich an {recipient} gesendet! Status: {response.status_code}")
     except Exception as e:
+        logger.error(f"Fehler beim Senden der E-Mail: {e}")
         raise RuntimeError(f"Fehler beim Senden der E-Mail: {e}")
 
 
@@ -113,7 +113,6 @@ def submit():
         send_email(f'Neue Nachricht von {name}', f"Von: {name} <{email}>\n\nNachricht:\n{message}")
         flash("Danke! Deine Nachricht wurde gesendet.", "success")
     except Exception as e:
-        logger.error(f"Fehler beim Senden der Kontakt-E-Mail: {e}")
         flash(f"Fehler beim Senden der Nachricht: {e}", "error")
 
     return redirect('/kontakt')
@@ -131,7 +130,6 @@ def newsletter():
         flash("Danke! Newsletter-Anmeldung erfolgreich.", "success")
         return redirect('/danke')
     except Exception as e:
-        logger.error(f"Fehler beim Newsletter-Versand: {e}")
         flash(f"Fehler beim Newsletter-Versand: {e}", "error")
         return redirect('/')
 
