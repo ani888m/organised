@@ -115,11 +115,8 @@ def submit():
     except Exception as e:
         flash(f"Fehler beim Senden der Nachricht: {e}", "error")
 
-    return redirect('/')
+    return redirect('/danke')
 
-@app.route('/danke')
-def danke():
-    return render_template('danke.html')
 
 
 @app.route('/newsletter', methods=['POST'])
