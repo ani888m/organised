@@ -7,13 +7,13 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
 # ---------- SETUP ----------
-load_dotenv()  # nur lokal .env laden
+load_dotenv()  # .env nur lokal laden
 
 # Logging konfigurieren
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-# JSON-Datei mit Produkten
+# JSON-Datei mit Produkten laden
 basedir = os.path.abspath(os.path.dirname(__file__))
 json_path = os.path.join(basedir, 'produkte.json')
 
@@ -23,12 +23,12 @@ with open(json_path, encoding='utf-8') as f:
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "fallback-secret-key")
 
-# SendGrid und E-Mail
+# SendGrid API-Konfiguration
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 EMAIL_SENDER = os.getenv("EMAIL_SENDER")
 
 
-# ---------- HILFSFUNKTIONEN ----------
+# ---------- HILFSFUNKTION ----------
 def send_email(subject, body, recipient=EMAIL_SENDER):
     if not SENDGRID_API_KEY or not EMAIL_SENDER:
         raise ValueError("SENDGRID_API_KEY oder EMAIL_SENDER ist nicht gesetzt!")
@@ -110,15 +110,15 @@ def submit():
         return redirect('/kontakt')
 
     try:
-        send_email(f'Neue Nachricht von {name}', f"Von: {name} <{email}>\n\nNachricht:\n{message}")
+        send_email(
+            subject=f'Neue Nachricht von {name}',
+            body=f"Von: {name} <{email}>\n\nNachricht:\n{message}"
+        )
         flash("Danke! Deine Nachricht wurde gesendet.", "success")
-    return redirect('/kontaktdanke')
-    
+        return redirect('/kontaktdanke')
     except Exception as e:
         flash(f"Fehler beim Senden der Nachricht: {e}", "error")
-
-    return redirect('/kontakt')
-
+        return redirect('/kontakt')
 
 
 @app.route('/newsletter', methods=['POST'])
@@ -129,7 +129,10 @@ def newsletter():
         return redirect('/')
 
     try:
-        send_email('Neue Newsletter-Anmeldung', f'Neue Newsletter-Anmeldung: {email}')
+        send_email(
+            subject='Neue Newsletter-Anmeldung',
+            body=f'Neue Newsletter-Anmeldung: {email}'
+        )
         flash("Danke! Newsletter-Anmeldung erfolgreich.", "success")
         return redirect('/danke')
     except Exception as e:
@@ -141,12 +144,15 @@ def newsletter():
 def danke():
     return render_template('danke.html')
 
+
 @app.route('/kontaktdanke')
 def kontaktdanke():
     return render_template('kontaktdanke.html')
-    
+
+
 @app.route('/cart')
 def cart():
+    # Temporäre Cart-Items – später durch dynamische Daten ersetzen
     cart_items = [
         {'title': 'Reife Blessuren | Danilo Lučić', 'price': 23.90, 'quantity': 1}
     ]
@@ -164,9 +170,9 @@ def cancel():
     return "Bezahlung abgebrochen."
 
 
-@app.route("/rechtliches")
+@app.route('/rechtliches')
 def rechtliches():
-    return render_template("rechtliches.html")
+    return render_template('rechtliches.html')
 
 
 # ---------- START ----------
