@@ -1,4 +1,5 @@
 Flask
+Flask-SQLAlchemy
 gunicorn
 stripe
 python-dotenv
