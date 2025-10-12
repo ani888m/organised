@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: mein-flask-projekt
+    env: python
+    plan: free
+    region: frankfurt  # oder oregon, je nach Wunsch
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    envVars:
+      - key: FLASK_SECRET_KEY
+        sync: false
+      - key: STRIPE_API_KEY
+        sync: false
