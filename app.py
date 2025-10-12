@@ -112,10 +112,12 @@ def submit():
     try:
         send_email(f'Neue Nachricht von {name}', f"Von: {name} <{email}>\n\nNachricht:\n{message}")
         flash("Danke! Deine Nachricht wurde gesendet.", "success")
+    return redirect('/kontaktdanke')
+    
     except Exception as e:
         flash(f"Fehler beim Senden der Nachricht: {e}", "error")
 
-    return redirect('/danke')
+    return redirect('/kontakt')
 
 
 
@@ -139,7 +141,10 @@ def newsletter():
 def danke():
     return render_template('danke.html')
 
-
+@app.route('/kontaktdanke')
+def danke():
+    return render_template('kontaktdanke.html')
+    
 @app.route('/cart')
 def cart():
     cart_items = [
