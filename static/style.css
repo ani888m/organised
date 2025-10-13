@@ -105,10 +105,9 @@ header {
 padding: 25px;
 }
    h2 {
-   
    font-size: 2rem;
 }
-
+}
 @media (max-width: 480px) {
 .logo {
 height: 80px; /* Smartphones */
