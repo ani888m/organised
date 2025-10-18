@@ -2,29 +2,59 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Login | Der Blaue Reiter</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <title>Login / Registrierung</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
+  <style>
+    body {font-family: 'DM Sans', sans-serif; display:flex; justify-content:center; align-items:center; height:100vh; background:#f7f7f7;}
+    .container {background:white; padding:30px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:380px;}
+    .tabs {display:flex; justify-content:space-around; margin-bottom:20px;}
+    .tab {cursor:pointer; padding:10px; border-bottom:2px solid transparent;}
+    .tab.active {border-color:#0073e6; font-weight:bold;}
+    form {display:none; flex-direction:column;}
+    form.active {display:flex;}
+    input {margin:8px 0; padding:10px; border:1px solid #ccc; border-radius:6px;}
+    button {margin-top:10px; padding:10px; background:#0073e6; color:white; border:none; border-radius:6px; cursor:pointer;}
+    button:hover {background:#005bb5;}
+    .flash {color:red; text-align:center;}
+  </style>
 </head>
 <body>
-  {% include 'navbar.html' %}
+  <div class="container">
+    <div class="tabs">
+      <div class="tab active" onclick="showForm('login')">Login</div>
+      <div class="tab" onclick="showForm('register')">Registrieren</div>
+    </div>
 
-  <div class="login-container">
-    <h2>Login</h2>
-    <form action="{{ url_for('login') }}" method="POST">
-      <label for="username">Benutzername</label><br>
-      <input type="text" id="username" name="username" required><br>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, msg in messages %}
+          <div class="flash">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
 
-      <label for="password">Passwort</label><br>
-      <input type="password" id="password" name="password" required><br>
-
+    <form id="login" class="active" method="POST">
+      <input type="hidden" name="action" value="login">
+      <input type="email" name="email" placeholder="E-Mail" required>
+      <input type="password" name="password" placeholder="Passwort" required>
       <button type="submit">Einloggen</button>
     </form>
 
-    {% if error %}
-      <p class="error">{{ error }}</p>
-    {% endif %}
+    <form id="register" method="POST">
+      <input type="hidden" name="action" value="register">
+      <input type="email" name="email" placeholder="E-Mail" required>
+      <input type="password" name="password" placeholder="Passwort" required>
+      <button type="submit">Registrieren</button>
+    </form>
   </div>
 
-  {% include 'footer.html' %}
+  <script>
+    function showForm(id) {
+      document.querySelectorAll("form").forEach(f => f.classList.remove("active"));
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+      event.target.classList.add("active");
+    }
+  </script>
 </body>
 </html>
