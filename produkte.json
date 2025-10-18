@@ -433,6 +433,30 @@
   "zielalter": "ab 3 Jahren",
   "originaltitel": "Les monstres ne boivent pas de lait fraise",
   "verlag": "Insel Verlag (Teil des Suhrkamp Verlags)‎"
+},
+{
+  "id": 23,
+  "name": "Unsichtbar in der großen Stadt",
+  "autor": "Sydney Smith",
+  "beschreibung": "Allein in der großen Stadt zu sein, ist manchmal unheimlich. Besonders, wenn man klein ist und alles um einen herum so laut und riesengroß. Da ist es gut, wenn es jemanden gibt, der die besten Geheimverstecke kennt, zum Beispiel unterm Haselstrauch oder hoch oben im Walnussbaum. (Ausgezeichnet mit dem Deutschen Jugendliteraturpreis 2021 in der Kategorie Bilderbuch.)",
+  "preis": 18.00,
+  "bilder": [
+    "images/unsichtbar/unsichtbar.jpg",
+    "images/unsichtbar/unsichtbar1.jpg",
+    "images/unsichtbar/unsichtbar2.jpg",
+    "images/unsichtbar/unsichtbar3.jpg"
+  ],
+  "kategorie": "Kinder und ihre Gefühle",
+  "seitenzahl": 40,
+  "format": {
+    "breite_cm": 18.4,
+    "höhe_cm": 28.6
+  },
+  "einband": "Gebunden (Hardcover)",
+  "erscheinungsjahr": 2020,
+  "isbn": "978-3-8489-0176-0",
+  "zielalter": "ab 4 Jahren",
+  "verlag": "Thienemann-Esslinger Verlag"
 }
 
 
