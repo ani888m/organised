@@ -17,7 +17,7 @@
 
   <section class="form">
     <h2>Bezahlung</h2>
-    <form id="payment-form">
+    <form id="payment-form" method="POST" action="{{ url_for('checkout') }}">
       <label>
         Name:
         <input type="text" name="name" required placeholder="Vor- und Nachname">
@@ -25,16 +25,16 @@
 
       <label>
         E-Mail Adresse:
-        <input type="text" name="email" required placeholder="Ihre E-Mail">
+        <input type="email" name="email" required placeholder="Ihre E-Mail">
       </label>
       
       <label>
         Anschrift:
-        <input type="text" name="address" required placeholder="Straße und Hausnnummer">
+        <input type="text" name="address" required placeholder="Straße und Hausnummer">
       </label>
       
       <label>
-        <input type="text" name="address-additional" placeholder="Adressenzusatz">
+        <input type="text" name="address-additional" placeholder="Adresszusatz">
       </label>
 
       <div class="half-container">
@@ -81,12 +81,11 @@
         </label>
       </div>
 
+      <!-- Newsletter Checkbox -->
       <label class="newsletter-consent">
         <input type="checkbox" name="newsletter" id="newsletter-checkbox">
         Ich möchte mich für den Newsletter anmelden.
       </label>
-      <form id="payment-form" method="POST" action="{{ url_for('checkout') }}">
-
 
       <button type="submit">Bezahlen</button>
     </form>
@@ -100,55 +99,17 @@
 
   paymentMethodSelect.addEventListener('change', () => {
     const method = paymentMethodSelect.value;
-
     rechnungDetails.classList.add('hidden');
     paypalDetails.classList.add('hidden');
     kreditkarteDetails.classList.add('hidden');
-
-    if (method === 'rechnung') {
-      rechnungDetails.classList.remove('hidden');
-    } else if (method === 'paypal') {
-      paypalDetails.classList.remove('hidden');
-    } else if (method === 'kreditkarte') {
-      kreditkarteDetails.classList.remove('hidden');
-    }
-  });
-
-  document.getElementById('payment-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const method = paymentMethodSelect.value;
-    if (!method) {
-      alert('Bitte wählen Sie eine Zahlungsmethode.');
-      return;
-    }
-    if (method === 'paypal') {
-      alert('Weiterleitung zu PayPal (Simulation).');
-    } else if (method === 'rechnung') {
-      alert('Vielen Dank! Sie erhalten die Rechnung per Post.');
-    } else if (method === 'kreditkarte') {
-      const cardnumber = this.cardnumber.value.trim();
-      const expiry = this.expiry.value;
-      const cvv = this.cvv.value.trim();
-      if (!/^\d{16}$/.test(cardnumber)) {
-        alert('Bitte geben Sie eine gültige 16-stellige Kreditkartennummer ein.');
-        return;
-      }
-      if (!expiry) {
-        alert('Bitte geben Sie ein Ablaufdatum ein.');
-        return;
-      }
-      if (!/^\d{3}$/.test(cvv)) {
-        alert('Bitte geben Sie einen gültigen 3-stelligen CVV ein.');
-        return;
-      }
-      alert('Zahlung erfolgreich (Simulation). Vielen Dank!');
-    }
-    localStorage.removeItem('cart');
-    window.location.href = 'index.html';
+    if (method === 'rechnung') rechnungDetails.classList.remove('hidden');
+    if (method === 'paypal') paypalDetails.classList.remove('hidden');
+    if (method === 'kreditkarte') kreditkarteDetails.classList.remove('hidden');
   });
 </script>
 </body>
 </html>
+
 
 
 <!--<style>
