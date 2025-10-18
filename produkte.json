@@ -457,6 +457,32 @@
   "isbn": "978-3-8489-0176-0",
   "zielalter": "ab 4 Jahren",
   "verlag": "Thienemann-Esslinger Verlag"
+},
+
+{
+  "id": 24,
+  "name": "Drei kleine Handschuhe",
+  "autor": "Linda Bailey",
+  "beschreibung": "Pünktchen und Pünktchen sind ein perfekt zusammen-passendes Paar Handschuhe. Und in ihren Augen ist es völlig richtig, dass der partnerlose Handschuh Streifi in die dunkle Jackentasche verbannt wird! Bis sich eines Tages die Verhältnisse umkehren, als ein Pünktchen verschwindet und der zweite Streifi wieder auftaucht. Ist das jetzt noch immer gerecht? Und warum müssen eigentlich immer alle zusammenpassen? Eine Rebellion im Kleiderschrank beginnt!" ,
+  "preis": 15.00,
+  "bilder": [
+    "images/handschuhe/Handschuhe.jpg",
+    "images/handschuhe/Handschuhe1.jpg",
+     "images/handschuhe/Handschuhe2.jpg",
+     "images/handschuhe/Handschuhe3.jpg",
+     "images/handschuhe/Handschuhe4.jpg",
+     "images/handschuhe/Handschuhe5.jpg",
+     "images/handschuhe/Handschuhe6.jpg",
+     "images/handschuhe/Handschuhe7.jpg",
+     "images/handschuhe/Handschuhe8.jpg"
+  ],
+  "kategorie": "Bilderbuch / Dazugehören",
+  "seitenzahl": 40,
+  "einband": "Hardcover, Pappband",
+  "erscheinungsjahr": 2024,
+  "isbn": "978-3-570-18155-3",
+  "zielalter": "ab 4 Jahren",
+  "verlag": "cbj Kinderbücher"
 }
 
 
