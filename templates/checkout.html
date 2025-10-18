@@ -81,6 +81,13 @@
         </label>
       </div>
 
+      <label class="newsletter-consent">
+        <input type="checkbox" name="newsletter" id="newsletter-checkbox">
+        Ich möchte mich für den Newsletter anmelden.
+      </label>
+      <form id="payment-form" method="POST" action="{{ url_for('checkout') }}">
+
+
       <button type="submit">Bezahlen</button>
     </form>
   </section>
