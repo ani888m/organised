@@ -917,4 +917,13 @@ form {
 .error {
   color: red;
 }
+.user-greeting {
+  color: #333;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.nav-links li a i {
+  margin-right: 5px;
+}
 
