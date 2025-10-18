@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | Der Blaue Reiter</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  {% include 'navbar.html' %}
+
+  <div class="login-container">
+    <h2>Login</h2>
+    <form action="{{ url_for('login') }}" method="POST">
+      <label for="username">Benutzername</label><br>
+      <input type="text" id="username" name="username" required><br>
+
+      <label for="password">Passwort</label><br>
+      <input type="password" id="password" name="password" required><br>
+
+      <button type="submit">Einloggen</button>
+    </form>
+
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+  </div>
+
+  {% include 'footer.html' %}
+</body>
+</html>
