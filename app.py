@@ -250,6 +250,11 @@ def danke():
 def kontaktdanke():
     return render_template('kontaktdanke.html', user_email=session.get("user_email"))
 
+@app.route('/bestelldanke')
+def bestelldanke():
+    return render_template('bestelldanke.html', user_email=session.get("user_email"))
+
+
 
 # ---------- WARENKORB ----------
 @app.route('/cart')
