@@ -167,8 +167,32 @@ def kontakt():
     return render_template('kontakt.html', user_email=session.get("user_email"))
 
 
+# ---------- CHECKOUT MIT NEWSLETTER ----------
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
+    if request.method == "POST":
+        name = request.form.get('name')
+        email = request.form.get('email')
+        newsletter_opt_in = request.form.get('newsletter')
+
+        if not name or not email:
+            flash("Bitte Name und E-Mail-Adresse ausfüllen.", "error")
+            return redirect(url_for("checkout"))
+
+        # Newsletter-Anmeldung (optional)
+        if newsletter_opt_in:
+            try:
+                send_email(
+                    subject="Neue Newsletter-Anmeldung",
+                    body=f"Neue Newsletter-Anmeldung: {email}"
+                )
+                flash("Newsletter-Anmeldung erfolgreich!", "success")
+            except Exception as e:
+                flash(f"Fehler bei der Newsletter-Anmeldung: {e}", "error")
+
+        flash("Danke für deine Bestellung! (Simulation)", "success")
+        return redirect(url_for("danke"))
+
     return render_template('checkout.html', user_email=session.get("user_email"))
 
 
@@ -228,7 +252,6 @@ def kontaktdanke():
 # ---------- WARENKORB ----------
 @app.route('/cart')
 def cart():
-    # Platzhalter für Warenkorb
     cart_items = [
         {'title': 'Reife Blessuren | Danilo Lučić', 'price': 23.90, 'quantity': 1}
     ]
