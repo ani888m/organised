@@ -170,28 +170,30 @@ def kontakt():
 # ---------- CHECKOUT MIT NEWSLETTER ----------
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
-    if request.method == "POST":
+    if request.method == 'POST':
         name = request.form.get('name')
         email = request.form.get('email')
-        newsletter_opt_in = request.form.get('newsletter')
+        newsletter = request.form.get('newsletter')
+        payment_method = request.form.get('payment-method')
 
-        if not name or not email:
-            flash("Bitte Name und E-Mail-Adresse ausfüllen.", "error")
-            return redirect(url_for("checkout"))
+        if not name or not email or not payment_method:
+            flash("Bitte fülle alle Pflichtfelder aus.", "error")
+            return redirect(url_for('checkout'))
 
-        # Newsletter-Anmeldung (optional)
-        if newsletter_opt_in:
+        # Falls Newsletter ausgewählt wurde → sende E-Mail im Hintergrund
+        if newsletter:
             try:
                 send_email(
-                    subject="Neue Newsletter-Anmeldung",
-                    body=f"Neue Newsletter-Anmeldung: {email}"
+                    subject='Neue Newsletter-Anmeldung (über Bestellung)',
+                    body=f'{name} ({email}) hat sich beim Bestellvorgang für den Newsletter angemeldet.'
                 )
-                flash("Newsletter-Anmeldung erfolgreich!", "success")
+                # kein Redirect — Nutzer bleibt auf der Bestell-Danke-Seite
             except Exception as e:
-                flash(f"Fehler bei der Newsletter-Anmeldung: {e}", "error")
+                logger.warning(f"Newsletter konnte nicht gesendet werden: {e}")
 
-        flash("Danke für deine Bestellung! (Simulation)", "success")
-        return redirect(url_for("danke"))
+        # Bestellung bestätigen (Simulation)
+        flash("Zahlung erfolgreich (Simulation). Vielen Dank für deine Bestellung!", "success")
+        return redirect(url_for('bestelldanke'))
 
     return render_template('checkout.html', user_email=session.get("user_email"))
 
