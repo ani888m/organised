@@ -26,16 +26,16 @@
         </ul>
       </li>
 
-      <li><a href="{{ url_for('kontakt') }}">Kontakt</a></li>
+      <!--<li><a href="{{ url_for('kontakt') }}">Kontakt</a></li>-->
       <li class="cart"><a href="{{ url_for('cart') }}">🛒 <span id="cart-count">0</span></a></li>
 
-      <!-- Login / Logout Bereich -->
+      <!-- Login / Logout Bereich 
       {% if session.get('user') %}
         <li class="user-greeting">👋 Hallo, {{ session.get('user') }}</li>
         <li><a href="{{ url_for('logout') }}">Logout</a></li>
       {% else %}
         <li><a href="{{ url_for('login') }}"><i class="fas fa-user"></i> Login</a></li>
-      {% endif %}
+      {% endif %}-->
       
 
     </ul>
