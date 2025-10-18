@@ -1,49 +1,55 @@
 from flask import Flask, render_template, request, redirect, flash, abort, session, url_for
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 import os
 import json
 from dotenv import load_dotenv
 import logging
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
-from werkzeug.security import generate_password_hash, check_password_hash
-import sqlite3
 
 # ---------- SETUP ----------
-load_dotenv()
+load_dotenv()  # .env nur lokal laden
 
+# Logging konfigurieren
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-basedir = os.path.abspath(os.path.dirname(__file__))
-json_path = os.path.join(basedir, 'produkte.json')
-db_path = os.path.join(basedir, "users.db")
-
-with open(json_path, encoding='utf-8') as f:
-    produkte = json.load(f)
-
+# Flask App Setup
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "fallback-secret-key")
 
+# Datenbank Setup
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db = SQLAlchemy(app)
+
+# ---------- DATENBANKMODELLE ----------
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(200), nullable=False)
+
+with app.app_context():
+    db.create_all()
+
+# ---------- PRODUKT DATEN LADEN ----------
+basedir = os.path.abspath(os.path.dirname(__file__))
+json_path = os.path.join(basedir, 'produkte.json')
+
+if os.path.exists(json_path):
+    with open(json_path, encoding='utf-8') as f:
+        produkte = json.load(f)
+else:
+    produkte = []  # Falls Datei fehlt
+
+# ---------- SENDGRID KONFIGURATION ----------
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 EMAIL_SENDER = os.getenv("EMAIL_SENDER")
 
-# ---------- DB Setup ----------
-def init_db():
-    conn = sqlite3.connect(db_path)
-    c = conn.cursor()
-    c.execute('''CREATE TABLE IF NOT EXISTS users (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    username TEXT UNIQUE NOT NULL,
-                    password TEXT NOT NULL,
-                    email TEXT
-                )''')
-    conn.commit()
-    conn.close()
 
-init_db()
-
-# ---------- Hilfsfunktion ----------
 def send_email(subject, body, recipient=EMAIL_SENDER):
+    """E-Mail-Versand mit SendGrid"""
     if not SENDGRID_API_KEY or not EMAIL_SENDER:
         raise ValueError("SENDGRID_API_KEY oder EMAIL_SENDER ist nicht gesetzt!")
 
@@ -53,16 +59,69 @@ def send_email(subject, body, recipient=EMAIL_SENDER):
         subject=subject,
         plain_text_content=body
     )
-
     try:
         sg = SendGridAPIClient(SENDGRID_API_KEY)
         response = sg.send(message)
-        logger.info(f"E-Mail erfolgreich an {recipient} gesendet! Status: {response.status_code}")
+        logger.info(f"E-Mail erfolgreich gesendet! Status: {response.status_code}")
     except Exception as e:
         logger.error(f"Fehler beim Senden der E-Mail: {e}")
         raise RuntimeError(f"Fehler beim Senden der E-Mail: {e}")
 
-# ---------- ROUTES ----------
+
+# ---------- LOGIN / REGISTRIERUNG ----------
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        action = request.form.get("action")
+
+        # 🔹 Registrierung
+        if action == "register":
+            email = request.form.get("email")
+            password = request.form.get("password")
+
+            if not email or not password:
+                flash("Bitte alle Felder ausfüllen.", "error")
+                return redirect(url_for("login"))
+
+            existing = User.query.filter_by(email=email).first()
+            if existing:
+                flash("Diese E-Mail ist bereits registriert.", "error")
+                return redirect(url_for("login"))
+
+            hashed = generate_password_hash(password)
+            new_user = User(email=email, password=hashed)
+            db.session.add(new_user)
+            db.session.commit()
+
+            flash("Registrierung erfolgreich! Bitte melde dich an.", "success")
+            return redirect(url_for("login"))
+
+        # 🔹 Login
+        elif action == "login":
+            email = request.form.get("email")
+            password = request.form.get("password")
+
+            user = User.query.filter_by(email=email).first()
+            if not user or not check_password_hash(user.password, password):
+                flash("Falsche E-Mail oder Passwort.", "error")
+                return redirect(url_for("login"))
+
+            session["user_id"] = user.id
+            session["user_email"] = user.email
+            flash("Erfolgreich eingeloggt!", "success")
+            return redirect(url_for("index"))
+
+    return render_template("login.html")
+
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    flash("Du wurdest ausgeloggt.", "success")
+    return redirect(url_for("login"))
+
+
+# ---------- PRODUKT-SEITEN ----------
 @app.route('/')
 def index():
     kategorienamen = [
@@ -71,36 +130,49 @@ def index():
         "Kinder und ihre Gefühle"
     ]
     kategorien = [(k, [p for p in produkte if p.get("kategorie") == k]) for k in kategorienamen]
-    user = session.get("user")
-    return render_template("index.html", kategorien=kategorien, user=user)
+    return render_template("index.html", kategorien=kategorien, user_email=session.get("user_email"))
+
 
 @app.route('/produkt/<int:produkt_id>')
 def produkt_detail(produkt_id):
     produkt = next((p for p in produkte if p['id'] == produkt_id), None)
     if produkt is None:
         abort(404)
-    return render_template('produkt.html', produkt=produkt)
+    return render_template('produkt.html', produkt=produkt, user_email=session.get("user_email"))
+
+
+# ---------- SEITEN ----------
+@app.route('/navbar')
+def navbar():
+    return render_template('navbar.html', user_email=session.get("user_email"))
+
 
 @app.route('/team')
 def team():
-    return render_template('Team.html')
+    return render_template('Team.html', user_email=session.get("user_email"))
+
 
 @app.route('/vision')
 def vision():
-    return render_template('vision.html')
+    return render_template('vision.html', user_email=session.get("user_email"))
+
 
 @app.route('/presse')
 def presse():
-    return render_template('presse.html')
+    return render_template('presse.html', user_email=session.get("user_email"))
+
 
 @app.route('/kontakt')
 def kontakt():
-    return render_template('kontakt.html')
+    return render_template('kontakt.html', user_email=session.get("user_email"))
+
 
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
-    return render_template('checkout.html')
+    return render_template('checkout.html', user_email=session.get("user_email"))
 
+
+# ---------- FORMULARE ----------
 @app.route('/submit', methods=['POST'])
 def submit():
     name = request.form.get('name')
@@ -122,6 +194,7 @@ def submit():
         flash(f"Fehler beim Senden der Nachricht: {e}", "error")
         return redirect('/kontakt')
 
+
 @app.route('/newsletter', methods=['POST'])
 def newsletter():
     email = request.form.get('email')
@@ -140,91 +213,34 @@ def newsletter():
         flash(f"Fehler beim Newsletter-Versand: {e}", "error")
         return redirect('/')
 
+
+# ---------- DANKESSEITEN ----------
 @app.route('/danke')
 def danke():
-    return render_template('danke.html')
+    return render_template('danke.html', user_email=session.get("user_email"))
+
 
 @app.route('/kontaktdanke')
 def kontaktdanke():
-    return render_template('kontaktdanke.html')
+    return render_template('kontaktdanke.html', user_email=session.get("user_email"))
 
+
+# ---------- WARENKORB ----------
 @app.route('/cart')
 def cart():
+    # Platzhalter für Warenkorb
     cart_items = [
         {'title': 'Reife Blessuren | Danilo Lučić', 'price': 23.90, 'quantity': 1}
     ]
     total = sum(item['price'] * item['quantity'] for item in cart_items)
-    return render_template('cart.html', cart_items=cart_items, total=total)
+    return render_template('cart.html', cart_items=cart_items, total=total, user_email=session.get("user_email"))
 
-@app.route('/success')
-def success():
-    return "Danke für deinen Einkauf!"
 
-@app.route('/cancel')
-def cancel():
-    return "Bezahlung abgebrochen."
-
+# ---------- RECHTLICHES ----------
 @app.route('/rechtliches')
 def rechtliches():
-    return render_template('rechtliches.html')
+    return render_template('rechtliches.html', user_email=session.get("user_email"))
 
-# ---------- LOGIN ----------
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        username = request.form.get("username")
-        password = request.form.get("password")
-
-        conn = sqlite3.connect(db_path)
-        c = conn.cursor()
-        c.execute("SELECT password FROM users WHERE username = ?", (username,))
-        user = c.fetchone()
-        conn.close()
-
-        if user and check_password_hash(user[0], password):
-            session["user"] = username
-            flash(f"Willkommen, {username}!", "success")
-            return redirect(url_for("index"))
-        else:
-            flash("Ungültiger Benutzername oder Passwort.", "error")
-            return redirect(url_for("login"))
-
-    return render_template("login.html")
-
-# ---------- REGISTRIERUNG ----------
-@app.route("/register", methods=["GET", "POST"])
-def register():
-    if request.method == "POST":
-        username = request.form.get("username")
-        email = request.form.get("email")
-        password = request.form.get("password")
-
-        if not username or not password:
-            flash("Bitte alle Felder ausfüllen!", "error")
-            return redirect(url_for("register"))
-
-        hashed_pw = generate_password_hash(password)
-
-        conn = sqlite3.connect(db_path)
-        c = conn.cursor()
-        try:
-            c.execute("INSERT INTO users (username, email, password) VALUES (?, ?, ?)", (username, email, hashed_pw))
-            conn.commit()
-            flash("Registrierung erfolgreich! Du kannst dich jetzt einloggen.", "success")
-            return redirect(url_for("login"))
-        except sqlite3.IntegrityError:
-            flash("Benutzername existiert bereits.", "error")
-        finally:
-            conn.close()
-
-    return render_template("register.html")
-
-# ---------- LOGOUT ----------
-@app.route("/logout")
-def logout():
-    session.pop("user", None)
-    flash("Du wurdest erfolgreich ausgeloggt.", "info")
-    return redirect(url_for("index"))
 
 # ---------- START ----------
 if __name__ == '__main__':
