@@ -1,10 +1,11 @@
-from flask import Flask, render_template, request, redirect, flash, abort
+from flask import Flask, render_template, request, redirect, flash, abort, session, url_for
 import os
 import json
 from dotenv import load_dotenv
 import logging
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # ---------- SETUP ----------
 load_dotenv()  # .env nur lokal laden
@@ -27,6 +28,12 @@ app.secret_key = os.getenv("FLASK_SECRET_KEY", "fallback-secret-key")
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 EMAIL_SENDER = os.getenv("EMAIL_SENDER")
 
+# ---------- Benutzerverwaltung (einfaches Beispiel) ----------
+# Du kannst diese Struktur später durch eine SQLite-DB ersetzen.
+users = {
+    "admin": generate_password_hash("meinpasswort123"),
+    "test": generate_password_hash("1234")
+}
 
 # ---------- HILFSFUNKTION ----------
 def send_email(subject, body, recipient=EMAIL_SENDER):
@@ -48,7 +55,6 @@ def send_email(subject, body, recipient=EMAIL_SENDER):
         logger.error(f"Fehler beim Senden der E-Mail: {e}")
         raise RuntimeError(f"Fehler beim Senden der E-Mail: {e}")
 
-
 # ---------- ROUTES ----------
 @app.route('/')
 def index():
@@ -58,8 +64,8 @@ def index():
         "Kinder und ihre Gefühle"
     ]
     kategorien = [(k, [p for p in produkte if p.get("kategorie") == k]) for k in kategorienamen]
-    return render_template("index.html", kategorien=kategorien)
-
+    user = session.get("user")
+    return render_template("index.html", kategorien=kategorien, user=user)
 
 @app.route('/produkt/<int:produkt_id>')
 def produkt_detail(produkt_id):
@@ -68,36 +74,29 @@ def produkt_detail(produkt_id):
         abort(404)
     return render_template('produkt.html', produkt=produkt)
 
-
 @app.route('/navbar')
 def navbar():
     return render_template('navbar.html')
-
 
 @app.route('/team')
 def team():
     return render_template('Team.html')
 
-
 @app.route('/vision')
 def vision():
     return render_template('vision.html')
-
 
 @app.route('/presse')
 def presse():
     return render_template('presse.html')
 
-
 @app.route('/kontakt')
 def kontakt():
     return render_template('kontakt.html')
 
-
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
     return render_template('checkout.html')
-
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -120,7 +119,6 @@ def submit():
         flash(f"Fehler beim Senden der Nachricht: {e}", "error")
         return redirect('/kontakt')
 
-
 @app.route('/newsletter', methods=['POST'])
 def newsletter():
     email = request.form.get('email')
@@ -139,41 +137,56 @@ def newsletter():
         flash(f"Fehler beim Newsletter-Versand: {e}", "error")
         return redirect('/')
 
-
 @app.route('/danke')
 def danke():
     return render_template('danke.html')
-
 
 @app.route('/kontaktdanke')
 def kontaktdanke():
     return render_template('kontaktdanke.html')
 
-
 @app.route('/cart')
 def cart():
-    # Temporäre Cart-Items – später durch dynamische Daten ersetzen
     cart_items = [
         {'title': 'Reife Blessuren | Danilo Lučić', 'price': 23.90, 'quantity': 1}
     ]
     total = sum(item['price'] * item['quantity'] for item in cart_items)
     return render_template('cart.html', cart_items=cart_items, total=total)
 
-
 @app.route('/success')
 def success():
     return "Danke für deinen Einkauf!"
-
 
 @app.route('/cancel')
 def cancel():
     return "Bezahlung abgebrochen."
 
-
 @app.route('/rechtliches')
 def rechtliches():
     return render_template('rechtliches.html')
 
+# ---------- LOGIN / LOGOUT ----------
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        if username in users and check_password_hash(users[username], password):
+            session["user"] = username
+            flash(f"Willkommen, {username}!", "success")
+            return redirect(url_for("index"))
+        else:
+            flash("Ungültiger Benutzername oder Passwort.", "error")
+            return redirect(url_for("login"))
+
+    return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+    session.pop("user", None)
+    flash("Du wurdest erfolgreich ausgeloggt.", "info")
+    return redirect(url_for("index"))
 
 # ---------- START ----------
 if __name__ == '__main__':
