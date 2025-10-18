@@ -127,7 +127,7 @@ def index():
     kategorienamen = [
         "Unsere Bücher", "Neuerscheinungen", "Über Angst", "Helga Bansch",
         "Klassiker", "Monstergeschichten", "Über Farben", "Weihnachten",
-        "Kinder und ihre Gefühle"
+        "Kinder und ihre Gefühle", "Dazugehören"
     ]
     kategorien = [(k, [p for p in produkte if p.get("kategorie") == k]) for k in kategorienamen]
     return render_template("index.html", kategorien=kategorien, user_email=session.get("user_email"))
