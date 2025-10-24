@@ -74,7 +74,7 @@
       "images/Angsthase4.jpg",
       "images/Angsthase6.jpg"
     ],
-  "kategorie": "Über Angst"
+  "kategorie": "Mut oder Angst?!"
   },
     {
     "id": 6,
@@ -128,7 +128,7 @@
       "images/wennannaangsthat/wennannaangsthat1.jpg",
       "images/wennannaangsthat/wennannaangsthat2.jpg"
     ],
-  "kategorie": "Über Angst"
+  "kategorie": "Mut oder Angst?!"
   },
 
    {
@@ -519,7 +519,34 @@
   "isbn": "978-3-7795-0371-2",
   "zielalter": null,
   "verlag": "Peter Hammer Verlag"
+},
+
+
+{
+  "id": 26,
+  "name": "Mut ist was Gutes",
+  "autor": "Arne Rautenberg",
+  "illustrierer": "Wolf Erlbruch",
+  "beschreibung": "Wer sein Herz in die Hand nimmt und das Zaudern überwindet, auf den wartet echtes Hochgefühl! Wolf Erlbruch hat diesen speziellen Moment in hinreißenden Bildern eingefangen. Arne Rautenberg hat sich von ihnen inspirieren lassen zu vergnüglichen Gedichten. Gedichte zu Bildern von Wolf Erlbruch.",
+  "preis": 14.00,
+  "bilder": [
+    "images/mutwasgutes/mutwasgutes.jpg",
+    "images/mutwasgutes/mutwasgutes1.jpg",
+    "images/mutwasgutes/mutwasgutes2.jpg",
+    "images/mutwasgutes/mutwasgutes3.jpg",
+    "images/mutwasgutes/mutwasgutes4.jpg",
+    "images/mutwasgutes/mutwasgutes5.jpg"
+  ],
+  "kategorie": "Kinderlyrik / Gefühle",
+  "seitenzahl": 48,
+  "einband": "Halbleinen, gebunden",
+  "erscheinungsjahr": 2023,
+  "isbn": "978-3-7795-0712-3",
+  "zielalter": "ab 6 Jahren",
+  "verlag": "Peter Hammer Verlag",
+  "lieferstatus": "lieferbar"
 }
+
 
 
 
