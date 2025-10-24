@@ -545,6 +545,31 @@
   "zielalter": "ab 6 Jahren",
   "verlag": "Peter Hammer Verlag",
   "lieferstatus": "lieferbar"
+},
+
+
+{
+  "id": 27,
+  "name": "Vier Kerzen, drei Könige, zwei Augen, ein Stern",
+  "autor": "Arne Rautenberg",
+  "illustrierer": "Katrin Stangl",
+  "beschreibung": "24 Weihnachtsgedichte – Ein Sack voller Gedichte von Arne Rautenberg! Was drin ist, möchtet ihr wissen? Alles, was das Herz zum Fest begehrt: Kerzen, Lieder, Leckereien. Wichtel, Wünsche, Tannenbaum. Vom hohoho bis pipapo. Es fehlt also nichts, doch hat der Dichter alles einen Tick anders aufgehängt und arrangiert. So flicht er das Lametta ins Haar von Marietta. Er rettet die Weihnachtsgans, nennt sie erst Hans und tauft sie dann ganz schnell auf den Namen Isabell. Aus dem Weihnachtsmann macht er ein Weihnachtsmännchen, aus dessen großer Hand ein Händchen und aus dem Sack ein Säckchen mit winzigen Päckchen. Oft lustig und ungestüm, manchmal leise und besinnlich runden sich Rautenbergs Verse mit Katrin Stangls Illustrationen – in Weihnachtsrot und Blau und voller schöner Einfälle!",  
+  "preis": 14.00,
+  "bilder": [
+    "images/vierkerzen/vierkerzen.jpg"
+  ],
+  "kategorie": "Weihnachten",
+  "seitenzahl": 32,
+  "format": {
+    "breite_cm": 16.5,
+    "höhe_cm": 21.6
+  },
+  "einband": "Gebunden (Hardcover)",
+  "erscheinungsjahr": 2019,
+  "isbn": "978-3-7795-0620-1",
+  "zielalter": "ab 5 Jahren",
+  "verlag": "Peter Hammer Verlag",
+  "lieferstatus": "lieferbar"
 }
 
 
