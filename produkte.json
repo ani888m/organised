@@ -262,7 +262,7 @@
   "bilder": [
     "images/wuetend/wuetend.jpg"
   ],
-  "kategorie": "Kinder und ihre Gefühle",
+  "kategorie": "Kinder und Gefühle",
   "seitenzahl": 48,
   "format": {
     "breite_cm": 21.5,
@@ -273,7 +273,7 @@
   "isbn": "978-3-7913-7493-2",
   "zielalter": "ab 4 Jahren",
   "reihe": {
-    "titel": "Kinder und ihre Gefühle",
+    "titel": "Kinder und Gefühle",
     "band": 1
   }
 },
@@ -288,7 +288,7 @@
     "images/mutig/mutig.jpg"
   ],
   "leseprobe_pdf": "mutig.pdf",
-  "kategorie": "Kinder und ihre Gefühle",
+  "kategorie": "Kinder und Gefühle",
   "seitenzahl": 40,
   "format": {
     "breite_cm": 21.5,
@@ -298,7 +298,7 @@
   "erscheinungsjahr": 2024,
   "isbn": "978-3-7913-7575-5",
   "reihe": {
-    "titel": "Kinder und ihre Gefühle",
+    "titel": "Kinder und Gefühle",
     "band": 2
   },
   "zielalter": "ab 4 Jahren"
@@ -314,7 +314,7 @@
     "images/einsam/einsam.jpg"
   ],
   "leseprobe_pdf": "einsam.pdf",
-  "kategorie": "Kinder und ihre Gefühle",
+  "kategorie": "Kinder und Gefühle",
   "seitenzahl": 40,
   "format": {
     "breite_cm": 21.5,
@@ -324,7 +324,7 @@
   "erscheinungsjahr": 2025,
   "isbn": "978-3-7913-7618-9",
   "reihe": {
-    "titel": "Kinder und ihre Gefühle",
+    "titel": "Kinder und Gefühle",
     "band": 3
   },
   "zielalter": "ab 4 Jahren",
@@ -342,7 +342,7 @@
     "images/schaukel/schaukel.jpg"
   ],
   "leseprobe_pdf": "schaukel.pdf",
-  "kategorie": "Kinder und ihre Gefühle",
+  "kategorie": "Kinder und Gefühle",
   "seitenzahl": 160,
   "format": {
     "breite_cm": 21.0,
@@ -446,7 +446,7 @@
     "images/unsichtbar/unsichtbar2.jpg",
     "images/unsichtbar/unsichtbar3.jpg"
   ],
-  "kategorie": "Kinder und ihre Gefühle",
+  "kategorie": "Kinder und Gefühle",
   "seitenzahl": 40,
   "format": {
     "breite_cm": 18.4,
@@ -483,7 +483,29 @@
   "isbn": "978-3-570-18155-3",
   "zielalter": "ab 4 Jahren",
   "verlag": "cbj Kinderbücher"
+},
+
+{
+  "id": 25,
+  "name": "Zwei, die sich lieben",
+  "autor": "Jürg Schubiger",
+  "illustrierer": "Wolf Erlbruch",
+  "beschreibung": "Was Liebe ist, ist schwer zu sagen. Nur soviel scheint klar: irgendwas mit Küssen und so. Zwei, die sich lieben jedenfalls ist ein kleines Buch für alle, die sich ihre Gedanken machen über die Liebe. Darüber, wer wen küssen will und darf und sogar soll. Über das Davor und das Danach. Das Sehnen, das Finden, Genießen und Abschied nehmen.",
+  "preis": 14.00,
+  "bilder": [
+    "URL_zum_Coverbild",
+    "URL_zur_Innenabbildung1",
+    "URL_zur_Innenabbildung2"
+  ],
+  "kategorie": "Kinder und Gefühle",
+  "seitenzahl": 48,
+  "einband": "Halbleinen, gebunden",
+  "erscheinungsjahr": null,
+  "isbn": "978-3-7795-0371-2",
+  "zielalter": null,
+  "verlag": "Peter Hammer Verlag"
 }
+
 
 
 
