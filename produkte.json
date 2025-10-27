@@ -570,6 +570,27 @@
   "zielalter": "ab 5 Jahren",
   "verlag": "Peter Hammer Verlag",
   "lieferstatus": "lieferbar"
+},
+
+{
+  "id": 28,
+  "name": "Wolf Erlbruchs Adventskalender",
+  "autor": "Wolf Erlbruch",
+  "beschreibung": "Zwei zappelige Katzenkinder, denen das geduldige Singen vor der Bescherung sichtlich schwerfällt, während ihre Eltern davon nicht genug bekommen – dieses Bild gehört zu den schönsten Motiven aus Wolf Erlbruchs Kinderzimmerkalendern. Jetzt kommt es als Adventskalender zu neuen Ehren: Hinter 24 Klapptürchen verbergen sich ausgesuchte Motive aus dem Werk des Künstlers – täglich eine feine Überraschung auf dem Weg zum Weihnachtsfest.",
+  "preis": 12.00,
+  "bilder": [
+    "images/wolf-erlbruchs-adventskalender.jpg"
+  ],
+  "kategorie": "Weihnachten",
+  "format": {
+    "breite_cm": 29.7,
+    "höhe_cm": 42.0
+  },
+  "einband": "Papierkalender mit 24 Klapptürchen",
+  "erscheinungsjahr": null,
+  "isbn": "978-3-7795-0638-6",
+  "zielalter": "Nicht geeignet für Kinder unter 36 Monaten",
+  "verlag": "Peter Hammer Verlag"
 }
 
 
