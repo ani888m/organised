@@ -272,6 +272,13 @@ def rechtliches():
     return render_template('rechtliches.html', user_email=session.get("user_email"))
 
 
+@app.route("/cron")
+def cron():
+    print("Cronjob wurde ausgelöst")
+    return "OK"
+
+
+
 # ---------- START ----------
 if __name__ == '__main__':
     app.run(debug=True)
