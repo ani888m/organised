@@ -617,7 +617,36 @@
     "Bologna Ragazzi Award 2004 – Kategorie Fiction",
     "Nominiert Deutscher Jugendliteraturpreis 2005 – Kategorie Bilderbuch"
   ]
+},
+
+{
+  "id": 30,
+  "name": "Frau Leo legt los",
+  "autor": "Natalia Shaloshvili",
+  "übersetzer": "Thomas Weiler",
+  "beschreibung": "Frau Leo schlief immer in einem Baum. Und wenn sie nicht schlief, fuhr sie ihren Bus. Jeden Tag beförderte sie Tiere von A nach B – das war eine schöne Arbeit. Bis eines Tages ein kleines dunkles Auto an ihrem Bus vorbei raste und alle Passagiere so begeistert waren, dass sie auch ein kleines Auto haben wollten. Damit gerät Frau Leos Job und ihr Zuhause in Gefahr, doch sie findet eine neue, sensationelle Idee. Ein bezauberndes Vorlesebuch mit liebenswerter Protagonistin und humorvollen Details.",
+  "preis": 16.00,
+  "bilder": [
+    "images/leolegtlos/leolegtlos.jpg",
+    "images/leolegtlos/leolegtlos2.jpg",
+    "images/leolegtlos/leolegtlos3.jpg",
+    "images/leolegtlos/leolegtlos4.jpg",
+    "images/leolegtlos/leolegtlos5.jpg",
+    "images/leolegtlos/leolegtlos6.jpg"
+  ],
+  "kategorie": "Mut oder Angst?!",
+  "seitenzahl": 48,
+  "format": {
+    "breite_cm": 27.0,
+    "höhe_cm": 24.0
+  },
+  "einband": "Gebunden (Hardcover)",
+  "erscheinungsjahr": 2023,
+  "isbn": "978-3-95728-709-0",
+  "zielalter": "ab 4 Jahren",
+  "verlag": "Knesebeck Verlag"
 }
+
 
 
 
