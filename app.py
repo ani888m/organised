@@ -126,7 +126,7 @@ def logout():
 def index():
     kategorienamen = [
         "Unsere Bücher", "Neuerscheinungen", "Mut oder Angst?!", "Helga Bansch",
-        "Klassiker", "Monstergeschichten", "Über Farben", "Weihnachten",
+        "Klassiker", "Monstergeschichten", "Wichtige Fragen", "Weihnachten",
         "Kinder und Gefühle", "Dazugehören"
     ]
     kategorien = [(k, [p for p in produkte if p.get("kategorie") == k]) for k in kategorienamen]
