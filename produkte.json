@@ -591,7 +591,34 @@
   "isbn": "978-3-7795-0638-6",
   "zielalter": "Nicht geeignet für Kinder unter 36 Monaten",
   "verlag": "Peter Hammer Verlag"
+},
+
+{
+  "id": 29,
+  "name": "Die große Frage",
+  "autor": "Wolf Erlbruch",
+  "beschreibung": "Auf die große Frage „Warum bin ich auf der Welt?“ weiß Wolf Erlbruch selbst keine Antwort – also lässt er andere antworten. Vater, Mutter, Tiere und andere Figuren geben jeweils ihre persönliche Sichtweise, humorvoll, nachdenklich und überraschend. In wenigen Worten und einfachen Bildern widmet sich das Buch dem Sinn des Lebens aus ganz unterschiedlichen Perspektiven, regt zum Staunen und Gespräch an und lässt am Ende Raum für eigene Antworten.",
+  "preis": 25.00,
+  "bilder": [
+    "images/diegroßenfragen/diegroßenfragen.jpg",
+    "images/diegroßenfragen/diegroßenfragen1.jpg",
+    "images/diegroßenfragen/diegroßenfragen2.jpg",
+    "images/diegroßenfragen/diegroßenfragen3.jpg",
+    "images/diegroßenfragen/diegroßenfragen4.jpg"
+],
+  "kategorie": "Bilderbuch / Philosophie / Kinder & Leben",
+  "seitenzahl": 52,
+  "einband": "Gebunden (Hardcover)",
+  "erscheinungsjahr": 2004,
+  "isbn": "978-3-87294-948-6",
+  "zielalter": "ab 3 Jahren",
+  "verlag": "Peter Hammer Verlag",
+  "auszeichnungen": [
+    "Bologna Ragazzi Award 2004 – Kategorie Fiction",
+    "Nominiert Deutscher Jugendliteraturpreis 2005 – Kategorie Bilderbuch"
+  ]
 }
+
 
 
 
