@@ -645,7 +645,34 @@
   "isbn": "978-3-95728-709-0",
   "zielalter": "ab 4 Jahren",
   "verlag": "Knesebeck Verlag"
+},
+
+{
+  "id": 31,
+  "name": "Der Nussknacker",
+  "autor": "E. T. A. Hoffmann",
+  "übersetzer": null,
+  "beschreibung": "Die berühmte Weihnachtsgeschichte über Clara und ihren Nussknacker: Am Weihnachtsabend schenkt ihr der geheimnisvolle Drosselmeyer einen Holz-Nussknacker, der in der folgenden Nacht lebendig wird. Gemeinsam mit ihm und seinen Soldaten kämpft sie gegen den Mäusekönig und erlebt ein zauberhaftes Abenteuer voller Fantasie und Wunder – ein Klassiker der Weihnachts- und Kindermärchenliteratur.",
+  "preis": 20.00,
+  "bilder": [
+    "URL_zum_Coverbild",
+    "URL_innenabbildung_1",
+    "URL_innenabbildung_2"
+  ],
+  "kategorie": "Klassiker",
+  "seitenzahl": 40,
+  "format": {
+    "breite_cm": 22.8,
+    "höhe_cm": 27.8
+  },
+  "einband": "Gebunden (Hardcover)",
+  "erscheinungsjahr": 2016,
+  "isbn": "978-3-314-10354-4",
+  "zielalter": "ab 4 Jahren",
+  "verlag": "NordSüd Verlag AG",
+  "leseprobe_url": "https://www.book2look.com/book/agb6hWl8UV"
 }
+
 
 
 
