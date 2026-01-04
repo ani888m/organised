@@ -655,9 +655,13 @@
   "beschreibung": "Die berühmte Weihnachtsgeschichte über Clara und ihren Nussknacker: Am Weihnachtsabend schenkt ihr der geheimnisvolle Drosselmeyer einen Holz-Nussknacker, der in der folgenden Nacht lebendig wird. Gemeinsam mit ihm und seinen Soldaten kämpft sie gegen den Mäusekönig und erlebt ein zauberhaftes Abenteuer voller Fantasie und Wunder – ein Klassiker der Weihnachts- und Kindermärchenliteratur.",
   "preis": 20.00,
   "bilder": [
-    "URL_zum_Coverbild",
-    "URL_innenabbildung_1",
-    "URL_innenabbildung_2"
+    "images/nussknacker/nussknacker.jpg",
+    "images/nussknacker/nussknacker1.jpg",
+    "images/nussknacker/nussknacker2.jpg",
+    "images/nussknacker/nussknacker3.jpg",
+    "images/nussknacker/nussknacker4.jpg",
+    "images/nussknacker/nussknacker5.jpg",
+    "images/nussknacker/nussknacker6.jpg"
   ],
   "kategorie": "Klassiker",
   "seitenzahl": 40,
