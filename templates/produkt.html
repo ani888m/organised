@@ -50,9 +50,17 @@
         <p class="author"> {{ produkt.autor }}</p>
         <p class="price">{{ "%.2f"|format(produkt.preis) }} €</p>
          
+      
+
         {% if produkt.leseprobe_pdf %}
           <a href="{{ url_for('static', filename='leseproben/' ~ produkt.leseprobe_pdf) }}" target="_blank">
-            <button type="button" class="button">📖 Leseprobe</button>
+             <button type="button" class="button"> 📄 Leseprobe (PDF)</button>
+         </a>
+        {% endif %}
+
+        {% if produkt.leseprobe_url %}
+           <a href="{{ produkt.leseprobe_url }}" target="_blank"  rel="noopener noreferrer">
+           <button type="button" class="button">  📖 Leseprobe online ansehen </button>
          </a>
         {% endif %}
 
