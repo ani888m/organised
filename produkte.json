@@ -704,11 +704,70 @@
   "verlag": "NordSüd Verlag",
   "leseprobe_url": "https://www.book2look.com/book/agb6hWl8UV"
 
+},
+
+  
+  {
+  "id": 31,
+  "name": "Der Vogel in mir fliegt, wohin er will",
+  "autor": "Sara Lundberg",
+  "übersetzer": "Friederike Buchinger",
+  "beschreibung": "Berta wächst zu Beginn des 20. Jahrhunderts im ländlichen Norden Schwedens auf. Alles in ihr sträubt sich gegen ein vorherbestimmtes Leben auf dem Bauernhof. Frei will sie sein wie ein Vogel und studieren, was sie liebt: die Malerei. Doch ihr Vater ist dagegen und ihre Mutter, die sie versteht und unterstützt, stirbt. Berta fühlt tief in sich eine starke Kraft, die sie handeln lässt. ‚Der Vogel in mir fliegt, wohin er will‘ ist ein Buch über Trauer, Sehnsucht, Kompromisslosigkeit und die Kraft der Fantasie, die alles verändern kann – basierend auf dem Leben der schwedischen Malerin Berta Hansson.:contentReference[oaicite:0]{index=0}",
+  "preis": 18.00,
+  "bilder": [
+    "images/dervogelinmir/dervogelinmir.jpg",
+    "images/dervogelinmir/dervogelinmir1.jpg",
+    "images/dervogelinmir/dervogelinmir2.jpg",
+    "images/dervogelinmir/dervogelinmir3.jpg",
+    "images/dervogelinmir/dervogelinmir4.jpg",
+    "images/dervogelinmir/dervogelinmir5.jpg",
+    "images/dervogelinmir/dervogelinmir6.jpg",
+    "images/dervogelinmir/dervogelinmir7.jpg"
+  ],
+  "kategorie": "Wichtige Fragen",
+  "seitenzahl": 128,
+  "format": {
+    "breite_cm": 17.6,
+    "höhe_cm": 21.7,
+    "tiefe_cm": 2.0
+  },
+  "einband": "Gebunden (Hardcover)",
+  "erscheinungsjahr": 2024,
+  "isbn": "978-3-89565-464-0",
+  "originaltitel": "Fågeln i mig flyger vart den vill",
+  "zielalter": "ab 10 Jahren",
+  "verlag": "Moritz Verlag",
+  "leseprobe_url": "https://www.book2look.com//book/WjLI79HvFc&euid=0&ruid=0&refererpath=www.moritzverlag.de&isbnformat=hardcover&bookisbn=9783895654640&dct=0&biblettype=double&clickedby=lk&bibloc=0"
+},
+
+  {
+  "id": 32,
+  "name": "Und jetzt sei fröhlich, Knochenmann!",
+  "autor": "Ca Rose",
+  "beschreibung": "Die Urgroßmutter des Mädchens ist alt und möchte tanzen – aber der Tod lässt auf sich warten. Also macht sich das Mädchen auf die Suche nach ihm. Auf ihrer Reise trifft sie ungewöhnliche Gefährten und lernt, dass der Tod ganz anders sein kann als erwartet. Eine philosophische Geschichte über Tod und Abschied mit farbenprächtigen, detailreichen Bildern, die an den mexikanischen Día de Muertos erinnern.",  
+  "preis": 24.00,
+  "bilder": [
+   "images/knochenmann/knochenmann.jpg",
+   "images/knochenmann/knochenmann2.jpg",
+   "images/knochenmann/knochenmann3.jpg",
+   "images/knochenmann/knochenmann4.jpg",
+   "images/knochenmann/knochenmann5.jpg",
+   "images/knochenmann/knochenmann6.jpg"
+  ],
+  "kategorie": "Wichtige Fragen",
+  "seitenzahl": 48,
+  "format": {
+    "breite_cm": 18.3,
+    "höhe_cm": 29.2,
+    "tiefe_cm": 1.1
+  },
+  "einband": "Gebunden (Hardcover)",
+  "erscheinungsjahr": 2024,
+  "isbn": "978-3-948743-30-7",
+  "zielalter": "ab 3 Jahren",
+  "verlag": "Kunstanstifter GmbH & Co. KG",
+  "leseprobe_url": "https://www.book2look.com/book/9783948743307(buchpalastmuenchen.de)"
 }
-
-
-
-
 
 
 
