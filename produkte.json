@@ -767,7 +767,38 @@
   "zielalter": "ab 3 Jahren",
   "verlag": "Kunstanstifter GmbH & Co. KG",
   "leseprobe_url": "https://www.book2look.com/book/9783948743307(buchpalastmuenchen.de)"
+},
+
+{
+  "id": 35,
+  "name": "Kindergedichte und Galgenlieder",
+  "autor": "Christian Morgenstern",
+  "illustrierer": "Lisbeth Zwerger",
+  "beschreibung": "Eine liebevoll illustrierte Sammlung von klassischen Kindergedichten und Galgenliedern von Christian Morgenstern, die sowohl Kinder als auch Erwachsene begeistert. In den Gedichten entfaltet Morgenstern seinen scharfsinnigen und zugleich zarten Sprachwitz – perfekt zum Vorlesen und Wiederentdecken der Gedichteklassiker.",
+  "preis": 20.00,
+  "bilder": [
+    "images/galgenlieder/galgenlieder.jpg",
+    "images/galgenlieder/galgenlieder1.jpg",
+    "images/galgenlieder/galgenlieder2.jpg",
+    "images/galgenlieder/galgenlieder3.jpg",
+    "images/galgenlieder/galgenlieder4.jpg",
+    "images/galgenlieder/galgenlieder5.jpg"
+  ],
+  "kategorie": "Klassiker",
+  "seitenzahl": 48,
+  "format": {
+    "breite_cm": 22.8,
+    "höhe_cm": 27.7
+  },
+  "einband": "Gebunden (Hardcover)",
+  "erscheinungsjahr": 2014,
+  "isbn": "978-3-314-10256-1",
+  "zielalter": "ab 4 Jahren",
+  "verlag": "NordSüd Verlag",
+  "leseprobe_url": "https://www.book2look.com/book/osuBL4pubX"
+  
 }
+
 
 
 
