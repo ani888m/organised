@@ -285,7 +285,7 @@ display: block;
 
 .carousel-slide img {
 width: 80%;
-height: 800px; /* feste Höhe, kannst du anpassen */
+height: 600px; /* feste Höhe, kannst du anpassen */
 object-fit: cover;
 display: block;
 }
