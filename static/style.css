@@ -341,7 +341,7 @@ button.next { right: 10px; }
 @media (max-width: 480px) {
   .carousel-slide img {
     height: auto;
-    max-height: 300px;
+    max-height: 500px;
   }
 
   .carousel-slide h2 {
