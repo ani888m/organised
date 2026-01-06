@@ -340,7 +340,6 @@ button.next { right: 10px; }
 /* Smartphones (max-width: 480px) */
 @media (max-width: 480px) {
   .carousel-slide img {
-    height: auto;
     max-height: 500px;
   }
 
@@ -367,7 +366,6 @@ button.next { right: 10px; }
 
 @media (max-width: 768px) and (min-width: 481px) {
   .carousel-slide img {
-    height: auto;
     max-height: 500px;
   }
 
