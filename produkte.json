@@ -859,9 +859,7 @@
   "preis": 15.00,
   "bilder": [
     "images/heutebinich/heutebinich.jpg",
-    "images/heutebinich/heutebinich1.jpg",
-    "images/heutebinich/heutebinich2.jpg",
-    "images/heutebinich/heutebinich3.jpg"
+    "images/heutebinich/heutebinich1.jpg"
   ],
   "kategorie": "Kinder und Gefühle",
   "seitenzahl": 48,
@@ -873,7 +871,8 @@
   "erscheinungsjahr": 2025,
   "isbn": "978-3-905945-30-0",
   "zielalter": "ab 3 Jahren",
-  "verlag": "Aracari Verlag"
+  "verlag": "Aracari Verlag",
+  "leseprobe_url": "https://www.blickinsbuch.net/go.php?id=3709063013&ean=9783905945300"
 }
 
 
