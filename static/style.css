@@ -72,7 +72,7 @@ header {
 position: sticky;
 top: 0;
 z-index: 10000;  /* Damit sie über anderen Inhalten liegt */
-background-color: white; /* Hintergrundfarbe nicht vergessen */
+background-color: #ffffff; /* Hintergrundfarbe nicht vergessen */
 display: flex;
 align-items: center;
 justify-content: space-between;
