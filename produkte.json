@@ -850,6 +850,30 @@
   "isbn": "978-3-480-24093-7",
   "zielalter": "ab 3 Jahren",
   "verlag": "Esslinger in der Thienemann-Esslinger Verlag GmbH"
+},
+{
+  "id": 38,
+  "name": "Heute bin ich",
+  "autor": "Mies van Hout",
+  "beschreibung": "Heute bin ich zufrieden. Und du? Bist du neugierig? Gelangweilt? Zornig? In diesem liebevoll illustrierten Bilderbuch drückt jeder Fisch ein anderes Gefühl aus – mal ist es eine schöne, mal eine verwirrende Stimmung, manchmal eine heftige Empfindung, manchmal eine ganz zarte. Das Buch nimmt mit auf eine Reise durch die Welt der Gefühle, regt an, über Empfindungen zu reden, sie zu benennen und besser zu verstehen. Auf jeder Doppelseite wird ein Gefühl visuell dargestellt. Für Kinder ab etwa 3 Jahren geeignet.",
+  "preis": 15.00,
+  "bilder": [
+    "images/heutebinich/heutebinich.jpg",
+    "images/heutebinich/heutebinich1.jpg",
+    "images/heutebinich/heutebinich2.jpg",
+    "images/heutebinich/heutebinich3.jpg"
+  ],
+  "kategorie": "Kinder und Gefühle",
+  "seitenzahl": 48,
+  "format": {
+    "breite_cm": 26.4,
+    "höhe_cm": 21.6
+  },
+  "einband": "Gebunden (Hardcover)",
+  "erscheinungsjahr": 2025,
+  "isbn": "978-3-905945-30-0",
+  "zielalter": "ab 3 Jahren",
+  "verlag": "Aracari Verlag"
 }
 
 
