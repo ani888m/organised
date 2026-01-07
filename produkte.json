@@ -873,7 +873,37 @@
   "zielalter": "ab 3 Jahren",
   "verlag": "Aracari Verlag",
   "leseprobe_url": "https://www.blickinsbuch.net/go.php?id=3709063013&ean=9783905945300"
+},
+
+{
+  "id": 37,
+  "name": "Überraschung!",
+  "autor": "Mies van Hout",
+  "beschreibung": "Nach den Bestsellern „Heute bin ich“ und „Freunde“ hat Mies van Hout ein neues Bilderbuch gezeichnet: „Überraschung!“. In gewohnter Weise werden Gefühle und Stimmungen sehr treffend dargestellt – getreu dem Motto ‚ein Wort, ein Bild‘. Die leuchtenden, schillernden Farben aus Pastell und Wachs schaffen eine künstlerisch gestaltete Welt, die sowohl Kinder als auch Erwachsene anspricht und vielseitig in Kindergarten, Schule oder Familie eingesetzt werden kann.:contentReference[oaicite:1]{index=1}",
+  "preis": 15.00,
+  "bilder": [
+    "images/überraschung/überraschung.jpg",
+    "images/überraschung/überraschung1.jpg",
+    "images/überraschung/überraschung2.jpg",
+    "images/überraschung/überraschung3.jpg",
+    "images/überraschung/überraschung4.jpg"
+  ],
+  "kategorie": "Kinder und Gefühle",
+  "seitenzahl": 32,
+  "format": {
+    "breite_cm": 26.0,
+    "höhe_cm": 20.9,
+    "tiefe_cm": 1.0
+  },
+  "einband": "Gebunden (Hardcover)",
+  "erscheinungsjahr": 2025,
+  "isbn": "978-3-905945-47-8",
+  "originaltitel": "Verrassing",
+  "originalsprache": "niederländisch",
+  "zielalter": "ab 3 Jahren",
+  "verlag": "Aracari Verlag"
 }
+
 
 
 
