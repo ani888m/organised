@@ -822,6 +822,34 @@
   "isbn": null,
   "zielalter": "ab 4 Jahren",
   "verlag": "Coppenrath Kinderklassiker"
+},
+
+
+  {
+  "id": 37,
+  "name": "Lupo, was bedrückt dich?",
+  "autor": "Catherine Rayner",
+  "illustrierer": "Catherine Rayner",
+  "übersetzer": "Sylvia Tress",
+  "beschreibung": "Große Gefühle, k(l)eine Worte: Ein warmherziges Bilderbuch über Sorgen, Ängste, Mut und Selbstvertrauen. Lupo, der kleine Wolf, hat viele Sorgen und fühlt sich nicht groß, wild oder mutig genug. Sein Freund Pablo zeigt ihm, wie man mit solchen belastenden Gedanken umgehen kann, indem man sie teilt und zusammen Achtsamkeitstricks übt – so werden die Sorgen kleiner. Eine einfühlsame Geschichte, die zeigt, wie wichtig es ist, über Gefühle zu sprechen.",  
+  "preis": 15.00,
+  "bilder": [
+    "images/lupo/lupo.jpg",
+    "images/lupo/lupo1.jpg",
+    "images/lupo/lupo2.jpg"
+  ],
+  "kategorie": "Dazugehören",
+  "seitenzahl": 32,
+  "format": {
+    "breite_cm": 25.6,
+    "höhe_cm": 28.6,
+    "tiefe_cm": 0.8
+  },
+  "einband": "Gebunden (Hardcover)",
+  "erscheinungsjahr": 2025,
+  "isbn": "978-3-480-24093-7",
+  "zielalter": "ab 3 Jahren",
+  "verlag": "Esslinger in der Thienemann-Esslinger Verlag GmbH"
 }
 
 
