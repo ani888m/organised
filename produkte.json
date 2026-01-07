@@ -879,14 +879,14 @@
   "id": 39,
   "name": "Überraschung!",
   "autor": "Mies van Hout",
-  "beschreibung": "Nach den Bestsellern „Heute bin ich“ und „Freunde“ hat Mies van Hout ein neues Bilderbuch gezeichnet: „Überraschung!“. In gewohnter Weise werden Gefühle und Stimmungen sehr treffend dargestellt – getreu dem Motto ‚ein Wort, ein Bild‘. Die leuchtenden, schillernden Farben aus Pastell und Wachs schaffen eine künstlerisch gestaltete Welt, die sowohl Kinder als auch Erwachsene anspricht und vielseitig in Kindergarten, Schule oder Familie eingesetzt werden kann.:contentReference[oaicite:1]{index=1}",
+  "beschreibung": "Nach den Bestsellern „Heute bin ich“ und „Freunde“ hat Mies van Hout ein neues Bilderbuch gezeichnet: „Überraschung!“. In gewohnter Weise werden Gefühle und Stimmungen sehr treffend dargestellt – getreu dem Motto ‚ein Wort, ein Bild‘. Die leuchtenden, schillernden Farben aus Pastell und Wachs schaffen eine künstlerisch gestaltete Welt, die sowohl Kinder als auch Erwachsene anspricht und vielseitig in Kindergarten, Schule oder Familie eingesetzt werden kann.",
   "preis": 15.00,
   "bilder": [
-    "images/überraschung/überraschung.jpg",
-    "images/überraschung/überraschung1.jpg",
-    "images/überraschung/überraschung2.jpg",
-    "images/überraschung/überraschung3.jpg",
-    "images/überraschung/überraschung4.jpg"
+    "images/ueberraschung/ueberraschung.jpg",
+    "images/ueberraschung/ueberraschung1.jpg",
+    "images/ueberraschung/ueberraschung2.jpg",
+    "images/ueberraschung/ueberraschung3.jpg",
+    "images/ueberraschung/ueberraschung4.jpg"
   ],
   "kategorie": "Kinder und Gefühle",
   "seitenzahl": 32,
