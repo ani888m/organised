@@ -797,7 +797,33 @@
   "verlag": "NordSüd Verlag",
   "leseprobe_url": "https://www.book2look.com/book/osuBL4pubX"
   
+},
+
+{
+  "id": 36,
+  "name": "Pinocchio",
+  "autor": "Carlo Collodi",
+  "übersetzer": null,
+  "beschreibung": "Pinocchio ist die klassische Geschichte der hölzernen Marionette, die voller guter Vorsätze ist, aber immer wieder in Schwierigkeiten gerät. Als seine Lügen wachsen, wächst auch seine Nase – und es beginnt eine abenteuerliche Reise voller Begegnungen mit Gaunern, Feen und allerlei Kuriositäten. Ein Meilenstein der Kinder- und Weltliteratur, wunderschön illustriert und für Kinder ab etwa 4–5 Jahren geeignet.",  
+  "preis": 16.00,
+  "bilder": [
+    "images/pinocchio/pinocchio.jpg",
+    "images/pinocchio/pinocchio1.jpg",
+    "images/pinocchio/pinocchio2.jpg",
+    "images/pinocchio/pinocchio3.jpg",
+    "images/pinocchio/pinocchio4.jpg",
+    "images/pinocchio/pinocchio5.jpg",
+    "images/pinocchio/pinocchio6.jpg"
+  ],
+  "kategorie": "Klassiker",
+  "seitenzahl": 48,
+  "einband": "Gebunden (Hardcover)",
+  "erscheinungsjahr": null,
+  "isbn": null,
+  "zielalter": "ab 4 Jahren",
+  "verlag": "Coppenrath Kinderklassiker"
 }
+
 
 
 
