@@ -125,7 +125,7 @@ def logout():
 @app.route('/')
 def index():
     kategorienamen = [
-        "Unsere Bücher", "Neuerscheinungen", "Mut oder Angst?!", "Helga Bansch",
+        "Unsere Bücher", "Neuerscheinungen", "Mut oder Angst?!",
         "Klassiker", "Monstergeschichten", "Wichtige Fragen", "Weihnachten",
         "Kinder und Gefühle", "Dazugehören"
     ]
