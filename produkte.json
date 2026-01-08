@@ -902,8 +902,40 @@
   "originalsprache": "niederländisch",
   "zielalter": "ab 3 Jahren",
   "verlag": "Aracari Verlag"
-}
+},
 
+{
+  "id": 38,
+  "name": "Bär",
+  "autor": "Natalia Shaloshvili",
+  "illustrierer": "Natalia Shaloshvili",
+  "übersetzer": "Ebi Naumann",
+  "beschreibung": "Bär ist glücklich: Er hat sein Buch, seinen Luftballon, seinen Keks und seine Lieblingsbank. Doch als Fuchs, Wolf, Hase und schließlich auch Elefant etwas von seinen Schätzen haben wollen, steht Bär vor einer großen Herausforderung: Soll er wirklich teilen? Diese humorvolle und einfühlsame Geschichte zeigt Kindern, wie schwierig es manchmal sein kann, die eigenen Bedürfnisse wahrzunehmen und auszudrücken.",
+  "preis": 15.00,
+  "bilder": [
+    "images/bear/bear.jpg",
+    "images/bear/bear1.jpg",
+    "images/bear/bear2.jpg",
+    "images/bear/bear3.jpg",
+    "images/bear/bear4.jpg",
+    "images/bear/bear5.jpg",
+    "images/bear/bear6.jpg"
+  ],
+  "kategorie": "Wichtige Fragen",
+  "seitenzahl": 40,
+  "format": {
+    "breite_cm": 25.5,
+    "höhe_cm": 28.5,
+    "tiefe_cm": 1.2
+  },
+  "einband": "Gebunden (Hardcover)",
+  "erscheinungsjahr": 2025,
+  "isbn": "978-3-522-46252-5",
+  "originaltitel": "Bear",
+  "originalsprache": "englisch",
+  "zielalter": "ab 4 Jahren",
+  "verlag": "Thienemann-Esslinger Verlag"
+}
 
 
 
