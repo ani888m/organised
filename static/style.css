@@ -114,6 +114,9 @@ object-fit: contain;
     padding-right: 0;  /* Abstand rechts entfernen */
     gap: 16px;
   }
+  .nav-links li a {
+     font-size: 20px;}
+     
 }
 
 
