@@ -104,6 +104,9 @@ height: 100px; /* Tablets */
 header {
 padding: 25px;
 }
+ header {
+    padding: 0 40px;  
+  }
    h2 {
    font-size: 2rem;
 }
