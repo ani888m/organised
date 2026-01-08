@@ -96,21 +96,27 @@ transition: height 0.3s ease;
 display: block;
 object-fit: contain;
 }
+/* =========================
+   iPad / Tablets
+   ========================= */
+@media (min-width: 769px) and (max-width: 1024px) {
 
-@media (max-width: 768px) {
-.logo {
-height: 100px; /* Tablets */
-}
-header {
-padding: 25px;
-}
- header {
-    padding: 0 40px;  
+  header {
+    padding: 0 40px;   /* weniger Abstand links & rechts */
   }
-   h2 {
-   font-size: 2rem;
+
+  .logo {
+    height: 100px;     /* etwas kompakter */
+  }
+
+  .nav-links {
+    margin-top: 30px;  /* statt 100px */
+    padding-right: 0;  /* Abstand rechts entfernen */
+    gap: 16px;
+  }
 }
-}
+
+
 @media (max-width: 480px) {
 .logo {
 height: 80px; /* Smartphones */
