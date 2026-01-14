@@ -316,7 +316,7 @@ position: absolute;
 bottom: 85px;
 left: 75%;
 transform: translateX(-50%);
-padding: 22px 75px;
+padding: 17px 55px;
 background-color: #ac345c;
 color: white;
 border: none;
@@ -389,7 +389,7 @@ button.next { right: 10px; }
 
   .slide-btn {
     font-size: 14px;
-    padding: 10px 24px;
+    padding: 8px 18px;
     bottom: 40px;
   }
 
