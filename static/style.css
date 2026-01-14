@@ -502,7 +502,7 @@ align-items: stretch;
 
 @media (max-width: 1024px) {
 .book-list {
-grid-template-columns: repeat(2, 1fr);
+grid-template-columns: repeat(3, 1fr);
 }
 }
 
