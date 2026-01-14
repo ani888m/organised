@@ -139,8 +139,8 @@
     "preis": 18.00,
     "leseprobe_pdf": "Monstergeburtstag.pdf",
     "bilder": [
-      "images/Monstergeburtstag.jpg",
-      "images/Monstergeburtstag1.jpg"
+      "images/monster/Monstergeburtstag.jpg",
+      "images/monster/Monstergeburtstag1.jpg"
     ],
      "kategorie": "Monstergeschichten"
   },
@@ -152,15 +152,15 @@
     "beschreibung": "Maurice Sendaks Kinderbuchklassiker: Die Geschichte vom wilden Max, der von seiner Mutter ohne Essen ins Bett geschickt wird und darauf das Reich der wilden Kerle erobert.\n\nMaurice Sendak, geboren 1928 in New York als Kind polnisch-jüdischer Einwanderer, revolutionierte mit Büchern wie ›Wo die wilden Kerle wohnen‹, ›Die Nachtküche‹ und ›Higgelti Piggelti Pop!‹ die Kinderliteratur. Sendak wurde u.a. mit der Caldecott-Medal, dem internationalen Hans-Christian-Andersen-Preis und dem Astrid-Lindgren-Gedächtnis-Preis ausgezeichnet. Spike Jonzes Verfilmung von ›Wo die wilden Kerle wohnen‹ (Drehbuch: Spike Jonze und Dave Eggers) war 2009 ein großer Kinoerfolg. Maurice Sendak starb 2012 in Danbury, Connecticut.",
     "preis": 20.00,
     "bilder": [
-      "images/wildeKerle.jpg",
-      "images/wildeKerle1.jpg",
-      "images/wildeKerle2.jpg",
-      "images/wildeKerle3.jpg",
-      "images/wildeKerle4.jpg",
-      "images/wildeKerle5.jpg",
-      "images/wildeKerle6.jpg",
-      "images/wildeKerle7.jpg",
-      "images/wildeKerle8.jpg"
+      "images/wildekerle/wildeKerle.jpg",
+      "images/wildekerle/wildeKerle1.jpg",
+      "images/wildekerle/wildeKerle2.jpg",
+      "images/wildekerle/wildeKerle3.jpg",
+      "images/wildekerle/wildeKerle4.jpg",
+      "images/wildekerle/wildeKerle5.jpg",
+      "images/wildekerle/wildeKerle6.jpg",
+      "images/wildekerle/wildeKerle7.jpg",
+      "images/wildekerle/wildeKerle8.jpg"
     ],
      "kategorie": "Klassiker"
   },
@@ -232,13 +232,13 @@
   "beschreibung": "Der große und der kleine Igel feiern Weihnachten. Der kleine Igel kann es kaum abwarten, seinen Wunschzettel zu schreiben und den schönsten Weihnachtsbaum zu finden und zu schmücken. Und – endlich – dürfen abends die Geschenke ausgepackt werden. Aber halt! Für einige seiner Freunde, nämlich die Grauhörnchen, die Waschbären und den Nutria aus Amerika, werden am Abend des 24. Dezember nur leere Socken an den Kamin gehängt. Diese befüllt Santa Claus in der Nacht mit Geschenken. Und das Auspacken beginnt erst am Weihnachtsmorgen. Das erweist sich aber gar nicht als Problem: Der kleine Igel kann mit seinen Freunden gleich zweimal Bescherung feiern. Ein Buch, das es leicht macht, über die großen Erwartungen zu sprechen, die ein Kind vor und an Weihnachten haben kann. Und ganz nebenbei zeigt das Buch, dass Weihnachten zwar fast überall, aber oft ein bisschen anders gefeiert wird.",
   "preis": 15.00,
   "bilder": [
-    "images/Cover_IGEL-6_Weihnachten-min.jpg",
-    "images/Cover_IGEL-6_Weihnachten1-min.jpg",
-    "images/Cover_IGEL-6_Weihnachten2-min.jpg",
-    "images/Cover_IGEL-6_Weihnachten3-min.jpg",
-    "images/Cover_IGEL-6_Weihnachten4-min.jpg",
-    "images/Cover_IGEL-6_Weihnachten5-min.jpg",
-    "images/Cover_IGEL-6_Weihnachten6-min.jpg"
+    "images/weihnachten/Cover_IGEL-6_Weihnachten-min.jpg",
+    "images/weihnachten/Cover_IGEL-6_Weihnachten1-min.jpg",
+    "images/weihnachten/Cover_IGEL-6_Weihnachten2-min.jpg",
+    "images/weihnachten/Cover_IGEL-6_Weihnachten3-min.jpg",
+    "images/weihnachten/Cover_IGEL-6_Weihnachten4-min.jpg",
+    "images/weihnachten/Cover_IGEL-6_Weihnachten5-min.jpg",
+    "images/weihnachten/Cover_IGEL-6_Weihnachten6-min.jpg"
   ],
   "kategorie": "Weihnachten",
   "seitenzahl": 32,
