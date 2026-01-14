@@ -70,9 +70,9 @@
     "preis": 17.00,
     "leseprobe_pdf": "Angsthase.pdf",
     "bilder": [
-      "images/Angsthasecover.jpg",
-      "images/Angsthase4.jpg",
-      "images/Angsthase6.jpg"
+      "images/angsthase/Angsthasecover.jpg",
+      "images/angsthase/Angsthase4.jpg",
+      "images/angsthase/Angsthase6.jpg"
     ],
   "kategorie": "Mut oder Angst?!"
   },
@@ -84,7 +84,7 @@
     "preis": 17.00,
     "leseprobe_pdf": "Die Bruecke.pdf",
     "bilder": [
-      "images/dieBruecke.jpg"
+      "images/bruecke/dieBruecke.jpg"
     ],
       "kategorie": "Wichtige Fragen"
   },
@@ -97,8 +97,8 @@
     "preis": 17.00,
     "leseprobe_pdf": "DerPupu.pdf",
     "bilder": [
-      "images/pupu.jpg",
-      "images/Pupu2.jpg"
+      "images/pupu/pupu.jpg",
+      "images/pupu/Pupu2.jpg"
     ],
      "kategorie": "Wichtige Fragen"
   },
@@ -110,8 +110,8 @@
     "preis": 16.00,
     "leseprobe_pdf": "dierabenrosa.pdf",
     "bilder": [
-      "images/dierabenrosa.jpg",
-      "images/dierabenrosa1.jpg"
+      "images/rabenrosa/dierabenrosa.jpg",
+      "images/rabenrosa/dierabenrosa1.jpg"
     ],
   "kategorie": "Dazugehören"
   },
