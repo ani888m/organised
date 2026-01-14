@@ -127,6 +127,10 @@ height: 80px; /* Smartphones */
 header {
 padding: 25px;
 }
+
+h2 {
+   font-size:2rem;
+}
 }
 
 
