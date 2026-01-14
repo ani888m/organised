@@ -7,9 +7,9 @@
     "preis": 24.00,
     "leseprobe_pdf": "das-stundenbuch-des-jacominus-gainsborough_9783458178385_leseprobe.pdf",
     "bilder": [
-      "images/jacominus.jpg",
-      "images/Jacominus1.jpg",
-      "images/Jacominus2.jpg"
+      "images/jacominus/jacominus.jpg",
+      "images/jacominus/Jacominus1.jpg",
+      "images/jacominus/Jacominus2.jpg"
     ],
     "kategorie": "Unsere Bücher"
   },
@@ -21,12 +21,12 @@
     "beschreibung": "Für eine Verabredung braucht es zwei Personen (mindestens). Sie vereinbaren einen Ort, einen Tag und eine Uhrzeit: zum Beispiel Punkt zwölf.\n\nWenn die beiden Personen, die sich verabredet haben, am vereinbarten Ort erscheinen, zum vereinbarten Tag und zur vereinbarten Stunde, dann wird die Verabredung vermutlich ein Erfolg. So einfach ist das.\n\nnUnd manchmal verändert sie ALLES.\n\nRébecca Dautremer nimmt uns in diesem staunenswerten Buch mit auf eine Entdeckungsreise: Wir begeben uns mit Sweety, dem Kaninchen,  auf den langen, langen Weg von ihrem Zuhause bis hin zum Hafen, wo Jacominus kurz davor ist, ein Schiff zu besteigen, und bang auf sie wartet. Wir laufen über Wiesen, durch einen Zirkus, an Marktständen vorbei und an unzähligen Weggefährten, bis zu den Hafendocks, wo wir schließlich in der Ferne die Silhouette von Jacominus erspähen … Kommen wir noch rechtzeitig an?",
     "preis": 24.00,
     "bilder": [
-      "images/punkt-12(1).jpg",
-      "images/punkt-12_cover.jpg",
-      "images/punkt-12(2).jpg",
-      "images/punkt-12(3).jpg",
-      "images/punkt-12(4).jpg",
-      "images/punkt-12(5).jpg"
+      "images/punkt/punkt-12(1).jpg",
+      "images/punkt/punkt-12_cover.jpg",
+      "images/punkt/punkt-12(2).jpg",
+      "images/punkt/punkt-12(3).jpg",
+      "images/punkt/punkt-12(4).jpg",
+      "images/punkt/punkt-12(5).jpg"
     ],
     "kategorie": "Unsere Bücher"
   },
@@ -38,10 +38,10 @@
     "beschreibung": "Eine winzig kleine Sekunde.\n\nDas ist nicht viel, denkt ihr?\n\nAber manche kleinen Sekunden zählen mehr als alles sonst.\n\nFür Jacominus ganz gewiss, aber auch für die anderen, und es sind viele.\n\nEine winzig kleine Sekunde also für 1 oder 10 oder gar 100 Figuren auf einem Fresko, das größer ist als ihr, nein, das ist keine Kleinigkeit.",
     "preis": 29.90,
     "bilder": [
-      "images/eine-winzig-kleine-sekunde_cover.jpg",
-      "images/eine-winzig-kleine-sekunde1.jpg",
-      "images/eine-winzig-kleine-sekunde2.jpg",
-      "images/eine-winzig-kleine-sekunde3.jpg",
+      "images/winzsekunde/eine-winzig-kleine-sekunde_cover.jpg",
+      "images/winzsekunde/eine-winzig-kleine-sekunde1.jpg",
+      "images/winzsekunde/eine-winzig-kleine-sekunde2.jpg",
+      "images/winzsekunde/eine-winzig-kleine-sekunde3.jpg",
       
       "images/eine-winzig-kleine-sekunde6.jpg"
     ],
@@ -55,9 +55,9 @@
     "beschreibung": "Als Jacominus aus einem Nickerchen erwacht, kann er sich nicht mehr erinnern, wovon er geträumt hat. Eine wunderbare Sache war es ganz bestimmt, eine ferne Erinnerung – doch welche genau, das will ihm einfach nicht mehr einfallen. Gemeinsam mit seinem Freund Polikarp sitzt er im Garten und die beiden überlegen angestrengt. Ist ihm vielleicht die Melodie des Lieds wieder eingefallen, das die beiden so gerne zusammen gesungen haben? Der Witz, den Jacominus immer erzählt hat, um alle aufzuheitern? Oder das Rezept für den leckeren Apfelkuchen seiner Großmutter? Doch all das war es nicht, da ist Jacominus ganz sicher.  Da fällt es ihm wieder ein: Sein Traum hat ihn weit in die Vergangenheit getragen, zu dem Tag, an dem er Polikarp kennenlernte, als die beiden noch ganz klein waren …\n\nEin traumhaft schön illustriertes Bilderbuch über den Zauber der großen und kleinen Momente einer Freundschaft – und eine Erinnerung daran, dass nicht die Erlebnisse zählen, sondern die Menschen, mit denen wir sie teilen.",
     "preis": 24.00,
     "bilder": [
-      "images/eine-wunderbare-sache_cover.jpg",
-      "images/eine-wunderbare-sache1.jpg",
-      "images/eine-wunderbare-sache2.jpg"
+      "images/wbaresache/weine-wunderbare-sache_cover.jpg",
+      "images/wbaresache/eine-wunderbare-sache1.jpg",
+      "images/wbaresache/eine-wunderbare-sache2.jpg"
     ],
     "kategorie": "Unsere Bücher"
   },
