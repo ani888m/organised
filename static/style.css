@@ -569,16 +569,7 @@ transition: opacity 0.3s ease;
 opacity: 1;
 }
 
-.bok button {
-padding: 7px 15px;
-background-color: #7393B3;
-border: none;
-border-radius: 6px;
-font-size: 1rem;
-cursor: pointer;
-transition: background-color 0.3s ease;
-bottom: 15px;
-}
+
 
 button {
 padding: 10px;
@@ -723,15 +714,17 @@ outline: none;
 }
 
 .newsletter-section input[type="email"] {
-  padding: 10px;
+  padding: 7px;
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 6px;
-  font-size: 1rem;
+  font-size: 0.7rem;
 }
 
 .newsletter-section button {
   background-color: #e66e3f;
+  border-radius: 6px;
+  padding: 7px;
 }
 
 .newsletter-section button:hover {
