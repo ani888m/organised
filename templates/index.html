@@ -38,14 +38,14 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
 
      <div class="carousel-slide">
       <img src="{{ url_for('static', filename='images/Angsthase.jpg') }}" class="carousel-image" alt="Slide 4">
-      <button class="slide-btn" onclick="window.location.href='images/seite4'"> Zu den Büchern </button>
+      <button class="slide-btn" onclick="window.location.href='{{ url_for("index") }}#Mut_oder_Angst'"> Zu den Büchern </button>
     </div>
 
     
     <!-- Folie 1 
     <div class="carousel-slide active">
       <img src="{{ url_for('static', filename='images/slider1.jpg') }}" class="carousel-image" alt="Slide 3">
-      <button class="slide-btn" onclick="window.location.href='#Unsere_Bücher'">Zu den Büchern</button>
+      <button class="slide-btn" onclick="window.location.href='{{ url_for("index") }}#Klassiker'">Zu den Büchern</button>
     </div> -->
     
   </div>
