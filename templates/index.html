@@ -31,7 +31,7 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
 
      <div class="carousel-slide">
       <img src="{{ url_for('static', filename='images/Slide5.jpg') }}" class="carousel-image" alt="Slide 5">
-      <button class="slide-btn" onclick="window.location.href='images/seite4'"> Zu den Büchern </button>
+      <button class="slide-btn" onclick="window.location.href='{{ url_for("index") }}#Jacominus_Gainsborough'"> Zu den Büchern </button>
     </div>
 
     <!-- Folie 2 -->
@@ -59,7 +59,12 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
 
 <main>
   {% for titel, liste in kategorien %}
-    <h2 id="{{ titel|replace(' ', '_') }}">{{ titel }}</h2>
+    <h2 id="{{ titel|replace(' ', '_')
+                    |replace('?', '')
+                    |replace('!', '')
+                    |replace('ä','ae')
+                    |replace('ö','oe')
+                    |replace('ü','ue')}}">{{ titel }}</h2>
     <div class="book-list">
       {% for produkt in liste %}
         <div class="book">
