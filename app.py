@@ -144,14 +144,7 @@ def produkt_detail(produkt_id):
 # ---------- SEITEN ----------
 @app.route('/navbar')
 def navbar():
-    return render_template('navbar.html', user_email=session.get("user_email"))
-
-
-
-
-@app.route('/vision')
-def vision():
-    return render_template('vision.html', user_email=session.get("user_email"))
+    return render_template('navbar.html', user_email=session.get("user_email")
 
 
 
@@ -161,9 +154,7 @@ def kontakt():
     return render_template('kontakt.html', user_email=session.get("user_email"))
 
 
-@app.route('/datenschutz')
-def datenschutz():
-    return render_template('datenschutz.html', user_email=session.get("user_email"))
+
 
 # ---------- CHECKOUT MIT NEWSLETTER ----------
 @app.route('/checkout', methods=['GET', 'POST'])
@@ -268,6 +259,10 @@ def cart():
 @app.route('/rechtliches')
 def rechtliches():
     return render_template('rechtliches.html', user_email=session.get("user_email"))
+
+@app.route('/datenschutz')
+def datenschutz():
+    return render_template('datenschutz.html', user_email=session.get("user_email"))
 
 
 @app.route("/cron")
