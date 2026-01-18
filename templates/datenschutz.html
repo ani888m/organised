@@ -1,4 +1,36 @@
-<h3>Datenschutzerklärung</h3> 
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Datenschutzerklärung</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+
+  
+</head>
+<body>
+  
+
+  
+<header>
+    <a href="{{ url_for('index') }}" class="back-link">← Zurück zur Übersicht</a>
+
+    <ul class="nav-links" id="nav-links">
+      <li class="cart">
+        <a href="{{ url_for('cart') }}">🛒 <span id="cart-count">0</span></a>
+      </li>
+    </ul>
+</header>
+
+
+
+  <div class="rechtliches">
+ 
+ 
+<h2>Datenschutzerklärung</h2> 
 
 <p>Wir verarbeiten personenbezogene Daten ausschließlich im Einklang mit den geltenden datenschutzrechtlichen Bestimmungen, insbesondere der Datenschutz-Grundverordnung (DSGVO).<br> 
 
@@ -26,4 +58,9 @@ Unsere Website verwendet ausschließlich technisch notwendige Cookies, die für 
 
 Personenbezogene Daten werden gelöscht oder anonymisiert, sobald der Zweck der Verarbeitung entfällt und keine gesetzlichen Aufbewahrungspflichten entgegenstehen. <br> </p> 
 
- 
+   
+ {% include 'footer.html' %}
+
+   
+</body>
+</html>
