@@ -147,9 +147,6 @@ def navbar():
     return render_template('navbar.html', user_email=session.get("user_email"))
 
 
-@app.route('/team')
-def team():
-    return render_template('Team.html', user_email=session.get("user_email"))
 
 
 @app.route('/vision')
@@ -157,9 +154,6 @@ def vision():
     return render_template('vision.html', user_email=session.get("user_email"))
 
 
-@app.route('/presse')
-def presse():
-    return render_template('presse.html', user_email=session.get("user_email"))
 
 
 @app.route('/kontakt')
