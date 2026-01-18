@@ -144,7 +144,7 @@ def produkt_detail(produkt_id):
 # ---------- SEITEN ----------
 @app.route('/navbar')
 def navbar():
-    return render_template('navbar.html', user_email=session.get("user_email")
+    return render_template('navbar.html', user_email=session.get("user_email"))
 
 
 
