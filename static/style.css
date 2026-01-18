@@ -253,7 +253,7 @@ display: none;
 ========================================= */
 footer {
 background-color: #ebebe3;
-padding: 30px;
+padding: 10px;
 text-align: center;
 color: #333;
 bottom: 0;
@@ -262,7 +262,7 @@ bottom: 0;
 .social-icons {
 color: #7393B3;
 font-size: 2em;
-margin: 10px;
+margin: 5px;
 }
 
 /* Main */
