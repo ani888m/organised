@@ -161,6 +161,10 @@ def kontakt():
     return render_template('kontakt.html', user_email=session.get("user_email"))
 
 
+@app.route('/datenschutz')
+def datenschutz():
+    return render_template('datenschutz.html', user_email=session.get("user_email"))
+
 # ---------- CHECKOUT MIT NEWSLETTER ----------
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
