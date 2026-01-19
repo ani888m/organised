@@ -922,6 +922,28 @@ form {
       }
     }
 
+.rechtliches { 
+  margin: 50px 180px 
+}
+
+.rechtliches h2 {
+  font-family: 'Cormorant', serif; 
+  color: black;
+  font-size: 2.4rem;
+  margin-bottom: 5px;
+}
+.rechtliches h3 {
+  font-family: 'Cormorant', serif; 
+  color: black;
+  font-size: 2rem;}
+  
+.rechtliches p {
+font-size: 1.3rem;
+font-family: 'Cormorant', serif;
+line-height: 1.6;
+color: #333;
+margin-top: 10px;
+}
 
 /* .login-container {
   width: 300px;
