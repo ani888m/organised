@@ -38,7 +38,9 @@
       <div class="book-cover">
        <div class="carousel">
           {% for bild in produkt.bilder %}
-          <img src="{{ url_for('static', filename=bild) }}" class="carousel-image {% if loop.first %}active{% endif %}" alt="{{ produkt.name }}">
+       <!--   <img src="{{ url_for('static', filename=bild) }}" class="carousel-image {% if loop.first %}active{% endif %}" alt="{{ produkt.name }}">
+          {% endfor %}-->
+         <img src="{{ bild }}" class="carousel-image {% if loop.first %}active{% endif %}" alt="{{ produkt.name }}">
           {% endfor %}
          <button class="product-prev">❮</button>
          <button class="product-next">❯</button>
@@ -74,7 +76,9 @@
     </div>
     
     <div class="book-description">
-       {{ produkt.beschreibung | replace('\n', '<br>') | safe }}
+      <!-- {{ produkt.beschreibung | replace('\n', '<br>') | safe }} -->
+       {{ produkt.beschreibung | safe }}
+
     </div>
   </main>
 {% include 'footer.html' %}
