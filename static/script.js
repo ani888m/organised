@@ -131,24 +131,5 @@ window.addEventListener("scroll", () => {
 // -----------------------------
 window.addEventListener('load', updateCartCount);
 
-//------------------------------ACHTUNG, DAS IST NOCH NICHT SICHER; 
 
-
-
-fetch("https://api.deineseite.de/api/products")
-  .then(res => res.json())
-  .then(data => {
-    const container = document.getElementById("products");
-
-    data.forEach(p => {
-      container.innerHTML += `
-        <div class="product">
-          <p>EAN: ${p.ean}</p>
-          <p>Preis: ${p.price.toFixed(2)} €</p>
-          <p>Lieferzeit: ${p.delivery_days} Tage</p>
-          <p>Status: ${p.stock > 0 ? "✔ verfügbar" : "❌ nicht verfügbar"}</p>
-        </div>
-      `;
-    });
-  });
 
