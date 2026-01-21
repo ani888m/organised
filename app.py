@@ -311,7 +311,7 @@ def produktseite(ean):
         ]
     }
 
-    return render_template("product.html", produkt=produkt)
+    return render_template("produkt.html", produkt=produkt)
 
 
 # ---------- START ----------
