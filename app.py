@@ -279,7 +279,6 @@ import os
 import requests
 from flask import Flask, render_template
 
-app = Flask(__name__)
 
 API_USER = os.getenv("MOLUNA_USER")
 API_PASS = os.getenv("MOLUNA_PASS")
