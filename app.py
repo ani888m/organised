@@ -134,7 +134,7 @@ def index():
     return render_template("index.html", kategorien=kategorien, user_email=session.get("user_email"))
 
 
-@app.route('/produkt/<int:produkt_id>')
+@app.route('/produkt/local/<int:produkt_id>')
 def produkt_detail(produkt_id):
     produkt = next((p for p in produkte if p['id'] == produkt_id), None)
     if produkt is None:
@@ -283,7 +283,7 @@ from flask import Flask, render_template
 API_USER = os.getenv("MOLUNA_USER")
 API_PASS = os.getenv("MOLUNA_PASS")
 
-@app.route("/produkt/<ean>")
+@app.route("/produkt/api/<ean>")
 def produktseite(ean):
     url = "https://api.buchbutler.de/CONTENT/"
     params = {
