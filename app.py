@@ -275,7 +275,9 @@ def cron():
     return "OK"
 
 # -----------------
-
+import os
+import requests
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -311,7 +313,9 @@ def produktseite(ean):
         ]
     }
 
-    return render_template("produkt.html", produkt=produkt)
+    return render_template("product.html", produkt=produkt)
+
+
 
 
 # ---------- START ----------
