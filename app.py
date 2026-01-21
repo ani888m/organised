@@ -273,6 +273,43 @@ def cron():
     print("Cronjob wurde ausgelöst")
     return "OK"
 
+# -----------------
+
+app = Flask(__name__)
+
+API_USER = os.getenv("MOLUNA_USER")
+API_PASS = os.getenv("MOLUNA_PASS")
+
+@app.route("/produkt/<ean>")
+def produktseite(ean):
+    url = "https://api.buchbutler.de/CONTENT/"
+    params = {
+        "username": API_USER,
+        "passwort": API_PASS,
+        "ean": ean
+    }
+
+    r = requests.get(url, params=params, timeout=10)
+
+    if r.status_code != 200:
+        return "Fehler beim Abruf der Produktdaten", 500
+
+    data = r.json().get("response")
+
+    if not data:
+        return "Kein Produkt gefunden", 404
+
+    produkt = {
+        "name": data.get("bezeichnung"),
+        "autor": data.get("Artikelattribute", {}).get("Autor", {}).get("Wert", ""),
+        "preis": float(data.get("vk_brutto", 0)),
+        "beschreibung": data.get("text_text", ""),
+        "bilder": [
+            f"https://api.buchbutler.de/image/{data.get('ean')}"
+        ]
+    }
+
+    return render_template("product.html", produkt=produkt)
 
 
 # ---------- START ----------
