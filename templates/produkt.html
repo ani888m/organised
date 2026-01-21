@@ -39,7 +39,7 @@
        <div class="carousel">
          
        <!--   <img src="{{ url_for('static', filename=bild) }}" class="carousel-image {% if loop.first %}active{% endif %}" alt="{{ produkt.name }}">
-          {% endfor %}-->
+          -->
      
          {% for bild in produkt.bilder %}
             <img src="{{ bild }}" class="carousel-image {% if loop.first %}active{% endif %}" alt="{{ produkt.name }}">
