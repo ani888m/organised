@@ -264,7 +264,10 @@ def rechtliches():
 def datenschutz():
     return render_template('datenschutz.html', user_email=session.get("user_email"))
 
-
+@app.route('/impressum')
+def impressum():
+    return render_template('impressum.html', user_email=session.get("user_email"))
+    
 @app.route("/cron")
 def cron():
     print("Cronjob wurde ausgelöst")
