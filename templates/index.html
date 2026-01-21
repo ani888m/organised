@@ -71,6 +71,7 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
           <div class="image-wrapper">
             <img src="{{ url_for('static', filename=produkt.bilder[0]) }}" alt="{{ produkt.name }}">
             <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}" class="hover-btn">Mehr erfahren</a>
+
           </div>
           <h3>{{ produkt.name }}</h3>
           <p>{{ produkt.preis }} €</p>
