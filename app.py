@@ -134,12 +134,22 @@ def index():
     return render_template("index.html", kategorien=kategorien, user_email=session.get("user_email"))
 
 
-@app.route('/produkt/local/<int:produkt_id>')
+@app.route('/produkt/<int:produkt_id>')
 def produkt_detail(produkt_id):
+    # Produkt aus der JSON-Liste suchen
     produkt = next((p for p in produkte if p['id'] == produkt_id), None)
+
+    # Wenn Produkt nicht gefunden → 404
     if produkt is None:
         abort(404)
-     return render_template('produkt.html', produkt=produkt, user_email=session.get("user_email"))
+
+    # Template rendern
+    return render_template(
+        'produkt.html',
+        produkt=produkt,
+        user_email=session.get("user_email")
+    )
+
 
 
 # ---------- SEITEN ----------
