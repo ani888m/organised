@@ -1,4 +1,4 @@
-from flask import Flask, render_template, requests, redirect, flash, abort, session, url_for
+from flask import Flask, render_template, request, redirect, flash, abort, session, url_for
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 import logging
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
+import requests
 
 # ---------- SETUP ----------
 load_dotenv()  # .env nur lokal laden
