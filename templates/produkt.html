@@ -33,6 +33,10 @@
 
 
 
+
+
+
+
   <main class="book-detail">
     <div class="book-container">
       <div class="book-cover">
@@ -40,9 +44,10 @@
          
      
      
-         {% for bild in produkt.bilder %}
-            <img src="{{ bild }}" class="carousel-image {% if loop.first %}active{% endif %}" alt="{{ produkt.name }}">
-         {% endfor %}
+        {% for bild in produkt.bilder %}
+         <img src="{{ url_for('static', filename=bild) }}" class="carousel-image {% if loop.first %}active{% endif %}" alt="{{ produkt.name }}">
+        {% endfor %}
+
 
 
          <button class="product-prev">❮</button>
