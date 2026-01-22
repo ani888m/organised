@@ -3,11 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 import json
-from dotenv import load_dotenv
 import logging
+import requests
+from dotenv import load_dotenv
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
-import requests
 
 # ---------- SETUP ----------
 load_dotenv()  # .env nur lokal laden
@@ -44,10 +44,51 @@ if os.path.exists(json_path):
 else:
     produkte = []  # Falls Datei fehlt
 
+# ---------- BUCHBUTLER API ZUGANG ----------
+BUCHBUTLER_USER = os.getenv("BUCHBUTLER_USER")
+BUCHBUTLER_PASSWORD = os.getenv("BUCHBUTLER_PASSWORD")
+
+def lade_produkt_von_api(ean):
+    """Lädt ein Buch von Buchbutler API anhand der EAN"""
+    if not BUCHBUTLER_USER or not BUCHBUTLER_PASSWORD:
+        logger.error("Buchbutler Zugangsdaten fehlen")
+        return None
+
+    url = "https://api.buchbutler.de/CONTENT/"
+    params = {
+        "username": BUCHBUTLER_USER,
+        "passwort": BUCHBUTLER_PASSWORD,
+        "ean": ean
+    }
+
+    try:
+        response = requests.get(url, params=params, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+
+        res = data.get("response")
+        if not res:
+            return None
+
+        produkt = {
+            "id": int(res.get("pim_artikel_id", 0)),
+            "name": res.get("bezeichnung"),
+            "autor": res.get("Artikelattribute", {}).get("Autor", {}).get("Wert", ""),
+            "preis": float(res.get("vk_brutto") or 0),
+            "beschreibung": res.get("text_text") or "",
+            # Buchbutler-Coverbild direkt per EAN
+            "bilder": [f"https://api.buchbutler.de/image/{ean}"],
+            "extra": res.get("Artikelattribute", {})
+        }
+        return produkt
+
+    except Exception as e:
+        logger.error(f"Fehler beim Laden von API: {e}")
+        return None
+
 # ---------- SENDGRID KONFIGURATION ----------
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 EMAIL_SENDER = os.getenv("EMAIL_SENDER")
-
 
 def send_email(subject, body, recipient=EMAIL_SENDER):
     """E-Mail-Versand mit SendGrid"""
@@ -68,14 +109,12 @@ def send_email(subject, body, recipient=EMAIL_SENDER):
         logger.error(f"Fehler beim Senden der E-Mail: {e}")
         raise RuntimeError(f"Fehler beim Senden der E-Mail: {e}")
 
-
 # ---------- LOGIN / REGISTRIERUNG ----------
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         action = request.form.get("action")
 
-        # 🔹 Registrierung
         if action == "register":
             email = request.form.get("email")
             password = request.form.get("password")
@@ -97,7 +136,6 @@ def login():
             flash("Registrierung erfolgreich! Bitte melde dich an.", "success")
             return redirect(url_for("login"))
 
-        # 🔹 Login
         elif action == "login":
             email = request.form.get("email")
             password = request.form.get("password")
@@ -114,13 +152,11 @@ def login():
 
     return render_template("login.html")
 
-
 @app.route("/logout")
 def logout():
     session.clear()
     flash("Du wurdest ausgeloggt.", "success")
     return redirect(url_for("login"))
-
 
 # ---------- PRODUKT-SEITEN ----------
 @app.route('/')
@@ -133,29 +169,40 @@ def index():
     kategorien = [(k, [p for p in produkte if p.get("kategorie") == k]) for k in kategorienamen]
     return render_template("index.html", kategorien=kategorien, user_email=session.get("user_email"))
 
-
 @app.route('/produkt/<int:produkt_id>')
 def produkt_detail(produkt_id):
     produkt = next((p for p in produkte if p['id'] == produkt_id), None)
-    if produkt is None:
-        abort(404)
-    return render_template('produkt.html', produkt=produkt, user_email=session.get("user_email"))
 
+    if produkt and produkt.get("ean"):
+        api_produkt = lade_produkt_von_api(produkt["ean"])
+        if api_produkt:
+            produkt.update(api_produkt)
+
+    if not produkt:
+        abort(404)
+
+    return render_template('produkt.html', produkt=produkt, user_email=session.get("user_email"))
 
 # ---------- SEITEN ----------
 @app.route('/navbar')
 def navbar():
     return render_template('navbar.html', user_email=session.get("user_email"))
 
+@app.route('/team')
+def team():
+    return render_template('Team.html', user_email=session.get("user_email"))
 
+@app.route('/vision')
+def vision():
+    return render_template('vision.html', user_email=session.get("user_email"))
 
+@app.route('/presse')
+def presse():
+    return render_template('presse.html', user_email=session.get("user_email"))
 
 @app.route('/kontakt')
 def kontakt():
     return render_template('kontakt.html', user_email=session.get("user_email"))
-
-
-
 
 # ---------- CHECKOUT MIT NEWSLETTER ----------
 @app.route('/checkout', methods=['GET', 'POST'])
@@ -170,23 +217,19 @@ def checkout():
             flash("Bitte fülle alle Pflichtfelder aus.", "error")
             return redirect(url_for('checkout'))
 
-        # Falls Newsletter ausgewählt wurde → sende E-Mail im Hintergrund
         if newsletter:
             try:
                 send_email(
                     subject='Neue Newsletter-Anmeldung (über Bestellung)',
                     body=f'{name} ({email}) hat sich beim Bestellvorgang für den Newsletter angemeldet.'
                 )
-                # kein Redirect — Nutzer bleibt auf der Bestell-Danke-Seite
             except Exception as e:
                 logger.warning(f"Newsletter konnte nicht gesendet werden: {e}")
 
-        # Bestellung bestätigen (Simulation)
         flash("Zahlung erfolgreich (Simulation). Vielen Dank für deine Bestellung!", "success")
         return redirect(url_for('bestelldanke'))
 
     return render_template('checkout.html', user_email=session.get("user_email"))
-
 
 # ---------- FORMULARE ----------
 @app.route('/submit', methods=['POST'])
@@ -210,7 +253,6 @@ def submit():
         flash(f"Fehler beim Senden der Nachricht: {e}", "error")
         return redirect('/kontakt')
 
-
 @app.route('/newsletter', methods=['POST'])
 def newsletter():
     email = request.form.get('email')
@@ -226,15 +268,13 @@ def newsletter():
         flash("Danke! Newsletter-Anmeldung erfolgreich.", "success")
         return redirect('/danke')
     except Exception as e:
-        flash(f"Fehler beim Newsletter-Versand: {e}", "error")
+        flash(f"Fehler beim Newsletter-Versand: {e}", 'error')
         return redirect('/')
-
 
 # ---------- DANKESSEITEN ----------
 @app.route('/danke')
 def danke():
     return render_template('danke.html', user_email=session.get("user_email"))
-
 
 @app.route('/kontaktdanke')
 def kontaktdanke():
@@ -243,8 +283,6 @@ def kontaktdanke():
 @app.route('/bestelldanke')
 def bestelldanke():
     return render_template('bestelldanke.html', user_email=session.get("user_email"))
-
-
 
 # ---------- WARENKORB ----------
 @app.route('/cart')
@@ -255,28 +293,16 @@ def cart():
     total = sum(item['price'] * item['quantity'] for item in cart_items)
     return render_template('cart.html', cart_items=cart_items, total=total, user_email=session.get("user_email"))
 
-
 # ---------- RECHTLICHES ----------
 @app.route('/rechtliches')
 def rechtliches():
     return render_template('rechtliches.html', user_email=session.get("user_email"))
 
-@app.route('/datenschutz')
-def datenschutz():
-    return render_template('datenschutz.html', user_email=session.get("user_email"))
-
-@app.route('/impressum')
-def impressum():
-    return render_template('impressum.html', user_email=session.get("user_email"))
-    
+# ---------- CRON / TEST ----------
 @app.route("/cron")
 def cron():
     print("Cronjob wurde ausgelöst")
     return "OK"
-
-
-
-
 
 # ---------- START ----------
 if __name__ == '__main__':
