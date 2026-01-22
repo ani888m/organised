@@ -40,13 +40,18 @@
   <main class="book-detail">
     <div class="book-container">
       <div class="book-cover">
-       <div class="carousel">
+
+    
+
+      <div class="carousel">
          
      
      
         {% for bild in produkt.bilder %}
-         <img src="{{ url_for('static', filename=bild) }}" class="carousel-image {% if loop.first %}active{% endif %}" alt="{{ produkt.name }}">
-        {% endfor %}
+          <img class="carousel-image {% if loop.index0 == 0 %}active{% endif %}"
+          {% if bild.startswith('http') %}src="{{ bild }}"{% else %}src="{{ url_for('static', filename=bild) }}"{% endif %}
+            alt="{{ produkt.name }}">
+          {% endfor %}
 
 
 
