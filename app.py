@@ -294,9 +294,18 @@ def cart():
     return render_template('cart.html', cart_items=cart_items, total=total, user_email=session.get("user_email"))
 
 # ---------- RECHTLICHES ----------
+
 @app.route('/rechtliches')
 def rechtliches():
     return render_template('rechtliches.html', user_email=session.get("user_email"))
+
+@app.route('/datenschutz')
+def datenschutz():
+    return render_template('datenschutz.html', user_email=session.get("user_email"))
+
+@app.route('/impressum')
+def impressum():
+    return render_template('impressum.html', user_email=session.get("user_email"))
 
 # ---------- CRON / TEST ----------
 @app.route("/cron")
