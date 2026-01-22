@@ -69,19 +69,39 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
       {% for produkt in liste %}
         <div class="book">
           <div class="image-wrapper">
-            <img src="{{ url_for('static', filename=produkt.bilder[0]) }}" alt="{{ produkt.name }}">
+            {# Bild: extern oder lokal #}
+            <img 
+              {% if produkt.bilder[0].startswith('http') %}
+                src="{{ produkt.bilder[0] }}"
+              {% else %}
+                src="{{ url_for('static', filename=produkt.bilder[0]) }}"
+              {% endif %}
+              alt="{{ produkt.name }}">
+            
             <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}" class="hover-btn">Mehr erfahren</a>
-
           </div>
+          
           <h3>{{ produkt.name }}</h3>
           <p>{{ produkt.preis }} €</p>
-          <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}')">
+
+          <button 
+            onclick="addToCart(
+              '{{ produkt.name }}', 
+              {{ produkt.preis }}, 
+              {% if produkt.bilder[0].startswith('http') %}
+                '{{ produkt.bilder[0] }}'
+              {% else %}
+                '{{ url_for('static', filename=produkt.bilder[0]) }}'
+              {% endif %}
+            )">
             In den Warenkorb
           </button>
         </div>
       {% endfor %}
     </div>
   {% endfor %}
+</main>
+
   
 
  <section class="newsletter-section">
