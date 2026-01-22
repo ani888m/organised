@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, redirect, flash, abort, session, url_for
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -8,6 +7,7 @@ from dotenv import load_dotenv
 import logging
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
+import requests
 
 # ---------- SETUP ----------
 load_dotenv()  # .env nur lokal laden
@@ -265,11 +265,55 @@ def rechtliches():
 def datenschutz():
     return render_template('datenschutz.html', user_email=session.get("user_email"))
 
-
+@app.route('/impressum')
+def impressum():
+    return render_template('impressum.html', user_email=session.get("user_email"))
+    
 @app.route("/cron")
 def cron():
     print("Cronjob wurde ausgelöst")
     return "OK"
+
+# -----------------
+import os
+import requests
+from flask import Flask, render_template
+
+
+API_USER = os.getenv("MOLUNA_USER")
+API_PASS = os.getenv("MOLUNA_PASS")
+
+@app.route("/produkt/<ean>")
+def produktseite(ean):
+    url = "https://api.buchbutler.de/CONTENT/"
+    params = {
+        "username": API_USER,
+        "passwort": API_PASS,
+        "ean": ean
+    }
+
+    r = requests.get(url, params=params, timeout=10)
+
+    if r.status_code != 200:
+        return "Fehler beim Abruf der Produktdaten", 500
+
+    data = r.json().get("response")
+
+    if not data:
+        return "Kein Produkt gefunden", 404
+
+    produkt = {
+        "name": data.get("bezeichnung"),
+        "autor": data.get("Artikelattribute", {}).get("Autor", {}).get("Wert", ""),
+        "preis": float(data.get("vk_brutto", 0)),
+        "beschreibung": data.get("text_text", ""),
+        "bilder": [
+            f"https://api.buchbutler.de/image/{data.get('ean')}"
+        ]
+    }
+
+    return render_template("produkt.html", produkt=produkt)
+
 
 
 
