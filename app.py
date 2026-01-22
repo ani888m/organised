@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request, redirect, flash, abort, session, url_for
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -7,7 +8,6 @@ from dotenv import load_dotenv
 import logging
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
-import requests
 
 # ---------- SETUP ----------
 load_dotenv()  # .env nur lokal laden
@@ -136,20 +136,10 @@ def index():
 
 @app.route('/produkt/<int:produkt_id>')
 def produkt_detail(produkt_id):
-    # Produkt aus der JSON-Liste suchen
     produkt = next((p for p in produkte if p['id'] == produkt_id), None)
-
-    # Wenn Produkt nicht gefunden → 404
     if produkt is None:
         abort(404)
-
-    # Template rendern
-    return render_template(
-        'produkt.html',
-        produkt=produkt,
-        user_email=session.get("user_email")
-    )
-
+    return render_template('produkt.html', produkt=produkt, user_email=session.get("user_email"))
 
 
 # ---------- SEITEN ----------
@@ -275,18 +265,11 @@ def rechtliches():
 def datenschutz():
     return render_template('datenschutz.html', user_email=session.get("user_email"))
 
-@app.route('/impressum')
-def impressum():
-    return render_template('impressum.html', user_email=session.get("user_email"))
-    
+
 @app.route("/cron")
 def cron():
     print("Cronjob wurde ausgelöst")
     return "OK"
-
-# -----------------
-
-
 
 
 
