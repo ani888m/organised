@@ -136,6 +136,9 @@ color: #333;
 margin-top: 10px;
 }
 
+.book-info .anzahl {
+  flex-direction: row;
+}
 label[for="quantity"] {
 font-weight: 600;
 argin-top: 20px;
@@ -154,7 +157,7 @@ outline: none;
 }
 
 .book-info button {
-margin-top: 20px;
+argin-top: 20px;
 background-color: #7393B3;
 border: none;
 color: white;
@@ -164,7 +167,7 @@ border-radius: 8px;
 cursor: pointer;
 transition: background-color 0.3s ease;
 max-width: 220px;
-align-self: flex-start;
+lign-self: flex-start;
 }
 
 .book-info button:hover {
