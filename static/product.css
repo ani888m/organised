@@ -259,8 +259,8 @@ font-size:20px;
   .book-info button {
     width: 100%;
     max-width: none;
-    padding: 14px 0;
-    font-size: 1.1rem;
+    padding: 7px 1px;
+    font-size: 1rem;
   }
 
   .back-link {
