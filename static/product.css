@@ -176,12 +176,20 @@ background-color: #527a9b;
 
 .back-link {
 display: inline-block;
-margin: 10px 110px;
+margin: 10px 0;
 text-decoration: none;
 color: #7393B3;
 font-family: 'Cormorant', serif;
 font-size:20px;
 }
+
+@media (max-width: 480px) {
+  .back-link {
+    margin: 10px 0;   /* statt 10px 110px */
+    font-size: 16px;
+  }
+}
+
 
 
 .book-description {
