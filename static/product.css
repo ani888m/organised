@@ -28,6 +28,11 @@ color: #333;
 bottom: 0;
 }
 
+footer a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .social-icons {
 color: #7393B3;
 font-size: 2em;
