@@ -20,6 +20,19 @@ header {
  z-index: 1000;              /* Header über den Bildern */
 
 }
+footer {
+background-color: #ebebe3;
+padding: 10px;
+text-align: center;
+color: #333;
+bottom: 0;
+}
+
+.social-icons {
+color: #7393B3;
+font-size: 2em;
+margin: 5px;
+}
 
 .nav-links {
   list-style: none;
