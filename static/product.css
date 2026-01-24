@@ -266,6 +266,9 @@ font-size:20px;
   .back-link {
     margin: 15px 10px 0;
   }
+  header a {
+     padding: 0;
+  }
 }
 
 
