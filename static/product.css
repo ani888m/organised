@@ -218,9 +218,7 @@ font-size:20px;
   font-family: 'Cormorant', serif;
 }
 
-  .nav-links { list-style: none; display: flex; align-items: center; gap: 20px; padding: 0; margin: 0; }
-  .nav-links li { list-style: none; }
-  .nav-links a { text-decoration: none; color: inherit; display: flex; align-items: center; gap: 5px; }
+
 
 /* ------------- MOBILE VERSION ------------- */
 @media (max-width: 480px) {
@@ -258,8 +256,8 @@ font-size:20px;
   .book-info button {
     width: 100%;
     max-width: none;
-    padding: 7px 1px;
-    font-size: 1rem;
+    padding: 7px 3px;
+    font-size: 1.1rem;
   }
 
   .back-link {
