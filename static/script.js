@@ -132,4 +132,8 @@ window.addEventListener("scroll", () => {
 window.addEventListener('load', updateCartCount);
 
 
+function toggleInfoDetails() {
+  const box = document.querySelector('.info-details');
+  box.classList.toggle('info-open');
+}
 
