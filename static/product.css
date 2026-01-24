@@ -109,6 +109,7 @@ font-family: 'Cormorant', serif;
 color: #0c4d77;
 font-size: 2.4rem;
 margin-bottom: 5px;
+text-align:left;
 }
 
 .book-info .author {
@@ -159,7 +160,7 @@ background-color: #7393B3;
 border: none;
 color: white;
 font-size: 1.2rem;
-padding: 12px 20px;
+padding: 7px 15px;
 border-radius: 8px;
 cursor: pointer;
 transition: background-color 0.3s ease;
