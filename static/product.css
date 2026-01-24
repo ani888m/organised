@@ -20,6 +20,11 @@ header {
  z-index: 1000;              /* Header über den Bildern */
 
 }
+
+header a {
+  padding: 0 50px
+}
+
 footer {
 background-color: #ebebe3;
 padding: 10px;
