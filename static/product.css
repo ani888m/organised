@@ -22,7 +22,9 @@ header {
 }
 
 header a {
-  padding: 0 50px
+  padding: 0 50px;
+  text-decoration: none;
+
 }
 
 footer {
@@ -30,11 +32,11 @@ background-color: #ebebe3;
 padding: 10px;
 text-align: center;
 bottom: 0;
+color: #333;
 }
 
 footer a {
   text-decoration: none;
-  color: #333;
 }
 
 .social-icons {
@@ -266,7 +268,7 @@ font-size:20px;
   header a {
      padding: 0;
   }
-  footer a{
+  footer {
     font-size: 0.8rem;
   }
 }
