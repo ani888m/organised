@@ -210,6 +210,46 @@ font-size:20px;
 
 
 
+.info-details {
+  margin-top: 15px;
+  font-family: 'Cormorant', serif;
+}
+
+.info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: #0c4d77;
+  padding: 6px 0;
+  border-bottom: 1px solid #ddd;
+  user-select: none;
+}
+
+.info-arrow {
+  transition: transform 0.3s ease;
+}
+
+.info-content {
+  display: none;
+  margin-top: 10px;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* geöffnet */
+.info-open .info-content {
+  display: block;
+}
+
+.info-open .info-arrow {
+  transform: rotate(90deg);
+}
+
+
+
 
 .book-description {
   max-width: 1000px;
