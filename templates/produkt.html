@@ -80,6 +80,21 @@
 
         <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }})">In den Warenkorb 🛒</button>
       </div>
+
+      <div class="info-details">
+
+<div class="info-header" onclick="toggleInfoDetails()">
+    <span>Weitere Details</span>
+    <span class="info-arrow" id="info-arrow">❯</span>
+  </div>
+
+  <div class="info-content" id="info-content">
+    <p><strong>ISBN:</strong> {{ produkt.isbn if produkt.isbn else "–" }}</p>
+    <p><strong>Seiten:</strong> {{ produkt.seiten if produkt.seiten else "–" }}</p>
+    <p><strong>Format:</strong> {{ produkt.format if produkt.format else "–" }}</p>
+  </div>
+</div>
+
       </div>
     </div>
     
