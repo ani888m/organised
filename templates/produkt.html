@@ -80,11 +80,14 @@
          </a>
         {% endif %}
 
-        
+     
+       <div class="buy-row">   
         <label for="quantity">Anzahl:</label>
         <input type="number" id="quantity" value="1" min="1">
 
         <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }})">In den Warenkorb 🛒</button>
+       </div>
+
       </div>
     </div>
     
@@ -93,6 +96,10 @@
        {{ produkt.beschreibung | safe }}
 
     </div>
+
+
+
+
   </main>
 {% include 'footer.html' %}
 
