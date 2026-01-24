@@ -266,6 +266,9 @@ font-size:20px;
   header a {
      padding: 0;
   }
+  footer a{
+    font-size: 0.8rem;
+  }
 }
 
 
