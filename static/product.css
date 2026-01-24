@@ -29,13 +29,12 @@ footer {
 background-color: #ebebe3;
 padding: 10px;
 text-align: center;
-color: #333;
 bottom: 0;
 }
 
 footer a {
   text-decoration: none;
-  color: inherit;
+  color: #333;
 }
 
 .social-icons {
