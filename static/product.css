@@ -1,5 +1,11 @@
+/* =========================================================
+   GOOGLE FONTS
+========================================================= */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Varela&display=swap');
+
+/* =========================================================
+   ROOT VARIABLES
+========================================================= */
 :root {
   --color-primary: #7393B3;
   --color-secondary: #0c4d77;
@@ -7,220 +13,219 @@
   --font-body: 'Segoe UI', sans-serif;
 }
 
+/* =========================================================
+   BASE ELEMENTS
+========================================================= */
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
 header {
   display: flex;
-  justify-content: space-between; /* Link links, Icon rechts */
+  justify-content: space-between;
   align-items: center;
-
   position: sticky;
-  top: 0;                         /* am oberen Rand kleben */
-  background: white;              /* Hintergrund, sonst durchsichtig */
+  top: 0;
+  background: white;
   box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
   padding: 0.5rem 1rem;
- z-index: 1000;              /* Header über den Bildern */
-
+  z-index: 1000;
 }
 
 header a {
   padding: 0 50px;
-  text-decoration: none;
-
+  color: inherit;
 }
 
+/* =========================================================
+   FOOTER
+========================================================= */
 footer {
-background-color: #ebebe3;
-padding: 10px;
-text-align: center;
-bottom: 0;
-color: #333;
-font-family: 'Cormorant', serif;
-
+  background-color: #ebebe3;
+  padding: 10px;
+  text-align: center;
+  color: #333;
+  font-family: var(--font-heading);
 }
 
 footer a {
-  text-decoration: none;
   color: #333;
 }
 
 .social-icons {
-color: #7393B3;
-font-size: 2em;
-margin: 5px;
+  color: var(--color-primary);
+  font-size: 2em;
+  margin: 5px;
 }
 
-.nav-links {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
+/* =========================================================
+   BOOK DETAIL LAYOUT
+========================================================= */
 .book-detail {
-max-width: 1000px;
-margin: 50px auto;
-padding: 0 20px;
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 0 20px;
 }
 
 .book-container {
-display: flex;
-gap: 40px;
-flex-wrap: wrap;
-justify-content: center;
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
+/* =========================================================
+   BOOK COVER / CAROUSEL
+========================================================= */
 .book-cover {
-flex: 1 1 300px;
-max-width: 400px;
-position: relative;
+  flex: 1 1 300px;
+  max-width: 400px;
+  position: relative;
 }
 
 .carousel {
-position: relative;
-width: 100%;
-overflow: hidden;
-border-radius: 12px;
-box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .carousel-image {
-display: none;
-width: 100%;
-height: auto;
-border-radius: 12px;
-object-fit: contain;
+  display: none;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: contain;
 }
 
 .carousel-image.active {
-display: block;
+  display: block;
 }
 
 .product-prev,
 .product-next {
-position: absolute;
-top: 50%;
-transform: translateY(-50%);
-background-color: rgba(115, 147, 179, 0.8);
-color: white;
-border: none;
-padding: 10px 15px;
-font-size: 1.5rem;
-cursor: pointer;
-border-radius: 50%;
-user-select: none;
-transition: background-color 0.3s ease;
-z-index: 10;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(115, 147, 179, 0.8);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  user-select: none;
+  transition: background-color 0.3s ease;
+  z-index: 10;
 }
 
 .product-prev:hover,
 .product-next:hover {
-background-color: rgba(115, 147, 179, 1);
+  background-color: rgba(115, 147, 179, 1);
 }
 
-.product-prev {
-left: 10px;
-}
+.product-prev { left: 10px; }
+.product-next { right: 10px; }
 
-.product-next {
-right: 10px;
-}
-
+/* =========================================================
+   BOOK INFO
+========================================================= */
 .book-info {
-flex: 1 1 300px;
-max-width: 500px;
-display: flex;
-flex-direction: column;
-gap: 15px;
+  flex: 1 1 300px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .book-info h1 {
-font-family: 'Cormorant', serif; 
-color: #0c4d77;
-font-size: 2.4rem;
-margin-bottom: 10px;
-text-align:left;
+  font-family: var(--font-heading);
+  color: var(--color-secondary);
+  font-size: 2.4rem;
+  margin-bottom: 10px;
 }
 
 .book-info .author {
-font-style: italic;
-color: #555;
-font-size: 1.2rem;
+  font-style: italic;
+  color: #555;
+  font-size: 1.2rem;
 }
 
 .book-info .price {
-font-size: 1.5rem;
-color: #7393B3;
+  font-size: 1.5rem;
+  color: var(--color-primary);
 }
 
 .book-info .release {
-font-size: 1rem;
-color: #444;
+  font-size: 1rem;
+  color: #444;
 }
 
 .book-info .description {
-font-size: 1.3rem;
-font-family: 'Cormorant', serif;
-line-height: 1.6;
-color: #333;
-margin-top: 10px;
+  font-size: 1.3rem;
+  font-family: var(--font-heading);
+  line-height: 1.6;
+  margin-top: 10px;
 }
 
-.book-info .anzahl {
-  flex-direction: row;
-}
+/* Quantity */
 label[for="quantity"] {
-font-weight: 600;
-argin-top: 20px;
-font-size: 1.1rem;
-color: #333;
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 
 #quantity {
-width: 60px;
-padding: 8px 10px;
-font-size: 1rem;
-margin-top: 5px;
-border-radius: 6px;
-border: 1px solid #ccc;
-outline: none;
+  width: 60px;
+  padding: 8px 10px;
+  font-size: 1rem;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
 }
 
+/* Button */
 .book-info button {
-argin-top: 20px;
-background-color: #7393B3;
-border: none;
-color: white;
-font-size: 1.2rem;
-padding: 7px 15px;
-border-radius: 8px;
-cursor: pointer;
-transition: background-color 0.3s ease;
-max-width: 220px;
-lign-self: flex-start;
+  background-color: var(--color-primary);
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  padding: 7px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  max-width: 220px;
+  align-self: flex-start;
 }
 
 .book-info button:hover {
-background-color: #527a9b;
+  background-color: #527a9b;
 }
 
 .back-link {
-display: inline-block;
-margin: 10px 0;
-text-decoration: none;
-color: #7393B3;
-font-family: 'Cormorant', serif;
-font-size:20px;
+  display: inline-block;
+  margin: 10px 0;
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: 20px;
 }
 
-
-
-
-
-
-
-
-
+/* =========================================================
+   INFO ACCORDION
+========================================================= */
 .info-details {
   margin-top: 15px;
-  font-family: 'Cormorant', serif;
+  font-family: var(--font-heading);
 }
 
 .info-header {
@@ -229,7 +234,7 @@ font-size:20px;
   align-items: center;
   cursor: pointer;
   font-size: 1.4rem;
-  color: #0c4d77;
+  color: var(--color-secondary);
   padding: 6px 0;
   border-bottom: 1px solid #ddd;
   user-select: none;
@@ -244,10 +249,8 @@ font-size:20px;
   margin-top: 10px;
   font-size: 1.1rem;
   line-height: 1.5;
-  color: #333;
 }
 
-/* geöffnet */
 .info-open .info-content {
   display: block;
 }
@@ -256,37 +259,57 @@ font-size:20px;
   transform: rotate(90deg);
 }
 
-
-
-
+/* =========================================================
+   BOOK DESCRIPTION
+========================================================= */
 .book-description {
   max-width: 1000px;
   margin: 40px auto;
   padding: 0 20px;
   font-size: 1.3rem;
   line-height: 1.8;
-  color: #333;
-  font-family: 'Cormorant', serif;
+  font-family: var(--font-heading);
 }
 
+/* =========================================================
+   LEGAL / RECHTLICHES
+========================================================= */
+.rechtliches {
+  margin: 50px auto;
+  max-width: 900px;
+  padding: 0 20px;
+}
 
+.rechtliches h2 {
+  font-family: var(--font-heading);
+  font-size: 2.4rem;
+  margin-bottom: 5px;
+}
 
-/* ------------- MOBILE VERSION ------------- */
-@media (max-width: 480px) {
+.rechtliches h3 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+}
+
+.rechtliches p {
+  font-size: 1.3rem;
+  font-family: var(--font-heading);
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+/* =========================================================
+   MEDIA QUERIES
+========================================================= */
+@media (max-width: 768px) {
+
+  header a {
+    padding: 0 10px;
+  }
 
   .book-container {
     flex-direction: column;
     gap: 20px;
-  }
-
-  .book-cover,
-  .book-info {
-    max-width: 100%;
-    flex: none;
-  }
-
-  .book-info {
-    align-items: flex-start;
   }
 
   .book-info h1 {
@@ -298,7 +321,6 @@ font-size:20px;
   }
 
   .book-description {
-    max-width: 100%;
     padding: 0 10px;
     font-size: 1.2rem;
     margin: 20px auto 40px;
@@ -311,58 +333,11 @@ font-size:20px;
     font-size: 1.1rem;
   }
 
-  .back-link {
-    margin: 15px 10px 0;
-  }
-  header a {
-     padding: 0;
-  }
   footer {
     font-size: 0.8rem;
   }
+
+  .rechtliches h2 { font-size: 1.8rem; }
+  .rechtliches h3 { font-size: 1.2rem; }
+  .rechtliches p  { font-size: 1.1rem; line-height: 1.4; }
 }
-
-
-
-.rechtliches { 
-  margin: 50px 180px 
-}
-
-.rechtliches h2 {
-  font-family: 'Cormorant', serif; 
-  color: black;
-  font-size: 2.4rem;
-  margin-bottom: 5px;
-}
-.rechtliches h3 {
-  font-family: 'Cormorant', serif; 
-  color: black;
-  font-size: 2rem;}
-  
-.rechtliches p {
-font-size: 1.3rem;
-font-family: 'Cormorant', serif;
-line-height: 1.6;
-color: #333;
-margin-top: 10px;
-}
-
-/* Mobile Anpassung */
-@media screen and (max-width: 768px) {
-  .rechtliches {
-    margin: 20px 35px; /* weniger Abstand an den Seiten */
-  }
-
-  .rechtliches h2 {
-    font-size: 1.8rem; /* kleinerer Titel */
-  }
-
-  .rechtliches h3 {
-    font-size: 1.2rem; /* kleinerer Titel */
-  }
-  .rechtliches p {
-    font-size: 1.1rem; /* kleinere Schrift für besseren Lesefluss */
-    line-height: 1.4; /* engerer Zeilenabstand */
-  }
-}
-
