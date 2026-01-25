@@ -45,9 +45,6 @@ else:
     produkte = []  # Falls Datei fehlt
 
 # ---------- BUCHBUTLER API ZUGANG ----------
-BUCHBUTLER_USER = os.getenv("BUCHBUTLER_USER")
-BUCHBUTLER_PASSWORD = os.getenv("BUCHBUTLER_PASSWORD")
-
 def lade_produkt_von_api(ean):
     """Lädt ein Buch von Buchbutler API anhand der EAN"""
     if not BUCHBUTLER_USER or not BUCHBUTLER_PASSWORD:
@@ -70,26 +67,27 @@ def lade_produkt_von_api(ean):
         if not res:
             return None
 
+        # <<< WICHTIG: attrs hier definieren >>>
+        attrs = res.get("Artikelattribute", {})
+
         produkt = {
             "id": int(res.get("pim_artikel_id", 0)),
             "name": res.get("bezeichnung"),
-            "autor": res.get("Artikelattribute", {}).get("Autor", {}).get("Wert", ""),
+            "autor": attrs.get("Autor", {}).get("Wert", ""),
             "preis": float(res.get("vk_brutto") or 0),
             "beschreibung": res.get("text_text") or "",
-            # Buchbutler-Coverbild direkt per EAN
+
+            # Bild
             "bilder": [f"https://api.buchbutler.de/image/{ean}"],
-            "extra": res.get("Artikelattribute", {}), 
 
-
-           
-            # Zentrale Detailfelder für "Weitere Details"
+            # Weitere Details
             "isbn": attrs.get("ISBN_13", {}).get("Wert", ""),
             "isbn10": attrs.get("ISBN_10", {}).get("Wert", ""),
             "ean": attrs.get("EAN", {}).get("Wert", ""),
 
             "seiten": attrs.get("Seiten", {}).get("Wert", ""),
-            "format": attrs.get("Buchtyp", {}).get("Wert", ""),          # z.B. Hardcover
-            "medium": attrs.get("Medium", {}).get("Wert", ""),           # z.B. Gebunden
+            "format": attrs.get("Buchtyp", {}).get("Wert", ""),
+            "medium": attrs.get("Medium", {}).get("Wert", ""),
 
             "sprache": attrs.get("Sprache", {}).get("Wert", ""),
             "verlag": attrs.get("Verlag", {}).get("Wert", ""),
@@ -105,15 +103,16 @@ def lade_produkt_von_api(ean):
             "breite": attrs.get("Breite", {}).get("Wert", ""),
             "hoehe": attrs.get("Hoehe", {}).get("Wert", ""),
 
-            # Optional: Rohdaten behalten
+            # optional Rohdaten
             "extra": attrs
-            
         }
+
         return produkt
 
     except Exception as e:
         logger.error(f"Fehler beim Laden von API: {e}")
         return None
+
 
 # ---------- SENDGRID KONFIGURATION ----------
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
