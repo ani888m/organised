@@ -93,18 +93,11 @@
     <p><strong>ISBN:</strong> {{ produkt.isbn if produkt.isbn else "–" }}</p>
     <p><strong>Seiten:</strong> {{ produkt.seiten if produkt.seiten else "–" }}</p>
     <p><strong>Format:</strong> {{ produkt.format if produkt.format else "–" }}</p>
-
-
- 
-
- 
-  <p><strong>Verlag:</strong> {{ produkt.verlag if produkt.verlag else "–" }}</p>
-  <p><strong>Sprache:</strong> {{ produkt.sprache if produkt.sprache else "–" }}</p>
-
-  <p><strong>Seiten:</strong> {{ produkt.seiten if produkt.seiten else "–" }}</p>
-  <p><strong>Format:</strong> {{ produkt.format if produkt.format else "–" }}</p>
-
-  <p><strong>Erscheinungsjahr:</strong> {{ produkt.erscheinungsjahr if produkt.erscheinungsjahr else "–" }}</p>
+    
+    <p><strong>Verlag:</strong> {{ produkt.verlag if produkt.verlag else "–" }}</p>
+    <p><strong>Sprache:</strong> {{ produkt.sprache if produkt.sprache else "–" }}</p>
+    <p><strong>Erscheinungsjahr:</strong> {{ produkt.erscheinungsjahr if produkt.erscheinungsjahr else "–" }}</p>
+    
   <p><strong>Altersempfehlung:</strong>
     {% if produkt.alter_von and produkt.alter_bis %}
       {{ produkt.alter_von }}–{{ produkt.alter_bis }} Jahre
