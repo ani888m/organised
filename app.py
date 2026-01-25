@@ -88,12 +88,9 @@ def lade_produkt_von_api(ean):
 
             # Weitere Details
             "isbn": attrs.get("ISBN_13", {}).get("Wert", ""),
-            "isbn10": attrs.get("ISBN_10", {}).get("Wert", ""),
-            "ean": attrs.get("EAN", {}).get("Wert", ""),
-
+           
             "seiten": attrs.get("Seiten", {}).get("Wert", ""),
             "format": attrs.get("Buchtyp", {}).get("Wert", ""),
-            "medium": attrs.get("Medium", {}).get("Wert", ""),
 
             "sprache": attrs.get("Sprache", {}).get("Wert", ""),
             "verlag": attrs.get("Verlag", {}).get("Wert", ""),
