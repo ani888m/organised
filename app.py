@@ -45,6 +45,12 @@ else:
     produkte = []  # Falls Datei fehlt
 
 # ---------- BUCHBUTLER API ZUGANG ----------
+
+import os
+
+BUCHBUTLER_USER = os.getenv("BUCHBUTLER_USER")
+BUCHBUTLER_PASSWORD = os.getenv("BUCHBUTLER_PASSWORD")
+
 def lade_produkt_von_api(ean):
     """Lädt ein Buch von Buchbutler API anhand der EAN"""
     if not BUCHBUTLER_USER or not BUCHBUTLER_PASSWORD:
