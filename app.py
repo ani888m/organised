@@ -78,7 +78,36 @@ def lade_produkt_von_api(ean):
             "beschreibung": res.get("text_text") or "",
             # Buchbutler-Coverbild direkt per EAN
             "bilder": [f"https://api.buchbutler.de/image/{ean}"],
-            "extra": res.get("Artikelattribute", {})
+            "extra": res.get("Artikelattribute", {}), 
+
+
+           
+            # Zentrale Detailfelder für "Weitere Details"
+            "isbn": attrs.get("ISBN_13", {}).get("Wert", ""),
+            "isbn10": attrs.get("ISBN_10", {}).get("Wert", ""),
+            "ean": attrs.get("EAN", {}).get("Wert", ""),
+
+            "seiten": attrs.get("Seiten", {}).get("Wert", ""),
+            "format": attrs.get("Buchtyp", {}).get("Wert", ""),          # z.B. Hardcover
+            "medium": attrs.get("Medium", {}).get("Wert", ""),           # z.B. Gebunden
+
+            "sprache": attrs.get("Sprache", {}).get("Wert", ""),
+            "verlag": attrs.get("Verlag", {}).get("Wert", ""),
+            "erscheinungsjahr": attrs.get("Erscheinungsjahr", {}).get("Wert", ""),
+            "erscheinungsdatum": attrs.get("Erscheinungsdatum", {}).get("Wert", ""),
+
+            "alter_von": attrs.get("Altersempfehlung_von", {}).get("Wert", ""),
+            "alter_bis": attrs.get("Altersempfehlung_bis", {}).get("Wert", ""),
+            "lesealter": attrs.get("Lesealter", {}).get("Wert", ""),
+
+            "gewicht": attrs.get("Gewicht", {}).get("Wert", ""),
+            "laenge": attrs.get("Laenge", {}).get("Wert", ""),
+            "breite": attrs.get("Breite", {}).get("Wert", ""),
+            "hoehe": attrs.get("Hoehe", {}).get("Wert", ""),
+
+            # Optional: Rohdaten behalten
+            "extra": attrs
+            
         }
         return produkt
 
