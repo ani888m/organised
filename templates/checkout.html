@@ -17,6 +17,34 @@
 
   <section class="form">
     <h2>Bezahlung</h2>
+    <section class="order-summary">
+      <h3>Bestellübersicht</h3>
+
+      <table class="order-table">
+       <tr>
+         <th>Produkt</th>
+         <th>Menge</th>
+         <th>Preis</th>
+       </tr>
+
+    {% for item in cart %}
+       <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ "%.2f"|format(item.price) }} €</td>
+       </tr>
+    {% endfor %}
+      </table>
+
+  <p class="order-total">
+    <strong>Gesamtbetrag: {{ "%.2f"|format(total) }} € inkl. MwSt.</strong>
+  </p>
+
+  <p class="order-hint">
+    Bitte prüfen Sie Ihre Bestelldaten sorgfältig, bevor Sie fortfahren.
+  </p>
+</section>
+
     <form id="payment-form" method="POST" action="{{ url_for('checkout') }}">
       <label>
         Name:
