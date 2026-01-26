@@ -899,7 +899,7 @@ form {
   height: 120px;
 }
 
- .newsletter-consent {
+ .newsletter_privacy-consent {
   display: flex;
   align-items: center;      /* richtet Checkbox & Text vertikal aus */
   gap: 8px;                 /* Abstand zwischen Checkbox und Text */
@@ -908,7 +908,7 @@ form {
   cursor: pointer;
 }
 
-.newsletter-consent input[type="checkbox"] {
+.newsletter_privacy-consent input[type="checkbox"] {
   width: 18px;
   height: 18px;
   cursor: pointer;
