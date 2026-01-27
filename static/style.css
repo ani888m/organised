@@ -365,7 +365,7 @@ button.next { right: 10px; }
   }
 
   .slide-btn {
-    font-size: 12px;
+    font-size: 8px;
     padding: 8px 16px;
     bottom: 20px;
     left: 70%;
@@ -391,7 +391,7 @@ button.next { right: 10px; }
   }
 
   .slide-btn {
-    font-size: 14px;
+    font-size: 10px;
     padding: 5px 13px;
     bottom: 40px;
   }
