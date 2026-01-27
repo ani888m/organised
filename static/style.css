@@ -668,43 +668,6 @@ form {
   cursor: pointer;
 }
 
-.order-summary {
-  background-color: #f7f7f7;
-  padding: 20px;
-  border-radius: 6px;
-  margin-bottom: 30px;
-}
-
-.order-summary h3 {
-  margin-bottom: 15px;
-  color: #0c4d77;
-}
-
-.order-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 15px;
-}
-
-.order-table th,
-.order-table td {
-  border-bottom: 1px solid #ccc;
-  padding: 8px 5px;
-  text-align: left;
-  font-size: 16px;
-}
-
-.order-total {
-  font-size: 1.2rem;
-  margin-top: 10px;
-}
-
-.order-hint {
-  font-size: 0.95rem;
-  color: #666;
-  margin-top: 10px;
-}
-
 
     @media (max-width: 768px) {
       .form {
