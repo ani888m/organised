@@ -1,14 +1,8 @@
-
-
-
-
-
-
 /* =========================================
    1. IMPORTS & RESET
 ========================================= */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Varela&display=swap');
+
 :root {
   --color-primary: #7393B3;
   --color-secondary: #0c4d77;
@@ -35,13 +29,14 @@ h1, h2, h3 {
   color: var(--color-secondary);
 }
 
-h1, h2 { text-align: center; }
+h1, h2 { 
+  text-align: center; 
+}
 
 h2 {
-   color: #0c4d77;
-   font-size: 2.4rem;
-   margin-bottom:30px;
-   padding-top: 50px;
+  font-size: 2.4rem;
+  margin-bottom: 30px;
+  padding-top: 50px;
 }
 
 p {
@@ -49,7 +44,6 @@ p {
   line-height: 1.7;
   margin-bottom: 20px;
   font-family: var(--font-heading);
-
 }
 
 a {
@@ -63,296 +57,281 @@ img {
   display: block;
 }
 
-
 /* =========================================
    4. LAYOUT / STRUKTUR
 ========================================= */
 
-
 header {
-position: sticky;
-top: 0;
-z-index: 10000;  /* Damit sie über anderen Inhalten liegt */
-background-color: #ffffff; /* Hintergrundfarbe nicht vergessen */
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 0px 110px;
-flex-wrap: wrap;
-box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 110px;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
 }
 
 .site-title {
-display: flex;
-align-items: center;
-flex: 1;
-min-width: 0;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
 }
 
 .logo {
-height: 100px; /* Groß für Desktop */
-width: auto;
-transition: height 0.3s ease;
-display: block;
-object-fit: contain;
+  height: 100px;
+  width: auto;
+  transition: height 0.3s ease;
+  display: block;
+  object-fit: contain;
 }
-/* =========================
-   iPad / Tablets
-   ========================= */
-@media (min-width: 769px) and (max-width: 1024px) {
 
+/* iPad / Tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
   header {
-    padding: 0 40px;   /* weniger Abstand links & rechts */
+    padding: 0 40px;
   }
 
   .logo {
-    height: 100px;     /* etwas kompakter */
+    height: 100px;
   }
 
   .nav-links {
-    margin-top: 30px;  /* statt 100px */
-    padding-right: 0;  /* Abstand rechts entfernen */
+    margin-top: 30px;
+    padding-right: 0;
     gap: 16px;
   }
-  .nav-links li a {
-     font-size: 20px;}
-     
-}
 
+  .nav-links li a {
+    font-size: 20px;
+  }
+}
 
 @media (max-width: 480px) {
-.logo {
-height: 80px; /* Smartphones */
-}
-header {
-padding: 25px;
-}
+  .logo {
+    height: 80px;
+  }
 
-h2 {
-   font-size:2rem;
-}
-}
+  header {
+    padding: 25px;
+  }
 
+  h2 {
+    font-size: 2rem;
+  }
+}
 
 /* =========================================
    NAVIGATION
 ========================================= */
 
 nav {
-position: relative;
-z-index: 9999;
+  position: relative;
+  z-index: 9999;
 }
 
 .nav-links {
-list-style: none;
-display: flex;
-gap: 20px;
-position: relative;
-margin-top: 100px;
-padding-right:40px;
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  position: relative;
+  margin-top: 100px;
+  padding-right: 40px;
 }
 
 .nav-links li {
-position: relative;
+  position: relative;
 }
 
 .nav-links li a {
-text-decoration: none;
-color: #7393B3;
-display: block;
-padding: 8px 10px;
-font-size: 25px;
-font-family: 'Cormorant', serif; /* Cormorant für Header-Menü */
-font-weight: 300;    
+  color: var(--color-primary);
+  display: block;
+  padding: 8px 10px;
+  font-size: 25px;
+  font-family: var(--font-heading);
+  font-weight: 300;
 }
 
 .dropdown-content {
-display: none;
-position: absolute;
-background-color: #f7f6f4;
-min-width: 180px;
-top: 100%;
-left: 0;
-z-index: 1000;
-border-radius: 5px;
-}
-
-.dropdown-content li {
-padding: 0;
+  display: none;
+  position: absolute;
+  background-color: #f7f6f4;
+  min-width: 180px;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  border-radius: 5px;
 }
 
 .dropdown-content li a {
-padding: 10px;
+  padding: 10px;
 }
 
 .dropdown:hover .dropdown-content {
-display: block;
-}
-
-.cart a {
-color: #7393B3;
+  display: block;
 }
 
 .mobile-menu,
 .close-menu {
-display: none;
+  display: none;
 }
 
 @media (max-width: 768px) {
-.mobile-menu {
-display: block; /* nur auf Mobile sichtbar */
-z-index: 10000;
-position: relative;
-font-size: 1.8rem;
-color: #7393B3;
-cursor: pointer;
-}
+  .mobile-menu {
+    display: block;
+    z-index: 10000;
+    position: relative;
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    cursor: pointer;
+  }
 
-.nav-links {
-margin: 0;
-padding: 0;
-position: fixed;
-inset: 0;
-width: 100vw;
-height: 100vh;
-background-color: #fdfdfc;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-gap: 30px;
-z-index: 9998;
-display: none;
-}
+  .nav-links {
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fdfdfc;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    z-index: 9998;
+    display: none;
+  }
 
-.nav-links.show {
-display: flex;
-}
+  .nav-links.show {
+    display: flex;
+  }
 
-.close-menu {
-position: fixed;
-top: 20px;
-right: 20px;
-font-size: 2rem;
-color: #7393B3;
-z-index: 9999;
-display: none;
-cursor: pointer;
-}
+  .close-menu {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    color: var(--color-primary);
+    z-index: 9999;
+    display: none;
+    cursor: pointer;
+  }
 
-.close-menu.show {
-display: block;
-}
+  .close-menu.show {
+    display: block;
+  }
 
-.mobile-menu.hide {
-display: none;
-}
+  .mobile-menu.hide {
+    display: none;
+  }
 }
 
 /* =========================================
    FOOTER
 ========================================= */
+
 footer {
-background-color: #ebebe3;
-padding: 10px;
-text-align: center;
-color: #333;
-bottom: 0;
+  background-color: #ebebe3;
+  padding: 10px;
+  text-align: center;
+  color: #333;
 }
 
 .social-icons {
-color: #7393B3;
-font-size: 2em;
-margin: 5px;
+  color: var(--color-primary);
+  font-size: 2em;
+  margin: 5px;
 }
 
 /* Main */
 
 main {
-padding: 50px 20px;
-background-color: transparent;
-max-width: 1200px;
-margin: 0 auto;
+  padding: 50px 20px;
+  background-color: transparent;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* =========================================
-   5. KOMPONENTEN / MODULE
+   CAROUSEL
 ========================================= */
-/* Carousel */
-
 
 .carousel {
-position: relative;
-z-index: 1;
-max-width: 1300px;
-width: 100%;
-margin: 0 auto 300px;
-overflow: hidden;
+  position: relative;
+  z-index: 1;
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto 300px;
+  overflow: hidden;
 }
 
 .carousel-slide {
-position: relative;
-display: none;
+  position: relative;
+  display: none;
 }
 
 .carousel-slide.active {
-display: block;
+  display: block;
 }
 
 .carousel-slide img {
-width: 80%;
-height: 600px; /* feste Höhe, kannst du anpassen */
-object-fit: cover;
-display: block;
+  width: 80%;
+  height: 600px;
+  object-fit: cover;
 }
 
 .carousel-slide h2 {
-margin-left: 100px;
-position: absolute;
-bottom: 250px;
-font-size: 80px;
-z-index: 5;
-color: white;
-text-align: left;
+  margin-left: 100px;
+  position: absolute;
+  bottom: 250px;
+  font-size: 80px;
+  z-index: 5;
+  color: white;
+  text-align: left;
 }
+
 .slide-btn {
-position: absolute;
-bottom: 85px;
-left: 75%;
-transform: translateX(-50%);
-padding: 17px 55px;
-background-color:#7393B3;
-color: white;
-border: none;
-border-radius:5px;
-font-size: 16px;
-cursor: pointer;
-z-index: 5;
-transition: background 0.3s ease;
+  position: absolute;
+  bottom: 85px;
+  left: 75%;
+  transform: translateX(-50%);
+  padding: 17px 55px;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 5;
+  transition: background 0.3s ease;
 }
 
 .slide-btn:hover {
-background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.8);
 }
 
 button.prev,
 button.next {
-position: absolute;
-top: 50%;
-transform: translateY(-50%);
-background-color: rgba(0,0,0,0.5);
-color: white;
-border: none;
-padding: 12px;
-cursor: pointer;
-font-size: 18px;
-border-radius: 50%;
-z-index: 10;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 50%;
+  z-index: 10;
 }
 
 button.prev { left: 10px; }
 button.next { right: 10px; }
 
-/* Smartphones (max-width: 480px) */
+/* Mobile Carousel */
 @media (max-width: 480px) {
   .carousel-slide img {
     max-height: 500px;
@@ -369,7 +348,6 @@ button.next { right: 10px; }
     padding: 8px 16px;
     bottom: 20px;
     left: 70%;
-    transform: translateX(-50%);
   }
 
   button.prev,
@@ -403,7 +381,9 @@ button.next { right: 10px; }
   }
 }
 
-
+/* =========================================
+   BOOK LIST
+========================================= */
 
 .book-list {
   display: grid;
@@ -415,93 +395,100 @@ button.next { right: 10px; }
 }
 
 @media (max-width: 1024px) {
-.book-list {
-grid-template-columns: repeat(3, 1fr);
-}
+  .book-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 600px) {
-.book-list {
-grid-template-columns: repeat(2, 1fr);
-margin: 2px;
+  .book-list {
+    grid-template-columns: repeat(2, 1fr);
+    margin: 2px;
+  }
+
+  .book-item {
+    width: 100%;
+    max-width: 250px;
+    padding: 1px;
+    font-size: 0.6rem;
+    box-sizing: border-box;
+  }
+
+  .book {
+    border-radius: 2px;
+    padding: 1px;
+  }
 }
-.book-item {
-width: 100%;
-max-width: 250px;
-padding: 1px;
-font-size: 0.6rem;
-box-sizing: border-box;
-}
+
+/* ZUSAMMENGEFÜHRTE .book-KLASSE */
 .book {
-border-radius: 2px;
-padding:1px;
-}
-}
-.book {
-background: #f8f8f8;
-border-radius: 10px;
-overflow: hidden;
-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-text-align: center;
-padding: 15px;
-transition: transform 0.3s ease;
-   display: flex;
+  width: 100%;
+  height: auto;
+  background: #f8f8f8;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 15px;
+  transition: transform 0.3s ease;
+  display: flex;
   flex-direction: column;
 }
 
 .book:hover {
-transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
 .image-wrapper {
-position: relative;
-overflow: hidden;
-width: 100%;
-aspect-ratio: 3 / 4;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 3 / 4;
 }
 
 .image-wrapper img {
-width: 100%;
-height: 100%;
-object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .hover-btn {
-position: absolute;
-bottom: 10px;
-left: 50%;
-transform: translateX(-50%);
-background-color: #060606;
-color: white;
-padding: 8px 12px;
-border: none;
-border-radius: 5px;
-text-decoration: none;
-opacity: 0;
-transition: opacity 0.3s ease;
-   margin-top: auto; 
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #060606;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  margin-top: auto;
 }
 
 .image-wrapper:hover .hover-btn {
-opacity: 1;
+  opacity: 1;
 }
-
-
-
-button {
-padding: 10px;
-background-color: #7393B3;
-color: white;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-transition: background-color 0.3s ease;
-margin: 0 auto;
-}
-
 
 /* =========================================
-   NEWSLETTEER
+   BUTTONS
+========================================= */
+
+button {
+  padding: 10px;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 0 auto;
+}
+
+/* =========================================
+   NEWSLETTER
 ========================================= */
 
 .newsletter-section {
@@ -527,19 +514,15 @@ margin: 0 auto;
   font-size: 0.7rem;
 }
 
-.newsletter-section button:hover {
-  background-color: #ff5722;
-}
 .newsletter-section button {
   background-color: #e66e3f;
   border-radius: 6px;
   padding: 7px;
 }
 
-
-
-
-
+.newsletter-section button:hover {
+  background-color: #ff5722;
+}
 
 /* =========================================
    THANK YOU
@@ -563,99 +546,74 @@ margin: 0 auto;
 .thank-you-container a {
   display: inline-block;
   margin-top: 20px;
-  text-decoration: none;
   color: white;
   background-color: #3498db;
   padding: 10px 20px;
   border-radius: 5px;
-} 
-
-.book {
-width: 100%;
-height: auto;
 }
-
-.vorschau-item h3 {
-margin-top: 15px;
-font-size: 1.2rem;
-color: #444;
-}
-
-.vorschau-item p {
-font-size: 0.95rem;
-color: #666;
-}
-
 
 /* =========================================
    FORMS
 ========================================= */
 
 .form {
-    margin: 0 0 20px 100px;
-    max-width: 600px;
-  }
-
-.form h2{
-   text-align: left;
-   color: #0c4d77; 
+  margin: 0 0 20px 100px;
+  max-width: 600px;
 }
+
+.form h2 {
+  text-align: left;
+}
+
 form {
-    font-size: 18px;
-  }
+  font-size: 18px;
+}
 
-  label {
-    display: block;
-    margin-bottom: 15px;
-    font-weight: 600;
-  }
+label {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
 
+input, select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  border-radius: 6px;
+}
 
+.payment-details {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #f5f5f5;
+}
 
-  input, select {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    border-radius: 6px;
+button[type="submit"] {
+  background-color: #ff7f50;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 3px;
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+}
 
-  }
-
-  .payment-details {
-    margin-top: 15px;
-    padding: 15px;
-    background-color: #f5f5f5;
-  }
-
-  .hidden {
-    display: none;
-  }
-
-  button[type="submit"] {
-    background-color: #ff7f50;
-    color: #fff;
-    font-size: 1rem;
-    border: none;
-    border-radius: 3px;
-    padding: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 15px;
-  }
-
-  button[type="submit"]:hover {
-    background-color: #e66e3f;
-  }
+button[type="submit"]:hover {
+  background-color: #e66e3f;
+}
 
 #nachricht {
   width: 100%;
   height: 120px;
 }
 
- .newsletter_privacy-consent {
+.newsletter_privacy-consent {
   display: flex;
-  align-items: center;      /* richtet Checkbox & Text vertikal aus */
-  gap: 8px;                 /* Abstand zwischen Checkbox und Text */
+  align-items: center;
+  gap: 8px;
   margin-top: 10px;
   font-size: 16px;
   cursor: pointer;
@@ -667,88 +625,59 @@ form {
   cursor: pointer;
 }
 
-.order-summary {
-  background-color: #f7f7f7;
-  padding: 20px;
-  border-radius: 6px;
-  margin-bottom: 30px;
+/* Mobile Forms */
+@media (max-width: 768px) {
+  .form {
+    margin: 25px;
+    max-width: 100%;
+  }
 }
 
-.order-summary h3 {
-  margin-bottom: 15px;
-  color: #0c4d77;
-}
-
-.order-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 15px;
-}
-
-.order-table th,
-.order-table td {
-  border-bottom: 1px solid #ccc;
-  padding: 8px 5px;
-  text-align: left;
-  font-size: 16px;
-}
-
-.order-total {
-  font-size: 1.2rem;
-  margin-top: 10px;
-}
-
-.order-hint {
-  font-size: 0.95rem;
-  color: #666;
-  margin-top: 10px;
-}
-
-
-    @media (max-width: 768px) {
-      .form {
-        margin: 25px !important;
-        max-width: 100%;
-      }
-    }
+/* =========================================
+   RECHTLICHES
+========================================= */
 
 .rechtliches { 
-  margin: 50px 180px 
+  margin: 50px 180px;
 }
 
 .rechtliches h2 {
-  font-family: 'Cormorant', serif; 
+  font-family: var(--font-heading);
   color: black;
   font-size: 2.4rem;
   margin-bottom: 5px;
 }
+
 .rechtliches h3 {
-  font-family: 'Cormorant', serif; 
+  font-family: var(--font-heading);
   color: black;
-  font-size: 2rem;}
-  
-.rechtliches p {
-font-size: 1.3rem;
-font-family: 'Cormorant', serif;
-line-height: 1.6;
-color: #333;
-margin-top: 10px;
+  font-size: 2rem;
 }
 
-/* Mobile Anpassung */
+.rechtliches p {
+  font-size: 1.3rem;
+  font-family: var(--font-heading);
+  line-height: 1.6;
+  color: #333;
+  margin-top: 10px;
+}
+
+/* Mobile Rechtliches */
 @media screen and (max-width: 768px) {
   .rechtliches {
-    margin: 20px 35px; /* weniger Abstand an den Seiten */
+    margin: 20px 35px;
   }
 
   .rechtliches h2 {
-    font-size: 1.8rem; /* kleinerer Titel */
+    font-size: 1.8rem;
   }
 
   .rechtliches h3 {
-    font-size: 1.2rem; /* kleinerer Titel */
+    font-size: 1.2rem;
   }
+
   .rechtliches p {
-    font-size: 1.1rem; /* kleinere Schrift für besseren Lesefluss */
-    line-height: 1.4; /* engerer Zeilenabstand */
+    font-size: 1.1rem;
+    line-height: 1.4;
   }
+}
