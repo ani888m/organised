@@ -357,7 +357,7 @@ button.next { right: 10px; }
   }
 }
 
-@media (max-width: 768px) and (min-width: 481px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   .carousel-slide img {
     max-height: 500px;
   }
