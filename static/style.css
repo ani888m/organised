@@ -158,7 +158,7 @@ position: relative;
 
 .nav-links li a {
 text-decoration: none;
-color: #4a6d3e;
+color: #ac345c;
 display: block;
 padding: 8px 10px;
 font-size: 25px;
@@ -320,7 +320,7 @@ bottom: 85px;
 left: 75%;
 transform: translateX(-50%);
 padding: 17px 55px;
-background-color: #ac345c;
+background-color:#7393B3;
 color: white;
 border: none;
 border-radius:5px;
