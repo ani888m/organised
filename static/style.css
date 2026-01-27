@@ -24,10 +24,19 @@
 /* =========================================
    3. BASE STYLES
 ========================================= */
+
+html, body {
+  height: 100%;
+}
+
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   font-family: var(--font-body);
   color: #333;
 }
+
 
 h1, h2, h3 {
   font-family: var(--font-heading);
@@ -268,11 +277,11 @@ margin: 5px;
 /* Main */
 
 main {
-argin-left: 100px;
 padding: 50px 20px;
 background-color: transparent;
 max-width: 1200px;
 margin: 0 auto;
+flex: 1; 
 }
 
 /* =========================================
