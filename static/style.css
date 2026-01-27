@@ -82,7 +82,7 @@ header {
 }
 
 .logo {
-  height: 100px;
+  height: 110px;
   width: auto;
   transition: height 0.3s ease;
   display: block;
