@@ -17,34 +17,6 @@
 
   <section class="form">
     <h2>Bezahlung</h2>
-    <section class="order-summary">
-      <h3>Bestellübersicht</h3>
-
-      <table class="order-table">
-       <tr>
-         <th>Produkt</th>
-         <th>Menge</th>
-         <th>Preis</th>
-       </tr>
-
-    {% for item in cart %}
-       <tr>
-          <td>{{ item.name }}</td>
-          <td>{{ item.quantity }}</td>
-          <td>{{ "%.2f"|format(item.price) }} €</td>
-       </tr>
-    {% endfor %}
-      </table>
-
-  <p class="order-total">
-    <strong>Gesamtbetrag: {{ "%.2f"|format(total) }} € inkl. MwSt.</strong>
-  </p>
-
-  <p class="order-hint">
-    Bitte prüfen Sie Ihre Bestelldaten sorgfältig, bevor Sie fortfahren.
-  </p>
-</section>
-
     <form id="payment-form" method="POST" action="{{ url_for('checkout') }}">
       <label>
         Name:
@@ -110,14 +82,9 @@
       </div>
 
       <!-- Newsletter Checkbox -->
-      <label class="newsletter_privacy-consent">
+      <label class="newsletter-consent">
         <input type="checkbox" name="newsletter" id="newsletter-checkbox">
         Ich möchte mich für den Newsletter anmelden.
-      </label>
-      <!-- Datenschutz Pflicht-Checkbox -->
-      <label class="newsletter_privacy-consent">
-          <input type="checkbox" name="privacy" id="privacy-checkbox" required>
-          Ich habe die <a href="{{ url_for('datenschutz') }}" target="_blank">Datenschutzerklärung</a> gelesen und stimme ihr zu.
       </label>
 
       <button type="submit">Bezahlen</button>
@@ -141,17 +108,7 @@
     if (method === 'paypal') paypalDetails.classList.remove('hidden');
     if (method === 'kreditkarte') kreditkarteDetails.classList.remove('hidden');
   });
-
-
-  const privacyCheckbox = document.getElementById('privacy-checkbox');
-  const submitButton = document.getElementById('submit-button');
-
-  privacyCheckbox.addEventListener('change', () => {
-    submitButton.disabled = !privacyCheckbox.checked;
-  });
-
 </script>
 </body>
 </html>
-
 
