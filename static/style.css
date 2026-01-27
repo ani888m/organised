@@ -90,7 +90,7 @@ min-width: 0;
 }
 
 .logo {
-height: 120px; /* Groß für Desktop */
+height: 100px; /* Groß für Desktop */
 width: auto;
 transition: height 0.3s ease;
 display: block;
