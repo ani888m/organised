@@ -61,6 +61,11 @@ img {
 /* =========================================
    4. LAYOUT / STRUKTUR
 ========================================= */
+/* Scroll-Offset für Sprungziel */
+:target {
+  scroll-margin-top: 100px; /* Höhe deines Headers anpassen */
+}
+
 
 header {
   position: sticky;
