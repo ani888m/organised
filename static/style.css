@@ -1,9 +1,11 @@
-
-/* =========================================
-   1. IMPORTS & RESET
-========================================= */
+/* =========================================================
+   GOOGLE FONTS
+========================================================= */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap');
 
+/* =========================================================
+   ROOT VARIABLES
+========================================================= */
 :root {
   --color-primary: #7393B3;
   --color-secondary: #0c4d77;
@@ -11,241 +13,51 @@
   --font-body: 'Segoe UI', sans-serif;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* =========================================
-   3. BASE STYLES
-========================================= */
-
-
-
-
+/* =========================================================
+   BASE ELEMENTS
+========================================================= */
 body {
+  margin: 0;
   font-family: var(--font-body);
   color: #333;
 }
 
-
-
-
-
-h1, h2, h3 {
-  font-family: var(--font-heading);
-  color: var(--color-secondary);
-}
-
-h1, h2 { 
-  text-align: center; 
-}
-
-h2 {
-  font-size: 2.4rem;
-  margin-bottom: 30px;
-  padding-top: 50px;
-}
-
-p {
-  font-size: 1.1em;
-  line-height: 1.7;
-  margin-bottom: 20px;
-  font-family: var(--font-heading);
-}
-
 a {
   text-decoration: none;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: white;
+  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1rem;
+  z-index: 1000;
+}
+
+header a {
+  padding: 0 50px;
   color: inherit;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* =========================================
-   4. LAYOUT / STRUKTUR
-========================================= */
-
-header {
-  position: sticky;
-  top: 0;
-  z-index: 10000;
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 110px;
-  flex-wrap: wrap;
-  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
-}
-
-.site-title {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  min-width: 0;
-}
-
-.logo {
-  height: 110px;
-  width: auto;
-  transition: height 0.3s ease;
-  display: block;
-  object-fit: contain;
-}
-
-/* iPad / Tablets */
-@media (min-width: 769px) and (max-width: 1024px) {
-  header {
-    padding: 0 40px;
-  }
-
-  .logo {
-    height: 100px;
-  }
-
-  .nav-links {
-    margin-top: 30px;
-    padding-right: 0;
-    gap: 16px;
-  }
-
-  .nav-links li a {
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .logo {
-    height: 80px;
-  }
-
-  header {
-    padding: 25px;
-  }
-
-  h2 {
-    font-size: 2rem;
-  }
-}
-
-/* =========================================
-   NAVIGATION
-========================================= */
-
-nav {
-  position: relative;
-  z-index: 9999;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-  position: relative;
-  margin-top: 100px;
-  padding-right: 40px;
-}
-
-.nav-links li {
-  position: relative;
-}
-
-.nav-links li a {
-  color: var(--color-primary);
-  display: block;
-  padding: 8px 10px;
-  font-size: 25px;
-  font-family: var(--font-heading);
-  font-weight: 300;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f7f6f4;
-  min-width: 180px;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  border-radius: 5px;
-}
-
-.dropdown-content li a {
-  padding: 10px;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.mobile-menu,
-.close-menu {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .mobile-menu {
-    display: block;
-    z-index: 10000;
-    position: relative;
-    font-size: 1.8rem;
-    color: var(--color-primary);
-    cursor: pointer;
-  }
-
-  .nav-links {
-    margin: 0;
-    padding: 0;
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #fdfdfc;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    z-index: 9998;
-    display: none;
-  }
-
-  .nav-links.show {
-    display: flex;
-  }
-
-  .close-menu {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    font-size: 2rem;
-    color: var(--color-primary);
-    z-index: 9999;
-    display: none;
-    cursor: pointer;
-  }
-
-  .close-menu.show {
-    display: block;
-  }
-
-  .mobile-menu.hide {
-    display: none;
-  }
-}
-
-/* =========================================
+/* =========================================================
    FOOTER
-========================================= */
-
+========================================================= */
 footer {
   background-color: #ebebe3;
   padding: 10px;
   text-align: center;
+  color: #333;
+  font-family: var(--font-heading);
+}
+
+footer a {
   color: #333;
 }
 
@@ -255,412 +67,229 @@ footer {
   margin: 5px;
 }
 
-/* Main */
-
-main {
-  padding: 50px 20px;
-  background-color: transparent;
-  max-width: 1200px;
-  margin: 0 auto;
+/* =========================================================
+   BOOK DETAIL LAYOUT
+========================================================= */
+.book-detail {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 0 20px;
 }
 
-/* =========================================
-   CAROUSEL
-========================================= */
+.book-container {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* =========================================================
+   BOOK COVER / CAROUSEL
+========================================================= */
+.book-cover {
+  flex: 1 1 300px;
+  max-width: 400px;
+  position: relative;
+}
 
 .carousel {
   position: relative;
-  z-index: 1;
-  max-width: 1300px;
   width: 100%;
-  margin: 0 auto 20px;
-  padding-bottom: 300px;
   overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-.carousel-slide {
-  position: relative;
+.carousel-image {
   display: none;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: contain;
 }
 
-.carousel-slide.active {
+.carousel-image.active {
   display: block;
 }
 
-.carousel-slide img {
-  width: 80%;
-  height: 600px;
-  object-fit: cover;
-}
-
-.carousel-slide h2 {
-  margin-left: 100px;
-  position: absolute;
-  bottom: 250px;
-  font-size: 80px;
-  z-index: 5;
-  color: white;
-  text-align: left;
-}
-
-.slide-btn {
-  position: absolute;
-  bottom: 85px;
-  left: 75%;
-  transform: translateX(-50%);
-  padding: 17px 55px;
-  background-color: var(--color-primary);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  z-index: 5;
-  transition: background 0.3s ease;
-}
-
-.slide-btn:hover {
-  background: rgba(0, 0, 0, 0.8);
-}
-
-button.prev,
-button.next {
+.product-prev,
+.product-next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(115, 147, 179, 0.8);
   color: white;
   border: none;
-  padding: 12px;
+  padding: 10px 15px;
+  font-size: 1.5rem;
   cursor: pointer;
-  font-size: 18px;
   border-radius: 50%;
+  user-select: none;
+  transition: background-color 0.3s ease;
   z-index: 10;
 }
 
-button.prev { left: 10px; }
-button.next { right: 10px; }
-
-/* Mobile Carousel */
-@media (max-width: 480px) {
-  .carousel-slide img {
-    max-height: 500px;
-  }
-
-  .carousel-slide h2 {
-    font-size: 24px;
-    margin-left: 15px;
-    bottom: 90px;
-  }
-
-  .slide-btn {
-    font-size: 8px;
-    padding: 8px 16px;
-    bottom: 20px;
-    left: 70%;
-  }
-
-  button.prev,
-  button.next {
-    padding: 8px;
-    font-size: 14px;
-  }
+.product-prev:hover,
+.product-next:hover {
+  background-color: rgba(115, 147, 179, 1);
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-  .carousel-slide img {
-    max-height: 500px;
-  }
+.product-prev { left: 10px; }
+.product-next { right: 10px; }
 
-  .carousel-slide h2 {
-    font-size: 36px;
-    margin-left: 30px;
-    bottom: 120px;
-  }
-
-  .slide-btn {
-    font-size: 15px;
-    padding: 8px 16px;
-    bottom: 40px;
-  }
-
-  button.prev,
-  button.next {
-    font-size: 16px;
-    padding: 10px;
-  }
-}
-
-/* =========================================
-   BOOK LIST
-========================================= */
-
-.book-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  max-width: 2200px;
-  margin-left: 140px;
-  padding: 50px 0;
-}
-
-@media (max-width: 1024px) {
-  .book-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .book-list {
-    grid-template-columns: repeat(2, 1fr);
-    margin: 2px;
-  }
-
-  .book-item {
-    width: 100%;
-    max-width: 250px;
-    padding: 1px;
-    font-size: 0.6rem;
-    box-sizing: border-box;
-  }
-
-  .book {
-    border-radius: 2px;
-    padding: 1px;
-  }
-}
-
-/* ZUSAMMENGEFÜHRTE .book-KLASSE */
-.book {
-  width: 100%;
-  height: auto;
-  background: #f8f8f8;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  padding: 15px;
-  transition: transform 0.3s ease;
+/* =========================================================
+   BOOK INFO
+========================================================= */
+.book-info {
+  flex: 1 1 300px;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
+  gap: 15px;
 }
 
-.book:hover {
-  transform: translateY(-5px);
+.book-info h1 {
+  font-family: var(--font-heading);
+  color: var(--color-secondary);
+  font-size: 2.4rem;
+  margin-bottom: 10px;
 }
 
-.image-wrapper {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  aspect-ratio: 3 / 4;
+.book-info .author {
+  font-style: italic;
+  color: #555;
+  font-size: 1.2rem;
 }
 
-.image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.book-info .price {
+  font-size: 1.5rem;
+  color: var(--color-primary);
 }
 
-.hover-btn {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #060606;
-  color: white;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 5px;
-  text-decoration: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  margin-top: auto;
-}
-
-.image-wrapper:hover .hover-btn {
-  opacity: 1;
-}
-
-/* =========================================
-   BUTTONS
-========================================= */
-
-button {
-  padding: 10px;
-  background-color: var(--color-primary);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin: 0 auto;
-}
-
-/* =========================================
-   NEWSLETTER
-========================================= */
-
-.newsletter-section {
-  padding: 20px;
-  text-align: center;
-  margin-top: 19px;
-}
-
-.newsletter-section form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.newsletter-section input[type="email"] {
-  padding: 7px;
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 0.7rem;
-}
-
-.newsletter-section button {
-  background-color: #e66e3f;
-  border-radius: 6px;
-  padding: 7px;
-}
-
-.newsletter-section button:hover {
-  background-color: #ff5722;
-}
-
-/* =========================================
-   THANK YOU
-========================================= */
-
-.thank-you-container {
-  max-width: 600px;
-  margin: 100px auto;
-  padding: 40px;
-  text-align: center;
-  background-color: #f7f7f7;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  font-family: sans-serif;
-}
-
-.thank-you-container h1 {
-  color: #2c3e50;
-}
-
-.thank-you-container a {
-  display: inline-block;
-  margin-top: 20px;
-  color: white;
-  background-color: #3498db;
-  padding: 10px 20px;
-  border-radius: 5px;
-}
-
-/* =========================================
-   FORMS
-========================================= */
-
-.form {
-  margin: 0 0 20px 100px;
-  max-width: 600px;
-}
-
-.form h2 {
-  text-align: left;
-}
-
-form {
-  font-size: 18px;
-}
-
-label {
-  display: block;
-  margin-bottom: 15px;
-  font-weight: 600;
-}
-
-input, select {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  border-radius: 6px;
-}
-
-.payment-details {
-  margin-top: 15px;
-  padding: 15px;
-  background-color: #f5f5f5;
-}
-
-button[type="submit"] {
-  background-color: #ff7f50;
-  color: #fff;
+.book-info .release {
   font-size: 1rem;
+  color: #444;
+}
+
+.book-info .description {
+  font-size: 1.3rem;
+  font-family: var(--font-heading);
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+/* Quantity */
+label[for="quantity"] {
+  font-weight: 600;
+  margin-top: 20px;
+  font-size: 1.1rem;
+}
+
+#quantity {
+  width: 60px;
+  padding: 8px 10px;
+  font-size: 1rem;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+/* Button */
+.book-info button {
+  margin-top: 20px;
+  background-color: var(--color-primary);
   border: none;
-  border-radius: 3px;
-  padding: 8px;
+  color: white;
+  font-size: 1.2rem;
+  padding: 7px 15px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  max-width: 220px;
+  align-self: flex-start;
+}
+
+.book-info button:hover {
+  background-color: #527a9b;
+}
+
+.back-link {
+  display: inline-block;
+  margin: 10px 0;
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: 20px;
+}
+
+/* =========================================================
+   INFO ACCORDION
+========================================================= */
+.info-details {
   margin-top: 15px;
+  font-family: var(--font-heading);
 }
 
-button[type="submit"]:hover {
-  background-color: #e66e3f;
-}
-
-#nachricht {
-  width: 100%;
-  height: 120px;
-}
-
-.newsletter_privacy-consent {
+.info-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 8px;
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: var(--color-secondary);
+  padding: 6px 0;
+  border-bottom: 1px solid #ddd;
+  user-select: none;
+}
+
+.info-arrow {
+  transition: transform 0.3s ease;
+}
+
+.info-content {
+  display: none;
   margin-top: 10px;
-  font-size: 16px;
-  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1.5;
 }
 
-.newsletter_privacy-consent input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
+.info-open .info-content {
+  display: block;
 }
 
-/* Mobile Forms */
-@media (max-width: 768px) {
-  .form {
-    margin: 25px;
-    max-width: 100%;
-  }
+.info-open .info-arrow {
+  transform: rotate(90deg);
 }
 
-/* =========================================
-   RECHTLICHES
-========================================= */
+/* =========================================================
+   BOOK DESCRIPTION
+========================================================= */
+.book-description {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-size: 1.3rem;
+  line-height: 1.8;
+  font-family: var(--font-heading);
+}
 
-.rechtliches { 
-  margin: 50px 180px;
+/* =========================================================
+   LEGAL / RECHTLICHES
+========================================================= */
+.rechtliches {
+  margin: 50px auto;
+  max-width: 900px;
+  padding: 0 20px;
 }
 
 .rechtliches h2 {
   font-family: var(--font-heading);
-  color: black;
   font-size: 2.4rem;
   margin-bottom: 5px;
 }
 
 .rechtliches h3 {
   font-family: var(--font-heading);
-  color: black;
   font-size: 2rem;
 }
 
@@ -668,26 +297,49 @@ button[type="submit"]:hover {
   font-size: 1.3rem;
   font-family: var(--font-heading);
   line-height: 1.6;
-  color: #333;
   margin-top: 10px;
 }
 
-/* Mobile Rechtliches */
-@media screen and (max-width: 768px) {
-  .rechtliches {
-    margin: 20px 35px;
+/* =========================================================
+   MEDIA QUERIES
+========================================================= */
+@media (max-width: 768px) {
+
+  header a {
+    padding: 0 10px;
   }
 
-  .rechtliches h2 {
-    font-size: 1.8rem;
+  .book-container {
+    flex-direction: column;
+    gap: 20px;
   }
 
-  .rechtliches h3 {
+  .book-info h1 {
+    font-size: 2rem;
+  }
+
+  .book-info .price {
+    font-size: 1.3rem;
+  }
+
+  .book-description {
+    padding: 0 10px;
     font-size: 1.2rem;
+    margin: 20px auto 40px;
   }
 
-  .rechtliches p {
+  .book-info button {
+    width: 100%;
+    max-width: none;
+    padding: 7px 3px;
     font-size: 1.1rem;
-    line-height: 1.4;
   }
+
+  footer {
+    font-size: 0.8rem;
+  }
+
+  .rechtliches h2 { font-size: 1.8rem; }
+  .rechtliches h3 { font-size: 1.2rem; }
+  .rechtliches p  { font-size: 1.1rem; line-height: 1.4; }
 }
