@@ -16,23 +16,27 @@
 /* =========================================================
    BASE ELEMENTS
 ========================================================= */
-body {
+html, body {
   margin: 0;
-  font-family: var(--font-body);
-  color: #333;
+  padding: 0;
+  height: 100%;
+}
+
+body {
   display: flex;
   flex-direction: column;
+  min-height: 100dvh; /* robust für Mobile */
+  font-family: var(--font-body);
+  color: #333;
+}
+
+main.page-content {
+  flex: 1; /* füllt den restlichen Platz zwischen Header und Footer */
 }
 
 a {
   text-decoration: none;
 }
-
-html, body {
-  height: 100%;
-}
-
-
 
 /* =========================================================
    HEADER
@@ -61,23 +65,23 @@ header a {
   padding: 0;
 }
 
-
 /* =========================================================
    FOOTER
 ========================================================= */
 footer {
   background-color: #ebebe3;
-  padding: 10px;
+  padding: 25px 10px;
   text-align: center;
   color: #333;
   font-family: var(--font-heading);
+  margin-top: auto; /* schiebt Footer nach unten */
 }
 
 footer a {
-  color: #333;
+  color: inherit; /* bleibt neutral, Icons können extra gestylt werden */
 }
 
-.social-icons {
+.social-icons i {
   color: var(--color-primary);
   font-size: 2em;
   margin: 5px;
@@ -351,10 +355,7 @@ label[for="quantity"] {
 
   footer {
     font-size: 0.8rem;
-    margin-top: auto;
   }
-
-
 
   .rechtliches h2 { font-size: 1.8rem; }
   .rechtliches h3 { font-size: 1.2rem; }
