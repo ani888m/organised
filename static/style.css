@@ -23,26 +23,14 @@
 
 
 
-/* =========================================================
-   BASE ELEMENTS
-========================================================= */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
 
 body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100dvh; /* robust für Mobile */
   font-family: var(--font-body);
   color: #333;
 }
 
-main.page-content {
-  flex: 1; /* füllt den restlichen Platz zwischen Header und Footer */
-}
+
+
 
 
 h1, h2, h3 {
