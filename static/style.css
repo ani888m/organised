@@ -663,10 +663,16 @@ button[type="submit"]:hover {
   margin-top: 10px;
 }
 
+@media screen and (max-width: 1024px) {
+  .rechtliches {
+    margin: 30px 55px 200px 55px;
+  }
+
+
 /* Mobile Rechtliches */
 @media screen and (max-width: 768px) {
   .rechtliches {
-    margin: 20px 35px;
+    margin: 20px 35px 100px 35px;
   }
 
   .rechtliches h2 {
