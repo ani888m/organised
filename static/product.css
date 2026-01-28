@@ -72,6 +72,7 @@ footer {
   color: #333;
   font-family: var(--font-heading);
   margin-top: auto; /* schiebt Footer nach unten */
+  font-size: 1.5rem;
 }
 
 footer a {
@@ -351,7 +352,8 @@ label[for="quantity"] {
   }
 
   footer {
-    font-size: 0.8rem;
+    font-size: 1rem;
+     
   }
 
   .rechtliches h2 { font-size: 1.8rem; }
