@@ -63,7 +63,7 @@ img {
 ========================================= */
 /* Scroll-Offset für Sprungziel */
 :target {
-  scroll-margin-top: 100px; /* Höhe deines Headers anpassen */
+  scroll-margin-top: 150px; /* Höhe deines Headers anpassen */
 }
 
 
