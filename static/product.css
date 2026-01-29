@@ -72,7 +72,7 @@ footer {
   color: #333;
   font-family: var(--font-heading);
   margin-top: auto; /* schiebt Footer nach unten */
-  font-size: 1.2rem;
+  font-size: 16px;
 }
 
 footer a {
