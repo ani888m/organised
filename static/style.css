@@ -17,6 +17,10 @@
   padding: 0;
 }
 
+main.page-content {
+  flex: 1; /* füllt den restlichen Platz zwischen Header und Footer */
+}
+
 /* =========================================
    3. BASE STYLES
 ========================================= */
