@@ -46,48 +46,13 @@ else:
 
 # ---------- BUCHBUTLER API ZUGANG ----------
 
-BUCHBUTLER_USER = os.getenv("BUCHBUTLER_USER")
-BUCHBUTLER_PASSWORD = os.getenv("BUCHBUTLER_PASSWORD")
-
-
-# ⭐ NEU → Lager & Verfügbarkeitsdaten laden
-def lade_lager_von_api(ean):
-
-    if not BUCHBUTLER_USER or not BUCHBUTLER_PASSWORD:
-        return {}
-
-    url = "https://api.buchbutler.de/AVAILABILITY/"
-    params = {
-        "username": BUCHBUTLER_USER,
-        "passwort": BUCHBUTLER_PASSWORD,
-        "ean": ean
-    }
-
-    try:
-        response = requests.get(url, params=params, timeout=10)
-        response.raise_for_status()
-        data = response.json()
-
-        res = data.get("response")
-        if not res:
-            return {}
-
-        return res[0]  # API liefert Array
-
-    except Exception as e:
-        logger.error(f"Lager API Fehler: {e}")
-        return {}
-
-
-
-# ---------- PRODUKT LADEN ----------
 def lade_produkt_von_api(ean):
-
     if not BUCHBUTLER_USER or not BUCHBUTLER_PASSWORD:
         logger.error("Buchbutler Zugangsdaten fehlen")
         return None
 
-    url = "https://api.buchbutler.de/CONTENT/"
+    # --- 1️⃣ Content holen ---
+    content_url = "https://api.buchbutler.de/CONTENT/"
     params = {
         "username": BUCHBUTLER_USER,
         "passwort": BUCHBUTLER_PASSWORD,
@@ -95,7 +60,7 @@ def lade_produkt_von_api(ean):
     }
 
     try:
-        response = requests.get(url, params=params, timeout=10)
+        response = requests.get(content_url, params=params, timeout=10)
         response.raise_for_status()
         data = response.json()
 
@@ -105,9 +70,17 @@ def lade_produkt_von_api(ean):
 
         attrs = res.get("Artikelattribute", {})
 
-        # ⭐ NEU → Lagerdaten laden
-        lager = lade_lager_von_api(ean)
+        # --- 2️⃣ Lagerdaten (Movement) holen ---
+        movement_url = "https://api.buchbutler.de/MOVEMENT/"
+        response_lager = requests.get(movement_url, params=params, timeout=10)
+        response_lager.raise_for_status()
+        data_lager = response_lager.json()
+        bewegungen = data_lager.get("response", {}).get("Bewegungen", [])
 
+        # Beispiel: erstes Lager oder summieren
+        lager = bewegungen[0] if bewegungen else {}
+
+        # --- Produkt zusammenbauen ---
         produkt = {
             "id": int(res.get("pim_artikel_id", 0)),
             "name": res.get("bezeichnung"),
@@ -122,27 +95,25 @@ def lade_produkt_von_api(ean):
             "isbn": attrs.get("ISBN_13", {}).get("Wert", ""),
             "seiten": attrs.get("Seiten", {}).get("Wert", ""),
             "format": attrs.get("Buchtyp", {}).get("Wert", ""),
-
             "sprache": attrs.get("Sprache", {}).get("Wert", ""),
             "verlag": attrs.get("Verlag", {}).get("Wert", ""),
             "erscheinungsjahr": attrs.get("Erscheinungsjahr", {}).get("Wert", ""),
             "erscheinungsdatum": attrs.get("Erscheinungsdatum", {}).get("Wert", ""),
-
             "alter_von": attrs.get("Altersempfehlung_von", {}).get("Wert", ""),
             "alter_bis": attrs.get("Altersempfehlung_bis", {}).get("Wert", ""),
             "lesealter": attrs.get("Lesealter", {}).get("Wert", ""),
-
             "gewicht": attrs.get("Gewicht", {}).get("Wert", ""),
             "laenge": attrs.get("Laenge", {}).get("Wert", ""),
             "breite": attrs.get("Breite", {}).get("Wert", ""),
             "hoehe": attrs.get("Hoehe", {}).get("Wert", ""),
 
-            # ⭐ NEU → Lager / Versand Infos
+            # Lager / Versand
             "bestand": lager.get("Bestand") or None,
             "einkaufspreis": lager.get("Einkaufspreis") or None,
             "handling_zeit": lager.get("Handling_Zeit_in_Werktagen") or None,
             "erfuellungsrate": lager.get("Erfuellungsrate") or None,
 
+            # Rohdaten extra speichern
             "extra": attrs
         }
 
@@ -151,6 +122,7 @@ def lade_produkt_von_api(ean):
     except Exception as e:
         logger.error(f"Fehler beim Laden von API: {e}")
         return None
+
 
 # ---------- SENDGRID KONFIGURATION ----------
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
