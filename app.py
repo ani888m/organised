@@ -239,17 +239,50 @@ def index():
 
 @app.route('/produkt/<int:produkt_id>')
 def produkt_detail(produkt_id):
+    # Produkt aus der lokalen JSON-Datei laden
     produkt = next((p for p in produkte if p['id'] == produkt_id), None)
-
-    if produkt and produkt.get("ean"):
-        api_produkt = lade_produkt_von_api(produkt["ean"])
-        if api_produkt:
-            produkt.update(api_produkt)
-
+    
     if not produkt:
         abort(404)
 
+    # Wenn eine EAN vorhanden ist, Daten von Buchbutler API laden
+    ean = produkt.get("ean")
+    if ean:
+        api_produkt = lade_produkt_von_api(ean)
+        if api_produkt:
+            produkt.update(api_produkt)
+
+        # Lager-/Bestandsinformationen holen
+        movement = lade_bestand_von_api(ean)
+        if movement:
+            produkt.update(movement)
+
+    # Alle fehlenden Felder auf Default setzen, um Template-Fehler zu vermeiden
+    default_fields = {
+        "bilder": [],
+        "isbn": "",
+        "seiten": "",
+        "format": "",
+        "verlag": "",
+        "sprache": "",
+        "erscheinungsjahr": "",
+        "alter_von": "",
+        "alter_bis": "",
+        "lesealter": "",
+        "gewicht": "",
+        "laenge": "",
+        "breite": "",
+        "hoehe": "",
+        "bestand": "–",
+        "handling_zeit": "–",
+        "erfuellungsrate": "–",
+        "preis": 0.0
+    }
+    for key, value in default_fields.items():
+        produkt.setdefault(key, value)
+
     return render_template('produkt.html', produkt=produkt, user_email=session.get("user_email"))
+
 
 # ---------- SEITEN ----------
 @app.route('/navbar')
