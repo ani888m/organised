@@ -46,13 +46,18 @@ else:
 
 # ---------- BUCHBUTLER API ZUGANG ----------
 
+import os
+
+BUCHBUTLER_USER = os.getenv("BUCHBUTLER_USER")
+BUCHBUTLER_PASSWORD = os.getenv("BUCHBUTLER_PASSWORD")
+
 def lade_produkt_von_api(ean):
+    """Lädt ein Buch von Buchbutler API anhand der EAN"""
     if not BUCHBUTLER_USER or not BUCHBUTLER_PASSWORD:
         logger.error("Buchbutler Zugangsdaten fehlen")
         return None
 
-    # --- 1️⃣ Content holen ---
-    content_url = "https://api.buchbutler.de/CONTENT/"
+    url = "https://api.buchbutler.de/CONTENT/"
     params = {
         "username": BUCHBUTLER_USER,
         "passwort": BUCHBUTLER_PASSWORD,
@@ -60,38 +65,23 @@ def lade_produkt_von_api(ean):
     }
 
     try:
-        response = requests.get(content_url, params=params, timeout=10)
+        response = requests.get(url, params=params, timeout=10)
         response.raise_for_status()
         data = response.json()
-
         res = data.get("response")
         if not res:
             return None
 
+        # <<< WICHTIG: attrs hier definieren >>>
         attrs = res.get("Artikelattribute", {})
 
-        # --- 2️⃣ Lagerdaten (Movement) holen ---
-        movement_url = "https://api.buchbutler.de/MOVEMENT/"
-        response_lager = requests.get(movement_url, params=params, timeout=10)
-        response_lager.raise_for_status()
-        data_lager = response_lager.json()
-        bewegungen = data_lager.get("response", {}).get("Bewegungen", [])
-
-        # Beispiel: erstes Lager oder summieren
-        lager = bewegungen[0] if bewegungen else {}
-
-        # --- Produkt zusammenbauen ---
         produkt = {
             "id": int(res.get("pim_artikel_id", 0)),
             "name": res.get("bezeichnung"),
             "autor": attrs.get("Autor", {}).get("Wert", ""),
             "preis": float(res.get("vk_brutto") or 0),
             "beschreibung": res.get("text_text") or "",
-
-            # Bild
             "bilder": [f"https://api.buchbutler.de/image/{ean}"],
-
-            # Details
             "isbn": attrs.get("ISBN_13", {}).get("Wert", ""),
             "seiten": attrs.get("Seiten", {}).get("Wert", ""),
             "format": attrs.get("Buchtyp", {}).get("Wert", ""),
@@ -106,14 +96,6 @@ def lade_produkt_von_api(ean):
             "laenge": attrs.get("Laenge", {}).get("Wert", ""),
             "breite": attrs.get("Breite", {}).get("Wert", ""),
             "hoehe": attrs.get("Hoehe", {}).get("Wert", ""),
-
-            # Lager / Versand
-            "bestand": lager.get("Bestand") or None,
-            "einkaufspreis": lager.get("Einkaufspreis") or None,
-            "handling_zeit": lager.get("Handling_Zeit_in_Werktagen") or None,
-            "erfuellungsrate": lager.get("Erfuellungsrate") or None,
-
-            # Rohdaten extra speichern
             "extra": attrs
         }
 
@@ -123,6 +105,48 @@ def lade_produkt_von_api(ean):
         logger.error(f"Fehler beim Laden von API: {e}")
         return None
 
+
+def lade_bestand_von_api(ean):
+    """Lädt Bestands- und Preisinformationen von Buchbutler API anhand der EAN"""
+    if not BUCHBUTLER_USER or not BUCHBUTLER_PASSWORD:
+        logger.error("Buchbutler Zugangsdaten fehlen")
+        return None
+
+    url = "https://api.buchbutler.de/MOVEMENT/"
+    params = {
+        "username": BUCHBUTLER_USER,
+        "passwort": BUCHBUTLER_PASSWORD,
+        "ean": ean
+    }
+
+    try:
+        response = requests.get(url, params=params, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        res = data.get("response", [])
+        if not res:
+            return None
+
+        # Wir nehmen das erste Item (falls mehrere zurückkommen)
+        info = res[0]
+
+        # Dictionary mit wichtigen Lager-/Preisinfos
+        bestand_info = {
+            "ean": info.get("EAN", ""),
+            "bestand": int(info.get("Bestand", 0)),
+            "einkaufspreis": float(info.get("Einkaufspreis", 0)),
+            "preis": float(info.get("Preis", 0)),
+            "preistyp": info.get("Preistyp", ""),
+            "umsatzsteuer": float(info.get("Umsatzsteuer_Deutschland", 0)),
+            "handling_zeit": info.get("Handling_Zeit_in_Werktagen", ""),
+            "erfuellungsrate": info.get("Erfuellungsrate", "")
+        }
+
+        return bestand_info
+
+    except Exception as e:
+        logger.error(f"Fehler beim Laden von MOVEMENT API: {e}")
+        return None
 
 # ---------- SENDGRID KONFIGURATION ----------
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
