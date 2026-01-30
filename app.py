@@ -45,9 +45,6 @@ else:
     produkte = []  # Falls Datei fehlt
 
 # ---------- BUCHBUTLER API ZUGANG ----------
-
-import os
-
 BUCHBUTLER_USER = os.getenv("BUCHBUTLER_USER")
 BUCHBUTLER_PASSWORD = os.getenv("BUCHBUTLER_PASSWORD")
 
@@ -72,7 +69,6 @@ def lade_produkt_von_api(ean):
         if not res:
             return None
 
-        # <<< WICHTIG: attrs hier definieren >>>
         attrs = res.get("Artikelattribute", {})
 
         produkt = {
@@ -98,16 +94,14 @@ def lade_produkt_von_api(ean):
             "hoehe": attrs.get("Hoehe", {}).get("Wert", ""),
             "extra": attrs
         }
-
         return produkt
 
     except Exception as e:
-        logger.error(f"Fehler beim Laden von API: {e}")
+        logger.error(f"Fehler beim Laden von CONTENT API: {e}")
         return None
 
-
 def lade_bestand_von_api(ean):
-    """Lädt Bestands- und Preisinformationen von Buchbutler API anhand der EAN"""
+    """Lädt Bestand, Preis, Lieferzeit von Buchbutler MOVEMENT API"""
     if not BUCHBUTLER_USER or not BUCHBUTLER_PASSWORD:
         logger.error("Buchbutler Zugangsdaten fehlen")
         return None
@@ -123,46 +117,28 @@ def lade_bestand_von_api(ean):
         response = requests.get(url, params=params, timeout=10)
         response.raise_for_status()
         data = response.json()
-        res = data.get("response", [])
-        if not res:
+        if "response" not in data:
             return None
 
-        # MOVEMENT-Daten (Bestand, Preis, Lieferzeit etc.)
-        movement = lade_bestand_von_api(produkt["ean"])
-        if movement:
-            produkt.update(movement)
-
-        # Wir nehmen das erste Item (falls mehrere zurückkommen)
-        info = res[0]
-
-        # Dictionary mit wichtigen Lager-/Preisinfos
-        bestand_info = {
-            "ean": info.get("EAN", ""),
-            "bestand": int(info.get("Bestand", 0)),
-            "einkaufspreis": float(info.get("Einkaufspreis", 0)),
-            "preis": float(info.get("Preis", 0)),
-            "preistyp": info.get("Preistyp", ""),
-            "umsatzsteuer": float(info.get("Umsatzsteuer_Deutschland", 0)),
-            "handling_zeit": info.get("Handling_Zeit_in_Werktagen", ""),
-            "erfuellungsrate": info.get("Erfuellungsrate", "")
+        res = data["response"]
+        return {
+            "bestand": res.get("lagerbestand", ""),
+            "preis": float(res.get("preis") or 0),
+            "handling_zeit": res.get("handling_zeit", ""),
+            "erfuellungsrate": res.get("erfuellungsrate", "")
         }
-
-        return bestand_info
 
     except Exception as e:
         logger.error(f"Fehler beim Laden von MOVEMENT API: {e}")
         return None
-        
-  
+
 # ---------- SENDGRID KONFIGURATION ----------
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 EMAIL_SENDER = os.getenv("EMAIL_SENDER")
 
 def send_email(subject, body, recipient=EMAIL_SENDER):
-    """E-Mail-Versand mit SendGrid"""
     if not SENDGRID_API_KEY or not EMAIL_SENDER:
         raise ValueError("SENDGRID_API_KEY oder EMAIL_SENDER ist nicht gesetzt!")
-
     message = Mail(
         from_email=EMAIL_SENDER,
         to_emails=recipient,
@@ -182,37 +158,27 @@ def send_email(subject, body, recipient=EMAIL_SENDER):
 def login():
     if request.method == "POST":
         action = request.form.get("action")
+        email = request.form.get("email")
+        password = request.form.get("password")
 
         if action == "register":
-            email = request.form.get("email")
-            password = request.form.get("password")
-
             if not email or not password:
                 flash("Bitte alle Felder ausfüllen.", "error")
                 return redirect(url_for("login"))
-
-            existing = User.query.filter_by(email=email).first()
-            if existing:
+            if User.query.filter_by(email=email).first():
                 flash("Diese E-Mail ist bereits registriert.", "error")
                 return redirect(url_for("login"))
-
             hashed = generate_password_hash(password)
-            new_user = User(email=email, password=hashed)
-            db.session.add(new_user)
+            db.session.add(User(email=email, password=hashed))
             db.session.commit()
-
             flash("Registrierung erfolgreich! Bitte melde dich an.", "success")
             return redirect(url_for("login"))
 
         elif action == "login":
-            email = request.form.get("email")
-            password = request.form.get("password")
-
             user = User.query.filter_by(email=email).first()
             if not user or not check_password_hash(user.password, password):
                 flash("Falsche E-Mail oder Passwort.", "error")
                 return redirect(url_for("login"))
-
             session["user_id"] = user.id
             session["user_email"] = user.email
             flash("Erfolgreich eingeloggt!", "success")
@@ -239,52 +205,30 @@ def index():
 
 @app.route('/produkt/<int:produkt_id>')
 def produkt_detail(produkt_id):
-    # Produkt aus der lokalen JSON-Datei laden
     produkt = next((p for p in produkte if p['id'] == produkt_id), None)
-    
     if not produkt:
         abort(404)
 
-    # Wenn eine EAN vorhanden ist, Daten von Buchbutler API laden
-    ean = produkt.get("ean")
-    if ean:
-        api_produkt = lade_produkt_von_api(ean)
+    # 1️⃣ CONTENT API Daten laden
+    if produkt.get("ean"):
+        api_produkt = lade_produkt_von_api(produkt["ean"])
         if api_produkt:
             produkt.update(api_produkt)
 
-        # Lager-/Bestandsinformationen holen
-        movement = lade_bestand_von_api(ean)
+        movement = lade_bestand_von_api(produkt["ean"])
         if movement:
             produkt.update(movement)
 
-    # Alle fehlenden Felder auf Default setzen, um Template-Fehler zu vermeiden
-    default_fields = {
-        "bilder": [],
-        "isbn": "",
-        "seiten": "",
-        "format": "",
-        "verlag": "",
-        "sprache": "",
-        "erscheinungsjahr": "",
-        "alter_von": "",
-        "alter_bis": "",
-        "lesealter": "",
-        "gewicht": "",
-        "laenge": "",
-        "breite": "",
-        "hoehe": "",
-        "bestand": "–",
-        "handling_zeit": "–",
-        "erfuellungsrate": "–",
-        "preis": 0.0
-    }
-    for key, value in default_fields.items():
-        produkt.setdefault(key, value)
+    # 2️⃣ Default-Werte setzen
+    produkt.setdefault("bestand", "n/a")
+    produkt.setdefault("preis", 0)
+    produkt.setdefault("handling_zeit", "n/a")
+    produkt.setdefault("erfuellungsrate", "n/a")
 
     return render_template('produkt.html', produkt=produkt, user_email=session.get("user_email"))
 
+# ---------- RESTLICHE ROUTES ----------
 
-# ---------- SEITEN ----------
 @app.route('/navbar')
 def navbar():
     return render_template('navbar.html', user_email=session.get("user_email"))
@@ -305,7 +249,6 @@ def presse():
 def kontakt():
     return render_template('kontakt.html', user_email=session.get("user_email"))
 
-# ---------- CHECKOUT MIT NEWSLETTER ----------
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
     if request.method == 'POST':
@@ -332,7 +275,6 @@ def checkout():
 
     return render_template('checkout.html', user_email=session.get("user_email"))
 
-# ---------- FORMULARE ----------
 @app.route('/submit', methods=['POST'])
 def submit():
     name = request.form.get('name')
@@ -360,7 +302,6 @@ def newsletter():
     if not email:
         flash('Bitte gib eine gültige E-Mail-Adresse ein.', 'error')
         return redirect('/')
-
     try:
         send_email(
             subject='Neue Newsletter-Anmeldung',
@@ -372,7 +313,6 @@ def newsletter():
         flash(f"Fehler beim Newsletter-Versand: {e}", 'error')
         return redirect('/')
 
-# ---------- DANKESSEITEN ----------
 @app.route('/danke')
 def danke():
     return render_template('danke.html', user_email=session.get("user_email"))
@@ -385,7 +325,6 @@ def kontaktdanke():
 def bestelldanke():
     return render_template('bestelldanke.html', user_email=session.get("user_email"))
 
-# ---------- WARENKORB ----------
 @app.route('/cart')
 def cart():
     cart_items = [
@@ -393,8 +332,6 @@ def cart():
     ]
     total = sum(item['price'] * item['quantity'] for item in cart_items)
     return render_template('cart.html', cart_items=cart_items, total=total, user_email=session.get("user_email"))
-
-# ---------- RECHTLICHES ----------
 
 @app.route('/rechtliches')
 def rechtliches():
@@ -408,7 +345,6 @@ def datenschutz():
 def impressum():
     return render_template('impressum.html', user_email=session.get("user_email"))
 
-# ---------- CRON / TEST ----------
 @app.route("/cron")
 def cron():
     print("Cronjob wurde ausgelöst")
