@@ -147,6 +147,10 @@ def lade_bestand_von_api(ean):
     except Exception as e:
         logger.error(f"Fehler beim Laden von MOVEMENT API: {e}")
         return None
+        
+   movement = lade_bestand_von_api(ean)
+     if movement:
+       produkt.update(movement)
 
 # ---------- SENDGRID KONFIGURATION ----------
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
