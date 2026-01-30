@@ -177,6 +177,12 @@ def lade_bestand_von_api(ean):
         if not res:
             return None
 
+        # 🔥 FIX — falls Liste zurückkommt
+        if isinstance(res, list):
+            if len(res) == 0:
+                return None
+            res = res[0]
+
         return {
             "bestand": to_int(res.get("lagerbestand")),
             "preis": to_float(res.get("preis")),
