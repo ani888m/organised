@@ -46,13 +46,43 @@ else:
 
 # ---------- BUCHBUTLER API ZUGANG ----------
 
-import os
-
 BUCHBUTLER_USER = os.getenv("BUCHBUTLER_USER")
 BUCHBUTLER_PASSWORD = os.getenv("BUCHBUTLER_PASSWORD")
 
+
+# ⭐ NEU → Lager & Verfügbarkeitsdaten laden
+def lade_lager_von_api(ean):
+
+    if not BUCHBUTLER_USER or not BUCHBUTLER_PASSWORD:
+        return {}
+
+    url = "https://api.buchbutler.de/AVAILABILITY/"
+    params = {
+        "username": BUCHBUTLER_USER,
+        "passwort": BUCHBUTLER_PASSWORD,
+        "ean": ean
+    }
+
+    try:
+        response = requests.get(url, params=params, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+
+        res = data.get("response")
+        if not res:
+            return {}
+
+        return res[0]  # API liefert Array
+
+    except Exception as e:
+        logger.error(f"Lager API Fehler: {e}")
+        return {}
+
+
+
+# ---------- PRODUKT LADEN ----------
 def lade_produkt_von_api(ean):
-    """Lädt ein Buch von Buchbutler API anhand der EAN"""
+
     if not BUCHBUTLER_USER or not BUCHBUTLER_PASSWORD:
         logger.error("Buchbutler Zugangsdaten fehlen")
         return None
@@ -73,8 +103,10 @@ def lade_produkt_von_api(ean):
         if not res:
             return None
 
-        # <<< WICHTIG: attrs hier definieren >>>
         attrs = res.get("Artikelattribute", {})
+
+        # ⭐ NEU → Lagerdaten laden
+        lager = lade_lager_von_api(ean)
 
         produkt = {
             "id": int(res.get("pim_artikel_id", 0)),
@@ -86,9 +118,8 @@ def lade_produkt_von_api(ean):
             # Bild
             "bilder": [f"https://api.buchbutler.de/image/{ean}"],
 
-            # Weitere Details
+            # Details
             "isbn": attrs.get("ISBN_13", {}).get("Wert", ""),
-           
             "seiten": attrs.get("Seiten", {}).get("Wert", ""),
             "format": attrs.get("Buchtyp", {}).get("Wert", ""),
 
@@ -106,7 +137,12 @@ def lade_produkt_von_api(ean):
             "breite": attrs.get("Breite", {}).get("Wert", ""),
             "hoehe": attrs.get("Hoehe", {}).get("Wert", ""),
 
-            # optional Rohdaten
+            # ⭐ NEU → Lager / Versand Infos
+            "bestand": lager.get("Bestand"),
+            "einkaufspreis": lager.get("Einkaufspreis"),
+            "handling_zeit": lager.get("Handling_Zeit_in_Werktagen"),
+            "erfuellungsrate": lager.get("Erfuellungsrate"),
+
             "extra": attrs
         }
 
@@ -115,7 +151,6 @@ def lade_produkt_von_api(ean):
     except Exception as e:
         logger.error(f"Fehler beim Laden von API: {e}")
         return None
-
 
 # ---------- SENDGRID KONFIGURATION ----------
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
