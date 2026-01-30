@@ -45,92 +45,149 @@ else:
     produkte = []  # Falls Datei fehlt
 
 # ---------- BUCHBUTLER API ZUGANG ----------
+
+
+logger = logging.getLogger(__name__)
+
 BUCHBUTLER_USER = os.getenv("BUCHBUTLER_USER")
 BUCHBUTLER_PASSWORD = os.getenv("BUCHBUTLER_PASSWORD")
 
-def lade_produkt_von_api(ean):
-    """Lädt ein Buch von Buchbutler API anhand der EAN"""
+BASE_URL = "https://api.buchbutler.de"
+
+
+# -----------------------------
+# Helper Funktionen
+# -----------------------------
+
+def check_auth():
     if not BUCHBUTLER_USER or not BUCHBUTLER_PASSWORD:
         logger.error("Buchbutler Zugangsdaten fehlen")
-        return None
+        return False
+    return True
 
-    url = "https://api.buchbutler.de/CONTENT/"
+
+def to_float(value):
+    """Konvertiert API Preis sicher"""
+    if not value:
+        return 0.0
+    try:
+        return float(str(value).replace(",", "."))
+    except ValueError:
+        return 0.0
+
+
+def to_int(value):
+    """Konvertiert Zahlen sicher"""
+    if not value:
+        return 0
+    try:
+        return int(value)
+    except ValueError:
+        return 0
+
+
+def attr(attrs, key):
+    """Greift sicher auf Artikelattribute zu"""
+    return (attrs.get(key) or {}).get("Wert", "")
+
+
+def buchbutler_request(endpoint, ean):
+    """Allgemeine Request Funktion"""
+    url = f"{BASE_URL}/{endpoint}/"
+
     params = {
         "username": BUCHBUTLER_USER,
         "passwort": BUCHBUTLER_PASSWORD,
         "ean": ean
     }
 
+    response = requests.get(url, params=params, timeout=10)
+    response.raise_for_status()
+
+    data = response.json()
+
+    if not data or "response" not in data:
+        return None
+
+    return data["response"]
+
+
+# -----------------------------
+# CONTENT API
+# -----------------------------
+
+def lade_produkt_von_api(ean):
+    """Lädt Produktdaten von CONTENT API"""
+
+    if not check_auth():
+        return None
+
     try:
-        response = requests.get(url, params=params, timeout=10)
-        response.raise_for_status()
-        data = response.json()
-        res = data.get("response")
+        res = buchbutler_request("CONTENT", ean)
+
         if not res:
             return None
 
-        attrs = res.get("Artikelattribute", {})
+        attrs = res.get("Artikelattribute") or {}
 
         produkt = {
-            "id": int(res.get("pim_artikel_id", 0)),
+            "id": to_int(res.get("pim_artikel_id")),
             "name": res.get("bezeichnung"),
-            "autor": attrs.get("Autor", {}).get("Wert", ""),
-            "preis": float(res.get("vk_brutto") or 0),
+            "autor": attr(attrs, "Autor"),
+            "preis": to_float(res.get("vk_brutto")),
             "beschreibung": res.get("text_text") or "",
-            "bilder": [f"https://api.buchbutler.de/image/{ean}"],
-            "isbn": attrs.get("ISBN_13", {}).get("Wert", ""),
-            "seiten": attrs.get("Seiten", {}).get("Wert", ""),
-            "format": attrs.get("Buchtyp", {}).get("Wert", ""),
-            "sprache": attrs.get("Sprache", {}).get("Wert", ""),
-            "verlag": attrs.get("Verlag", {}).get("Wert", ""),
-            "erscheinungsjahr": attrs.get("Erscheinungsjahr", {}).get("Wert", ""),
-            "erscheinungsdatum": attrs.get("Erscheinungsdatum", {}).get("Wert", ""),
-            "alter_von": attrs.get("Altersempfehlung_von", {}).get("Wert", ""),
-            "alter_bis": attrs.get("Altersempfehlung_bis", {}).get("Wert", ""),
-            "lesealter": attrs.get("Lesealter", {}).get("Wert", ""),
-            "gewicht": attrs.get("Gewicht", {}).get("Wert", ""),
-            "laenge": attrs.get("Laenge", {}).get("Wert", ""),
-            "breite": attrs.get("Breite", {}).get("Wert", ""),
-            "hoehe": attrs.get("Hoehe", {}).get("Wert", ""),
+            "bilder": [f"{BASE_URL}/image/{ean}"],
+            "isbn": attr(attrs, "ISBN_13"),
+            "seiten": attr(attrs, "Seiten"),
+            "format": attr(attrs, "Buchtyp"),
+            "sprache": attr(attrs, "Sprache"),
+            "verlag": attr(attrs, "Verlag"),
+            "erscheinungsjahr": attr(attrs, "Erscheinungsjahr"),
+            "erscheinungsdatum": attr(attrs, "Erscheinungsdatum"),
+            "alter_von": attr(attrs, "Altersempfehlung_von"),
+            "alter_bis": attr(attrs, "Altersempfehlung_bis"),
+            "lesealter": attr(attrs, "Lesealter"),
+            "gewicht": attr(attrs, "Gewicht"),
+            "laenge": attr(attrs, "Laenge"),
+            "breite": attr(attrs, "Breite"),
+            "hoehe": attr(attrs, "Hoehe"),
             "extra": attrs
         }
+
         return produkt
 
-    except Exception as e:
-        logger.error(f"Fehler beim Laden von CONTENT API: {e}")
+    except Exception:
+        logger.exception("Fehler beim Laden von CONTENT API")
         return None
+
+
+# -----------------------------
+# MOVEMENT API
+# -----------------------------
 
 def lade_bestand_von_api(ean):
-    """Lädt Bestand, Preis, Lieferzeit von Buchbutler MOVEMENT API"""
-    if not BUCHBUTLER_USER or not BUCHBUTLER_PASSWORD:
-        logger.error("Buchbutler Zugangsdaten fehlen")
-        return None
+    """Lädt Bestand / Preis / Lieferdaten"""
 
-    url = "https://api.buchbutler.de/MOVEMENT/"
-    params = {
-        "username": BUCHBUTLER_USER,
-        "passwort": BUCHBUTLER_PASSWORD,
-        "ean": ean
-    }
+    if not check_auth():
+        return None
 
     try:
-        response = requests.get(url, params=params, timeout=10)
-        response.raise_for_status()
-        data = response.json()
-        if "response" not in data:
+        res = buchbutler_request("MOVEMENT", ean)
+
+        if not res:
             return None
 
-        res = data["response"]
         return {
-            "bestand": res.get("lagerbestand", ""),
-            "preis": float(res.get("preis") or 0),
-            "handling_zeit": res.get("handling_zeit", ""),
-            "erfuellungsrate": res.get("erfuellungsrate", "")
+            "bestand": to_int(res.get("lagerbestand")),
+            "preis": to_float(res.get("preis")),
+            "handling_zeit": res.get("handling_zeit"),
+            "erfuellungsrate": res.get("erfuellungsrate")
         }
 
-    except Exception as e:
-        logger.error(f"Fehler beim Laden von MOVEMENT API: {e}")
+    except Exception:
+        logger.exception("Fehler beim Laden von MOVEMENT API")
         return None
+
 
 # ---------- SENDGRID KONFIGURATION ----------
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
