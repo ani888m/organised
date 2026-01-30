@@ -127,6 +127,11 @@ def lade_bestand_von_api(ean):
         if not res:
             return None
 
+        # MOVEMENT-Daten (Bestand, Preis, Lieferzeit etc.)
+        movement = lade_bestand_von_api(produkt["ean"])
+        if movement:
+            produkt.update(movement)
+
         # Wir nehmen das erste Item (falls mehrere zurückkommen)
         info = res[0]
 
@@ -148,10 +153,7 @@ def lade_bestand_von_api(ean):
         logger.error(f"Fehler beim Laden von MOVEMENT API: {e}")
         return None
         
-   movement = lade_bestand_von_api(ean)
-     if movement:
-       produkt.update(movement)
-
+  
 # ---------- SENDGRID KONFIGURATION ----------
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 EMAIL_SENDER = os.getenv("EMAIL_SENDER")
