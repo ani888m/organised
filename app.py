@@ -138,10 +138,10 @@ def lade_produkt_von_api(ean):
             "hoehe": attrs.get("Hoehe", {}).get("Wert", ""),
 
             # ⭐ NEU → Lager / Versand Infos
-            "bestand": lager.get("Bestand"),
-            "einkaufspreis": lager.get("Einkaufspreis"),
-            "handling_zeit": lager.get("Handling_Zeit_in_Werktagen"),
-            "erfuellungsrate": lager.get("Erfuellungsrate"),
+            "bestand": lager.get("Bestand") or None,
+            "einkaufspreis": lager.get("Einkaufspreis") or None,
+            "handling_zeit": lager.get("Handling_Zeit_in_Werktagen") or None,
+            "erfuellungsrate": lager.get("Erfuellungsrate") or None,
 
             "extra": attrs
         }
