@@ -184,11 +184,12 @@ def lade_bestand_von_api(ean):
             res = res[0]
 
         return {
-            "bestand": to_int(res.get("lagerbestand")),
-            "preis": to_float(res.get("preis")),
-            "handling_zeit": res.get("handling_zeit"),
-            "erfuellungsrate": res.get("erfuellungsrate")
+            "bestand": to_int(res.get("Bestand")),
+            "preis": to_float(res.get("Preis")),
+            "handling_zeit": res.get("Handling_Zeit_in_Werktagen"),
+            "erfuellungsrate": res.get("Erfuellungsrate")
         }
+
 
     except Exception:
         logger.exception("Fehler beim Laden von MOVEMENT API")
