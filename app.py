@@ -418,3 +418,100 @@ def cron():
 # ---------- START ----------
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+# ---------- BESTELLUNGEN SQLITE ----------
+import sqlite3
+
+BESTELL_DB = "bestellungen.db"
+
+def init_bestell_db():
+    conn = sqlite3.connect(BESTELL_DB)
+    cur = conn.cursor()
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS bestellungen (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        mol_kunde_id INTEGER,
+        rechnungsadresse_id INTEGER,
+        mol_zahlart_id INTEGER,
+        bestelldatum TEXT,
+        bestellreferenz TEXT,
+        seite TEXT,
+        bestellfreigabe INTEGER,
+        mol_verkaufskanal_id INTEGER,
+        liefer_anrede TEXT,
+        liefer_vorname TEXT,
+        liefer_nachname TEXT,
+        liefer_zusatz TEXT,
+        liefer_strasse TEXT,
+        liefer_hausnummer TEXT,
+        liefer_adresszeile1 TEXT,
+        liefer_adresszeile2 TEXT,
+        liefer_adresszeile3 TEXT,
+        liefer_plz TEXT
+    )
+    """)
+    conn.commit()
+    conn.close()
+
+init_bestell_db()
+
+
+@app.route("/bestellung", methods=["POST"])
+def neue_bestellung():
+    data = request.get_json()
+
+    try:
+        conn = sqlite3.connect(BESTELL_DB)
+        cur = conn.cursor()
+
+        cur.execute("""
+        INSERT INTO bestellungen
+        (mol_kunde_id, rechnungsadresse_id, mol_zahlart_id, bestelldatum, bestellreferenz, seite,
+        bestellfreigabe, mol_verkaufskanal_id,
+        liefer_anrede, liefer_vorname, liefer_nachname, liefer_zusatz,
+        liefer_strasse, liefer_hausnummer,
+        liefer_adresszeile1, liefer_adresszeile2, liefer_adresszeile3, liefer_plz)
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+        """, (
+            data.get("mol_kunde_id"),
+            data.get("rechnungsadresse_id"),
+            data.get("mol_zahlart_id"),
+            data.get("bestelldatum"),
+            data.get("bestellreferenz"),
+            data.get("seite"),
+            data.get("bestellfreigabe"),
+            data.get("mol_verkaufskanal_id"),
+
+            data.get("lieferadresse", {}).get("anrede"),
+            data.get("lieferadresse", {}).get("vorname"),
+            data.get("lieferadresse", {}).get("nachname"),
+            data.get("lieferadresse", {}).get("zusatz"),
+            data.get("lieferadresse", {}).get("strasse"),
+            data.get("lieferadresse", {}).get("hausnummer"),
+            data.get("lieferadresse", {}).get("adresszeile_1"),
+            data.get("lieferadresse", {}).get("adresszeile_2"),
+            data.get("lieferadresse", {}).get("adresszeile_3"),
+            data.get("lieferadresse", {}).get("plz")
+        ))
+
+        conn.commit()
+        bestell_id = cur.lastrowid
+        conn.close()
+
+        return {"success": True, "bestellId": bestell_id}
+
+    except Exception as e:
+        logger.exception("Bestellung speichern fehlgeschlagen")
+        return {"success": False, "error": str(e)}, 500
+
+
+@app.route("/bestellungen")
+def alle_bestellungen():
+    conn = sqlite3.connect(BESTELL_DB)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM bestellungen")
+    rows = cur.fetchall()
+    conn.close()
+    return jsonify(rows)
+
