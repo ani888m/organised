@@ -4,12 +4,11 @@ gunicorn
 stripe
 python-dotenv
 sendgrid
-Flask==3.0.3
 Flask-SQLAlchemy==3.1.1
-python-dotenv==1.0.1
 sendgrid==6.11.0
 Werkzeug==3.0.4
 flask
 requests
-Flask==2.3.3
-python-dotenv==1.0.0
+Flask==3.1.2
+python-dotenv==1.2.1
+
