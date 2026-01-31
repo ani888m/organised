@@ -3,13 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link rel="icon" type="image/x-icon" href="logo.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<script src="{{ url_for('static', filename='script.js') }}"></script>
 <title>Bezahlung</title>
-
 </head>
 <body>
   {% include 'navbar.html' %}
@@ -17,7 +14,7 @@
 
   <section class="form">
     <h2>Bezahlung</h2>
-    <form id="payment-form" method="POST" action="{{ url_for('checkout') }}">
+    <form id="payment-form">
       <label>
         Name:
         <input type="text" name="name" required placeholder="Vor- und Nachname">
@@ -69,36 +66,34 @@
           Kreditkartennummer:
           <input type="text" name="cardnumber" pattern="\d{16}" title="16-stellige Kreditkartennummer">
         </label>
-
         <label>
           Ablaufdatum:
           <input type="month" name="expiry">
         </label>
-
         <label>
           CVV:
           <input type="text" name="cvv" pattern="\d{3}" title="3-stelliger CVV">
         </label>
       </div>
 
-      <!-- Newsletter Checkbox -->
       <label class="newsletter-consent">
         <input type="checkbox" name="newsletter" id="newsletter-checkbox">
         Ich möchte mich für den Newsletter anmelden.
       </label>
-      <!-- Datenschutz Pflicht-Checkbox -->
+
       <label class="privacy-consent">
           <input type="checkbox" name="privacy" id="privacy-checkbox" required>
           Ich habe die <a href="{{ url_for('datenschutz') }}" target="_blank">Datenschutzerklärung</a> gelesen und stimme ihr zu.
       </label>
 
-      <button type="submit">Bezahldaten überprüfen</button>
+      <button type="submit" id="submit-button">Bezahldaten überprüfen</button>
     </form>
   </section>
+
   {% include 'footer.html' %}
 
-
-<script>
+  <script>
+  // --- Zahlungsdetails anzeigen ---
   const paymentMethodSelect = document.getElementById('payment-method');
   const rechnungDetails = document.getElementById('rechnung-details');
   const paypalDetails = document.getElementById('paypal-details');
@@ -114,7 +109,7 @@
     if (method === 'kreditkarte') kreditkarteDetails.classList.remove('hidden');
   });
 
-
+  // --- Datenschutz Checkbox ---
   const privacyCheckbox = document.getElementById('privacy-checkbox');
   const submitButton = document.getElementById('submit-button');
 
@@ -122,7 +117,51 @@
     submitButton.disabled = !privacyCheckbox.checked;
   });
 
-</script>
+  // --- Bestellung an Python-Backend senden ---
+  const paymentForm = document.getElementById("payment-form");
+
+  paymentForm.addEventListener("submit", async (e) => {
+    e.preventDefault(); // verhindert das Standard-Submit
+
+    const formData = new FormData(paymentForm);
+
+    const bestellung = {
+      mol_kunde_id: 3,
+      rechnungsadresse_id: 2476303,
+      mol_zahlart_id: formData.get("payment-method") === "rechnung" ? 2 : formData.get("payment-method") === "paypal" ? 3 : 1,
+      bestelldatum: new Date().toISOString().slice(0,19).replace("T"," "),
+      bestellreferenz: "REF" + Date.now(),
+      seite: "Moluna.de",
+      bestellfreigabe: 1,
+      mol_verkaufskanal_id: 3,
+      lieferadresse: {
+        anrede: "Herr/Frau",
+        vorname: formData.get("name").split(" ")[0],
+        nachname: formData.get("name").split(" ")[1] || "",
+        zusatz: formData.get("address-additional") || "",
+        strasse: formData.get("address").split(" ")[0],
+        hausnummer: formData.get("address").split(" ")[1] || "",
+        adresszeile_1: "",
+        adresszeile_2: "",
+        adresszeile_3: "",
+        plz: formData.get("plz")
+      }
+    };
+
+    try {
+      const response = await fetch("https://DEIN-BACKEND-URL.onrender.com/bestellung", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bestellung)
+      });
+      const result = await response.json();
+      console.log(result);
+      alert("Bestellung gespeichert! ID: " + result.bestellId);
+    } catch (err) {
+      console.error(err);
+      alert("Fehler beim Speichern der Bestellung");
+    }
+  });
+  </script>
 </body>
 </html>
-
