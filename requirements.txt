@@ -1,14 +1,20 @@
-Flask
-Flask-SQLAlchemy
-gunicorn
-stripe
-python-dotenv
-sendgrid
-Flask-SQLAlchemy==3.1.1
-sendgrid==6.11.0
-Werkzeug==3.0.4
-flask
-requests
+# Webframework
 Flask==3.1.2
+
+# Umgebungsvariablen
 python-dotenv==1.2.1
 
+# Datenbank (SQLite ist in Python eingebaut, daher kein extra Paket nötig)
+Flask-SQLAlchemy==3.1.1
+
+# Webserver für Render
+gunicorn==24.1.1
+
+# Zahlungsintegration (Stripe)
+stripe==14.3.0
+
+# E-Mail Versand
+sendgrid==6.12.5
+
+# HTTP Requests
+requests==2.32.5
