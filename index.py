@@ -68,3 +68,12 @@ def neue_bestellung():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
+@app.route("/bestellungen", methods=["GET"])
+def alle_bestellungen():
+    conn = sqlite3.connect(DB_PATH)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM bestellungen")
+    rows = cur.fetchall()
+    conn.close()
+    return jsonify(rows)
