@@ -11,3 +11,5 @@ sendgrid==6.11.0
 Werkzeug==3.0.4
 flask
 requests
+Flask==2.3.3
+python-dotenv==1.0.0
