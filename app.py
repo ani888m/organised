@@ -151,7 +151,7 @@ def lade_produkt_von_api(ean):
             "laenge": attr(attrs, "Laenge"),
             "breite": attr(attrs, "Breite"),
             "hoehe": attr(attrs, "Hoehe"),
-            "extra": attrs,
+            "extra": attrs
         }
 
         return produkt
