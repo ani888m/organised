@@ -151,7 +151,8 @@ def lade_produkt_von_api(ean):
             "laenge": attr(attrs, "Laenge"),
             "breite": attr(attrs, "Breite"),
             "hoehe": attr(attrs, "Hoehe"),
-            "extra": attrs
+            "extra": attrs,
+            "handling_zeit": res.get("Handling_Zeit_in_Werktagen")
         }
 
         return produkt
@@ -186,7 +187,6 @@ def lade_bestand_von_api(ean):
         return {
             "bestand": to_int(res.get("Bestand")),
             "preis": to_float(res.get("Preis")),
-            "handling_zeit": res.get("Handling_Zeit_in_Werktagen"),
             "erfuellungsrate": res.get("Erfuellungsrate")
         }
 
