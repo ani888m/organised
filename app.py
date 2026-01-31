@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, flash, abort, session, url_for
+from flask import Flask, render_template, request, redirect, flash, abort, session, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
@@ -423,7 +423,8 @@ if __name__ == '__main__':
 # ---------- BESTELLUNGEN SQLITE ----------
 import sqlite3
 
-BESTELL_DB = "bestellungen.db"
+basedir = os.path.abspath(os.path.dirname(__file__))
+BESTELL_DB = os.path.join(basedir, "bestellungen.db")
 
 def init_bestell_db():
     conn = sqlite3.connect(BESTELL_DB)
