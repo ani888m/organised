@@ -9,11 +9,11 @@
 <title>Bezahlung</title>
 </head>
 <body>
-  {% include 'navbar.html' %}
-  {% include 'cart.html' %}
 
   <div id="navbar-placeholder"></div>
   {% include 'cart.html' %}
+  {% set include_footer = false %}
+
   <section class="form">
     <h2>Bezahlung</h2>
     <form id="payment-form">
