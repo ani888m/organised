@@ -78,5 +78,5 @@
     window.onload = loadCart;
 
     document.getElementById('checkout-btn').addEventListener('click', () => {
-      window.location.href = '/checkout';
+      window.location.href = '/templates/checkout';
     });
