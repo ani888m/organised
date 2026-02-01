@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Checkout-Button Event
   if (checkoutBtn) {
     checkoutBtn.addEventListener('click', () => {
-      window.location.href = '/templates/checkout';
+      window.location.href = '/checkout';
     });
   }
 
