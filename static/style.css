@@ -659,12 +659,6 @@ button[type="submit"]:hover {
 }
 
 /* Tablet allgemein */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .form {
-    margin: 40px auto;
-    max-width: 700px;
-  }
-}
 
 
 /* ===== Checkout Layout ===== */
@@ -683,10 +677,17 @@ button[type="submit"]:hover {
   flex: 1;
 }
 @media (max-width: 768px) {
-  .checkout-layout {
+   .checkout-layout {
+    flex-direction: column;
+  }  
+}
+/* Tablet allgemein */
+@media (min-width: 768px) and (max-width: 1024px) {
+.checkout-layout {
     flex-direction: column;
   }
 }
+
 
 /* =========================================
    RECHTLICHES
