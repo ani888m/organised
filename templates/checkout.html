@@ -16,12 +16,16 @@
 
   <section class="form">
 
-    <h2>Bezahlung</h2>
+  <h2>Bezahlung</h2>
 
+  <div class="checkout-layout">
+   <div class="checkout-cart">
     <h3>Ihre Bestellung</h3>
     {% include 'cart_component.html' %}
     <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+   </div>
 
+  <div class="checkout-form">
     <form id="payment-form">
       <label>
         Name:
@@ -95,8 +99,12 @@
       </label>
 
       <button type="submit" id="submit-button">Bezahldaten überprüfen</button>
-    </form>
-  </section>
+      </form>
+    </div>
+
+  </div>
+</section>
+
 
   {% include 'footer.html' %}
 
