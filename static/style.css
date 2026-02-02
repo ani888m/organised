@@ -590,7 +590,7 @@ form {
 label {
   display: block;
   margin-bottom: 15px;
-  font-weight: 600;
+  font-weight: 200;
 }
 
 input:not([type="checkbox"]), select {
