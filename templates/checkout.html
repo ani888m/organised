@@ -22,14 +22,14 @@
 
   <div class="checkout-layout">
    <div class="checkout-cart">
-    <h3>Ihre Bestellung</h3>
+    <h3>Ihre Bestellung</h3><br>
     {% include 'cart_component.html' %}
     <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
    </div>
 
   <div class="checkout-form">
     <form id="payment-form">
-     <h3>Lieferadresse und Zahlungsmethode </h3>
+     <h3>Lieferadresse und Zahlungsmethode </h3><br><br>
 
       <label>
         Name:
