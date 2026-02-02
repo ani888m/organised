@@ -671,23 +671,15 @@ button[type="submit"]:hover {
 }
 
 /* Desktop & Tablet */
-.checkout-cart {
-  flex: 0 0 40%;
-}
-
+.checkout-cart,
 .checkout-form {
-  flex: 0 0 60%;
+  flex: 1 1 0;
 }
 
 /* Mobile */
 @media (max-width: 768px) {
   .checkout-layout {
     flex-direction: column;
-  }
-
-  .checkout-cart,
-  .checkout-form {
-    flex: 0 0 100%;
   }
 }
 
