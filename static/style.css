@@ -659,6 +659,27 @@ button[type="submit"]:hover {
   }
 }
 
+/* ===== Checkout Layout ===== */
+
+.checkout-layout {
+  display: flex;
+  gap: 50px;
+  align-items: flex-start;
+}
+
+.checkout-cart {
+  flex: 1;
+}
+
+.checkout-form {
+  flex: 1;
+}
+@media (max-width: 768px) {
+  .checkout-layout {
+    flex-direction: column;
+  }
+}
+
 /* =========================================
    RECHTLICHES
 ========================================= */
