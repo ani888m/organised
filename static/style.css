@@ -663,28 +663,25 @@ button[type="submit"]:hover {
 
 /* ===== Checkout Layout ===== */
 
+
 .checkout-layout {
   display: flex;
   gap: 50px;
   align-items: flex-start;
 }
 
-
+/* Desktop & Tablet */
 .checkout-cart,
 .checkout-form {
-  width: 50%;
+  flex: 1 1 0;
 }
+
 @media (max-width: 768px) {
    .checkout-layout {
     flex-direction: column;
   }  
 }
-/* Tablet allgemein */
-@media (min-width: 768px) and (max-width: 1024px) {
-.checkout-layout {
-        flex-direction: row;
-  }
-}
+
 
 
 /* =========================================
