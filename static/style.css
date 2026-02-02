@@ -658,6 +658,15 @@ button[type="submit"]:hover {
   }
 }
 
+/* Tablet allgemein */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .form {
+    margin: 40px auto;
+    max-width: 700px;
+  }
+}
+
+
 /* ===== Checkout Layout ===== */
 
 .checkout-layout {
