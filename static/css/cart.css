@@ -34,13 +34,16 @@
     }
 
     #cart-items img {
-      width: 200px;
-      height: 200px;
+      width: 100%;      /* passt in die Grid-Spalte */
+      max-width: 120px; /* maximal 120px */
+      height: auto;  
       object-fit: cover;
       justify-self: start;
       border-radius: 4px;
       box-shadow: 0 0 5px rgba(0,0,0,0.1);
     }
+
+  
 
     /* Inneres Div mit den Details als Grid mit 4 Spalten */
     #cart-items div > div {
