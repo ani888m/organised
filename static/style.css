@@ -677,7 +677,7 @@ button[type="submit"]:hover {
 }
 
 /* Mobile */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .checkout-layout {
     flex-direction: column;
   }
