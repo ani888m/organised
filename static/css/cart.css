@@ -24,7 +24,7 @@
     /* Gesamtes Item als 2-spaltiges Grid: Bild + Details */
     #cart-items div {
       display: grid;
-      grid-template-columns: 220px 1fr; /* Bild und Rest */
+      grid-template-columns: 320px 1fr; /* Bild und Rest */
       gap: 20px;
       align-items: center;
       margin-bottom: 20px;
