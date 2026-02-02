@@ -669,12 +669,10 @@ button[type="submit"]:hover {
   align-items: flex-start;
 }
 
-.checkout-cart {
-  flex: 1;
-}
 
+.checkout-cart,
 .checkout-form {
-  flex: 1;
+  width: 50%;
 }
 @media (max-width: 768px) {
    .checkout-layout {
@@ -684,7 +682,7 @@ button[type="submit"]:hover {
 /* Tablet allgemein */
 @media (min-width: 768px) and (max-width: 1024px) {
 .checkout-layout {
-    flex-direction: column;
+        flex-direction: row;
   }
 }
 
