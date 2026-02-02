@@ -136,7 +136,7 @@
       div[style*="display: flex; justify-content: space-between"] {
         flex-direction: column !important;
         gap: 10px;
-        margin: 50px 20px !important;
+        margin: 50px 5px !important;
       }
 
       div[style*="display: flex; justify-content: space-between"] > h2 {
