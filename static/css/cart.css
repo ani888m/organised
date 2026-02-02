@@ -101,16 +101,13 @@
 
       #cart-items div > div {
         /* 1 Spalte, 2 Zeilen: Titel + (Menge, Preis, Entfernen) */
-        display: grid !important;
-        grid-template-columns: 230px 1fr;
+        display: grid !important;;
         grid-template-rows: auto auto;
         gap: 5px;
         font-size: 14px;
       }
 
-      #crt-items div > div strong {
-        grid-row: 1;
-      }
+      
 
       /* Menge, Preis und Entfernen nebeneinander in Zeile 2 */
        #cart-items div > div strong ,
