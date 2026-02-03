@@ -429,6 +429,10 @@ BESTELL_DB = os.path.join(basedir, "bestellungen.db")
 def init_bestell_db():
     conn = sqlite3.connect(BESTELL_DB)
     cur = conn.cursor()
+
+    # -------------------------
+    # Hauptbestellung
+    # -------------------------
     cur.execute("""
     CREATE TABLE IF NOT EXISTS bestellungen (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -440,6 +444,7 @@ def init_bestell_db():
         seite TEXT,
         bestellfreigabe INTEGER,
         mol_verkaufskanal_id INTEGER,
+
         liefer_anrede TEXT,
         liefer_vorname TEXT,
         liefer_nachname TEXT,
@@ -449,9 +454,46 @@ def init_bestell_db():
         liefer_adresszeile1 TEXT,
         liefer_adresszeile2 TEXT,
         liefer_adresszeile3 TEXT,
-        liefer_plz TEXT
+        liefer_plz TEXT,
+
+        liefer_ort TEXT,
+        liefer_land TEXT,
+        liefer_land_iso TEXT,
+        liefer_tel TEXT,
+
+        versand_einstellung_id INTEGER,
+        collectkey TEXT
     )
     """)
+
+    # -------------------------
+    # Positionen
+    # -------------------------
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS bestell_positionen (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        bestell_id INTEGER,
+        ean TEXT,
+        bezeichnung TEXT,
+        menge INTEGER,
+        ek_netto REAL,
+        vk_brutto REAL,
+        referenz TEXT
+    )
+    """)
+
+    # -------------------------
+    # Zusatzoptionen
+    # -------------------------
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS bestell_zusatz (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        bestell_id INTEGER,
+        typ TEXT,
+        value TEXT
+    )
+    """)
+
     conn.commit()
     conn.close()
 
