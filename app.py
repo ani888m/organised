@@ -466,14 +466,23 @@ def neue_bestellung():
         conn = sqlite3.connect(BESTELL_DB)
         cur = conn.cursor()
 
+        # -------------------------
+        # Bestellung speichern
+        # -------------------------
         cur.execute("""
-        INSERT INTO bestellungen
-        (mol_kunde_id, rechnungsadresse_id, mol_zahlart_id, bestelldatum, bestellreferenz, seite,
-        bestellfreigabe, mol_verkaufskanal_id,
-        liefer_anrede, liefer_vorname, liefer_nachname, liefer_zusatz,
-        liefer_strasse, liefer_hausnummer,
-        liefer_adresszeile1, liefer_adresszeile2, liefer_adresszeile3, liefer_plz)
-        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+        INSERT INTO bestellungen (
+            mol_kunde_id, rechnungsadresse_id, mol_zahlart_id,
+            bestelldatum, bestellreferenz, seite, bestellfreigabe,
+            mol_verkaufskanal_id,
+
+            liefer_anrede, liefer_vorname, liefer_nachname,
+            liefer_zusatz, liefer_strasse, liefer_hausnummer,
+            liefer_adresszeile1, liefer_adresszeile2, liefer_adresszeile3,
+            liefer_plz, liefer_ort, liefer_land, liefer_land_iso, liefer_tel,
+
+            versand_einstellung_id, collectkey
+        )
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
         """, (
             data.get("mol_kunde_id"),
             data.get("rechnungsadresse_id"),
@@ -493,11 +502,51 @@ def neue_bestellung():
             data.get("lieferadresse", {}).get("adresszeile_1"),
             data.get("lieferadresse", {}).get("adresszeile_2"),
             data.get("lieferadresse", {}).get("adresszeile_3"),
-            data.get("lieferadresse", {}).get("plz")
+            data.get("lieferadresse", {}).get("plz"),
+            data.get("lieferadresse", {}).get("ort"),
+            data.get("lieferadresse", {}).get("land"),
+            data.get("lieferadresse", {}).get("land_iso"),
+            data.get("lieferadresse", {}).get("tel"),
+
+            data.get("versand_einstellung_id"),
+            data.get("collectkey")
         ))
 
-        conn.commit()
         bestell_id = cur.lastrowid
+
+        # -------------------------
+        # Positionen speichern
+        # -------------------------
+        for pos in data.get("auftrag_position", []):
+            cur.execute("""
+            INSERT INTO bestell_positionen
+            (bestell_id, ean, bezeichnung, menge, ek_netto, vk_brutto, referenz)
+            VALUES (?,?,?,?,?,?,?)
+            """, (
+                bestell_id,
+                pos.get("ean"),
+                pos.get("pos_bezeichnung"),
+                pos.get("menge"),
+                pos.get("ek_netto"),
+                pos.get("vk_brutto"),
+                pos.get("pos_referenz")
+            ))
+
+        # -------------------------
+        # Zusatzdaten speichern
+        # -------------------------
+        for zusatz in data.get("auftrag_zusatz", []):
+            cur.execute("""
+            INSERT INTO bestell_zusatz
+            (bestell_id, typ, value)
+            VALUES (?,?,?)
+            """, (
+                bestell_id,
+                zusatz.get("typ"),
+                zusatz.get("value")
+            ))
+
+        conn.commit()
         conn.close()
 
         return {"success": True, "bestellId": bestell_id}
