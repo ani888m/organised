@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, request, redirect, flash, abort, session, url_for, jsonify
+from flask import Flask, Blueprint, render_template, request, redirect, flash, abort, session, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
@@ -9,6 +9,7 @@ import requests
 from dotenv import load_dotenv
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
+
 
 # ---------- SETUP ----------
 load_dotenv()  # .env nur lokal laden
@@ -421,18 +422,32 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 
-# ---------- BESTELLUNGEN SQLITE ----------
+import os
 import sqlite3
+from flask import Blueprint, request, jsonify
+import logging
+
+logger = logging.getLogger(__name__)
+
+# Blueprint → kann separat in app.py eingebunden werden
+bestellung_api = Blueprint("bestellung_api", __name__)
+
+# -----------------------------
+# Datenbank
+# -----------------------------
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 BESTELL_DB = os.path.join(basedir, "bestellungen.db")
 
+
 def init_bestell_db():
     conn = sqlite3.connect(BESTELL_DB)
     cur = conn.cursor()
+
     cur.execute("""
     CREATE TABLE IF NOT EXISTS bestellungen (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+
         mol_kunde_id INTEGER,
         rechnungsadresse_id INTEGER,
         mol_zahlart_id INTEGER,
@@ -441,26 +456,43 @@ def init_bestell_db():
         seite TEXT,
         bestellfreigabe INTEGER,
         mol_verkaufskanal_id INTEGER,
+
+        -- Lieferadresse
         liefer_anrede TEXT,
         liefer_vorname TEXT,
         liefer_nachname TEXT,
         liefer_zusatz TEXT,
         liefer_strasse TEXT,
         liefer_hausnummer TEXT,
-        liefer_adresszeile1 TEXT,
-        liefer_adresszeile2 TEXT,
-        liefer_adresszeile3 TEXT,
-        liefer_plz TEXT
+        liefer_plz TEXT,
+        liefer_ort TEXT,
+        liefer_land TEXT,
+        liefer_land_iso TEXT,
+        liefer_tel TEXT,
+
+        -- Versandoptionen
+        shipping_option TEXT,
+        vormerkung TEXT,
+        versand_einstellung_id INTEGER,
+        collectkey TEXT,
+
+        status TEXT
     )
     """)
+
     conn.commit()
     conn.close()
 
+
 init_bestell_db()
 
+# -----------------------------
+# Bestellung speichern
+# -----------------------------
 
-@app.route("/bestellung", methods=["POST"])
+@bestellung_api.route("/api/bestellung", methods=["POST"])
 def neue_bestellung():
+
     data = request.get_json()
 
     try:
@@ -468,14 +500,38 @@ def neue_bestellung():
         cur = conn.cursor()
 
         cur.execute("""
-        INSERT INTO bestellungen
-        (mol_kunde_id, rechnungsadresse_id, mol_zahlart_id, bestelldatum, bestellreferenz, seite,
-        bestellfreigabe, mol_verkaufskanal_id,
-        liefer_anrede, liefer_vorname, liefer_nachname, liefer_zusatz,
-        liefer_strasse, liefer_hausnummer,
-        liefer_adresszeile1, liefer_adresszeile2, liefer_adresszeile3, liefer_plz)
-        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+        INSERT INTO bestellungen (
+            mol_kunde_id,
+            rechnungsadresse_id,
+            mol_zahlart_id,
+            bestelldatum,
+            bestellreferenz,
+            seite,
+            bestellfreigabe,
+            mol_verkaufskanal_id,
+
+            liefer_anrede,
+            liefer_vorname,
+            liefer_nachname,
+            liefer_zusatz,
+            liefer_strasse,
+            liefer_hausnummer,
+            liefer_plz,
+            liefer_ort,
+            liefer_land,
+            liefer_land_iso,
+            liefer_tel,
+
+            shipping_option,
+            vormerkung,
+            versand_einstellung_id,
+            collectkey,
+
+            status
+        )
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
         """, (
+
             data.get("mol_kunde_id"),
             data.get("rechnungsadresse_id"),
             data.get("mol_zahlart_id"),
@@ -485,34 +541,58 @@ def neue_bestellung():
             data.get("bestellfreigabe"),
             data.get("mol_verkaufskanal_id"),
 
+            # Lieferadresse
             data.get("lieferadresse", {}).get("anrede"),
             data.get("lieferadresse", {}).get("vorname"),
             data.get("lieferadresse", {}).get("nachname"),
             data.get("lieferadresse", {}).get("zusatz"),
             data.get("lieferadresse", {}).get("strasse"),
             data.get("lieferadresse", {}).get("hausnummer"),
-            data.get("lieferadresse", {}).get("adresszeile_1"),
-            data.get("lieferadresse", {}).get("adresszeile_2"),
-            data.get("lieferadresse", {}).get("adresszeile_3"),
-            data.get("lieferadresse", {}).get("plz")
+            data.get("lieferadresse", {}).get("plz"),
+            data.get("lieferadresse", {}).get("ort"),
+            data.get("lieferadresse", {}).get("land"),
+            data.get("lieferadresse", {}).get("land_iso"),
+            data.get("lieferadresse", {}).get("tel"),
+
+            # Zusatzfelder
+            data.get("shipping_option"),
+            data.get("vormerkung"),
+            data.get("versand_einstellung_id"),
+            data.get("collectkey"),
+
+            "N"
         ))
 
         conn.commit()
         bestell_id = cur.lastrowid
         conn.close()
 
-        return {"success": True, "bestellId": bestell_id}
+        return jsonify({
+            "success": True,
+            "bestell_id": bestell_id
+        })
 
     except Exception as e:
         logger.exception("Bestellung speichern fehlgeschlagen")
-        return {"success": False, "error": str(e)}, 500
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
 
 
-@app.route("/bestellungen")
+# -----------------------------
+# Alle Bestellungen abrufen
+# -----------------------------
+
+@bestellung_api.route("/api/bestellungen", methods=["GET"])
 def alle_bestellungen():
+
     conn = sqlite3.connect(BESTELL_DB)
     cur = conn.cursor()
+
     cur.execute("SELECT * FROM bestellungen")
     rows = cur.fetchall()
+
     conn.close()
+
     return jsonify(rows)
