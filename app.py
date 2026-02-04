@@ -422,13 +422,17 @@ if __name__ == '__main__':
 
 # ---------- BESTELLUNGEN SQLITE ----------
 import sqlite3
+import os
+from flask import request, jsonify
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 BESTELL_DB = os.path.join(basedir, "bestellungen.db")
 
+
 def init_bestell_db():
     conn = sqlite3.connect(BESTELL_DB)
     cur = conn.cursor()
+
     cur.execute("""
     CREATE TABLE IF NOT EXISTS bestellungen (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -440,6 +444,7 @@ def init_bestell_db():
         seite TEXT,
         bestellfreigabe INTEGER,
         mol_verkaufskanal_id INTEGER,
+
         liefer_anrede TEXT,
         liefer_vorname TEXT,
         liefer_nachname TEXT,
@@ -449,7 +454,7 @@ def init_bestell_db():
         liefer_adresszeile1 TEXT,
         liefer_adresszeile2 TEXT,
         liefer_adresszeile3 TEXT,
-        liefer_plz TEXT
+        liefer_plz TEXT,
         liefer_ort TEXT,
         liefer_land TEXT,
         liefer_land_iso TEXT,
@@ -457,53 +462,63 @@ def init_bestell_db():
 
         versand_einstellung_id INTEGER,
         collectkey TEXT
-)
-""")
+    )
+    """)
 
     cur.execute("""
     CREATE TABLE IF NOT EXISTS bestell_positionen (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    bestell_id INTEGER,
-    ean TEXT,
-    bezeichnung TEXT,
-    menge INTEGER,
-    ek_netto REAL,
-    vk_brutto REAL,
-    referenz TEXT
-)
-""")
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        bestell_id INTEGER,
+        ean TEXT,
+        bezeichnung TEXT,
+        menge INTEGER,
+        ek_netto REAL,
+        vk_brutto REAL,
+        referenz TEXT
+    )
+    """)
 
     cur.execute("""
     CREATE TABLE IF NOT EXISTS bestell_zusatz (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    bestell_id INTEGER,
-    typ TEXT,
-    value TEXT
-)
-""")
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        bestell_id INTEGER,
+        typ TEXT,
+        value TEXT
+    )
+    """)
 
-   
     conn.commit()
     conn.close()
+
 
 init_bestell_db()
 
 
+# -------------------------------------------------
+# Bestellung speichern
+# -------------------------------------------------
 @app.route("/bestellung", methods=["POST"])
 def neue_bestellung():
-    data = request.get_json()
+    data = request.get_json() or {}
+    liefer = data.get("lieferadresse", {})
 
     try:
         conn = sqlite3.connect(BESTELL_DB)
         cur = conn.cursor()
 
+        # -------------------------
+        # Bestellung speichern
+        # -------------------------
         cur.execute("""
-        INSERT INTO bestellungen
-        (mol_kunde_id, rechnungsadresse_id, mol_zahlart_id, bestelldatum, bestellreferenz, seite,
-        bestellfreigabe, mol_verkaufskanal_id,
-        liefer_anrede, liefer_vorname, liefer_nachname, liefer_zusatz,
-        liefer_strasse, liefer_hausnummer,
-        liefer_adresszeile1, liefer_adresszeile2, liefer_adresszeile3, liefer_plz,liefer_ort, liefer_land, liefer_land_iso, liefer_tel,
+        INSERT INTO bestellungen (
+            mol_kunde_id, rechnungsadresse_id, mol_zahlart_id,
+            bestelldatum, bestellreferenz, seite,
+            bestellfreigabe, mol_verkaufskanal_id,
+
+            liefer_anrede, liefer_vorname, liefer_nachname, liefer_zusatz,
+            liefer_strasse, liefer_hausnummer,
+            liefer_adresszeile1, liefer_adresszeile2, liefer_adresszeile3,
+            liefer_plz, liefer_ort, liefer_land, liefer_land_iso, liefer_tel,
 
             versand_einstellung_id, collectkey
         )
@@ -518,42 +533,36 @@ def neue_bestellung():
             data.get("bestellfreigabe"),
             data.get("mol_verkaufskanal_id"),
 
-            data.get("lieferadresse", {}).get("anrede"),
-            data.get("lieferadresse", {}).get("vorname"),
-            data.get("lieferadresse", {}).get("nachname"),
-            data.get("lieferadresse", {}).get("zusatz"),
-            data.get("lieferadresse", {}).get("strasse"),
-            data.get("lieferadresse", {}).get("hausnummer"),
-            data.get("lieferadresse", {}).get("adresszeile_1"),
-            data.get("lieferadresse", {}).get("adresszeile_2"),
-            data.get("lieferadresse", {}).get("adresszeile_3"),
-            data.get("lieferadresse", {}).get("plz"),
-            data.get("lieferadresse", {}).get("ort"),
-            data.get("lieferadresse", {}).get("land"),
-            data.get("lieferadresse", {}).get("land_iso"),
-            data.get("lieferadresse", {}).get("tel"),
+            liefer.get("anrede"),
+            liefer.get("vorname"),
+            liefer.get("nachname"),
+            liefer.get("zusatz"),
+            liefer.get("strasse"),
+            liefer.get("hausnummer"),
+            liefer.get("adresszeile_1"),
+            liefer.get("adresszeile_2"),
+            liefer.get("adresszeile_3"),
+            liefer.get("plz"),
+            liefer.get("ort"),
+            liefer.get("land"),
+            liefer.get("land_iso"),
+            liefer.get("tel"),
 
             data.get("versand_einstellung_id"),
             data.get("collectkey")
         ))
 
-        conn.commit()
         bestell_id = cur.lastrowid
-        conn.close()
-
-        return {"success": True, "bestellId": bestell_id}
-
-    except Exception as e:
-        logger.exception("Bestellung speichern fehlgeschlagen")
-        return {"success": False, "error": str(e)}, 500
 
         # -------------------------
         # Positionen speichern
         # -------------------------
         for pos in data.get("auftrag_position", []):
             cur.execute("""
-            INSERT INTO bestell_positionen
-            (bestell_id, ean, bezeichnung, menge, ek_netto, vk_brutto, referenz)
+            INSERT INTO bestell_positionen (
+                bestell_id, ean, bezeichnung,
+                menge, ek_netto, vk_brutto, referenz
+            )
             VALUES (?,?,?,?,?,?,?)
             """, (
                 bestell_id,
@@ -570,8 +579,9 @@ def neue_bestellung():
         # -------------------------
         for zusatz in data.get("auftrag_zusatz", []):
             cur.execute("""
-            INSERT INTO bestell_zusatz
-            (bestell_id, typ, value)
+            INSERT INTO bestell_zusatz (
+                bestell_id, typ, value
+            )
             VALUES (?,?,?)
             """, (
                 bestell_id,
@@ -582,17 +592,32 @@ def neue_bestellung():
         conn.commit()
         conn.close()
 
-        return {"success": True, "bestellId": bestell_id}
+        return jsonify({
+            "success": True,
+            "bestellId": bestell_id
+        })
 
     except Exception as e:
+        conn.rollback()
+        conn.close()
         logger.exception("Bestellung speichern fehlgeschlagen")
-        return {"success": False, "error": str(e)}, 500
 
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+
+# -------------------------------------------------
+# Alle Bestellungen anzeigen
+# -------------------------------------------------
 @app.route("/bestellungen")
 def alle_bestellungen():
     conn = sqlite3.connect(BESTELL_DB)
     cur = conn.cursor()
+
     cur.execute("SELECT * FROM bestellungen")
     rows = cur.fetchall()
+
     conn.close()
     return jsonify(rows)
