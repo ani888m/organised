@@ -450,8 +450,39 @@ def init_bestell_db():
         liefer_adresszeile2 TEXT,
         liefer_adresszeile3 TEXT,
         liefer_plz TEXT
-    )
-    """)
+        liefer_ort TEXT,
+        liefer_land TEXT,
+        liefer_land_iso TEXT,
+        liefer_tel TEXT,
+
+        versand_einstellung_id INTEGER,
+        collectkey TEXT
+)
+""")
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS bestell_positionen (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    bestell_id INTEGER,
+    ean TEXT,
+    bezeichnung TEXT,
+    menge INTEGER,
+    ek_netto REAL,
+    vk_brutto REAL,
+    referenz TEXT
+)
+""")
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS bestell_zusatz (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    bestell_id INTEGER,
+    typ TEXT,
+    value TEXT
+)
+""")
+
+   
     conn.commit()
     conn.close()
 
@@ -472,8 +503,11 @@ def neue_bestellung():
         bestellfreigabe, mol_verkaufskanal_id,
         liefer_anrede, liefer_vorname, liefer_nachname, liefer_zusatz,
         liefer_strasse, liefer_hausnummer,
-        liefer_adresszeile1, liefer_adresszeile2, liefer_adresszeile3, liefer_plz)
-        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+        liefer_adresszeile1, liefer_adresszeile2, liefer_adresszeile3, liefer_plz,liefer_ort, liefer_land, liefer_land_iso, liefer_tel,
+
+            versand_einstellung_id, collectkey
+        )
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
         """, (
             data.get("mol_kunde_id"),
             data.get("rechnungsadresse_id"),
@@ -493,7 +527,14 @@ def neue_bestellung():
             data.get("lieferadresse", {}).get("adresszeile_1"),
             data.get("lieferadresse", {}).get("adresszeile_2"),
             data.get("lieferadresse", {}).get("adresszeile_3"),
-            data.get("lieferadresse", {}).get("plz")
+            data.get("lieferadresse", {}).get("plz"),
+            data.get("lieferadresse", {}).get("ort"),
+            data.get("lieferadresse", {}).get("land"),
+            data.get("lieferadresse", {}).get("land_iso"),
+            data.get("lieferadresse", {}).get("tel"),
+
+            data.get("versand_einstellung_id"),
+            data.get("collectkey")
         ))
 
         conn.commit()
@@ -506,6 +547,46 @@ def neue_bestellung():
         logger.exception("Bestellung speichern fehlgeschlagen")
         return {"success": False, "error": str(e)}, 500
 
+        # -------------------------
+        # Positionen speichern
+        # -------------------------
+        for pos in data.get("auftrag_position", []):
+            cur.execute("""
+            INSERT INTO bestell_positionen
+            (bestell_id, ean, bezeichnung, menge, ek_netto, vk_brutto, referenz)
+            VALUES (?,?,?,?,?,?,?)
+            """, (
+                bestell_id,
+                pos.get("ean"),
+                pos.get("pos_bezeichnung"),
+                pos.get("menge"),
+                pos.get("ek_netto"),
+                pos.get("vk_brutto"),
+                pos.get("pos_referenz")
+            ))
+
+        # -------------------------
+        # Zusatzdaten speichern
+        # -------------------------
+        for zusatz in data.get("auftrag_zusatz", []):
+            cur.execute("""
+            INSERT INTO bestell_zusatz
+            (bestell_id, typ, value)
+            VALUES (?,?,?)
+            """, (
+                bestell_id,
+                zusatz.get("typ"),
+                zusatz.get("value")
+            ))
+
+        conn.commit()
+        conn.close()
+
+        return {"success": True, "bestellId": bestell_id}
+
+    except Exception as e:
+        logger.exception("Bestellung speichern fehlgeschlagen")
+        return {"success": False, "error": str(e)}, 500
 
 @app.route("/bestellungen")
 def alle_bestellungen():
