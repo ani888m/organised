@@ -419,7 +419,6 @@ def cron():
 if __name__ == '__main__':
     app.run(debug=True)
 
-
 # ---------- BESTELLUNGEN SQLITE ----------
 import sqlite3
 import os
@@ -429,8 +428,21 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 BESTELL_DB = os.path.join(basedir, "bestellungen.db")
 
 
-def init_bestell_db():
+# -------------------------------------------------
+# DB Verbindung Helper
+# -------------------------------------------------
+def get_db():
     conn = sqlite3.connect(BESTELL_DB)
+    conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA foreign_keys = ON")
+    return conn
+
+
+# -------------------------------------------------
+# DB Initialisierung
+# -------------------------------------------------
+def init_bestell_db():
+    conn = get_db()
     cur = conn.cursor()
 
     cur.execute("""
@@ -474,7 +486,8 @@ def init_bestell_db():
         menge INTEGER,
         ek_netto REAL,
         vk_brutto REAL,
-        referenz TEXT
+        referenz TEXT,
+        FOREIGN KEY(bestell_id) REFERENCES bestellungen(id) ON DELETE CASCADE
     )
     """)
 
@@ -483,7 +496,8 @@ def init_bestell_db():
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         bestell_id INTEGER,
         typ TEXT,
-        value TEXT
+        value TEXT,
+        FOREIGN KEY(bestell_id) REFERENCES bestellungen(id) ON DELETE CASCADE
     )
     """)
 
@@ -499,16 +513,15 @@ init_bestell_db()
 # -------------------------------------------------
 @app.route("/bestellung", methods=["POST"])
 def neue_bestellung():
+
     data = request.get_json() or {}
     liefer = data.get("lieferadresse", {})
 
-    try:
-        conn = sqlite3.connect(BESTELL_DB)
-        cur = conn.cursor()
+    conn = get_db()
+    cur = conn.cursor()
 
-        # -------------------------
+    try:
         # Bestellung speichern
-        # -------------------------
         cur.execute("""
         INSERT INTO bestellungen (
             mol_kunde_id, rechnungsadresse_id, mol_zahlart_id,
@@ -554,9 +567,7 @@ def neue_bestellung():
 
         bestell_id = cur.lastrowid
 
-        # -------------------------
         # Positionen speichern
-        # -------------------------
         for pos in data.get("auftrag_position", []):
             cur.execute("""
             INSERT INTO bestell_positionen (
@@ -574,9 +585,7 @@ def neue_bestellung():
                 pos.get("pos_referenz")
             ))
 
-        # -------------------------
-        # Zusatzdaten speichern
-        # -------------------------
+        # Zusatz speichern
         for zusatz in data.get("auftrag_zusatz", []):
             cur.execute("""
             INSERT INTO bestell_zusatz (
@@ -590,7 +599,6 @@ def neue_bestellung():
             ))
 
         conn.commit()
-        conn.close()
 
         return jsonify({
             "success": True,
@@ -599,25 +607,79 @@ def neue_bestellung():
 
     except Exception as e:
         conn.rollback()
-        conn.close()
-        logger.exception("Bestellung speichern fehlgeschlagen")
+        return jsonify({"success": False, "error": str(e)}), 500
 
-        return jsonify({
-            "success": False,
-            "error": str(e)
-        }), 500
+    finally:
+        conn.close()
 
 
 # -------------------------------------------------
-# Alle Bestellungen anzeigen
+# Alle Bestellungen (nur Kopf)
 # -------------------------------------------------
 @app.route("/bestellungen")
 def alle_bestellungen():
-    conn = sqlite3.connect(BESTELL_DB)
+
+    conn = get_db()
     cur = conn.cursor()
 
     cur.execute("SELECT * FROM bestellungen")
-    rows = cur.fetchall()
+    rows = [dict(row) for row in cur.fetchall()]
 
     conn.close()
     return jsonify(rows)
+
+
+# -------------------------------------------------
+# Bestellung Detail inkl Positionen + Zusatz
+# -------------------------------------------------
+@app.route("/bestellung/<int:bestell_id>")
+def bestellung_detail(bestell_id):
+
+    conn = get_db()
+    cur = conn.cursor()
+
+    # Bestellung
+    cur.execute("SELECT * FROM bestellungen WHERE id=?", (bestell_id,))
+    bestellung = cur.fetchone()
+
+    if not bestellung:
+        return jsonify({"error": "Nicht gefunden"}), 404
+
+    # Positionen
+    cur.execute("""
+        SELECT * FROM bestell_positionen
+        WHERE bestell_id=?
+    """, (bestell_id,))
+    positionen = [dict(row) for row in cur.fetchall()]
+
+    # Zusatz
+    cur.execute("""
+        SELECT * FROM bestell_zusatz
+        WHERE bestell_id=?
+    """, (bestell_id,))
+    zusatz = [dict(row) for row in cur.fetchall()]
+
+    conn.close()
+
+    return jsonify({
+        "bestellung": dict(bestellung),
+        "positionen": positionen,
+        "zusatz": zusatz
+    })
+
+
+# -------------------------------------------------
+# Bestellung löschen
+# -------------------------------------------------
+@app.route("/bestellung/<int:bestell_id>", methods=["DELETE"])
+def bestellung_loeschen(bestell_id):
+
+    conn = get_db()
+    cur = conn.cursor()
+
+    cur.execute("DELETE FROM bestellungen WHERE id=?", (bestell_id,))
+    conn.commit()
+    conn.close()
+
+    return jsonify({"success": True})
+
