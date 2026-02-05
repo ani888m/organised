@@ -45,7 +45,7 @@ function loadCart(containerId = "cart-items", totalId = "total-price") {
     const decreaseBtn = document.createElement('button');
     decreaseBtn.className = 'quantity-btn';
     decreaseBtn.textContent = '−';
-    decreaseBtn.addEventListener('click', () => decreaseQuantity(item.title, containerId, totalId));
+    decreaseBtn.addEventListener('click', () => decreaseQuantity(item.ean, containerId, totalId));
 
     const qtyText = document.createElement('span');
     qtyText.textContent = ` ${item.quantity} `;
@@ -53,7 +53,7 @@ function loadCart(containerId = "cart-items", totalId = "total-price") {
     const increaseBtn = document.createElement('button');
     increaseBtn.className = 'quantity-btn';
     increaseBtn.textContent = '+';
-    increaseBtn.addEventListener('click', () => increaseQuantity(item.title, containerId, totalId));
+    increaseBtn.addEventListener('click', () => increaseQuantity(item.ean, containerId, totalId));
 
     qtyControls.appendChild(decreaseBtn);
     qtyControls.appendChild(qtyText);
@@ -68,7 +68,7 @@ function loadCart(containerId = "cart-items", totalId = "total-price") {
     const removeBtn = document.createElement('button');
     removeBtn.className = 'remove-btn';
     removeBtn.textContent = '×';
-    removeBtn.addEventListener('click', () => removeFromCart(item.title, containerId, totalId));
+    removeBtn.addEventListener('click', () => removeFromCart(item.ean, containerId, totalId));
 
     // Alles zusammenfügen
     info.appendChild(title);
@@ -86,9 +86,9 @@ function loadCart(containerId = "cart-items", totalId = "total-price") {
 }
 
 // --- Menge erhöhen ---
-function increaseQuantity(title, containerId = "cart-items", totalId = "total-price") {
+function increaseQuantity(ean, containerId = "cart-items", totalId = "total-price") {
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  const item = cart.find(i => i.title === title);
+  const item = cart.find(i => i.ean === ean);
   if (item) {
     item.quantity++;
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -98,15 +98,15 @@ function increaseQuantity(title, containerId = "cart-items", totalId = "total-pr
 }
 
 // --- Menge verringern ---
-function decreaseQuantity(title, containerId = "cart-items", totalId = "total-price") {
+function decreaseQuantity(ean, containerId = "cart-items", totalId = "total-price") {
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  const item = cart.find(i => i.title === title);
+  const item = cart.find(i => i.ean === ean);
   if (!item) return;
 
   if (item.quantity > 1) {
     item.quantity--;
   } else {
-    removeFromCart(title, containerId, totalId);
+    removeFromCart(ean, containerId, totalId);
     return;
   }
 
@@ -116,9 +116,9 @@ function decreaseQuantity(title, containerId = "cart-items", totalId = "total-pr
 }
 
 // --- Item entfernen ---
-function removeFromCart(title, containerId = "cart-items", totalId = "total-price") {
+function removeFromCart(ean, containerId = "cart-items", totalId = "total-price") {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  cart = cart.filter(item => item.title !== title);
+  cart = cart.filter(item => item.ean !== ean);
   localStorage.setItem('cart', JSON.stringify(cart));
   loadCart(containerId, totalId);
   updateCartCountIfPossible();
