@@ -29,19 +29,21 @@ function updateCartCount() {
   // setCookie("cart", JSON.stringify(cart), 7); // 7 Tage
 }
 
-function addToCart(title, price, image) {
+function addToCart(title, price, image,ean) {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  let existing = cart.find(item => item.title === title);
+
+  let existing = cart.find(item => item.ean === ean);
 
   if (existing) {
     existing.quantity++;
   } else {
-    cart.push({ title, price, quantity: 1, image });
+    cart.push({ title, price, quantity: 1, image, ean });
   }
 
   localStorage.setItem('cart', JSON.stringify(cart));
   updateCartCount();
 }
+
 
 // -----------------------------
 // Mobile Menü
