@@ -167,7 +167,7 @@ paymentForm.addEventListener("submit", async (e) => {
     seite: "Moluna.de",
     bestellfreigabe: 1,
     mol_verkaufskanal_id: 3,
-    positionen: positionen,
+    auftrag_position: positionen,
 
     lieferadresse: {
       anrede: "Herr/Frau",
@@ -192,7 +192,9 @@ paymentForm.addEventListener("submit", async (e) => {
 
     const result = await response.json();
 
-    localStorage.removeItem("cart");
+   if(result.success){
+       localStorage.removeItem("cart");
+    }
 
     alert("Bestellung gespeichert! ID: " + result.bestellId);
 
