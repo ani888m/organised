@@ -151,11 +151,15 @@ paymentForm.addEventListener("submit", async (e) => {
     return;
   }
 
+ 
   const positionen = cart.map(item => ({
-    ean: item.ean,
-    menge: item.quantity,
-    preis: item.price
-  }));
+      ean: item.ean,
+      pos_bezeichnung: item.title,
+      menge: item.quantity,
+      ek_netto: 0,
+      vk_brutto: item.price,
+      pos_referenz: ""
+}));
 
   const bestellung = {
     mol_kunde_id: 3,
