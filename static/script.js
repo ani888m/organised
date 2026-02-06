@@ -37,7 +37,7 @@ function addToCart(title, price, image, ean) {
   if (existing) {
     existing.quantity++;
   } else {
-    cart.push({ title, price, quantity: 1, image, ean });
+    cart.push({ title, price, quantity: 1, image, String(ean) });
   }
 
   localStorage.setItem('cart', JSON.stringify(cart));
