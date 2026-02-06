@@ -29,7 +29,7 @@ function updateCartCount() {
   // setCookie("cart", JSON.stringify(cart), 7); // 7 Tage
 }
 
-function addToCart(title, price, image,ean) {
+function addToCart(title, price, image, ean) {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
   let existing = cart.find(item => item.ean === ean);
