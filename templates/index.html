@@ -99,7 +99,8 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
                 {% endif %}
               {% else %}
                 '{{ url_for('static', filename='images/default.jpg') }}'
-              {% endif %}
+              {% endif %},
+             '{{ produkt.ean }}'
             )">
             In den Warenkorb
           </button>
