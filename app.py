@@ -218,44 +218,7 @@ def send_email(subject, body, recipient=EMAIL_SENDER):
         logger.error(f"Fehler beim Senden der E-Mail: {e}")
         raise RuntimeError(f"Fehler beim Senden der E-Mail: {e}")
 
-# ---------- LOGIN / REGISTRIERUNG ----------
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        action = request.form.get("action")
-        email = request.form.get("email")
-        password = request.form.get("password")
 
-        if action == "register":
-            if not email or not password:
-                flash("Bitte alle Felder ausfüllen.", "error")
-                return redirect(url_for("login"))
-            if User.query.filter_by(email=email).first():
-                flash("Diese E-Mail ist bereits registriert.", "error")
-                return redirect(url_for("login"))
-            hashed = generate_password_hash(password)
-            db.session.add(User(email=email, password=hashed))
-            db.session.commit()
-            flash("Registrierung erfolgreich! Bitte melde dich an.", "success")
-            return redirect(url_for("login"))
-
-        elif action == "login":
-            user = User.query.filter_by(email=email).first()
-            if not user or not check_password_hash(user.password, password):
-                flash("Falsche E-Mail oder Passwort.", "error")
-                return redirect(url_for("login"))
-            session["user_id"] = user.id
-            session["user_email"] = user.email
-            flash("Erfolgreich eingeloggt!", "success")
-            return redirect(url_for("index"))
-
-    return render_template("login.html")
-
-@app.route("/logout")
-def logout():
-    session.clear()
-    flash("Du wurdest ausgeloggt.", "success")
-    return redirect(url_for("login"))
 
 # ---------- PRODUKT-SEITEN ----------
 @app.route('/')
@@ -298,17 +261,7 @@ def produkt_detail(produkt_id):
 def navbar():
     return render_template('navbar.html', user_email=session.get("user_email"))
 
-@app.route('/team')
-def team():
-    return render_template('Team.html', user_email=session.get("user_email"))
 
-@app.route('/vision')
-def vision():
-    return render_template('vision.html', user_email=session.get("user_email"))
-
-@app.route('/presse')
-def presse():
-    return render_template('presse.html', user_email=session.get("user_email"))
 
 @app.route('/kontakt')
 def kontakt():
