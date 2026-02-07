@@ -135,8 +135,7 @@ def lade_produkt_von_api(ean):
             "name": res.get("bezeichnung"),
             "autor": attr(attrs, "Autor"),
             "preis": to_float(res.get("vk_brutto")),
-            "beschreibung": res.get("text_text") or "",
-            "bilder": [f"{BASE_URL}/image/{ean}"],
+           
             "isbn": attr(attrs, "ISBN_13"),
             "seiten": attr(attrs, "Seiten"),
             "format": attr(attrs, "Buchtyp"),
