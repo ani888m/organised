@@ -592,7 +592,11 @@ label {
   margin-bottom: 15px;
   font-weight: 400;
 }
-
+.half-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
 input:not([type="checkbox"]), select {
   width: 100%;
   padding: 10px 12px;
