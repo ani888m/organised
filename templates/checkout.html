@@ -170,8 +170,6 @@ paymentForm.addEventListener("submit", async (e) => {
       pos_referenz: ""
 }));
   
-const nameParts = (formData.get("name") || "").trim().split(" ");
-const addressParts = (formData.get("address") || "").trim().split(" ");
 
 const bestellung = {
   mol_kunde_id: 3,
@@ -180,21 +178,17 @@ const bestellung = {
                   formData.get("payment-method") === "paypal" ? 3 : 1,
   bestelldatum: new Date().toISOString().slice(0,19).replace("T"," "),
   bestellreferenz: "REF" + Date.now(),
-  seite: "Moluna.de",
+  seite: "ibk-bilderbuch.de,
   bestellfreigabe: 1,
   mol_verkaufskanal_id: 3,
   auftrag_position: positionen,
 
   lieferadresse: {
-  anrede: "Herr/Frau",
   vorname: formData.get("vorname") || "",
   nachname: formData.get("nachname") || "",
   zusatz: formData.get("adresszusatz") || "",
   strasse: formData.get("address") || "",
   hausnummer: formData.get("hausnummer") || "",
-  adresszeile_1: "",
-  adresszeile_2: "",
-  adresszeile_3: "",
   plz: formData.get("plz")
 }
 
@@ -211,8 +205,7 @@ const bestellung = {
     });
 
     const result = await response.json();
-    document.getElementById("order-output").textContent =
-    JSON.stringify(result, null, 2);
+    
 
    if(result.success){
        localStorage.removeItem("cart");
