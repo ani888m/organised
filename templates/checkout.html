@@ -214,9 +214,11 @@ const bestellung = {
 
    if(result.success){
        localStorage.removeItem("cart");
+    
+       window.location.href = "/danke";
+      } else {
+     alert("Bestellung konnte nicht gespeichert werden");
     }
-
-    alert("Bestellung gespeichert! ID: " + result.bestellId);
 
   } catch (err) {
     console.error(err);
