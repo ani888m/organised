@@ -32,9 +32,8 @@
     <form id="payment-form">
      <h3>Lieferadresse und Zahlungsmethode </h3><br><br>
 
+    Name:
     <div class="half-container">
-     Name:
-
       <label>
         <input type="text" name="name" required placeholder="Vorname">
       </label>
@@ -46,8 +45,8 @@
         E-Mail Adresse:
         <input type="email" name="email" required placeholder="Ihre E-Mail">
       </label>
-              Anschrift:
-    
+      
+    Anschrift:
     <div class="half-container">
 
       <label>
@@ -66,7 +65,10 @@
           <input type="text" name="stadt" required placeholder="Stadt">
         </label>
       </div>
-
+       <label>
+        <input type="text" name="address-additional" placeholder="Adresszusatz">
+      </label>
+      
       <label>
         Zahlungsmethode:
         <select id="payment-method" name="payment-method" required>
