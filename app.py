@@ -558,7 +558,7 @@ def checkout():
                 logger.warning(f"Newsletter konnte nicht gesendet werden: {e}")
 
         flash("Zahlung erfolgreich (Simulation). Vielen Dank für deine Bestellung!", "success")
-        return redirect(url_for('bestelldanke'))
+        return redirect(url_for('/kontaktdanke'))
 
     return render_template('checkout.html', user_email=session.get("user_email"))
 
