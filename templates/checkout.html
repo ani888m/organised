@@ -35,10 +35,10 @@
     Name:
     <div class="half-container">
       <label>
-        <input type="text" name="name" required placeholder="Vorname">
+       <input type="text" name="vorname" required placeholder="Vorname">
       </label>
       <label>
-        <input type="text" name="name" required placeholder="Nachname">
+       <input type="text" name="nachname" required placeholder="Nachname">
       </label>
     </div>
       <label>
@@ -54,7 +54,7 @@
       </label>
       
       <label>
-        <input type="text" name="address-additional" required placeholder="Hausnummer">
+        <input type="text" name="hausnummer" required placeholder="Hausnummer">
       </label>
     </div>
       <div class="half-container">
@@ -66,7 +66,7 @@
         </label>
       </div>
        <label>
-        <input type="text" name="address-additional" placeholder="Adresszusatz">
+          <input type="text" name="adresszusatz" placeholder="Adresszusatz">
       </label>
       
       <label>
@@ -186,17 +186,18 @@ const bestellung = {
   auftrag_position: positionen,
 
   lieferadresse: {
-    anrede: "Herr/Frau",
-    vorname: nameParts[0] || "",
-    nachname: nameParts.slice(1).join(" "),
-    zusatz: formData.get("address-additional") || "",
-    strasse: addressParts.slice(0, -1).join(" "),
-    hausnummer: addressParts.slice(-1)[0] || "",
-    adresszeile_1: "",
-    adresszeile_2: "",
-    adresszeile_3: "",
-    plz: formData.get("plz")
-  }
+  anrede: "Herr/Frau",
+  vorname: formData.get("vorname") || "",
+  nachname: formData.get("nachname") || "",
+  zusatz: formData.get("adresszusatz") || "",
+  strasse: formData.get("address") || "",
+  hausnummer: formData.get("hausnummer") || "",
+  adresszeile_1: "",
+  adresszeile_2: "",
+  adresszeile_3: "",
+  plz: formData.get("plz")
+}
+
 };
 
 
