@@ -160,32 +160,36 @@ paymentForm.addEventListener("submit", async (e) => {
       vk_brutto: item.price,
       pos_referenz: ""
 }));
+  
+const nameParts = (formData.get("name") || "").trim().split(" ");
+const addressParts = (formData.get("address") || "").trim().split(" ");
 
-  const bestellung = {
-    mol_kunde_id: 3,
-    rechnungsadresse_id: 2476303,
-    mol_zahlart_id: formData.get("payment-method") === "rechnung" ? 2 :
-                    formData.get("payment-method") === "paypal" ? 3 : 1,
-    bestelldatum: new Date().toISOString().slice(0,19).replace("T"," "),
-    bestellreferenz: "REF" + Date.now(),
-    seite: "Moluna.de",
-    bestellfreigabe: 1,
-    mol_verkaufskanal_id: 3,
-    auftrag_position: positionen,
+const bestellung = {
+  mol_kunde_id: 3,
+  rechnungsadresse_id: 2476303,
+  mol_zahlart_id: formData.get("payment-method") === "rechnung" ? 2 :
+                  formData.get("payment-method") === "paypal" ? 3 : 1,
+  bestelldatum: new Date().toISOString().slice(0,19).replace("T"," "),
+  bestellreferenz: "REF" + Date.now(),
+  seite: "Moluna.de",
+  bestellfreigabe: 1,
+  mol_verkaufskanal_id: 3,
+  auftrag_position: positionen,
 
-    lieferadresse: {
-      anrede: "Herr/Frau",
-      vorname: formData.get("name").split(" ")[0],
-      nachname: formData.get("name").split(" ")[1] || "",
-      zusatz: formData.get("address-additional") || "",
-      strasse: formData.get("address").split(" ")[0],
-      hausnummer: formData.get("address").split(" ")[1] || "",
-      adresszeile_1: "",
-      adresszeile_2: "",
-      adresszeile_3: "",
-      plz: formData.get("plz")
-    }
-  };
+  lieferadresse: {
+    anrede: "Herr/Frau",
+    vorname: nameParts[0] || "",
+    nachname: nameParts.slice(1).join(" "),
+    zusatz: formData.get("address-additional") || "",
+    strasse: addressParts.slice(0, -1).join(" "),
+    hausnummer: addressParts.slice(-1)[0] || "",
+    adresszeile_1: "",
+    adresszeile_2: "",
+    adresszeile_3: "",
+    plz: formData.get("plz")
+  }
+};
+
 
   try {
     const response = await fetch("https://organised-13.onrender.com/bestellung", {
