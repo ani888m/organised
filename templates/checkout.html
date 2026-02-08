@@ -178,19 +178,24 @@ const bestellung = {
                   formData.get("payment-method") === "paypal" ? 3 : 1,
   bestelldatum: new Date().toISOString().slice(0,19).replace("T"," "),
   bestellreferenz: "REF" + Date.now(),
-  seite: "ibk-bilderbuch.de,
+  seite: "ibk-bilderbuch.de",
   bestellfreigabe: 1,
   mol_verkaufskanal_id: 3,
   auftrag_position: positionen,
 
   lieferadresse: {
-  vorname: formData.get("vorname") || "",
-  nachname: formData.get("nachname") || "",
-  zusatz: formData.get("adresszusatz") || "",
-  strasse: formData.get("address") || "",
-  hausnummer: formData.get("hausnummer") || "",
-  plz: formData.get("plz")
-}
+    anrede: "Herr/Frau",
+    vorname: formData.get("vorname") || "",
+    nachname: formData.get("nachname") || "",
+    zusatz: formData.get("adresszusatz") || "",
+    strasse: formData.get("address") || "",
+    hausnummer: formData.get("hausnummer") || "",
+    stadt: formData.get("stadt") || "",
+    plz: formData.get("plz"),
+    adresszeile_1: "",
+    adresszeile_2: "",
+    adresszeile_3: ""
+  }
 
 };
 
