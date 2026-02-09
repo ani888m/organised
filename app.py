@@ -8,7 +8,10 @@ import requests
 from dotenv import load_dotenv
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
-
+import secrets
+from datetime import datetime
+from sendgrid.helpers.mail import Attachment, FileContent, FileName, FileType, Disposition
+import base64
 # ---------- SETUP ----------
 load_dotenv()  # .env nur lokal laden
 
@@ -197,9 +200,6 @@ def lade_bestand_von_api(ean):
 
 
 
-# ---------- START ----------
-if __name__ == '__main__':
-    app.run(debug=True)
 
 # ---------- BESTELLUNGEN SQLITE ----------
 import sqlite3
@@ -282,6 +282,17 @@ def init_bestell_db():
         FOREIGN KEY(bestell_id) REFERENCES bestellungen(id) ON DELETE CASCADE
     )
     """)
+
+    cur.execute("""
+       CREATE TABLE IF NOT EXISTS storno_tokens (
+       id INTEGER PRIMARY KEY AUTOINCREMENT,
+       bestell_id INTEGER,
+       token TEXT,
+       created TEXT,
+       FOREIGN KEY(bestell_id) REFERENCES bestellungen(id) ON DELETE CASCADE
+    )
+    """)
+
 
     conn.commit()
     conn.close()
@@ -470,23 +481,38 @@ def bestellung_loeschen(bestell_id):
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 EMAIL_SENDER = os.getenv("EMAIL_SENDER")
 
-def send_email(subject, body, recipient=EMAIL_SENDER):
-    if not SENDGRID_API_KEY or not EMAIL_SENDER:
-        raise ValueError("SENDGRID_API_KEY oder EMAIL_SENDER ist nicht gesetzt!")
+def send_email(subject, body, recipient=None, pdf_bytes=None):
+
+    if not recipient:
+        recipient = EMAIL_SENDER
+
     message = Mail(
         from_email=EMAIL_SENDER,
         to_emails=recipient,
         subject=subject,
         plain_text_content=body
     )
+
+    # 📄 PDF anhängen
+    if pdf_bytes:
+        encoded_file = base64.b64encode(pdf_bytes).decode()
+
+        attachment = Attachment(
+            FileContent(encoded_file),
+            FileName("Rechnung.pdf"),
+            FileType("application/pdf"),
+            Disposition("attachment")
+        )
+
+        message.attachment = attachment
+
     try:
         sg = SendGridAPIClient(SENDGRID_API_KEY)
-        response = sg.send(message)
-        logger.info(f"E-Mail erfolgreich gesendet! Status: {response.status_code}")
+        sg.send(message)
+        logger.info("E-Mail erfolgreich gesendet")
     except Exception as e:
-        logger.error(f"Fehler beim Senden der E-Mail: {e}")
-        raise RuntimeError(f"Fehler beim Senden der E-Mail: {e}")
-
+        logger.error(f"E-Mail Fehler: {e}")
+        raise
 
 
 # ---------- PRODUKT-SEITEN ----------
@@ -524,6 +550,38 @@ def produkt_detail(produkt_id):
 
     return render_template('produkt.html', produkt=produkt, user_email=session.get("user_email"))
 
+
+# ------STORNO---------
+
+def generate_cancel_token(bestell_id):
+    token = secrets.token_urlsafe(32)
+
+    conn = get_db()
+    cur = conn.cursor()
+
+    cur.execute("""
+        INSERT INTO storno_tokens (bestell_id, token, created)
+        VALUES (?, ?, ?)
+    """, (bestell_id, token, datetime.now().isoformat()))
+
+    conn.commit()
+    conn.close()
+
+    return token
+
+
+def lade_rechnung(dateiname):
+    url = f"https://api.buchbutler.de/RECHNUNG/{dateiname}"
+
+    response = requests.get(url, auth=(BUCHBUTLER_USER, BUCHBUTLER_PASSWORD))
+
+    if response.status_code == 200:
+        return response.content  # PDF Bytes
+
+    return None
+
+
+
 # ---------- RESTLICHE ROUTES ----------
 
 @app.route('/navbar')
@@ -558,9 +616,12 @@ def checkout():
                 logger.warning(f"Newsletter konnte nicht gesendet werden: {e}")
 
         flash("Zahlung erfolgreich (Simulation). Vielen Dank für deine Bestellung!", "success")
-        return redirect(url_for('/kontaktdanke'))
+        return redirect(url_for('kontaktdanke'))
 
     return render_template('checkout.html', user_email=session.get("user_email"))
+
+
+
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -577,8 +638,10 @@ def submit():
             subject=f'Neue Nachricht von {name}',
             body=f"Von: {name} <{email}>\n\nNachricht:\n{message}"
         )
+
         flash("Danke! Deine Nachricht wurde gesendet.", "success")
         return redirect('/kontaktdanke')
+
     except Exception as e:
         flash(f"Fehler beim Senden der Nachricht: {e}", "error")
         return redirect('/kontakt')
@@ -637,3 +700,6 @@ def cron():
     print("Cronjob wurde ausgelöst")
     return "OK"
 
+# ---------- START ----------
+if __name__ == '__main__':
+    app.run(debug=True)
