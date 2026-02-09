@@ -241,6 +241,7 @@ def init_bestell_db():
         liefer_anrede TEXT,
         liefer_vorname TEXT,
         liefer_nachname TEXT,
+        email TEXT,
         liefer_zusatz TEXT,
         liefer_strasse TEXT,
         liefer_hausnummer TEXT,
