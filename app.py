@@ -17,7 +17,6 @@ load_dotenv()  # .env nur lokal laden
 
 # Logging konfigurieren
 logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
 
 # Flask App Setup
 app = Flask(__name__)
@@ -294,7 +293,7 @@ def init_bestell_db():
     """)
 
 
-    conn.commit()
+    conn.commit()                                                        
     conn.close()
 
 
@@ -314,7 +313,9 @@ def neue_bestellung():
     cur = conn.cursor()
 
     try:
+        # -------------------------
         # Bestellung speichern
+        # -------------------------
         cur.execute("""
         INSERT INTO bestellungen (
             mol_kunde_id, rechnungsadresse_id, mol_zahlart_id,
@@ -360,7 +361,9 @@ def neue_bestellung():
 
         bestell_id = cur.lastrowid
 
+        # -------------------------
         # Positionen speichern
+        # -------------------------
         for pos in data.get("auftrag_position", []):
             cur.execute("""
             INSERT INTO bestell_positionen (
@@ -378,20 +381,38 @@ def neue_bestellung():
                 pos.get("pos_referenz")
             ))
 
-        # Zusatz speichern
-        for zusatz in data.get("auftrag_zusatz", []):
-            cur.execute("""
-            INSERT INTO bestell_zusatz (
-                bestell_id, typ, value
-            )
-            VALUES (?,?,?)
-            """, (
-                bestell_id,
-                zusatz.get("typ"),
-                zusatz.get("value")
-            ))
-
         conn.commit()
+
+        # -------------------------
+        # Mail + Storno
+        # -------------------------
+        email = data.get("email")
+
+        if email:
+
+            token = generate_cancel_token(bestell_id)
+            cancel_link = f"https://deinedomain.de/storno/{token}"
+
+            pdf_bytes = None
+            if data.get("rechnungsdatei"):
+                pdf_bytes = lade_rechnung(data["rechnungsdatei"])
+
+            try:
+                send_email(
+                    subject="Ihre Bestellung",
+                    body=f"""
+Vielen Dank für Ihre Bestellung!
+
+Bestellnummer: {bestell_id}
+
+Stornieren Sie hier:
+{cancel_link}
+""",
+                    recipient=email,
+                    pdf_bytes=pdf_bytes
+                )
+            except Exception as e:
+                logger.error(f"Bestellmail Fehler: {e}")
 
         return jsonify({
             "success": True,
