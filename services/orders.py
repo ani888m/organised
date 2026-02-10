@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 import secrets
 from flask import current_app as app
-from .buchbutler import lade_rechnung
+from buchbutler import lade_rechnung
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 BESTELL_DB = os.path.join(basedir, "../bestellungen.db")
