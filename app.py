@@ -1,7 +1,8 @@
 from flask import Flask
-from .models import db
-from .routes.shop import shop_bp
-from .routes.orders import orders_bp
+from models import db
+from routes.shop import shop_bp
+from routes.orders import orders_bp
+
 
 
 # -----------------------------
