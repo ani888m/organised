@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, abort, session
-from services.buchbutler import lade_produkt_von_api, lade_bestand_von_api
+from ..services.buchbutler import lade_produkt_von_api, lade_bestand_von_api
 import json
 import os
 
