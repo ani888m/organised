@@ -1,6 +1,3 @@
-
-
-
 from flask import Blueprint, request, jsonify
 from services.orders import save_order, get_order, get_all_orders, delete_order, generate_cancel_token
 from services.mail import send_email
