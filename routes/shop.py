@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, abort, session, current_app
-from .services.buchbutler import lade_produkt_von_api, lade_bestand_von_api
-from .services.mail import send_email
+from services.buchbutler import lade_produkt_von_api, lade_bestand_von_api
+from services.mail import send_email
 import json
 import os
 
