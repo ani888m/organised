@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, abort, session
+from flask import Blueprint, render_template, abort, session, current_app
 from ..services.buchbutler import lade_produkt_von_api, lade_bestand_von_api
+from ..services.mail import send_email
 import json
 import os
 
@@ -41,7 +42,6 @@ def produkt_detail(produkt_id):
     if not produkt:
         abort(404)
 
-    # 1️⃣ CONTENT API Daten laden
     if produkt.get("ean"):
         api_produkt = lade_produkt_von_api(produkt["ean"])
         if api_produkt:
@@ -51,7 +51,6 @@ def produkt_detail(produkt_id):
         if movement:
             produkt.update(movement)
 
-    # 2️⃣ Default-Werte setzen
     produkt.setdefault("bestand", "n/a")
     produkt.setdefault("preis", 0)
     produkt.setdefault("handling_zeit", "n/a")
@@ -78,7 +77,6 @@ def cart():
 @shop_bp.route('/checkout', methods=['GET', 'POST'])
 def checkout():
     from flask import request, flash, redirect, url_for
-    from services.mail import send_email
 
     if request.method == 'POST':
         name = request.form.get('name')
@@ -97,7 +95,7 @@ def checkout():
                     body=f'{name} ({email}) hat sich beim Bestellvorgang für den Newsletter angemeldet.'
                 )
             except Exception as e:
-                app.logger.warning(f"Newsletter konnte nicht gesendet werden: {e}")
+                current_app.logger.warning(f"Newsletter konnte nicht gesendet werden: {e}")
 
         flash("Zahlung erfolgreich (Simulation). Vielen Dank für deine Bestellung!", "success")
         return redirect(url_for('shop.danke'))
