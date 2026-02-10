@@ -4,12 +4,8 @@ from services.mail import send_email
 from services.buchbutler import lade_rechnung
 import logging
 
-
-
 logger = logging.getLogger(__name__)
-
 orders_bp = Blueprint("orders", __name__)
-
 
 # ----------------------------
 # Neue Bestellung
