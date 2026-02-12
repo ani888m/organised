@@ -139,34 +139,35 @@ function toggleInfoDetails() {
   box.classList.toggle('info-open');
 }
 
-
 document.addEventListener("DOMContentLoaded", function () {
 
   const categories = document.querySelectorAll(".category");
   const button = document.getElementById("showMoreBtn");
 
-  let visibleCount = 3; // Anzahl Kategorien pro Klick
+  let visibleCount = 3; // wie viele Kategorien pro Klick gezeigt werden
 
-  function showCategories() {
+  function updateCategories() {
+    categories.forEach((cat, index) => {
+      cat.style.display = index < visibleCount ? "block" : "none";
+    });
 
-    for (let i = 0; i < visibleCount; i++) {
-      if (categories[i]) {
-        categories[i].style.display = "block";
-      }
-    }
-
+    // Button ausblenden, wenn alle Kategorien sichtbar sind
     if (visibleCount >= categories.length) {
       button.style.display = "none";
+    } else {
+      button.style.display = "inline-block";
     }
-
   }
 
-  showCategories();
+  // Beim Laden erste Kategorien anzeigen
+  updateCategories();
 
+  // Klick auf den Button
   button.addEventListener("click", () => {
-    visibleCount += 3;
-    showCategories();
+    visibleCount += 3; // nächste 3 Kategorien anzeigen
+    updateCategories();
   });
 
 });
+
 
