@@ -111,7 +111,7 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
 
 
 
- {% set visiblePerClick = 3 %}  {# Anzahl Kategorien pro Klick #}
+{% set visiblePerClick = 3 %}  {# Anzahl Kategorien pro Klick #}
 
 {% for titel, liste in kategorien %}
   <div 
@@ -160,14 +160,12 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
 
   </div>
 
-  {# Nach jeweils visiblePerClick Kategorien Button einfügen #}
-  {% if loop.index % visiblePerClick == 0 and loop.index != kategorien|length %}
-    <div style="text-align:center; margin:30px;">
-      <button class="showMoreBtn">Weitere Produkte anzeigen</button>
-    </div>
-  {% endif %}
-
 {% endfor %}
+
+{# EIN Button unter allen Kategorien #}
+<div style="text-align:center; margin:30px;">
+  <button id="showMoreBtn">Weitere Produkte anzeigen</button>
+</div>
 
 
 
