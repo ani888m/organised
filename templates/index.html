@@ -59,7 +59,7 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
 
 
 <main>
-  {% for titel, liste in kategorien %}
+ <!-- {% for titel, liste in kategorien %}
     <h2 id="{{ titel|replace(' ', '_')
                     |replace('?', '')
                     |replace('!', '')
@@ -107,10 +107,57 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
         </div>
       {% endfor %}
     </div>
-  {% endfor %}
+  {% endfor %}-->
 
 
-  
+
+  {% for titel, liste in kategorien %}
+
+<div class="category {% if loop.index > 2 %}hidden-category{% endif %}">
+
+  <h2>{{ titel }}</h2>
+
+  <div class="book-list">
+    {% for produkt in liste %}
+      <div class="book">
+
+        <div class="image-wrapper">
+          <img 
+            {% if produkt.bilder and produkt.bilder|length > 0 %}
+              {% if produkt.bilder[0].startswith('http') %}
+                src="{{ produkt.bilder[0] }}"
+              {% else %}
+                src="{{ url_for('static', filename=produkt.bilder[0]) }}"
+              {% endif %}
+            {% else %}
+              src="{{ url_for('static', filename='images/default.jpg') }}"
+            {% endif %}
+            alt="{{ produkt.name }}">
+
+          <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}" class="hover-btn">
+            Mehr erfahren
+          </a>
+        </div>
+
+        <h3>{{ produkt.name }}</h3>
+        <p>{{ produkt.preis }} €</p>
+
+        <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '', '{{ produkt.ean }}')">
+          In den Warenkorb
+        </button>
+
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+{% endfor %}
+
+<div style="text-align:center; margin:30px;">
+  <button id="showMoreBtn">Weitere Produkte anzeigen</button>
+</div>
+
 
  <section class="newsletter-section">
 
