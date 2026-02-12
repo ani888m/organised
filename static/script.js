@@ -140,13 +140,33 @@ function toggleInfoDetails() {
 }
 
 
-document.getElementById("showMoreBtn").addEventListener("click", function() {
+document.addEventListener("DOMContentLoaded", function () {
 
-  document.querySelectorAll(".hidden-category").forEach(el => {
-    el.style.display = "block";
+  const categories = document.querySelectorAll(".category");
+  const button = document.getElementById("showMoreBtn");
+
+  let visibleCount = 3; // Anzahl Kategorien pro Klick
+
+  function showCategories() {
+
+    for (let i = 0; i < visibleCount; i++) {
+      if (categories[i]) {
+        categories[i].style.display = "block";
+      }
+    }
+
+    if (visibleCount >= categories.length) {
+      button.style.display = "none";
+    }
+
+  }
+
+  showCategories();
+
+  button.addEventListener("click", () => {
+    visibleCount += 3;
+    showCategories();
   });
-
-  this.style.display = "none";
 
 });
 
