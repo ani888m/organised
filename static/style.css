@@ -99,6 +99,11 @@ header {
   object-fit: contain;
 }
 
+.hidden-category {
+  display: none;
+}
+
+
 /* iPad / Tablets */
 @media (min-width: 769px) and (max-width: 1024px) {
   header {
