@@ -1,75 +1,47 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="description" content="Geschichten und Bilder, die bleiben: Ganz besondere Bilderbücher – liebevoll gestaltet, hochwertig illustriert und online erhältlich bei I B K.
-Ein besonderes Geschenk für kleine und große Leser*innen..">
+  <meta name="description" content="Geschichten und Bilder, die bleiben">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title> I B K | Ausgewählte Illustrationen und Bilderbücher: Neuerscheinungen, Klassiker und alles Besondere </title>
-  <link rel="icon" type="image/x-icon" href="static/ficon.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Montserrat&display=swap" rel="stylesheet">
+  <title>I B K | Bilderbücher</title>
+
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
- 
+  <style>
+    /* Optional etwas Styling */
+    details {
+      margin-bottom: 20px;
+    }
+
+    summary {
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+  </style>
 
 </head>
 
-  {% include 'navbar.html' %}
-
-<div id="navbar-placeholder"></div>
-
 <body>
- 
-<div class="carousel">
-  <div class="slides">
-    
-     <!-- Folie 1 -->
 
-     <div class="carousel-slide">
-      <img src="{{ url_for('static', filename='images/Slide5.jpg') }}" class="carousel-image" alt="Slide 5">
-      <button class="slide-btn" onclick="window.location.href='{{ url_for("index") }}#Jacominus_Gainsborough'"> Zu den Büchern </button>
-    </div>
-
-    <!-- Folie 2 -->
-
-     <div class="carousel-slide">
-      <img src="{{ url_for('static', filename='images/Angsthase.jpg') }}" class="carousel-image" alt="Slide 4">
-      <button class="slide-btn" onclick="window.location.href='{{ url_for("index") }}#Mut_oder_Angst'"> Zu den Büchern </button>
-    </div>
-
-    
-    <!-- Folie 1 
-    <div class="carousel-slide active">
-      <img src="{{ url_for('static', filename='images/slider1.jpg') }}" class="carousel-image" alt="Slide 3">
-      <button class="slide-btn" onclick="window.location.href='{{ url_for("index") }}#Klassiker'">Zu den Büchern</button>
-    </div> -->
-    
-  </div>
-
-  <!-- Navigation -->
-  <button class="prev">❮</button>
-  <button class="next">❯</button>
-</div>
-
-
+{% include 'navbar.html' %}
 
 <main>
+
   {% for titel, liste in kategorien %}
-    <h2 id="{{ titel|replace(' ', '_')
-                    |replace('?', '')
-                    |replace('!', '')
-                    |replace('ä','ae')
-                    |replace('ö','oe')
-                    |replace('ü','ue')}}">{{ titel }}</h2>
-    <div class="book-list">
-      {% for produkt in liste %}
+
+    <details>
+      <summary>{{ titel }}</summary>
+
+      <div class="book-list">
+
+        {% for produkt in liste %}
         <div class="book">
+
           <div class="image-wrapper">
+
             <img 
               {% if produkt.bilder and produkt.bilder|length > 0 %}
                 {% if produkt.bilder[0].startswith('http') %}
@@ -81,13 +53,17 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
                 src="{{ url_for('static', filename='images/default.jpg') }}"
               {% endif %}
               alt="{{ produkt.name }}">
-              
-            <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}" class="hover-btn">Mehr erfahren</a>
+
+            <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}" class="hover-btn">
+              Mehr erfahren
+            </a>
+
           </div>
 
           <h3>{{ produkt.name }}</h3>
           <p>{{ produkt.preis }} €</p>
-         <button 
+
+          <button 
             onclick="addToCart(
               '{{ produkt.name }}', 
               {{ produkt.preis }}, 
@@ -100,39 +76,34 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
               {% else %}
                 '{{ url_for('static', filename='images/default.jpg') }}'
               {% endif %},
-             '{{ produkt.ean }}'
+              '{{ produkt.ean }}'
             )">
             In den Warenkorb
           </button>
+
         </div>
-      {% endfor %}
-    </div>
+        {% endfor %}
+
+      </div>
+
+    </details>
+
   {% endfor %}
 
 
-  
-
- <section class="newsletter-section">
-
-  <h3>Melde dich zu unserem Newsletter an!</h3>
-  <p>Erhalte exklusive Neuigkeiten und Angebote rund um unsere Kinderbücher.</p>
-  <form action="{{ url_for('newsletter') }}" method="POST">
-    <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required /><br>
-    <button type="submit">Anmelden</button>
-  </form>
-</section>
+  <section class="newsletter-section">
+    <h3>Melde dich zu unserem Newsletter an!</h3>
+    <form action="{{ url_for('newsletter') }}" method="POST">
+      <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required>
+      <button type="submit">Anmelden</button>
+    </form>
+  </section>
 
 </main>
 
+{% include 'footer.html' %}
 
- {% include 'footer.html' %}
-
-
-
-<script src="{{ url_for('static', filename='script.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+<script src="{{ url_for('static', filename='js/cart.js') }}"></script>
 
 </body>
 </html>
-
-
