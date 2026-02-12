@@ -139,3 +139,14 @@ function toggleInfoDetails() {
   box.classList.toggle('info-open');
 }
 
+
+document.getElementById("showMoreBtn").addEventListener("click", function() {
+
+  document.querySelectorAll(".hidden-category").forEach(el => {
+    el.style.display = "block";
+  });
+
+  this.style.display = "none";
+
+});
+
