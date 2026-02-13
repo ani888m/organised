@@ -212,7 +212,6 @@ def lade_bestand_von_api(ean):
 
 # ---------- BESTELLUNGEN SQLITE ----------
 import sqlite3
-import os
 from flask import request, jsonify
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -582,12 +581,17 @@ def test_moluna(bestell_id):
     try:
         response = send_bestellung_an_moluna(bestell_id)
 
-        return jsonify(response)
+        return jsonify({
+            "status": "ok",
+            "data": response
+        })
 
     except Exception as e:
         return jsonify({
-            "error": str(e)
+            "status": "error",
+            "message": str(e)
         }), 500
+
 
 # ---------- SENDGRID KONFIGURATION ----------
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
