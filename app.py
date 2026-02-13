@@ -575,23 +575,19 @@ def send_bestellung_an_moluna(bestell_id):
 
 
     
+
 @app.route("/test_moluna/<int:bestell_id>")
 def test_moluna(bestell_id):
 
     try:
         response = send_bestellung_an_moluna(bestell_id)
 
-        return jsonify({
-            "status": "ok",
-            "moluna_response": str(response)
-        })
+        return jsonify(response)
 
     except Exception as e:
         return jsonify({
-            "status": "error",
-            "message": str(e)
+            "error": str(e)
         }), 500
-
 
 # ---------- SENDGRID KONFIGURATION ----------
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
