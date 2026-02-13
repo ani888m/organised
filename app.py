@@ -14,6 +14,9 @@ import secrets
 from datetime import datetime
 from sendgrid.helpers.mail import Attachment, FileContent, FileName, FileType, Disposition
 import base64
+from moluna_mapper import build_moluna_payload
+from moluna_client import send_order_to_moluna
+
 # ---------- SETUP ----------
 load_dotenv()  # .env nur lokal laden
 
@@ -504,6 +507,65 @@ def bestellung_loeschen(bestell_id):
     conn.close()
 
     return jsonify({"success": True})
+
+# -------------------------------------------------
+# Bestellung an Moluna sebden
+# -------------------------------------------------
+
+def lade_bestellung(bestell_id):
+
+    conn = get_db()
+    cur = conn.cursor()
+
+    # Bestellung
+    cur.execute("SELECT * FROM bestellungen WHERE id=?", (bestell_id,))
+    bestellung = cur.fetchone()
+
+    if not bestellung:
+        conn.close()
+        return None
+
+    # Positionen
+    cur.execute("""
+        SELECT * FROM bestell_positionen
+        WHERE bestell_id=?
+    """, (bestell_id,))
+    positionen = [dict(row) for row in cur.fetchall()]
+
+    # Zusatz
+    cur.execute("""
+        SELECT * FROM bestell_zusatz
+        WHERE bestell_id=?
+    """, (bestell_id,))
+    zusatz = [dict(row) for row in cur.fetchall()]
+
+    conn.close()
+
+    return {
+        "bestellung": dict(bestellung),
+        "positionen": positionen,
+        "zusatz": zusatz
+    }
+
+
+def send_bestellung_an_moluna(bestell_id):
+
+    order = lade_bestellung(bestell_id)
+
+    payload = build_moluna_payload(order, MOLUNA_USER, MOLUNA_PASS)
+
+    response = send_order_to_moluna(payload)
+
+    return response
+
+# ----zum Testen -----
+
+@app.route("/test_moluna/<int:bestell_id>")
+def test_moluna(bestell_id):
+
+    response = send_bestellung_an_moluna(bestell_id)
+
+    return response
 
 
 # ---------- SENDGRID KONFIGURATION ----------
