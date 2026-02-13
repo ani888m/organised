@@ -378,11 +378,13 @@ def neue_bestellung():
                 bestell_id,
                 pos.get("ean"),
                 pos.get("pos_bezeichnung"),
-                pos.get("menge"),
-                pos.get("ek_netto"),
-                pos.get("vk_brutto"),
+                int(pos.get("menge", 0)),
+                float(pos.get("ek_netto", 0)),
+                float(pos.get("vk_brutto", 0)),
                 pos.get("pos_referenz")
             ))
+
+
 
         conn.commit()
 
