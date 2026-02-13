@@ -58,6 +58,9 @@ BUCHBUTLER_PASSWORD = os.getenv("BUCHBUTLER_PASSWORD")
 
 BASE_URL = "https://api.buchbutler.de"
 
+# Alias für Moluna Order Schnittstelle
+MOLUNA_USER = BUCHBUTLER_USER
+MOLUNA_PASS = BUCHBUTLER_PASSWORD
 
 # -----------------------------
 # Helper Funktionen
