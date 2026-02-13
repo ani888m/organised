@@ -548,24 +548,43 @@ def lade_bestellung(bestell_id):
     }
 
 
+
+
 def send_bestellung_an_moluna(bestell_id):
 
     order = lade_bestellung(bestell_id)
 
     payload = build_moluna_payload(order, MOLUNA_USER, MOLUNA_PASS)
 
+    if TEST_MODE:
+        logger.info("TEST MODE – Bestellung wird NICHT gesendet")
+        return payload
+
     response = send_order_to_moluna(payload)
 
     return response
 
+
 # ----zum Testen -----
 
+
+    
 @app.route("/test_moluna/<int:bestell_id>")
 def test_moluna(bestell_id):
 
-    response = send_bestellung_an_moluna(bestell_id)
+    try:
+        response = send_bestellung_an_moluna(bestell_id)
 
-    return response
+        return jsonify({
+            "status": "ok",
+            "moluna_response": str(response)
+        })
+
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "message": str(e)
+        }), 500
 
 
 # ---------- SENDGRID KONFIGURATION ----------
