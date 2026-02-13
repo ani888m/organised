@@ -65,6 +65,8 @@ BASE_URL = "https://api.buchbutler.de"
 MOLUNA_USER = BUCHBUTLER_USER
 MOLUNA_PASS = BUCHBUTLER_PASSWORD
 
+TEST_MODE = True
+
 # -----------------------------
 # Helper Funktionen
 # -----------------------------
@@ -554,8 +556,12 @@ def send_bestellung_an_moluna(bestell_id):
 
     order = lade_bestellung(bestell_id)
 
+    if not order:
+        raise Exception("Bestellung nicht gefunden")
+
     payload = build_moluna_payload(order, MOLUNA_USER, MOLUNA_PASS)
 
+    # ---------- TEST MODE ----------
     if TEST_MODE:
         logger.info("TEST MODE – Bestellung wird NICHT gesendet")
         return payload
