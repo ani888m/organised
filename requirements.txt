@@ -19,4 +19,3 @@ sendgrid==6.12.5
 # HTTP Requests
 requests==2.32.5
 
-psycopg[binary]==3.3.2
