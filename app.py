@@ -15,7 +15,12 @@ from moluna_mapper import build_moluna_payload
 from moluna_client import send_order_to_moluna
 from os import getenv
 
-    
+BUCHBUTLER_USER = os.getenv("BUCHBUTLER_USER")
+BUCHBUTLER_PASSWORD = os.getenv("BUCHBUTLER_PASSWORD")
+
+print("BUCHBUTLER_USER:", BUCHBUTLER_USER)
+print("BUCHBUTLER_PASSWORD gesetzt:", bool(BUCHBUTLER_PASSWORD))
+
 
 
 # -------------------------------------------------
