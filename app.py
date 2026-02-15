@@ -342,6 +342,11 @@ def newsletter():
         flash(f"Fehler beim Newsletter-Versand: {e}", 'error')
         return redirect('/')
 
+@app.route("/")
+def index():
+    return render_template("index.html", user_email=session.get("user_email"))
+
+
 @app.route('/danke')
 def danke():
     return render_template('danke.html', user_email=session.get("user_email"))
