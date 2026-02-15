@@ -13,7 +13,9 @@ from datetime import datetime
 import base64
 from moluna_mapper import build_moluna_payload
 from moluna_client import send_order_to_moluna
+from os import getenv
 
+    
 
 
 # -------------------------------------------------
@@ -263,6 +265,23 @@ def update_status(bestell_id):
 
 # ---------- RESTLICHE ROUTES ----------
 
+
+
+def lade_produkt_von_api(ean):
+    """Ruft ein Produkt von der Buchbutler-API ab."""
+    if not BUCHBUTLER_USER or not BUCHBUTLER_PASSWORD:
+        return None
+
+    try:
+        url = f"https://www.buchbutler.de/api/product/{ean}"
+        response = requests.get(url, auth=(BUCHBUTLER_USER, BUCHBUTLER_PASSWORD), timeout=10)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as e:
+        print(f"Fehler bei API-Abfrage: {e}")
+        return None
+    
+
 @app.route('/navbar')
 def navbar():
     return render_template('navbar.html', user_email=session.get("user_email"))
@@ -430,26 +449,7 @@ def produkt_detail(produkt_id):
 
     return render_template('produkt.html', produkt=produkt, user_email=session.get("user_email"))
 
-import requests
-from os import getenv
 
-BUCHBUTLER_USER = getenv("BUCHBUTLER_USER")
-BUCHBUTLER_PASSWORD = getenv("BUCHBUTLER_PASSWORD")
-
-def lade_produkt_von_api(ean):
-    """Ruft ein Produkt von der Buchbutler-API ab."""
-    if not BUCHBUTLER_USER or not BUCHBUTLER_PASSWORD:
-        return None
-
-    try:
-        url = f"https://www.buchbutler.de/api/product/{ean}"
-        response = requests.get(url, auth=(BUCHBUTLER_USER, BUCHBUTLER_PASSWORD), timeout=10)
-        response.raise_for_status()
-        return response.json()
-    except requests.RequestException as e:
-        print(f"Fehler bei API-Abfrage: {e}")
-        return None
-    
 
 
 # -------------------------------------------------
