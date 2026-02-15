@@ -400,15 +400,14 @@ def index():
     kategorien = [(k, [p for p in produkte if p.get("kategorie") == k]) for k in kategorienamen]
     return render_template("index.html", kategorien=kategorien, user_email=session.get("user_email"))
 
-
 @app.route('/produkt/<int:produkt_id>')
 def produkt_detail(produkt_id):
     produkt = next((p for p in produkte if p['id'] == produkt_id), None)
     if not produkt:
         abort(404)
 
-    # 1️⃣ CONTENT API Daten laden
-    if produkt.get("ean"):
+    # Buchbutler API nur bei vorhandener EAN
+    if produkt.get("ean") and check_auth():
         api_produkt = lade_produkt_von_api(produkt["ean"])
         if api_produkt:
             produkt.update(api_produkt)
@@ -417,13 +416,20 @@ def produkt_detail(produkt_id):
         if movement:
             produkt.update(movement)
 
-    # 2️⃣ Default-Werte setzen
-    produkt.setdefault("bestand", "n/a")
-    produkt.setdefault("preis", 0)
-    produkt.setdefault("handling_zeit", "n/a")
-    produkt.setdefault("erfuellungsrate", "n/a")
+    # Defaults setzen
+    keys_defaults = {
+        "bestand": "n/a",
+        "preis": 0,
+        "handling_zeit": "n/a",
+        "erfuellungsrate": "n/a",
+        "name": produkt.get("name", "Unbekannt"),
+        "isbn": produkt.get("isbn", "n/a"),
+        "seiten": produkt.get("seiten", "n/a")
+    }
+    produkt.update(keys_defaults)
 
     return render_template('produkt.html', produkt=produkt, user_email=session.get("user_email"))
+
 
 
 # -------------------------------------------------
