@@ -13,6 +13,9 @@ from datetime import datetime
 import base64
 from moluna_mapper import build_moluna_payload
 from moluna_client import send_order_to_moluna
+import psycopg2
+print("psycopg2 VERSION:", psycopg2.__version__)
+
 
 # -------------------------------------------------
 # SETUP
