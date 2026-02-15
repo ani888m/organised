@@ -28,13 +28,12 @@ function loadCart(containerId = "cart-items", totalId = "total-price") {
 
     // Bild
     const img = document.createElement('img');
-    img.src = '/static/images/' + slug + '/' + slug + '.jpg'
-
+    img.src = item.image;
     img.alt = item.title;
 
     // Fallback, falls Bild nicht gefunden wird
     img.onerror = () => {
-      img.src = '/static/images/default.jpg'; // Standardbild
+      img.src = '/static/images/image/default.jpg'; // Standardbild
     };
     // Info-Container
     const info = document.createElement('div');
