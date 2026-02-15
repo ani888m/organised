@@ -407,7 +407,7 @@ def produkt_detail(produkt_id):
         abort(404)
 
     # Buchbutler API nur bei vorhandener EAN
-    if produkt.get("ean") and check_auth():
+    if produkt.get("ean") and checkout():
         api_produkt = lade_produkt_von_api(produkt["ean"])
         if api_produkt:
             produkt.update(api_produkt)
@@ -429,6 +429,7 @@ def produkt_detail(produkt_id):
     produkt.update(keys_defaults)
 
     return render_template('produkt.html', produkt=produkt, user_email=session.get("user_email"))
+
 
 
 
