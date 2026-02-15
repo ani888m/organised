@@ -102,7 +102,7 @@ Ein besonderes Geschenk für kleine und große Leser*innen..">
           <h3>{{ produkt.name }}</h3>
           <p>{{ produkt.preis }} €</p>
 
-          <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '', '{{ produkt.ean }}', '{{ url_for('static', filename=produkt.bilder[0]) }}' )">
+          <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}', '{{ produkt.ean }}'  )">
             In den Warenkorb
           </button>
 
