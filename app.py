@@ -385,6 +385,39 @@ def cron():
     return "OK"
 
 
+@app.route('/')
+def index():
+    kategorienamen = [
+        "Jacominus Gainsborough", "Mut oder Angst?!",
+        "Klassiker", "Monstergeschichten", "Wichtige Fragen", "Weihnachten",
+        "Kinder und Gefühle", "Dazugehören"
+    ]
+    kategorien = [(k, [p for p in produkte if p.get("kategorie") == k]) for k in kategorienamen]
+    return render_template("index.html", kategorien=kategorien, user_email=session.get("user_email"))
+
+@app.route('/produkt/<int:produkt_id>')
+def produkt_detail(produkt_id):
+    produkt = next((p for p in produkte if p['id'] == produkt_id), None)
+    if not produkt:
+        abort(404)
+
+    # 1️⃣ CONTENT API Daten laden
+    if produkt.get("ean"):
+        api_produkt = lade_produkt_von_api(produkt["ean"])
+        if api_produkt:
+            produkt.update(api_produkt)
+
+        movement = lade_bestand_von_api(produkt["ean"])
+        if movement:
+            produkt.update(movement)
+
+    # 2️⃣ Default-Werte setzen
+    produkt.setdefault("bestand", "n/a")
+    produkt.setdefault("preis", 0)
+    produkt.setdefault("handling_zeit", "n/a")
+    produkt.setdefault("erfuellungsrate", "n/a")
+
+    return render_template('produkt.html', produkt=produkt, user_email=session.get("user_email"))
 # -------------------------------------------------
 # START
 # -------------------------------------------------
