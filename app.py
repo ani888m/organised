@@ -15,11 +15,7 @@ from moluna_mapper import build_moluna_payload
 from moluna_client import send_order_to_moluna
 from os import getenv
 
-BUCHBUTLER_USER = os.getenv("BUCHBUTLER_USER")
-BUCHBUTLER_PASSWORD = os.getenv("BUCHBUTLER_PASSWORD")
 
-print("BUCHBUTLER_USER:", BUCHBUTLER_USER)
-print("BUCHBUTLER_PASSWORD gesetzt:", bool(BUCHBUTLER_PASSWORD))
 
 
 
@@ -29,6 +25,12 @@ print("BUCHBUTLER_PASSWORD gesetzt:", bool(BUCHBUTLER_PASSWORD))
 
 load_dotenv()
 logging.basicConfig(level=logging.DEBUG)
+
+BUCHBUTLER_USER = os.getenv("BUCHBUTLER_USER")
+BUCHBUTLER_PASSWORD = os.getenv("BUCHBUTLER_PASSWORD")
+
+print("BUCHBUTLER_USER:", BUCHBUTLER_USER)
+print("BUCHBUTLER_PASSWORD gesetzt:", bool(BUCHBUTLER_PASSWORD))
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "fallback-secret-key")
@@ -425,34 +427,31 @@ def index():
     return render_template("index.html", kategorien=kategorien, user_email=session.get("user_email"))
 
 @app.route('/produkt/<int:produkt_id>')
+
+
+
+@app.route('/produkt/<int:produkt_id>')
 def produkt_detail(produkt_id):
+
     produkt = next((p for p in produkte if p['id'] == produkt_id), None)
+
     if not produkt:
         abort(404)
 
-    # Buchbutler API nur bei vorhandener EAN
-    if produkt.get("ean") and checkout():
+    # Buchbutler API nur wenn Login vorhanden
+    if produkt.get("ean") and BUCHBUTLER_USER and BUCHBUTLER_PASSWORD:
+
         api_produkt = lade_produkt_von_api(produkt["ean"])
+
         if api_produkt:
             produkt.update(api_produkt)
 
-        movement = lade_bestand_von_api(produkt["ean"])
-        if movement:
-            produkt.update(movement)
+    return render_template(
+        "produkt.html",
+        produkt=produkt,
+        user_email=session.get("user_email")
+    )
 
-    # Defaults setzen
-    keys_defaults = {
-        "bestand": "n/a",
-        "preis": 0,
-        "handling_zeit": "n/a",
-        "erfuellungsrate": "n/a",
-        "name": produkt.get("name", "Unbekannt"),
-        "isbn": produkt.get("isbn", "n/a"),
-        "seiten": produkt.get("seiten", "n/a")
-    }
-    produkt.update(keys_defaults)
-
-    return render_template('produkt.html', produkt=produkt, user_email=session.get("user_email"))
 
 
 
