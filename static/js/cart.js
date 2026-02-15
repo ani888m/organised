@@ -33,7 +33,7 @@ function loadCart(containerId = "cart-items", totalId = "total-price") {
 
     // Fallback, falls Bild nicht gefunden wird
     img.onerror = () => {
-      img.src = '/static/images/image/default.jpg'; // Standardbild
+      img.src = '/static/images/default/default.jpg'; // Standardbild
     };
     // Info-Container
     const info = document.createElement('div');
