@@ -1,3 +1,4 @@
+
 // cart.js
 
 // --- Globale Funktion zum Laden des Warenkorbs ---
@@ -31,10 +32,6 @@ function loadCart(containerId = "cart-items", totalId = "total-price") {
     img.src = item.image;
     img.alt = item.title;
 
-    // Fallback, falls Bild nicht gefunden wird
-    img.onerror = () => {
-      img.src = '/static/images/default/default.jpg'; // Standardbild
-    };
     // Info-Container
     const info = document.createElement('div');
 
