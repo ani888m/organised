@@ -525,7 +525,7 @@ def bestelldanke():
 @app.route('/cart')
 def cart():
     cart_items = [
-        {'title': 'Reife Blessuren | Danilo Lučić', 'price': 23.90, 'quantity': 1}
+        {'title': 'Reife Blessuren | Danilo Lučić', 'price': 23.90, 'quantity': 1, 'image': '/static/images/reifeblessuren.jpg'}
     ]
     total = sum(item['price'] * item['quantity'] for item in cart_items)
     return render_template('cart.html', cart_items=cart_items, total=total, user_email=session.get("user_email"))
