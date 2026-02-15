@@ -28,7 +28,8 @@ function loadCart(containerId = "cart-items", totalId = "total-price") {
 
     // Bild
     const img = document.createElement('img');
-    img.src = '/' + item.image;
+    img.src = '/static/images/' + slug + '/' + slug + '.jpg'
+
     img.alt = item.title;
 
     // Fallback, falls Bild nicht gefunden wird
