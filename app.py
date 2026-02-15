@@ -382,10 +382,8 @@ def cron():
     return "OK"
 
 
-import json
 from flask import Flask, render_template, session, abort
 
-app = Flask(__name__)
 
 # Produkte einmal beim Start laden
 with open("produkte.json", encoding="utf-8") as f:
