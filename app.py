@@ -252,13 +252,21 @@ def neue_bestellung():
 # PRODUKTE
 # -------------------------------------------------
 
+
+# Produkte einmal beim Start laden
 with open("produkte.json", encoding="utf-8") as f:
     produkte = json.load(f)
 
 
 @app.route('/')
 def index():
-    return render_template("index.html", produkte=produkte)
+    kategorienamen = [
+        "Jacominus Gainsborough", "Mut oder Angst?!",
+        "Klassiker", "Monstergeschichten", "Wichtige Fragen", "Weihnachten",
+        "Kinder und Gefühle", "Dazugehören"
+    ]
+    kategorien = [(k, [p for p in produkte if p.get("kategorie") == k]) for k in kategorienamen]
+    return render_template("index.html", kategorien=kategorien, user_email=session.get("user_email"))
 
 
 @app.route('/produkt/<int:produkt_id>')
@@ -407,23 +415,7 @@ def cron():
     return "OK"
 
 
-from flask import Flask, render_template, session, abort
 
-
-# Produkte einmal beim Start laden
-with open("produkte.json", encoding="utf-8") as f:
-    produkte = json.load(f)
-
-
-@app.route('/')
-def index():
-    kategorienamen = [
-        "Jacominus Gainsborough", "Mut oder Angst?!",
-        "Klassiker", "Monstergeschichten", "Wichtige Fragen", "Weihnachten",
-        "Kinder und Gefühle", "Dazugehören"
-    ]
-    kategorien = [(k, [p for p in produkte if p.get("kategorie") == k]) for k in kategorienamen]
-    return render_template("index.html", kategorien=kategorien, user_email=session.get("user_email"))
 
 
 # -------------------------------------------------
