@@ -286,6 +286,146 @@ def produkt_detail(produkt_id):
     return render_template("produkt.html", produkt=produkt)
 
 
+# ---------- RESTLICHE ROUTES ----------
+
+@app.route('/navbar')
+def navbar():
+    return render_template('navbar.html', user_email=session.get("user_email"))
+
+
+
+@app.route('/kontakt')
+def kontakt():
+    return render_template('kontakt.html', user_email=session.get("user_email"))
+
+@app.route('/checkout', methods=['GET', 'POST'])
+def checkout():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        newsletter = request.form.get('newsletter')
+        payment_method = request.form.get('payment-method')
+
+        if not name or not email or not payment_method:
+            flash("Bitte fülle alle Pflichtfelder aus.", "error")
+            return redirect(url_for('checkout'))
+
+        if newsletter:
+            try:
+                send_email(
+                    subject='Neue Newsletter-Anmeldung (über Bestellung)',
+                    body=f'{name} ({email}) hat sich beim Bestellvorgang für den Newsletter angemeldet.'
+                )
+            except Exception as e:
+                logger.warning(f"Newsletter konnte nicht gesendet werden: {e}")
+
+        flash("Zahlung erfolgreich (Simulation). Vielen Dank für deine Bestellung!", "success")
+        return redirect(url_for('kontaktdanke'))
+
+    return render_template('checkout.html', user_email=session.get("user_email"))
+
+
+
+
+@app.route('/submit', methods=['POST'])
+def submit():
+    name = request.form.get('name')
+    email = request.form.get('email')
+    message = request.form.get('message')
+
+    if not name or not email or not message:
+        flash("Bitte fülle alle Felder aus!", "error")
+        return redirect('/kontakt')
+
+    try:
+        send_email(
+            subject=f'Neue Nachricht von {name}',
+            body=f"Von: {name} <{email}>\n\nNachricht:\n{message}"
+        )
+
+        flash("Danke! Deine Nachricht wurde gesendet.", "success")
+        return redirect('/kontaktdanke')
+
+    except Exception as e:
+        flash(f"Fehler beim Senden der Nachricht: {e}", "error")
+        return redirect('/kontakt')
+
+@app.route('/newsletter', methods=['POST'])
+def newsletter():
+    email = request.form.get('email')
+    if not email:
+        flash('Bitte gib eine gültige E-Mail-Adresse ein.', 'error')
+        return redirect('/')
+    try:
+        send_email(
+            subject='Neue Newsletter-Anmeldung',
+            body=f'Neue Newsletter-Anmeldung: {email}'
+        )
+        flash("Danke! Newsletter-Anmeldung erfolgreich.", "success")
+        return redirect('/danke')
+    except Exception as e:
+        flash(f"Fehler beim Newsletter-Versand: {e}", 'error')
+        return redirect('/')
+
+
+
+@app.route('/danke')
+def danke():
+    return render_template('danke.html', user_email=session.get("user_email"))
+
+@app.route('/kontaktdanke')
+def kontaktdanke():
+    return render_template('kontaktdanke.html', user_email=session.get("user_email"))
+
+@app.route('/bestelldanke')
+def bestelldanke():
+    return render_template('bestelldanke.html', user_email=session.get("user_email"))
+
+@app.route('/cart')
+def cart():
+    cart_items = [
+        {'title': 'Reife Blessuren | Danilo Lučić', 'price': 23.90, 'quantity': 1, 'image': '/static/images/image/reifeblessuren.jpg'}
+    ]
+    total = sum(item['price'] * item['quantity'] for item in cart_items)
+    return render_template('cart.html', cart_items=cart_items, total=total, user_email=session.get("user_email"))
+
+@app.route('/rechtliches')
+def rechtliches():
+    return render_template('rechtliches.html', user_email=session.get("user_email"))
+
+@app.route('/datenschutz')
+def datenschutz():
+    return render_template('datenschutz.html', user_email=session.get("user_email"))
+
+@app.route('/impressum')
+def impressum():
+    return render_template('impressum.html', user_email=session.get("user_email"))
+
+@app.route("/cron")
+def cron():
+    print("Cronjob wurde ausgelöst")
+    return "OK"
+
+
+from flask import Flask, render_template, session, abort
+
+
+# Produkte einmal beim Start laden
+with open("produkte.json", encoding="utf-8") as f:
+    produkte = json.load(f)
+
+
+@app.route('/')
+def index():
+    kategorienamen = [
+        "Jacominus Gainsborough", "Mut oder Angst?!",
+        "Klassiker", "Monstergeschichten", "Wichtige Fragen", "Weihnachten",
+        "Kinder und Gefühle", "Dazugehören"
+    ]
+    kategorien = [(k, [p for p in produkte if p.get("kategorie") == k]) for k in kategorienamen]
+    return render_template("index.html", kategorien=kategorien, user_email=session.get("user_email"))
+
+
 # -------------------------------------------------
 # START
 # -------------------------------------------------
