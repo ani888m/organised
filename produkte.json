@@ -300,6 +300,7 @@
 
 {
   "id": 17,
+  "ean": "9783791375755",
   "name": "Mutig",
   "autor": "Britta Teckentrup",
   "beschreibung": "Was wir nicht kennen, kann ganz schön furchteinflößend sein. In diesem ausdrucksstarken Bilderbuch geht Britta Teckentrup der Frage nach, was es bedeutet, mutig zu sein. Sie erzählt die Geschichte eines Mädchens, das alleine durch einen dunklen Wald wandert und sich vor einem Bären fürchtet. Zuerst macht der Bär ihr Angst, er wirkt riesig und fremd. Doch als sie sich ihm nähert, wird der Bär ihr Begleiter und schließlich ihr Freund. Dieses Buch eignet sich perfekt für die Behandlung von Angst für Kinder im Kindergarten- und Grundschulalter. Es zeigt, wie lähmend sich Angst manchmal anfühlen kann, aber auch, wie gut es tut, sich mit seinen Ängsten zu konfrontieren und sie damit zu überwinden.",  
@@ -326,6 +327,7 @@
 
 {
   "id": 18,
+  "ean": "9783791376189",
   "name": "Einsam",
   "autor": "Britta Teckentrup",
   "beschreibung": "Mit stimmungsvollen Illustrationen und gereimten Texten erkundet dieses Buch das Gefühl der Einsamkeit aus der Perspektive eines Kindes. Britta Teckentrups neues Buch über Emotionen ist dem leider äußerst aktuellen Thema Einsamkeit in der Kindheit gewidmet. Zwar ist das Gefühl, allein zu sein, ganz natürlich und jeder kennt es. Doch kann es auch sehr beunruhigend und beängstigend sein, wenn sich ein Kind einsam fühlt. Mit der für sie charakteristischen Sensibilität erkundet sie Momente, in denen die Welt weit entfernt scheint und man mit der schweren Stille kämpft, die uns umgibt, wenn sich Einsamkeit wie ein allumfassender Schatten über uns legt. Das Buch vermittelt Kindern, dass Einsamkeit zwar traurig und schwierig sein kann, aber ein Teil des Lebens ist, den jede*r erlebt. Es bietet einen Hoffnungsschimmer: auch in den dunkelsten Momenten liegt vor uns die Möglichkeit von Licht und Verbindung.",
@@ -354,6 +356,7 @@
 
 {
   "id": 19,
+  "ean": "9783791375366",
   "name": "Die Schaukel",
   "autor": "Britta Teckentrup",
   "beschreibung": "Die Schaukel ist ein philosophisches Bilderbuch, das Kinder behutsam an die Höhen und Tiefen des Lebens heranführt. In vielen kleinen Miniatur-Erzählungen spielt die Schaukel eine tragende Rolle – sie weiß von Kinderträumen, Freundschaften, Sorgen und Zeiten des Wachsens. Wer sind wir, was bewegt uns gerade? Dieses Buch lädt dazu ein, über das Leben ins Gespräch zu kommen. (Ab 5 Jahren)",
@@ -378,6 +381,7 @@
 
 {
   "id": 20,
+  "ean": "9781851244942",
   "name": "There Was An Old Lady",
   "autor": "Abner Graboff",
   "beschreibung": "One day an old lady swallows a fly and the only way she can get rid of it is to swallow a wriggling, tickling spider ... For over a century this subversive rhyme has delighted children and parents alike. Graboff's bright and startling illustrations combine beautifully with the traditional verse to bring this classic tale to life.",
@@ -407,6 +411,7 @@
 
 {
   "id": 21,
+  "ean": "9781851245031",
   "name": "Hungry Goat",
   "autor": "Alan Mills & Abner Graboff",
   "beschreibung": "The (very) hungry goat has a big appetite which gets him into all kinds of adventures. He’ll eat anything, from pig swill to frying pans and even barbed wire. As a result he grows fatter and fatter until one day he gobbles up something that sends him on the biggest adventure of all. Abner Graboff’s timeless illustrations bring this greedy animal to life in a comic rhyming tale for younger children.",
@@ -430,6 +435,7 @@
 
 {
   "id": 22,
+  "ean": "9783458643852",
   "name": "Monster trinken keine Erdbeermilch",
   "autor": "Marie-Hélène Versini & Vincent Boudgourd",
   "übersetzer": "Felicia Bomhoff",
@@ -456,6 +462,7 @@
 },
 {
   "id": 23,
+  "ean": "9783848901760",
   "name": "Unsichtbar in der großen Stadt",
   "autor": "Sydney Smith",
   "beschreibung": "Allein in der großen Stadt zu sein, ist manchmal unheimlich. Besonders, wenn man klein ist und alles um einen herum so laut und riesengroß. Da ist es gut, wenn es jemanden gibt, der die besten Geheimverstecke kennt, zum Beispiel unterm Haselstrauch oder hoch oben im Walnussbaum. (Ausgezeichnet mit dem Deutschen Jugendliteraturpreis 2021 in der Kategorie Bilderbuch.)",
@@ -481,6 +488,7 @@
 
 {
   "id": 24,
+  "ean": "9783570181553",
   "name": "Drei kleine Handschuhe",
   "autor": "Linda Bailey",
   "beschreibung": "Pünktchen und Pünktchen sind ein perfekt zusammen-passendes Paar Handschuhe. Und in ihren Augen ist es völlig richtig, dass der partnerlose Handschuh Streifi in die dunkle Jackentasche verbannt wird! Bis sich eines Tages die Verhältnisse umkehren, als ein Pünktchen verschwindet und der zweite Streifi wieder auftaucht. Ist das jetzt noch immer gerecht? Und warum müssen eigentlich immer alle zusammenpassen? Eine Rebellion im Kleiderschrank beginnt!" ,
@@ -507,6 +515,7 @@
 
 {
   "id": 25,
+  "ean": "9783779503712",
   "name": "Zwei, die sich lieben",
   "autor": "Jürg Schubiger",
   "illustrierer": "Wolf Erlbruch",
@@ -544,6 +553,7 @@
 
 {
   "id": 26,
+  "ean": "9783779507123",
   "name": "Mut ist was Gutes",
   "autor": "Arne Rautenberg",
   "illustrierer": "Wolf Erlbruch",
@@ -570,6 +580,7 @@
 
 {
   "id": 27,
+  "ean": "9783779506201",
   "name": "Vier Kerzen, drei Könige, zwei Augen, ein Stern",
   "autor": "Arne Rautenberg",
   "illustrierer": "Katrin Stangl",
@@ -594,6 +605,7 @@
 
 {
   "id": 28,
+  "ean": "9783779506386",
   "name": "Wolf Erlbruchs Adventskalender",
   "autor": "Wolf Erlbruch",
   "beschreibung": "Zwei zappelige Katzenkinder, denen das geduldige Singen vor der Bescherung sichtlich schwerfällt, während ihre Eltern davon nicht genug bekommen – dieses Bild gehört zu den schönsten Motiven aus Wolf Erlbruchs Kinderzimmerkalendern. Jetzt kommt es als Adventskalender zu neuen Ehren: Hinter 24 Klapptürchen verbergen sich ausgesuchte Motive aus dem Werk des Künstlers – täglich eine feine Überraschung auf dem Weg zum Weihnachtsfest.",
@@ -615,6 +627,7 @@
 
 {
   "id": 29,
+  "ean": "9783872949486",
   "name": "Die große Frage",
   "autor": "Wolf Erlbruch",
   "beschreibung": "Auf die große Frage „Warum bin ich auf der Welt?“ weiß Wolf Erlbruch selbst keine Antwort – also lässt er andere antworten. Vater, Mutter, Tiere und andere Figuren geben jeweils ihre persönliche Sichtweise, humorvoll, nachdenklich und überraschend. In wenigen Worten und einfachen Bildern widmet sich das Buch dem Sinn des Lebens aus ganz unterschiedlichen Perspektiven, regt zum Staunen und Gespräch an und lässt am Ende Raum für eigene Antworten.",
@@ -641,6 +654,7 @@
 
 {
   "id": 30,
+  "ean": "9783957287090",
   "name": "Frau Leo legt los",
   "autor": "Natalia Shaloshvili",
   "übersetzer": "Thomas Weiler",
@@ -669,6 +683,7 @@
 
 {
   "id": 31,
+  "ean": "9783314103544",
   "name": "Der Nussknacker",
   "autor": "E. T. A. Hoffmann",
   "übersetzer": null,
@@ -700,6 +715,7 @@
 
 {
   "id": 32,
+  "ean": "9783314106668",
   "name": "Der kleine Häwelmann",
   "autor": "Theodor Storm",
   "illustrierer": "Lisbeth Zwerger",
@@ -729,6 +745,7 @@
   
   {
   "id": 33,
+  "ean": "9783895654640",
   "name": "Der Vogel in mir fliegt, wohin er will",
   "autor": "Sara Lundberg",
   "übersetzer": "Friederike Buchinger",
@@ -762,6 +779,7 @@
 
   {
   "id": 34,
+  "ean": "9783948743307",
   "name": "Und jetzt sei fröhlich, Knochenmann!",
   "autor": "Ca Rose",
   "beschreibung": "Die Urgroßmutter des Mädchens ist alt und möchte tanzen – aber der Tod lässt auf sich warten. Also macht sich das Mädchen auf die Suche nach ihm. Auf ihrer Reise trifft sie ungewöhnliche Gefährten und lernt, dass der Tod ganz anders sein kann als erwartet. Eine philosophische Geschichte über Tod und Abschied mit farbenprächtigen, detailreichen Bildern, die an den mexikanischen Día de Muertos erinnern.",  
@@ -791,6 +809,7 @@
 
 {
   "id": 35,
+  "ean": "9783314102561",
   "name": "Kindergedichte und Galgenlieder",
   "autor": "Christian Morgenstern",
   "illustrierer": "Lisbeth Zwerger",
@@ -821,6 +840,7 @@
 
 {
   "id": 36,
+  "ean": "9783855815975",
   "name": "Pinocchio",
   "autor": "Carlo Collodi",
   "übersetzer": null,
@@ -847,6 +867,7 @@
 
   {
   "id": 37,
+  "ean": "9783480240937",
   "name": "Lupo, was bedrückt dich?",
   "autor": "Catherine Rayner",
   "illustrierer": "Catherine Rayner",
@@ -873,6 +894,7 @@
 },
 {
   "id": 38,
+  "ean": "9783905945560",
   "name": "Heute bin ich",
   "autor": "Mies van Hout",
   "beschreibung": "Heute bin ich zufrieden. Und du? Bist du neugierig? Gelangweilt? Zornig? In diesem liebevoll illustrierten Bilderbuch drückt jeder Fisch ein anderes Gefühl aus – mal ist es eine schöne, mal eine verwirrende Stimmung, manchmal eine heftige Empfindung, manchmal eine ganz zarte. Das Buch nimmt mit auf eine Reise durch die Welt der Gefühle, regt an, über Empfindungen zu reden, sie zu benennen und besser zu verstehen. Auf jeder Doppelseite wird ein Gefühl visuell dargestellt. Für Kinder ab etwa 3 Jahren geeignet.",
@@ -897,6 +919,7 @@
 
 {
   "id": 39,
+  "ean": "9783905945478",
   "name": "Überraschung!",
   "autor": "Mies van Hout",
   "beschreibung": "Nach den Bestsellern „Heute bin ich“ und „Freunde“ hat Mies van Hout ein neues Bilderbuch gezeichnet: „Überraschung!“. In gewohnter Weise werden Gefühle und Stimmungen sehr treffend dargestellt – getreu dem Motto ‚ein Wort, ein Bild‘. Die leuchtenden, schillernden Farben aus Pastell und Wachs schaffen eine künstlerisch gestaltete Welt, die sowohl Kinder als auch Erwachsene anspricht und vielseitig in Kindergarten, Schule oder Familie eingesetzt werden kann.",
@@ -926,6 +949,7 @@
 
 {
   "id": 40,
+  "ean": "9783522462525",
   "name": "Bär",
   "autor": "Natalia Shaloshvili",
   "illustrierer": "Natalia Shaloshvili",
@@ -960,6 +984,7 @@
 
  {
     "id": 41,
+    "ean": "9783791375755",
     "kategorie": "Mut oder Angst?!",
     "ean": "9783551652171",
     "bilder": []
@@ -967,6 +992,7 @@
 
    {
     "id": 42,
+    "ean": "9783791375755",
     "kategorie": "Mut oder Angst?!",
     "ean": "9783458178385",
     "bilder": []
