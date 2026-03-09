@@ -1,53 +1,97 @@
 
-from flask import Flask, render_template, request, redirect, flash, abort, session, url_for, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import generate_password_hash, check_password_hash
+
+
 import os
 import json
 import logging
-import requests
-from dotenv import load_dotenv
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail, Attachment, FileContent, FileName, FileType, Disposition
-import secrets
 from datetime import datetime
-import base64
-from moluna_mapper import build_moluna_payload
-from moluna_client import send_order_to_moluna
-from os import getenv
+from dotenv import load_dotenv
+import requests
+
+from flask import (
+    Flask, render_template, request,
+    redirect, flash, abort,
+    session, url_for, jsonify
+)
+
+from flask_sqlalchemy import SQLAlchemy
+from flask_wtf.csrf import CSRFProtect
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
+# Modelle importieren
+from models import db, Bestellung, BestellPosition
 
 
+from datetime import timedelta
+
+from functools import lru_cache
 
 
-
-# -------------------------------------------------
-# SETUP
-# -------------------------------------------------
+# =====================================================
+# CONFIG
+# =====================================================
 
 load_dotenv()
-logging.basicConfig(level=logging.DEBUG)
-
-
 
 app = Flask(__name__)
-app.secret_key = os.getenv("FLASK_SECRET_KEY", "fallback-secret-key")
+limiter = Limiter(get_remote_address, app=app)
 
-database_url = os.getenv("DATABASE_URL")
-if database_url and database_url.startswith("postgres://"):
-    database_url = database_url.replace("postgres://", "postgresql://", 1)
+PAYPAL_WEBHOOK_ID = os.environ.get("PAYPAL_WEBHOOK_ID")
+PAYPAL_CLIENT_ID = os.getenv("PAYPAL_CLIENT_ID")
+PAYPAL_SECRET = os.getenv("PAYPAL_SECRET")
+PAYPAL_MODE = os.getenv("PAYPAL_MODE", "sandbox")
+
+PAYPAL_BASE = (
+    "https://api-m.sandbox.paypal.com"
+    if PAYPAL_MODE == "sandbox"
+    else "https://api-m.paypal.com"
+)
+
+app.config["SESSION_COOKIE_HTTPONLY"] = True
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(hours=1)
+app.config["SESSION_COOKIE_SECURE"] = os.getenv("FLASK_ENV") == "production"
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+app.config["SESSION_PERMANENT"] = False
+
+app.config["PAYPAL_CLIENT_ID"] = PAYPAL_CLIENT_ID
+
+
+app.config["SECRET_KEY"] = os.getenv("FLASK_SECRET_KEY")
+
+if not app.config["SECRET_KEY"]:
+    raise RuntimeError("FLASK_SECRET_KEY fehlt!")
+
+database_url = os.getenv("DATABASE_URL", "sqlite:///ibk-shop-db.db")
+database_url = database_url.replace("postgres://", "postgresql://")
 
 app.config["SQLALCHEMY_DATABASE_URI"] = database_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-db = SQLAlchemy(app)
+db.init_app(app)
+with app.app_context():
+    db.create_all()
 
+
+
+ADMIN_PASSWORD = os.getenv("FLASK_ADMIN_PASSWORD")
+
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
+EMAIL_SENDER = os.getenv("EMAIL_SENDER")
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+csrf = CSRFProtect(app)
 
 
 
 # ---------- BUCHBUTLER API ZUGANG ----------
 
 
-logger = logging.getLogger(__name__)
 
 BUCHBUTLER_USER = os.getenv("BUCHBUTLER_USER")
 BUCHBUTLER_PASSWORD = os.getenv("BUCHBUTLER_PASSWORD")
@@ -55,9 +99,211 @@ BUCHBUTLER_PASSWORD = os.getenv("BUCHBUTLER_PASSWORD")
 BASE_URL = "https://api.buchbutler.de"
 
 
-# -----------------------------
-# Helper Funktionen
-# -----------------------------
+
+# =====================================================
+# PRODUKTE LADEN
+# =====================================================
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+json_path = os.path.join(basedir, "produkte.json")
+
+if os.path.exists(json_path):
+    with open(json_path, encoding="utf-8") as f:
+        produkte = json.load(f)
+else:
+    produkte = []
+
+
+# =====================================================
+# PAYPAL
+# =====================================================
+
+def paypal_access_token():
+    response = requests.post(
+        f"{PAYPAL_BASE}/v1/oauth2/token",
+        auth=(PAYPAL_CLIENT_ID, PAYPAL_SECRET),
+        data={"grant_type": "client_credentials"},
+    )
+    return response.json().get("access_token")
+
+
+
+
+
+@app.route("/create-paypal-order", methods=["POST"])
+@csrf.exempt
+def create_paypal_order():
+    cart_items = get_cart()
+    total = calculate_total(cart_items)
+
+    if not cart_items or total <= 0:
+        return jsonify({"error": "Warenkorb leer"}), 400
+
+    access_token = paypal_access_token()
+
+    response = requests.post(
+        f"{PAYPAL_BASE}/v2/checkout/orders",
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {access_token}",
+        },
+        json={
+            "intent": "CAPTURE",
+            "purchase_units": [{
+                "amount": {
+                    "currency_code": "EUR",
+                    "value": f"{total:.2f}"
+                }
+            }]
+        },
+    )
+
+    order_data = response.json()
+    return jsonify({"id": order_data["id"]})
+
+
+
+
+@app.route("/capture-paypal-order/<order_id>", methods=["POST"])
+@csrf.exempt
+def capture_paypal_order(order_id):
+
+    access_token = paypal_access_token()
+
+    response = requests.post(
+        f"{PAYPAL_BASE}/v2/checkout/orders/{order_id}/capture",
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {access_token}",
+        }
+    )
+
+    data = response.json()
+
+    if data.get("status") == "COMPLETED":
+
+        cart_items = get_cart()
+
+        bestellung = Bestellung(
+            email=session.get("checkout_email"),
+            vorname=session.get("checkout_vorname"),
+            nachname=session.get("checkout_nachname"),
+            strasse=session.get("checkout_strasse"),
+            hausnummer=session.get("checkout_hausnummer"),
+            plz=session.get("checkout_plz"),
+            stadt=session.get("checkout_stadt"),
+            land=session.get("checkout_land"),
+            telefon=session.get("checkout_telefon"),
+            paymentmethod="paypal"
+        )
+
+        db.session.add(bestellung)
+        db.session.flush()
+
+        for item in cart_items:
+            db.session.add(
+                BestellPosition(
+                    bestellung_id=bestellung.id,
+                    bezeichnung=item["title"],
+                    menge=item["quantity"],
+                    preis=item["price"]
+                )
+            )
+
+        db.session.commit()
+
+        session.pop("cart", None)
+
+        return jsonify({"status": "success"})
+
+    return jsonify({"status": "error"}), 400
+
+
+
+def verify_webhook(headers, body):
+
+    access_token = paypal_access_token()
+
+    response = requests.post(
+        f"{PAYPAL_BASE}/v1/notifications/verify-webhook-signature",
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {access_token}",
+        },
+        json={
+            "transmission_id": headers.get("PAYPAL-TRANSMISSION-ID"),
+            "transmission_time": headers.get("PAYPAL-TRANSMISSION-TIME"),
+            "cert_url": headers.get("PAYPAL-CERT-URL"),
+            "auth_algo": headers.get("PAYPAL-AUTH-ALGO"),
+            "transmission_sig": headers.get("PAYPAL-TRANSMISSION-SIG"),
+            "webhook_id": PAYPAL_WEBHOOK_ID,
+            "webhook_event": body
+        }
+    )
+
+    return response.json().get("verification_status") == "SUCCESS"
+
+
+
+@app.route("/paypal-webhook", methods=["POST"])
+@csrf.exempt
+def paypal_webhook():
+
+    body = request.get_data(as_text=True)
+    event = json.loads(body)
+    headers = request.headers
+
+    if not verify_webhook(headers, body):
+        return "", 400
+
+    event_type = body.get("event_type")
+
+    if event_type == "PAYMENT.CAPTURE.COMPLETED":
+        capture = event["resource"]
+        order_id = capture["supplementary_data"]["related_ids"]["order_id"]
+        amount = capture["amount"]["value"]
+        logger.info(f"PayPal Zahlung abgeschlossen: {order_id} – {amount} EUR")
+
+
+
+    return "", 200
+
+# =====================================================
+# EMAIL
+# =====================================================
+
+
+def send_email(subject, body, recipient):
+    if not SENDGRID_API_KEY or not EMAIL_SENDER:
+        logger.warning("SendGrid nicht konfiguriert")
+        return
+
+    message = Mail(
+        from_email=EMAIL_SENDER,
+        to_emails=recipient,
+        subject=subject,
+        plain_text_content=body
+    )
+
+    sg = SendGridAPIClient(SENDGRID_API_KEY)
+    try:
+            sg.send(message)
+    except Exception:
+            logger.exception("Email Versand fehlgeschlagen")
+# =====================================================
+# HILFSFUNKTIONEN
+# =====================================================
+
+def get_cart():
+    return session.get("cart", [])
+
+def save_cart(cart):
+    session["cart"] = cart
+    session.modified = True
+
+def calculate_total(cart):
+    return sum(item["price"] * item["quantity"] for item in cart)
+
 
 def check_auth():
     if not BUCHBUTLER_USER or not BUCHBUTLER_PASSWORD:
@@ -90,7 +336,6 @@ def attr(attrs, key):
     """Greift sicher auf Artikelattribute zu"""
     return (attrs.get(key) or {}).get("Wert", "")
 
-
 def buchbutler_request(endpoint, ean):
     """Allgemeine Request Funktion"""
     url = f"{BASE_URL}/{endpoint}/"
@@ -110,11 +355,13 @@ def buchbutler_request(endpoint, ean):
         return None
 
     return data["response"]
-
-
 # -----------------------------
 # CONTENT API
 # -----------------------------
+
+@lru_cache(maxsize=128)
+def cached_lade_produkt_von_api(ean):
+    return lade_produkt_von_api(ean)
 
 def lade_produkt_von_api(ean):
     """Lädt Produktdaten von CONTENT API"""
@@ -159,7 +406,6 @@ def lade_produkt_von_api(ean):
         logger.exception("Fehler beim Laden von CONTENT API")
         return None
 
-
 # -----------------------------
 # MOVEMENT API
 # -----------------------------
@@ -197,408 +443,377 @@ def lade_bestand_von_api(ean):
 
 
 
+# =====================================================
+# ROUTES
+# =====================================================
 
-# -------------------------------------------------
-# MODELS
-# -------------------------------------------------
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(200), nullable=False)
-
-
-class Bestellung(db.Model):
-    __tablename__ = "bestellungen"
-
-    id = db.Column(db.Integer, primary_key=True)
-
-    mol_kunde_id = db.Column(db.Integer)
-    rechnungsadresse_id = db.Column(db.Integer)
-    mol_zahlart_id = db.Column(db.Integer)
-    mol_verkaufskanal_id = db.Column(db.Integer)
-
-    bestelldatum = db.Column(db.String(50))
-    bestellreferenz = db.Column(db.String(100))
-    seite = db.Column(db.String(200))
-    bestellfreigabe = db.Column(db.Integer)
-
-    liefer_anrede = db.Column(db.String(50))
-    liefer_vorname = db.Column(db.String(100))
-    liefer_nachname = db.Column(db.String(100))
-    liefer_strasse = db.Column(db.String(200))
-    liefer_hausnummer = db.Column(db.String(50))
-    liefer_plz = db.Column(db.String(20))
-    liefer_ort = db.Column(db.String(100))
-    liefer_land = db.Column(db.String(100))
-    liefer_land_iso = db.Column(db.String(10))
-    liefer_tel = db.Column(db.String(50))
-
-    status = db.Column(db.String(50), default="neu")
-    moluna_status = db.Column(db.String(50))
-    trackingnummer = db.Column(db.String(100))
-    versanddienstleister = db.Column(db.String(100))
-    versanddatum = db.Column(db.String(50))
-
-    positionen = db.relationship("BestellPosition", backref="bestellung", cascade="all, delete-orphan")
-    zusatz = db.relationship("BestellZusatz", backref="bestellung", cascade="all, delete-orphan")
-
-
-class BestellPosition(db.Model):
-    __tablename__ = "bestell_positionen"
-
-    id = db.Column(db.Integer, primary_key=True)
-    bestell_id = db.Column(db.Integer, db.ForeignKey("bestellungen.id"), nullable=False)
-
-    ean = db.Column(db.String(20))
-    bezeichnung = db.Column(db.String(500))
-    menge = db.Column(db.Integer)
-    ek_netto = db.Column(db.Float)
-    vk_brutto = db.Column(db.Float)
-    referenz = db.Column(db.String(200))
-
-
-class BestellZusatz(db.Model):
-    __tablename__ = "bestell_zusatz"
-
-    id = db.Column(db.Integer, primary_key=True)
-    bestell_id = db.Column(db.Integer, db.ForeignKey("bestellungen.id"), nullable=False)
-
-    typ = db.Column(db.String(100))
-    value = db.Column(db.String(200))
-
-
-class StornoToken(db.Model):
-    __tablename__ = "storno_tokens"
-
-    id = db.Column(db.Integer, primary_key=True)
-    bestell_id = db.Column(db.Integer, db.ForeignKey("bestellungen.id"), nullable=False)
-    token = db.Column(db.String(200), nullable=False)
-    created = db.Column(db.String(50))
-
-
-with app.app_context():
-    db.create_all()
-
-# -------------------------------------------------
-# BESTELLUNG ERSTELLEN
-# -------------------------------------------------
-
-@app.route("/bestellung", methods=["POST"])
-def neue_bestellung():
-    try:
-        data = request.get_json() or {}
-        liefer = data.get("lieferadresse", {})
-
-        bestellung = Bestellung(
-            mol_kunde_id=data.get("mol_kunde_id"),
-            bestelldatum=data.get("bestelldatum"),
-            bestellreferenz=data.get("bestellreferenz"),
-            mol_verkaufskanal_id=data.get("mol_verkaufskanal_id"),
-
-            liefer_anrede=liefer.get("anrede"),
-            liefer_vorname=liefer.get("vorname"),
-            liefer_nachname=liefer.get("nachname"),
-            liefer_strasse=liefer.get("strasse"),
-            liefer_hausnummer=liefer.get("hausnummer"),
-            liefer_plz=liefer.get("plz"),
-            liefer_ort=liefer.get("ort"),
-            liefer_land=liefer.get("land"),
-        )
-
-        db.session.add(bestellung)
-        db.session.flush()
-
-        for pos in data.get("auftrag_position", []):
-            db.session.add(BestellPosition(
-                bestell_id=bestellung.id,
-                ean=pos.get("ean"),
-                bezeichnung=pos.get("pos_bezeichnung"),
-                menge=int(pos.get("menge", 0)),
-                ek_netto=float(pos.get("ek_netto", 0)),
-                vk_brutto=float(pos.get("vk_brutto", 0)),
-            ))
-
-        db.session.commit()
-
-        return jsonify({"success": True, "bestellId": bestellung.id})
-
-    except Exception as e:
-        db.session.rollback()
-        return jsonify({"success": False, "error": str(e)}), 500
-
-# -------------------------------------------------
-# CRUD ROUTES
-# -------------------------------------------------
-
-@app.route("/bestellungen")
-def alle_bestellungen():
-    bestellungen = Bestellung.query.all()
-    return jsonify([
-        {
-            "id": b.id,
-            "status": b.status,
-            "bestellreferenz": b.bestellreferenz,
-            "bestelldatum": b.bestelldatum
-        } for b in bestellungen
-    ])
-
-
-@app.route("/bestellung/<int:bestell_id>")
-def bestellung_detail(bestell_id):
-    b = Bestellung.query.get(bestell_id)
-    if not b:
-        return jsonify({"error": "Nicht gefunden"}), 404
-
-    return jsonify({
-        "bestellung": {
-            "id": b.id,
-            "status": b.status,
-            "trackingnummer": b.trackingnummer
-        },
-        "positionen": [
-            {"ean": p.ean, "menge": p.menge}
-            for p in b.positionen
-        ]
-    })
-
-
-@app.route("/bestellung/<int:bestell_id>", methods=["DELETE"])
-def bestellung_loeschen(bestell_id):
-    b = Bestellung.query.get(bestell_id)
-    if not b:
-        return jsonify({"error": "Nicht gefunden"}), 404
-
-    db.session.delete(b)
-    db.session.commit()
-    return jsonify({"success": True})
-
-# -------------------------------------------------
-# MOLUNA
-# -------------------------------------------------
-
-def lade_bestellung(bestell_id):
-    b = Bestellung.query.get(bestell_id)
-    if not b:
-        return None
-
-    return {
-        "bestellung": {"id": b.id},
-        "positionen": [{"ean": p.ean, "menge": p.menge} for p in b.positionen]
-    }
-
-
-TEST_MODE = os.getenv("TEST_MODE", "true").lower() == "true"
-
-def send_bestellung_an_moluna(bestell_id):
-    order = lade_bestellung(bestell_id)
-    if not order:
-        raise Exception("Bestellung nicht gefunden")
-
-    payload = build_moluna_payload(order)
-
-    if TEST_MODE:
-        print("TEST MODE – Bestellung wird NICHT gesendet")
-        return payload
-
-    return send_order_to_moluna(payload)
-# -------------------------------------------------
-# STATUS UPDATE (NEU)
-# -------------------------------------------------
-
-@app.route("/bestellung/<int:bestell_id>/status", methods=["POST"])
-def update_status(bestell_id):
-    b = Bestellung.query.get(bestell_id)
-    if not b:
-        return jsonify({"error": "Nicht gefunden"}), 404
-
-    data = request.get_json() or {}
-    b.status = data.get("status", b.status)
-    b.trackingnummer = data.get("trackingnummer", b.trackingnummer)
-    b.versanddienstleister = data.get("versanddienstleister", b.versanddienstleister)
-    b.versanddatum = datetime.now().isoformat()
-
-    db.session.commit()
-
-    return jsonify({"success": True})
+# Admin Test
+@app.route("/admin-test")
+def admin_test():
+    alle = Bestellung.query.all()
+    return {"anzahl_bestellungen": len(alle)}
 
 
 
-# ---------- RESTLICHE ROUTES ----------
+def admin_required():
+    if not session.get("admin"):
+        return redirect(url_for("admin_login"))
+    return None
 
 
 
+@limiter.limit("5 per minute")
+@app.route("/ibk-control-8471", methods=["GET", "POST"])
+def admin_login():
+    if request.method == "POST":
+        pw = request.form.get("password")
+        if pw == ADMIN_PASSWORD:
+            session.clear()
+            session["admin"] = True
+            session.permanent = True
+            return redirect("/admin/bestellungen")
+        else:
+            flash("Falsches Passwort!", "error")
+    return render_template("admin_login.html")
+
+
+
+# Admin Bestellungen anzeigen
+@app.route("/admin/bestellungen")
+def admin_bestellungen():
+    resp = admin_required()
+    if resp:  # wenn redirect zurückkommt
+        return resp
+    alle = Bestellung.query.order_by(Bestellung.bestelldatum.desc()).all()
+    return render_template("admin_bestellungen.html", bestellungen=alle)
     
-
-@app.route('/navbar')
-def navbar():
-    return render_template('navbar.html', user_email=session.get("user_email"))
-
-
-
-@app.route('/kontakt')
-def kontakt():
-    return render_template('kontakt.html', user_email=session.get("user_email"))
-
-@app.route('/checkout', methods=['GET', 'POST'])
-def checkout():
-    if request.method == 'POST':
-        name = request.form.get('name')
-        email = request.form.get('email')
-        newsletter = request.form.get('newsletter')
-        payment_method = request.form.get('payment-method')
-
-        if not name or not email or not payment_method:
-            flash("Bitte fülle alle Pflichtfelder aus.", "error")
-            return redirect(url_for('checkout'))
-
-        if newsletter:
-            try:
-                send_email(
-                    subject='Neue Newsletter-Anmeldung (über Bestellung)',
-                    body=f'{name} ({email}) hat sich beim Bestellvorgang für den Newsletter angemeldet.'
-                )
-            except Exception as e:
-                logger.warning(f"Newsletter konnte nicht gesendet werden: {e}")
-
-        flash("Zahlung erfolgreich (Simulation). Vielen Dank für deine Bestellung!", "success")
-        return redirect(url_for('kontaktdanke'))
-
-    return render_template('checkout.html', user_email=session.get("user_email"))
-
-
-
-
-@app.route('/submit', methods=['POST'])
-def submit():
-    name = request.form.get('name')
-    email = request.form.get('email')
-    message = request.form.get('message')
-
-    if not name or not email or not message:
-        flash("Bitte fülle alle Felder aus!", "error")
-        return redirect('/kontakt')
-
-    try:
-        send_email(
-            subject=f'Neue Nachricht von {name}',
-            body=f"Von: {name} <{email}>\n\nNachricht:\n{message}"
-        )
-
-        flash("Danke! Deine Nachricht wurde gesendet.", "success")
-        return redirect('/kontaktdanke')
-
-    except Exception as e:
-        flash(f"Fehler beim Senden der Nachricht: {e}", "error")
-        return redirect('/kontakt')
-
-@app.route('/newsletter', methods=['POST'])
-def newsletter():
-    email = request.form.get('email')
-    if not email:
-        flash('Bitte gib eine gültige E-Mail-Adresse ein.', 'error')
-        return redirect('/')
-    try:
-        send_email(
-            subject='Neue Newsletter-Anmeldung',
-            body=f'Neue Newsletter-Anmeldung: {email}'
-        )
-        flash("Danke! Newsletter-Anmeldung erfolgreich.", "success")
-        return redirect('/danke')
-    except Exception as e:
-        flash(f"Fehler beim Newsletter-Versand: {e}", 'error')
-        return redirect('/')
-
-
-
-@app.route('/danke')
-def danke():
-    return render_template('danke.html', user_email=session.get("user_email"))
-
-@app.route('/kontaktdanke')
-def kontaktdanke():
-    return render_template('kontaktdanke.html', user_email=session.get("user_email"))
-
-@app.route('/bestelldanke')
-def bestelldanke():
-    return render_template('bestelldanke.html', user_email=session.get("user_email"))
-
-@app.route('/cart')
-def cart():
-    cart_items = [
-        {'title': 'Reife Blessuren | Danilo Lučić', 'price': 23.90, 'quantity': 1, 'image': '/static/images/image/reifeblessuren.jpg'}
-    ]
-    total = sum(item['price'] * item['quantity'] for item in cart_items)
-    return render_template('cart.html', cart_items=cart_items, total=total, user_email=session.get("user_email"))
-
-@app.route('/rechtliches')
-def rechtliches():
-    return render_template('rechtliches.html', user_email=session.get("user_email"))
-
-@app.route('/datenschutz')
-def datenschutz():
-    return render_template('datenschutz.html', user_email=session.get("user_email"))
-
-@app.route('/impressum')
-def impressum():
-    return render_template('impressum.html', user_email=session.get("user_email"))
-
-@app.route("/cron")
-def cron():
-    print("Cronjob wurde ausgelöst")
-    return "OK"
-
-
-from flask import Flask, render_template, session, abort
-
-
-# Produkte einmal beim Start laden
-with open("produkte.json", encoding="utf-8") as f:
-    produkte = json.load(f)
-
-
-@app.route('/')
+# Homepage
+@app.route("/")
 def index():
+
     kategorienamen = [
         "Jacominus Gainsborough", "Mut oder Angst?!",
-        "Klassiker", "Monstergeschichten", "Wichtige Fragen", "Weihnachten",
+        "Klassiker", "Monstergeschichten",
+        "Wichtige Fragen", "Weihnachten",
         "Kinder und Gefühle", "Dazugehören"
     ]
-    kategorien = [(k, [p for p in produkte if p.get("kategorie") == k]) for k in kategorienamen]
-    return render_template("index.html", kategorien=kategorien, user_email=session.get("user_email"))
+
+    kategorien = [
+        (k, [p for p in produkte if p.get("kategorie") == k])
+        for k in kategorienamen
+    ]
+
+    return render_template(
+        "index.html",
+        kategorien=kategorien,
+        user_email=session.get("user_email")
+    )
+
+
+
+@app.route("/admin/sync-buchbutler/<int:index>")
+def sync_buchbutler(index):
+
+    if not session.get("admin"):
+        abort(403)
+
+    if index >= len(produkte):
+        return "✅ Sync komplett"
+
+    produkt = produkte[index]
+    ean = produkt.get("ean")
+
+    if ean:
+        print("SYNC:", ean)
+
+        api = lade_produkt_von_api(ean)
+        movement = lade_bestand_von_api(ean)
+
+        if api:
+            produkt["name"] = api.get("name")
+            produkt["autor"] = api.get("autor")
+
+        if movement:
+            produkt["preis"] = movement.get("preis")
+
+        # sofort speichern → kein RAM Wachstum
+        with open(json_path, "w", encoding="utf-8") as f:
+            json.dump(produkte, f, ensure_ascii=False, indent=2)
+
+    next_index = index + 1
+
+    return redirect(url_for("sync_buchbutler", index=next_index))
+    
+# suche icon 
+@app.route("/suche", methods=["GET", "POST"])
+def suche():
+    query = ""
+    ergebnisse = []
+
+    if request.method == "POST":
+        query = request.form.get("q", "").lower()
+
+        for produkt in produkte:
+            name = produkt.get("name", "").lower()
+
+            if query in name:
+                ergebnisse.append(produkt)
+
+    return render_template(
+        "suche.html",
+        query=query,
+        ergebnisse=ergebnisse
+    )
+
+# Produkt Detail
+
+  
 
 @app.route('/produkt/<int:produkt_id>')
 def produkt_detail(produkt_id):
-    produkt = next((p for p in produkte if p['id'] == produkt_id), None)
+
+    # 1️⃣ lokale Zusatzdaten (Bilder / Leseprobe)
+    lokale_daten = next(
+         (p.copy() for p in produkte if p["id"] == produkt_id),
+         None
+    )
+
+    if not lokale_daten:
+        abort(404)
+
+    ean = lokale_daten.get("ean")
+
+    if not ean:
+        abort(404)
+
+    # 2️⃣ Produkt von Buchbutler laden
+    produkt = cached_lade_produkt_von_api(ean)
+
     if not produkt:
         abort(404)
 
-    # 1️⃣ CONTENT API Daten laden
-    if produkt.get("ean"):
-        api_produkt = lade_produkt_von_api(produkt["ean"])
-        if api_produkt:
-            produkt.update(api_produkt)
+    # 3️⃣ Bestand + Preis laden
+    movement = lade_bestand_von_api(ean)
+    if movement:
+        produkt.update(movement)
 
-        movement = lade_bestand_von_api(produkt["ean"])
-        if movement:
-            produkt.update(movement)
+    # 4️⃣ eigene Daten hinzufügen
+    produkt.update(lokale_daten)
 
-    # 2️⃣ Default-Werte setzen
+    # 5️⃣ Defaults (WICHTIG)
     produkt.setdefault("bestand", "n/a")
     produkt.setdefault("preis", 0)
     produkt.setdefault("handling_zeit", "n/a")
     produkt.setdefault("erfuellungsrate", "n/a")
 
-    return render_template('produkt.html', produkt=produkt, user_email=session.get("user_email"))
+    return render_template(
+        "produkt.html",
+        produkt=produkt,
+        user_email=session.get("user_email")
+    )
 
 
 
+# ============================
+# CART ROUTES
+# ============================
+
+@app.route("/add-to-cart", methods=["POST"])
+def add_to_cart():
+    produkt_id = int(request.form.get("produkt_id"))
+    produkt = next((p for p in produkte if p["id"] == produkt_id), None)
+
+    if not produkt:
+        abort(404)
+
+    # ✅ WICHTIG: Kopie machen (kein globales Update!)
+    produkt = produkt.copy()
+
+    # ✅ Preis + Bestand laden
+    if produkt.get("ean"):
+        movement = lade_bestand_von_api(produkt["ean"])
+        if movement:
+            produkt.update(movement)
+
+    cart = get_cart()
+
+    found = False
+    for item in cart:
+        if item["id"] == produkt_id:
+            item["quantity"] += 1
+            found = True
+            break
+
+    if not found:
+        cart.append({
+            "id": produkt["id"],
+            "title": produkt["name"],
+            "price": produkt.get("preis", 0),
+            "quantity": 1
+        })
+
+    save_cart(cart)
+    return redirect(url_for("cart"))
 
 
 
-# -------------------------------------------------
-# START
-# -------------------------------------------------
+@app.route("/cart")
+def cart():
+    cart_items = get_cart()
+    total = calculate_total(cart_items)
+    return render_template("cart.html", cart_items=cart_items, total=total)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+@app.route("/remove-from-cart/<int:produkt_id>")
+def remove_from_cart(produkt_id):
+    cart = get_cart()
+    cart = [item for item in cart if item["id"] != produkt_id]
+    save_cart(cart)
+    return redirect(url_for("cart"))
+
+
+@app.route("/sync-cart", methods=["POST"])
+@csrf.exempt  
+def sync_cart():
+    data = request.get_json()
+
+    if not data:
+        return {"status": "error"}, 400
+
+    session["cart"] = data
+    session.modified = True
+
+    print("SYNCED CART:", session["cart"])
+
+    return {"status": "ok"}
+    
+# ============================
+# CHECKOUT
+# ============================
+
+@app.route("/checkout", methods=["GET", "POST"])
+def checkout():
+    cart_items = get_cart()
+    total = calculate_total(cart_items)
+
+    logger.info("Checkout gestartet")
+
+    if request.method == "POST":
+
+        email = request.form.get("email")
+
+        if not email or not cart_items:
+            flash("Bitte gültige Daten eingeben.", "error")
+            return redirect(url_for("checkout"))
+
+        try:
+            session["checkout_email"] = request.form.get("email")
+            session["checkout_vorname"] = request.form.get("vorname")
+            session["checkout_nachname"] = request.form.get("nachname")
+            session["checkout_strasse"] = request.form.get("strasse")
+            session["checkout_hausnummer"] = request.form.get("hausnummer")
+            session["checkout_plz"] = request.form.get("plz")
+            session["checkout_stadt"] = request.form.get("stadt")
+            session["checkout_land"] = request.form.get("land")
+            session["checkout_telefon"] = request.form.get("telefon")
+            session["checkout_adresszusatz"] = request.form.get("adresszusatz")
+
+            logger.info("Kundendaten für PayPal gespeichert")
+
+        except Exception as e:
+            logger.error(f"Checkout Fehler: {e}")
+            flash("Fehler beim Checkout.", "error")
+            return redirect(url_for("checkout"))
+
+    return render_template(
+        "checkout.html",
+        cart_items=cart_items,
+        total=total
+    )
+
+    
+# ============================
+# KONTAKT
+# ============================
+
+@app.route("/kontakt")  
+def kontakt():
+    return render_template("kontakt.html", user_email=session.get("user_email"))
+
+@app.route("/submit", methods=["POST"])
+def submit():
+    name = request.form.get("name")
+    email = request.form.get("email")
+    message = request.form.get("message")
+    if not name or not email or not message:
+        flash("Bitte fülle alle Felder aus!", "error")
+        return redirect("/kontakt")
+    try:
+        send_email(
+            subject=f"Neue Nachricht von {name}",
+            body=f"Von: {name} <{email}>\n\nNachricht:\n{message}",
+            recipient=EMAIL_SENDER
+        )
+        flash("Danke! Deine Nachricht wurde gesendet.", "success")
+    except Exception as e:
+        flash(f"Fehler beim Senden: {e}", "error")
+    return redirect("/kontaktdanke")
+
+# ============================
+# NEWSLETTER
+# ============================
+
+@app.route("/newsletter", methods=["POST"])
+def newsletter():
+    email = request.form.get("email")
+    if not email:
+        flash("Bitte gib eine gültige E-Mail-Adresse ein.", "error")
+        return redirect("/")
+    try:
+        send_email(
+            subject="Neue Newsletter-Anmeldung",
+            body=f"Neue Anmeldung: {email}",
+            recipient=EMAIL_SENDER
+        )
+        flash("Danke! Newsletter-Anmeldung erfolgreich.", "success")
+    except Exception as e:
+        flash(f"Fehler beim Newsletter-Versand: {e}", "error")
+    return redirect("/danke")
+
+# ============================
+# RECHTLICHES
+# ============================
+
+@app.route("/agb")
+def agb():
+    return render_template("agb.html", user_email=session.get("user_email"))
+
+@app.route("/datenschutz")
+def datenschutz():
+    return render_template("datenschutz.html", user_email=session.get("user_email"))
+
+@app.route("/impressum")
+def impressum():
+    return render_template("impressum.html", user_email=session.get("user_email"))
+
+# ============================
+# DANKE SEITEN
+# ============================
+
+@app.route("/danke")
+def danke():
+    return render_template("danke.html", user_email=session.get("user_email"))
+
+@app.route("/kontaktdanke")
+def kontaktdanke():
+    return render_template("kontaktdanke.html", user_email=session.get("user_email"))
+
+@app.route("/bestelldanke")
+def bestelldanke():
+    return render_template("bestelldanke.html", user_email=session.get("user_email"))
+
+# =====================================================
+# START (RENDER READY)
+# =====================================================
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
