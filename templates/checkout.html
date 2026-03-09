@@ -1,3 +1,6 @@
+
+
+<!-- checkout.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -6,227 +9,139 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
-
 <title>Bezahlung | I B K - Buchhandlung für Illustration und Bilderbücher</title>
-<link rel="icon" type="image/x-icon" href="logo.png">
-
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='ficon.png') }}">
+  <style>
+.payment-details { margin-top: 1em; }
+.hidden { display: none; }
+</style>
 </head>
 <body>
 {% include 'navbar.html' %}
 
-  <div id="navbar-placeholder"></div>
-
-
-  <section class="form">
-
+<section class="form">
   <h2>Bezahlung</h2>
 
   <div class="checkout-layout">
-   <div class="checkout-cart">
-    <h3>Ihre Bestellung</h3>
-    {% include 'cart_component.html' %}
-    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
-   </div>
-
-  <div class="checkout-form">
-    <form id="payment-form">
-     <h3>Lieferadresse und Zahlungsmethode </h3><br><br>
-
-    Name:
-    <div class="half-container">
-      <label>
-       <input type="text" name="vorname" required placeholder="Vorname">
-      </label>
-      <label>
-       <input type="text" name="nachname" required placeholder="Nachname">
-      </label>
+    <!-- Warenkorb -->
+    <div class="checkout-cart">
+      <h3>Ihre Bestellung</h3>
+      {% include 'cart_component.html' %}
     </div>
-      <label>
-        E-Mail Adresse:
-        <input type="email" name="email" required placeholder="Ihre E-Mail">
-      </label>
-      
-    Anschrift:
-    <div class="half-container">
 
-      <label>
-        <input type="text" name="address" required placeholder="Straße">
-      </label>
-      
-      <label>
-        <input type="text" name="hausnummer" required placeholder="Hausnummer">
-      </label>
-    </div>
-      <div class="half-container">
-        <label class="half">
-          <input type="text" name="plz" required placeholder="Postleitzahl">
-        </label>
-        <label class="half">
-          <input type="text" name="stadt" required placeholder="Stadt">
-        </label>
-      </div>
-       <label>
-          <input type="text" name="adresszusatz" placeholder="Adresszusatz">
-      </label>
-      
-      <label>
-        Zahlungsmethode:
-        <select id="payment-method" name="payment-method" required>
-          <option value="" disabled selected>Bitte wählen</option>
-          <option value="rechnung">Per Rechnung</option>
-          <option value="paypal">PayPal</option>
-          <option value="kreditkarte">Kreditkarte</option>
-        </select>
-      </label>
+    <!-- Checkout Formular -->
+    <div class="checkout-form">
+      <form id="checkout-form" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <h3>Lieferdaten</h3><br><br>
 
-      <div id="rechnung-details" class="payment-details hidden">
-        <p>Sie erhalten die Rechnung per Post. Bitte zahlen Sie innerhalb von 14 Tagen.</p>
-      </div>
+        <!-- Kundendaten -->
+        <div class="half-container">
+          <label><input type="text" name="vorname" required placeholder="Vorname"></label>
+          <label><input type="text" name="nachname" required placeholder="Nachname"></label>
+        </div>
+        <label><input type="email" name="email" required placeholder="E-Mail"></label>
+        <div class="half-container">
+          <label><input type="text" name="strasse" required placeholder="Straße"></label>
+          <label><input type="text" name="hausnummer" required placeholder="Hausnummer"></label>
+        </div>
+        <div class="drittel-container">
+          <label class="drittel"><input type="text" name="plz" required placeholder="Postleitzahl"></label>
+          <label class="drittel"><input type="text" name="stadt" required placeholder="Stadt"></label>
+          <label class="drittel"><input type="text" name="land" required placeholder="Land"></label>
+        </div>
+        <label><input type="text" name="telefon"  placeholder="Telefonnummer (optional)"></label>
 
-      <div id="paypal-details" class="payment-details hidden">
-        <p>Mit einem Klick auf <em>Bezahlen</em> werden Sie zu PayPal weitergeleitet.</p>
-      </div>
-
-      <div id="kreditkarte-details" class="payment-details hidden">
-        <label>
-          Kreditkartennummer:
-          <input type="text" name="cardnumber" pattern="\d{16}" title="16-stellige Kreditkartennummer">
-        </label>
-        <label>
-          Ablaufdatum:
-          <input type="month" name="expiry">
-        </label>
-        <label>
-          CVV:
-          <input type="text" name="cvv" pattern="\d{3}" title="3-stelliger CVV">
-        </label>
-      </div>
-
-      <label class="newsletter-consent">
-        <input type="checkbox" name="newsletter" id="newsletter-checkbox">
-        Ich möchte mich für den Newsletter anmelden.
-      </label>
-
-      <label class="privacy-consent">
+        <!-- Datenschutz -->
+        <label class="privacy-consent">
           <input type="checkbox" name="privacy" id="privacy-checkbox" required>
           Ich habe die <a href="{{ url_for('datenschutz') }}" target="_blank">Datenschutzerklärung</a> gelesen und stimme ihr zu.
-      </label>
+        </label>
 
-      <button type="submit" id="submit-button">Bezahldaten überprüfen</button>
+        <!-- PayPal Button -->
+        <div id="paypal-button-container" style="margin-top:1em;"></div>
       </form>
     </div>
-
   </div>
 </section>
 
+{% include 'footer.html' %}
 
-  {% include 'footer.html' %}
-
-  <script>
-  // --- Zahlungsdetails anzeigen ---
-  const paymentMethodSelect = document.getElementById('payment-method');
-  const rechnungDetails = document.getElementById('rechnung-details');
-  const paypalDetails = document.getElementById('paypal-details');
-  const kreditkarteDetails = document.getElementById('kreditkarte-details');
-
-  paymentMethodSelect.addEventListener('change', () => {
-    const method = paymentMethodSelect.value;
-    rechnungDetails.classList.add('hidden');
-    paypalDetails.classList.add('hidden');
-    kreditkarteDetails.classList.add('hidden');
-    if (method === 'rechnung') rechnungDetails.classList.remove('hidden');
-    if (method === 'paypal') paypalDetails.classList.remove('hidden');
-    if (method === 'kreditkarte') kreditkarteDetails.classList.remove('hidden');
-  });
-
-  // --- Datenschutz Checkbox ---
-  const privacyCheckbox = document.getElementById('privacy-checkbox');
-  const submitButton = document.getElementById('submit-button');
-
-  privacyCheckbox.addEventListener('change', () => {
-    submitButton.disabled = !privacyCheckbox.checked;
-  });
-
-  // --- Bestellung an Python-Backend senden ---
-  const paymentForm = document.getElementById("payment-form");
-paymentForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const formData = new FormData(paymentForm);
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  if(cart.length === 0){
-    alert("Warenkorb leer");
-    return;
-  }
-
- 
-  const positionen = cart.map(item => ({
-      ean: item.ean,
-      pos_bezeichnung: item.title,
-      menge: item.quantity,
-      ek_netto: 0,
-      vk_brutto: item.price,
-      pos_referenz: ""
-}));
+<!-- PayPal SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id={{ config.PAYPAL_CLIENT_ID }}&currency=EUR&disable-funding=sepa,sofort,giropay,bancontact,eps,ideal"></script>
+<script>
   
+const form = document.getElementById('checkout-form');
+const privacyCheckbox = document.getElementById('privacy-checkbox');
+const requiredFields = form.querySelectorAll('input[required]');
 
-const bestellung = {
-  mol_kunde_id: 3,
-  rechnungsadresse_id: 2476303,
-  email: formData.get("email"),
-  mol_zahlart_id: formData.get("payment-method") === "rechnung" ? 2 :
-                  formData.get("payment-method") === "paypal" ? 3 : 1,
-  bestelldatum: new Date().toISOString().slice(0,19).replace("T"," "),
-  bestellreferenz: "REF" + Date.now(),
-  seite: "ibk-bilderbuch.de",
-  bestellfreigabe: 1,
-  mol_verkaufskanal_id: 3,
-  auftrag_position: positionen,
+function allFieldsFilled() {
+  return Array.from(requiredFields).every(f => f.value.trim() !== '') && privacyCheckbox.checked;
+}
 
-  lieferadresse: {
-    anrede: "Herr/Frau",
-    vorname: formData.get("vorname") || "",
-    nachname: formData.get("nachname") || "",
-    zusatz: formData.get("adresszusatz") || "",
-    strasse: formData.get("address") || "",
-    hausnummer: formData.get("hausnummer") || "",
-    stadt: formData.get("stadt") || "",
-    plz: formData.get("plz"),
-    adresszeile_1: "",
-    adresszeile_2: "",
-    adresszeile_3: ""
-  }
+paypal.Buttons({
 
-};
+  onClick: function(data, actions) {
 
-
-
-
-  try {
-    const response = await fetch("https://organised-13.onrender.com/bestellung", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(bestellung)
-    });
-
-    const result = await response.json();
-    
-
-   if(result.success){
-       localStorage.removeItem("cart");
-    
-       window.location.href = "/bestelldanke";
-      } else {
-     alert("Bestellung konnte nicht gespeichert werden");
+    if (!form.reportValidity()) {
+      form.querySelector(":invalid")?.focus();
+      return actions.reject();
     }
 
-  } catch (err) {
-    console.error(err);
-    alert("Fehler beim Speichern");
-  }
-});
+    return actions.resolve();
+  },
 
-  </script>
+  onInit: function(data, actions) {
+    actions.disable();
+
+    function validate() {
+      if (allFieldsFilled()) actions.enable();
+      else actions.disable();
+    }
+
+    requiredFields.forEach(f => f.addEventListener('input', validate));
+    privacyCheckbox.addEventListener('change', validate);
+  },
+
+  createOrder: function(data, actions) {
+
+    const formData = new FormData(form);
+
+    return fetch("/checkout", {
+        method: "POST",
+        body: formData
+    })
+    .then(() => fetch("/create-paypal-order", { method: "POST" }))
+    .then(res => res.json())
+    .then(data => data.id);
+  },
+  
+  onApprove: function(data, actions) {
+    const orderID = data.orderID || data.orderId;
+    return fetch("/capture-paypal-order/" + orderID, { method: "POST" })
+      .then(res => res.json())
+      .then(res => {
+        if(res.status === 'success') {
+          localStorage.removeItem("cart");
+          fetch("/sync-cart", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify([])
+          });
+          window.location.href = "/bestelldanke";
+        } else {
+          alert("Fehler bei PayPal-Zahlung.");
+        }
+      });
+  },
+
+  onError: function(err) {
+    console.error("PayPal Fehler:", err);
+    alert("PayPal-Zahlung konnte nicht gestartet werden.");
+  }
+
+}).render('#paypal-button-container');
+</script>
+<script src="{{ url_for('static', filename='js/cart.js') }}"></script>
 </body>
 </html>
