@@ -1,3 +1,4 @@
+
 # Webframework
 Flask==3.1.2
 
@@ -19,8 +20,12 @@ sendgrid==6.12.5
 # HTTP Requests
 requests==2.32.5
 
+# PostgreSQL
 psycopg2-binary==2.9.9
 
+# Forms & CSRF Schutz
+Flask-WTF==1.2.1
 
+flask-limiter
 
-
+paypal-checkout-serversdk
