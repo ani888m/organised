@@ -1,3 +1,8 @@
+
+
+
+
+
 .quantity-btn {
       font-size: 20px;
       user-select: none;
@@ -146,9 +151,10 @@
       }
 
       #checkout-btn {
-        width: 50% ;
+        width: 80% ;
         padding: 10px;
         font-size: 0.8rem ;
-        margin: 0 auto ;
+        margin: 0 auto;
+        background-color: #e66e3f;
       }
     }
