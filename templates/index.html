@@ -1,144 +1,119 @@
 
-
-
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="description" content="Geschichten und Bilder, die bleiben: Ganz besondere Bilderbücher – liebevoll gestaltet, hochwertig illustriert und online erhältlich bei I B K.
-Ein besonderes Geschenk für kleine und große Leser*innen..">
+Ein besonderes Geschenk für kleine und große Leser*innen.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title> I B K | Ausgewählte Illustrationen und Bilderbücher: Neuerscheinungen, Klassiker und alles Besondere </title>
+  <title>I B K | Ausgewählte Illustrationen und Bilderbücher: Neuerscheinungen, Klassiker und alles Besondere</title>
   <link rel="icon" type="image/x-icon" href="static/ficon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Montserrat&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
- 
-
 </head>
 
-  {% include 'navbar.html' %}
-
-<div id="navbar-placeholder"></div>
-
 <body>
- 
-<div class="carousel">
-  <div class="slides">
-    
-     <!-- Folie 1 -->
+  {% include 'navbar.html' %}
+  <div id="navbar-placeholder"></div>
 
-     <div class="carousel-slide">
-      <img src="{{ url_for('static', filename='images/Slide5.jpg') }}" class="carousel-image" alt="Slide 5">
-      <button class="slide-btn" onclick="window.location.href='{{ url_for("index") }}#Jacominus_Gainsborough'"> Zu den Büchern </button>
+  <div class="carousel">
+    <div class="slides">
+      
+      <!-- Folie 1 -->
+      <div class="carousel-slide">
+        <img src="{{ url_for('static', filename='images/Sleid511.jpg') }}" class="carousel-image" alt="Slide 5">
+        <button class="slide-btn" onclick="window.location.href='{{ url_for('index') }}#Jacominus_Gainsborough'">Zu den Büchern</button>
+      </div>
+
+      <!-- Folie 2 -->
+      <div class="carousel-slide">
+        <img src="{{ url_for('static', filename='images/Angsthase.jpg') }}" class="carousel-image" alt="Slide 4">
+        <button class="slide-btn" onclick="window.location.href='{{ url_for('index') }}#Mut_oder_Angst'">Zu den Büchern</button>
+      </div>
+
+      <!-- Folie 3 -->
+      <div class="carousel-slide active">
+        <img src="{{ url_for('static', filename='images/klassiker11.jpg') }}" class="carousel-image" alt="Slide 3">
+        <button class="slide-btn" onclick="window.location.href='{{ url_for('index') }}#Klassiker'">Zu den Büchern</button>
+      </div> 
+      
     </div>
 
-    <!-- Folie 2 -->
-
-     <div class="carousel-slide">
-      <img src="{{ url_for('static', filename='images/Angsthase.jpg') }}" class="carousel-image" alt="Slide 4">
-      <button class="slide-btn" onclick="window.location.href='{{ url_for("index") }}#Mut_oder_Angst'"> Zu den Büchern </button>
-    </div>
-
-    
-    <!-- Folie 1 
-    <div class="carousel-slide active">
-      <img src="{{ url_for('static', filename='images/slider1.jpg') }}" class="carousel-image" alt="Slide 3">
-      <button class="slide-btn" onclick="window.location.href='{{ url_for("index") }}#Klassiker'">Zu den Büchern</button>
-    </div> -->
-    
+    <!-- Navigation -->
+    <button class="prev">❮</button>
+    <button class="next">❯</button>
   </div>
+  
+  
+  
+  <main>
 
-  <!-- Navigation -->
-  <button class="prev">❮</button>
-  <button class="next">❯</button>
-</div>
+    <h1> AUSGEWÄHLTE BILDERBÜCHER<br>Neuerscheinungen, Klassiker und noch viel mehr</h1>
 
+    {% set visiblePerClick = 3 %}  {# Anzahl Kategorien pro Klick #}
 
+    {% for titel, liste in kategorien %}
+      <div 
+        id="{{ titel|replace(' ', '_')|replace('?', '')|replace('!', '')|replace('ä','ae')|replace('ö','oe')|replace('ü','ue') }}"
+        class="category {% if loop.index > visiblePerClick %}hidden-category{% endif %}">
 
-<main>
- 
+        <h2>{{ titel }}</h2>
 
+        <div class="book-list">
+          {% for produkt in liste %}
+            <div class="book">
 
+              <div class="image-wrapper">
+                <img 
+                  {% if produkt.bilder and produkt.bilder|length > 0 %}
+                    {% if produkt.bilder[0].startswith('http') %}
+                      src="{{ produkt.bilder[0] }}"
+                    {% else %}
+                      src="{{ url_for('static', filename=produkt.bilder[0]) }}"
+                    {% endif %}
+                  {% else %}
+                    src="{{ url_for('static', filename='images/default.jpg') }}"
+                  {% endif %}
+                  alt="{{ produkt.name }}">
 
-{% set visiblePerClick = 3 %}  {# Anzahl Kategorien pro Klick #}
+                <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}" class="hover-btn">
+                  Mehr erfahren
+                </a>
+              </div>
 
-{% for titel, liste in kategorien %}
-  <div 
-    id="{{ titel|replace(' ', '_')
-                |replace('?', '')
-                |replace('!', '')
-                |replace('ä','ae')
-                |replace('ö','oe')
-                |replace('ü','ue') }}"
-    class="category {% if loop.index > visiblePerClick %}hidden-category{% endif %}">
+              <h3>{{ produkt.name }}</h3>
+              <p>{{ produkt.preis }} €</p>
 
-    <h2>{{ titel }}</h2>
+              <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}', '{{ produkt.ean }}')">
+                In den Warenkorb
+              </button>
 
-    <div class="book-list">
-      {% for produkt in liste %}
-        <div class="book">
-
-          <div class="image-wrapper">
-            <img 
-              {% if produkt.bilder and produkt.bilder|length > 0 %}
-                {% if produkt.bilder[0].startswith('http') %}
-                  src="{{ produkt.bilder[0] }}"
-                {% else %}
-                  src="{{ url_for('static', filename=produkt.bilder[0]) }}"
-                {% endif %}
-              {% else %}
-                src="{{ url_for('static', filename='images/default.jpg') }}"
-              {% endif %}
-              alt="{{ produkt.name }}">
-
-            <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}" class="hover-btn">
-              Mehr erfahren
-            </a>
-          </div>
-
-          <h3>{{ produkt.name }}</h3>
-          <p>{{ produkt.preis }} €</p>
-
-          <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}', '{{ produkt.ean }}'  )">
-            In den Warenkorb
-          </button>
-
+            </div>
+          {% endfor %}
         </div>
-      {% endfor %}
+
+      </div>
+    {% endfor %}
+
+    <div style="text-align:center; margin:30px;">
+      <button id="showMoreBtn">Weitere Produkte anzeigen</button>
     </div>
 
-  </div>
+    <section class="newsletter-section">
+      <h3>Melde dich zu unserem Newsletter an!</h3>
+      <p>Erhalte exklusive Neuigkeiten und Angebote rund um unsere Kinderbücher.</p>
+      <form action="{{ url_for('newsletter') }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required /><br>
+        <button type="submit">Anmelden</button>
+      </form>
+    </section>
 
-{% endfor %}
+  </main>
 
-{# EIN Button unter allen Kategorien #}
-<div style="text-align:center; margin:30px;">
-  <button id="showMoreBtn">Weitere Produkte anzeigen</button>
-</div>
+  {% include 'footer.html' %}
 
-
-
- <section class="newsletter-section">
-
-  <h3>Melde dich zu unserem Newsletter an!</h3>
-  <p>Erhalte exklusive Neuigkeiten und Angebote rund um unsere Kinderbücher.</p>
-  <form action="{{ url_for('newsletter') }}" method="POST">
-    <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required /><br>
-    <button type="submit">Anmelden</button>
-  </form>
-</section>
-
-</main>
-
-
- {% include 'footer.html' %}
-
-
-
-<script src="{{ url_for('static', filename='script.js') }}"></script>
-
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
