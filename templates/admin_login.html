@@ -1,0 +1,7 @@
+
+<!-- templates/admin_login.html -->
+<form method="POST">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <input type="password" name="password" placeholder="Admin Passwort" required>
+  <button type="submit">Login</button>
+</form>
