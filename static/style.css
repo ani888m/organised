@@ -1,4 +1,7 @@
 
+
+
+
 /* =========================================
    1. IMPORTS & RESET
 ========================================= */
@@ -27,20 +30,24 @@ main.page-content {
 body {
   font-family: var(--font-body);
   color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
 }
 
-h1, h2, h3 {
+h1,  h3 {
   font-family: var(--font-heading);
   color: var(--color-secondary);
 }
 
 h1, h2 { 
   text-align: center; 
+  font-family: var(--font-heading);
 }
 
 h2 {
-  font-size: 2.4rem;
-  margin-bottom: 30px;
+  font-size: 2.0rem;
+  margin-bottom: 10px;
   padding-top: 50px;
 }
 
@@ -79,7 +86,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 110px;
+  padding: 0 90px;
   flex-wrap: wrap;
   box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
 }
@@ -89,6 +96,7 @@ header {
   align-items: center;
   flex: 1;
   min-width: 0;
+  position: relative;
 }
 
 .logo {
@@ -97,6 +105,11 @@ header {
   transition: height 0.3s ease;
   display: block;
   object-fit: contain;
+   
+  position: absolute;
+  top: 10%;              /* mittig in Navbar */
+  transform: translateY(20%); /* nach unten rausziehen */
+  z-index: 10;           /* Logo über Nav-Links */
 }
 
 .hidden-category {
@@ -131,11 +144,12 @@ header {
   }
 
   header {
-    padding: 25px;
+    padding: 45px;
+    padding-left: 20px;
   }
 
-  h2 {
-    font-size: 2rem;
+  h2, h1 {
+    ont-size: 2rem;
   }
 }
 
@@ -153,7 +167,7 @@ nav {
   display: flex;
   gap: 20px;
   position: relative;
-  margin-top: 100px;
+  margin-top: 70px;
   padding-right: 40px;
 }
 
@@ -199,8 +213,9 @@ nav {
     display: block;
     z-index: 10000;
     position: relative;
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     color: var(--color-primary);
+    color: #000000;
     cursor: pointer;
   }
 
@@ -256,7 +271,7 @@ footer {
   color: #333;
   font-family: var(--font-heading);
   margin-top: auto; /* schiebt Footer nach unten */
-  font-size: 16px;
+  font-size: 1.1rem,
 }
 
 footer a {
@@ -288,7 +303,7 @@ main {
   z-index: 1;
   max-width: 1300px;
   width: 100%;
-  margin: 0 auto 300px;
+  margin: 0 auto 50px;
   overflow: hidden;
 }
 
@@ -355,31 +370,7 @@ button.next {
 button.prev { left: 10px; }
 button.next { right: 10px; }
 
-/* Mobile Carousel */
-@media (max-width: 480px) {
-  .carousel-slide img {
-    max-height: 500px;
-  }
 
-  .carousel-slide h2 {
-    font-size: 24px;
-    margin-left: 15px;
-    bottom: 90px;
-  }
-
-  .slide-btn {
-    font-size: 8px;
-    padding: 8px 16px;
-    bottom: 20px;
-    left: 70%;
-  }
-
-  button.prev,
-  button.next {
-    padding: 8px;
-    font-size: 14px;
-  }
-}
 
 @media (min-width: 768px) and (max-width: 1024px) {
   .carousel-slide img {
@@ -394,7 +385,7 @@ button.next { right: 10px; }
 
   .slide-btn {
     font-size: 15px;
-    padding: 8px 16px;
+    padding: 12px 35px;
     bottom: 40px;
   }
 
@@ -403,8 +394,37 @@ button.next { right: 10px; }
     font-size: 16px;
     padding: 10px;
   }
+   footer {
+        margin-top: auto; /* schiebt Footer nach unten */
+   }
 }
 
+/* Mobile Carousel */
+@media (max-width: 480px) {
+  .carousel-slide img {
+    max-height: 500px;
+    width: auto;
+  }
+
+  .carousel-slide h2 {
+    font-size: 24px;
+    margin-left: 15px;
+    bottom: 90px;
+  }
+
+  .slide-btn {
+    font-size: 8px;
+    padding: 10px 23px;
+    bottom: 20px;
+    left: 70%;
+  }
+
+  button.prev,
+  button.next {
+    padding: 8px;
+    font-size: 14px;
+  }
+}
 /* =========================================
    BOOK LIST
 ========================================= */
@@ -413,6 +433,14 @@ button.next { right: 10px; }
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
+  max-width: 2200px;
+  margin-left: 140px;
+  padding: 50px 0;
+}
+.search-book-list {
+     display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
+    gap: 20px;
   max-width: 2200px;
   margin-left: 140px;
   padding: 50px 0;
@@ -597,9 +625,15 @@ label {
   margin-bottom: 15px;
   font-weight: 400;
 }
+
 .half-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.drittel-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
 }
 input:not([type="checkbox"]), select {
@@ -697,15 +731,20 @@ button[type="submit"]:hover {
    RECHTLICHES
 ========================================= */
 
-.rechtliches { 
+.rechtliches, .search-page { 
   margin: 50px 180px;
 }
 
+ .rechtliches h1 {
+     text-align:left;
+      font-size: 2rem;
+
+  }
 .rechtliches h2 {
   font-family: var(--font-heading);
   color: black;
   font-size: 2.4rem;
-  margin-bottom: 5px;
+  margin-bottom: 25px;
 }
 
 .rechtliches h3 {
@@ -715,11 +754,24 @@ button[type="submit"]:hover {
 }
 
 .rechtliches p {
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-family: var(--font-heading);
   line-height: 1.6;
   color: #333;
   margin-top: 10px;
+}
+
+.dsgvo {
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.dsgvo-text {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  display: inline-block;
+  margin-left: 6px;
+  font-family: var(--font-heading);
 }
 
 @media screen and (max-width: 1024px) {
@@ -730,10 +782,12 @@ button[type="submit"]:hover {
 
 /* Mobile Rechtliches */
 @media screen and (max-width: 768px) {
-  .rechtliches {
-    margin: 20px 35px 100px 35px;
+  .rechtliches, .search-page {
+    margin: 60px 35px 20px 35px;
   }
 
+
+ 
   .rechtliches h2 {
     font-size: 1.8rem;
   }
