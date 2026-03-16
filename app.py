@@ -1,12 +1,16 @@
 
 
 
+
+
 import os
 import json
 import logging
 from datetime import datetime
 from dotenv import load_dotenv
 import requests
+import uuid
+
 
 from flask import (
     Flask, render_template, request,
@@ -77,6 +81,9 @@ with app.app_context():
 
 
 
+
+
+
 ADMIN_PASSWORD = os.getenv("FLASK_ADMIN_PASSWORD")
 
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
@@ -96,6 +103,10 @@ csrf = CSRFProtect(app)
 BUCHBUTLER_USER = os.getenv("BUCHBUTLER_USER")
 BUCHBUTLER_PASSWORD = os.getenv("BUCHBUTLER_PASSWORD")
 
+BUCHBUTLER_MOL_KUNDE_ID = os.getenv("BUCHBUTLER_MOL_KUNDE_ID")
+BUCHBUTLER_RECHNUNGSADRESSE_ID = os.getenv("BUCHBUTLER_RECHNUNGSADRESSE_ID", "1")
+BUCHBUTLER_VERKAUFSKANAL_ID = os.getenv("BUCHBUTLER_VERKAUFSKANAL_ID", "1")
+
 BASE_URL = "https://api.buchbutler.de"
 
 
@@ -112,6 +123,10 @@ if os.path.exists(json_path):
         produkte = json.load(f)
 else:
     produkte = []
+
+
+
+
 
 
 # =====================================================
@@ -167,20 +182,21 @@ def create_paypal_order():
 @app.route("/capture-paypal-order/<order_id>", methods=["POST"])
 @csrf.exempt
 def capture_paypal_order(order_id):
+    try:
+        access_token = paypal_access_token()
 
-    access_token = paypal_access_token()
+        response = requests.post(
+            f"{PAYPAL_BASE}/v2/checkout/orders/{order_id}/capture",
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {access_token}",
+            }
+        )
 
-    response = requests.post(
-        f"{PAYPAL_BASE}/v2/checkout/orders/{order_id}/capture",
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {access_token}",
-        }
-    )
+        data = response.json()
 
-    data = response.json()
-
-    if data.get("status") == "COMPLETED":
+        if data.get("status") != "COMPLETED":
+            return jsonify({"status": "error", "message": "PayPal-Zahlung nicht abgeschlossen", "data": data}), 400
 
         cart_items = get_cart()
 
@@ -212,13 +228,19 @@ def capture_paypal_order(order_id):
 
         db.session.commit()
 
+        try:
+            sende_bestellung_an_buchbutler(bestellung, cart_items)
+        except Exception:
+            logger.exception("Buchbutler Bestellung fehlgeschlagen")
+
+        # Warenkorb leeren
         session.pop("cart", None)
 
-        return jsonify({"status": "success"})
+        return jsonify({"status": "success", "order_id": order_id})
 
-    return jsonify({"status": "error"}), 400
-
-
+    except Exception as e:
+        logger.exception("Fehler beim Capturen der PayPal-Zahlung")
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 def verify_webhook(headers, body):
 
@@ -381,6 +403,7 @@ def lade_produkt_von_api(ean):
             "id": to_int(res.get("pim_artikel_id")),
             "name": res.get("bezeichnung"),
             "autor": attr(attrs, "Autor"),
+            "illustrator": attr(attrs, "Illustrator"),
             "preis": to_float(res.get("vk_brutto")),
            
             "isbn": attr(attrs, "ISBN_13"),
@@ -441,8 +464,113 @@ def lade_bestand_von_api(ean):
         logger.exception("Fehler beim Laden von MOVEMENT API")
         return None
 
+# -----------------------------
+# Bestellung an Buchbutler senden 
+# -----------------------------
 
+def sende_bestellung_an_buchbutler(bestellung, cart_items):
 
+    url = f"{BASE_URL}/ORDER/"
+
+    collectkey = str(uuid.uuid4())
+    bestellung.collectkey = collectkey
+    db.session.commit()
+
+    payload = {
+        "username": BUCHBUTLER_USER,
+        "passwort": BUCHBUTLER_PASSWORD,
+
+        "auftrag_kopf": {
+            "mol_kunde_id": int(BUCHBUTLER_MOL_KUNDE_ID),
+            "rechnungsadresse_id": int(BUCHBUTLER_RECHNUNGSADRESSE_ID),
+            "mol_zahlart_id": 2,  # PayPal
+            "bestelldatum": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "bestellreferenz": f"IBK-{bestellung.id}",
+            "seite": "ibk-bilderbuch.de",
+            "bestellfreigabe": 0,
+            "mol_verkaufskanal_id": int(BUCHBUTLER_VERKAUFSKANAL_ID)
+        },
+
+        "lieferadresse": {
+            "anrede": "",
+            "vorname": bestellung.vorname,
+            "nachname": bestellung.nachname,
+            "strasse": bestellung.strasse,
+            "hausnummer": bestellung.hausnummer,
+            "plz": bestellung.plz,
+            "ort": bestellung.stadt,
+            "land": bestellung.land,
+            "land_iso": "DE",
+            "tel": bestellung.telefon
+        },
+
+        "auftrag_position": [],
+
+        "auftrag_zusatz": [
+            {
+                "typ": "SHIPPING_OPTION",
+                "value": "1040"
+            },
+            {
+                "typ": "collectkey",
+                "value": collectkey
+            }
+        ]
+    }
+
+    
+
+    for i, item in enumerate(cart_items):
+        payload["auftrag_position"].append({
+            "ean": item["ean"],
+            "pos_bezeichnung": item["title"],
+            "menge": item["quantity"],
+            "ek_netto": 0,
+            "vk_brutto": item["price"],
+            "pos_referenz": f"{bestellung.id}-{i}"
+        })
+    
+    response = requests.post(url, json=payload, timeout=20)
+    
+    data = response.json()
+    
+    if data.get("import_hash"):
+        bestellung.moluna_order_id = data["import_hash"]
+        bestellung.moluna_status = "übermittelt"
+        db.session.commit()
+        
+    logger.info("Buchbutler Bestellung: %s", data)
+    return data
+    
+    
+def buchbutler_orderresponse(collectkey):
+
+    url = f"{BASE_URL}/ORDERRESPONSE/"
+
+    payload = {
+        "username": BUCHBUTLER_USER,
+        "passwort": BUCHBUTLER_PASSWORD,
+        "collectkey": collectkey
+    }
+
+    try:
+        response = requests.post(url, json=payload, timeout=10)
+
+        # Wenn keine erfolgreiche Antwort
+        if response.status_code != 200:
+            logger.warning(f"ORDERRESPONSE Statuscode: {response.status_code}")
+            return None
+
+        # Wenn Antwort leer ist
+        if not response.text.strip():
+            logger.info("ORDERRESPONSE leer")
+            return None
+
+        return response.json()
+
+    except Exception:
+        logger.exception("ORDERRESPONSE Fehler")
+        return None
 # =====================================================
 # ROUTES
 # =====================================================
@@ -479,14 +607,68 @@ def admin_login():
 
 
 # Admin Bestellungen anzeigen
+
+
+
+
 @app.route("/admin/bestellungen")
 def admin_bestellungen():
+
     resp = admin_required()
-    if resp:  # wenn redirect zurückkommt
+    if resp:
         return resp
+
     alle = Bestellung.query.order_by(Bestellung.bestelldatum.desc()).all()
-    return render_template("admin_bestellungen.html", bestellungen=alle)
-    
+
+    for b in alle:
+
+        if getattr(b, "collectkey", None):
+
+            response = buchbutler_orderresponse(b.collectkey)
+
+            if response and "response" in response:
+                status = response["response"].get("status")
+                lieferungen = response["response"].get("lieferungen", [])
+
+                # Status speichern
+                b.moluna_status = status if status else "unbekannt"
+
+                # Trackingnummern & andere Felder sammeln
+                trackingnummern = []
+                logistiker_list = []
+                paketart_list = []
+                eans = []
+
+                for lieferung in lieferungen:
+                    if lieferung.get("trackingnummer"):
+                        trackingnummern.append(lieferung["trackingnummer"])
+                    if lieferung.get("logistiker"):
+                        logistiker_list.append(lieferung["logistiker"])
+                    if lieferung.get("logistik_produkt"):
+                        paketart_list.append(lieferung["logistik_produkt"])
+                    if lieferung.get("ean"):
+                        eans.append(lieferung["ean"])
+
+                # Optional: als kommagetrennte Strings speichern
+                b.trackingnummer = ", ".join(trackingnummern) if trackingnummern else None
+                b.logistiker = ", ".join(logistiker_list) if logistiker_list else None
+                b.paketart = ", ".join(paketart_list) if paketart_list else None
+                b.eans = ", ".join(eans) if eans else None
+
+            else:
+                b.moluna_status = "keine Antwort"
+                b.trackingnummer = None
+                b.logistiker = None
+                b.paketart = None
+                b.eans = None
+
+    # Commit nach allen Updates
+    db.session.commit()
+
+    return render_template(
+        "admin_bestellungen.html",
+        bestellungen=alle
+    )
 # Homepage
 @app.route("/")
 def index():
@@ -644,13 +826,17 @@ def add_to_cart():
             found = True
             break
 
+  
+
     if not found:
         cart.append({
             "id": produkt["id"],
             "title": produkt["name"],
             "price": produkt.get("preis", 0),
-            "quantity": 1
+            "quantity": 1,
+            "ean": produkt["ean"]
         })
+        
 
     save_cart(cart)
     return redirect(url_for("cart"))
