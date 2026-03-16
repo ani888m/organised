@@ -2,38 +2,38 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kontakt | I B K - Buchhandlung für Illustration und Bilderbücher </title>
-  <link rel="icon" type="image/x-icon" href="logo.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> I B K - Buchhandlung für Illustration und Bilderbücher | Kontakt </title>
+  <link rel="icon" type="image/x-icon" href="static/ficon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 
+  
 </head>
-<body>
+
   {% include 'navbar.html' %}
 
 <div id="navbar-placeholder"></div>
-
-
-  
+<body>
 
    
 
 
  <section class="form" >
   <h2>Kontakt</h2>
-   <p> I B K - Buchhandlung für Illustrationen und Bilderbücher <br>
+   <p> I B K - Buchhandlung für Illustration und Bilderbücher <br>
     Meller Bogen 14<br>
     13403 Berlin<br>
     E-Mail: kontakt@ibk-bilderbuch.de<br>
-    Telefon: +49(0)176/2116447<br></p>
+    Telefon: +49 179 1538512<br></p>
 
   <h3> Senden Sie uns eine Nachricht! </h3><br> 
 
    
 <form action="/submit" method="POST" class="kontakt-form">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
   <label for="name">Name:
   <input type="text" id="name" name="name" required>
   </label>
@@ -45,9 +45,18 @@
  
   <label for="nachricht">Nachricht: </label>
   <input id="nachricht" name="message" required></input><br>
-
-
+  <div class="dsgvo">
+    <input type="checkbox" id="consent" name="consent" required>
+    <label for="consent" class="dsgvo-text">
+    DSGVO-Einverständnis * <br>
+    Ich willige ein, dass diese Website meine übermittelten Informationen speichert,
+    sodass meine Anfrage beantwortet werden kann. Mehr dazu finde ich in der
+      <a href="/datenschutz">Datenschutzerklärung</a>. Hinweis: Die Einwilligung kann
+    jederzeit für die Zukunft per E-Mail an kontakt@ibk-bilderbuch.de widerrufen werden.
+    </label>
+  </div>
   <button type="submit">Absenden</button>
+
 </form>
  
 </section>
