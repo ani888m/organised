@@ -48,7 +48,13 @@
         <div class="drittel-container">
           <label class="drittel"><input type="text" name="plz" required placeholder="Postleitzahl"></label>
           <label class="drittel"><input type="text" name="stadt" required placeholder="Stadt"></label>
-          <label class="drittel"><input type="text" name="land" required placeholder="Land"></label>
+         
+          <label class="drittel">
+            <select name="land" required>
+              <option value="" disabled selected>Land wählen</option>
+              <option value="Deutschland">Deutschland</option>
+            </select>
+          </label>
         </div>
         <label><input type="text" name="telefon"  placeholder="Telefonnummer (optional)"></label>
 
