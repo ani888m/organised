@@ -1,0 +1,63 @@
+
+
+
+{% for b in bestellungen %}
+<div class="bestellung">
+
+    <h2>Bestellung #{{ b.id }}</h2>
+
+    <h3>Kundendaten</h3>
+    <p>
+        {{ b.vorname }} {{ b.nachname }}<br>
+        {{ b.strasse }} {{ b.hausnummer }}<br>
+        {% if b.adresszusatz %}{{ b.adresszusatz }}<br>{% endif %}
+        {{ b.plz }} {{ b.stadt }}<br>
+        {{ b.land }}<br>
+        Email: {{ b.email }}<br>
+        Telefon: {{ b.telefon }}<br>
+        Zahlungsmethode: {{ b.paymentmethod }}<br>
+        Newsletter: {{ b.newsletter or "Nein" }}<br>
+        Logistiker: {{ b.logistiker or "-" }}<br>
+        Paketart: {{ b.paketart or "-" }}<br>
+        EANs: {{ b.eans or "-" }}
+    </p>
+
+    <p><b>Datum:</b> {{ b.bestelldatum.strftime("%d.%m.%Y %H:%M") }}</p>
+    <p><b>Moluna Status:</b> {{ b.moluna_status or "-" }} | 
+       <b>Trackingnummer:</b> {{ b.trackingnummer or "-" }} | 
+       <b>Moluna Order-ID:</b> {{ b.moluna_order_id or "-" }}
+    </p>
+
+    <h3>Positionen</h3>
+    <table class="positionen-table">
+        <tr>
+            <th>Produkt</th>
+            <th>EAN</th>
+            <th>Menge</th>
+            <th>Preis</th>
+            <th>Summe</th>
+        </tr>
+
+        {% set gesamt = 0 %}
+        {% for pos in b.positionen %}
+            {% set summe = pos.menge * pos.preis %}
+            {% set gesamt = gesamt + summe %}
+        <tr>
+            <td>{{ pos.bezeichnung }}</td>
+            <td>{{ pos.ean or "-" }}</td>
+            <td>{{ pos.menge }}</td>
+            <td>{{ "%.2f"|format(pos.preis) }} €</td>
+            <td>{{ "%.2f"|format(summe) }} €</td>
+        </tr>
+        {% endfor %}
+
+        <tr>
+            <td colspan="4"><b>Gesamt</b></td>
+            <td><b>{{ "%.2f"|format(gesamt) }} €</b></td>
+        </tr>
+    </table>
+
+</div>
+{% else %}
+<p>Keine Bestellungen vorhanden.</p>
+{% endfor %}
