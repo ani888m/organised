@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ produkt.name }}  | I B K - Buchhandlung für Illustration und Bilderbücher </title>
-  <link rel="icon" type="image/x-icon" href="static/ficon.png">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='ficon.png') }}">
   <meta name="description" content="Details zum Buch '{{ produkt.name }}'. Jetzt entdecken und bestellen.">
 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -61,6 +61,8 @@
       <div class="book-info">
         <h1>{{ produkt.name }}</h1>
         <p class="author"> {{ produkt.autor }}</p>
+        <p class="illustrator"> {{ produkt.illustrator }}</p>
+
         <p class="price">{{ "%.2f"|format(produkt.preis) }} €</p>
          
       
