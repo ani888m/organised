@@ -1,3 +1,4 @@
+
 // -----------------------------
 // Helper für Cookies (optional für späteres Tracking)
 // -----------------------------
@@ -169,5 +170,3 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
-
-
