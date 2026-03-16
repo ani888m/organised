@@ -1,17 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="icon" type="image/x-icon" href="logo.png">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='ficon.png') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+
 
    <script src="{{ url_for('static', filename='script.js') }}"></script>
   <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
-  <title>Warenkorb | I B K - Buchhandlung für Illustration und Bilderbücher</title>
+  <title>I B K - Buchhandlung für Illustration und Bilderbücher | Warenkorb </title>
 </head>
 <body style="max-width: 1800px">
   {% include 'navbar.html' %}
@@ -20,11 +21,16 @@
   <main style="margin-left: 100px; max-width: 2000px">
     <h2 style="margin:50px">Warenkorb</h2>
     <div id="cart-items" style="padding:20px; font-size: 20px"></div>
-
+      <p class="dsgvo-text">
+      Kostenloser Versand. Weitere Informationen zu Versand, Rückgabe und Widerrufsrecht 
+      finden Sie in unseren <a href="/agb">Allgemeinen Geschäftsbedingungen</a>.
+      </p>
     <div style="display: flex; justify-content: space-between; margin: 50px; max-width: 1800px;">
-      <p>Zwischensumme: <span id="total-price">0.00</span> €</p>
-      <button id="checkout-btn">Zur Kasse</button>
+      <p>Zwischensumme: <span id="total-price">0.00</span> €</p><br>
+      
+      <button id="checkout-btn">Zur Kasse</button>   
     </div>
+   
   </main>
 
   {% include 'footer.html' %}
