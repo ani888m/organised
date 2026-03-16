@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> Suche | I B K - Buchhandlung für Illustration und Bilderbücher</title>
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='ficon.png') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  
+</head>
+
+  {% include 'navbar.html' %}
+
+<div id="navbar-placeholder"></div>
+  
+
+<div class="search-page">
+  <h2>Finde dein Buch</h2>
+
+  <form action="{{ url_for('suche') }}" method="POST" class="search-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="text" name="q" placeholder="Buchname eingeben..." required>
+    <button type="submit"><i class="fas fa-search"></i></button>
+  </form>
+
+  {% if query %}
+    <h3>Suchergebnisse für "{{ query }}":</h3>
+
+    {% if ergebnisse %}
+      <div class="search-book-list">
+        {% for produkt in ergebnisse %}
+          <div class="book">
+            <img src="{{ url_for('static', filename=produkt.bilder[0]) }}" alt="{{ produkt.name }}">
+            <h3>{{ produkt.name }}</h3>
+            <p>{{ produkt.preis }} €</p>
+            <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}">Mehr erfahren</a>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>Keine Ergebnisse gefunden.</p>
+    {% endif %}
+  {% endif %}
+</div>
+
+{% include 'footer.html' %}
+
+</html>
