@@ -20,7 +20,7 @@
       
       <!-- Folie 1 -->
       <div class="carousel-slide">
-        <img src="{{ url_for('static', filename='images/Sleid511.jpg') }}" class="carousel-image" alt="Illustriertes Kinderbuch Jacominus Gainsborough" loading="lazy">
+        <img src="{{ url_for('static', filename='images/Sleid511.jpg') }}" class="carousel-image" alt="Illustriertes Kinderbuch Jacominus Gainsborough">
         <button class="slide-btn" onclick="window.location.href='{{ url_for('index') }}#Jacominus_Gainsborough'">Zu den Büchern</button>
       </div>
 
@@ -43,11 +43,9 @@
     <button class="next">❯</button>
   </div>
   
-  
-  
   <main>
 
-    <h1> BILDERBÜCHER FÜR KINDER UND NICHT NUR </h1>
+    <h1>Bilderbücher für Kinder kaufen – liebevoll illustrierte Kinderbücher</h1>
 
     {% set visiblePerClick = 3 %}  {# Anzahl Kategorien pro Klick #}
 
@@ -58,35 +56,47 @@
 
         <h2>{{ titel }}</h2>
 
+        <p>
+          Entdecke bei I B K eine handverlesene Auswahl an Bilderbüchern für Kinder. 
+          Unsere liebevoll illustrierten Kinderbücher reichen von zeitlosen Klassikern 
+          bis hin zu modernen Geschichten, die zum Vorlesen und Entdecken einladen.
+        </p>
+
         <div class="book-list">
           {% for produkt in liste %}
             <div class="book">
+
+              <!-- JSON-LD pro Produkt -->
               <script type="application/ld+json">
-                  {
+              {
                 "@context": "https://schema.org",
                 "@type": "Product",
                 "name": "{{ produkt.name }}",
-                "image": "{{ produkt.bilder[0] }}",
+                "image": "{{ url_for('static', filename=produkt.bilder[0], _external=True) }}",
                 "offers": {
-                "@type": "Offer",
-                "price": "{{ produkt.preis }}",
-                "priceCurrency": "EUR"
+                  "@type": "Offer",
+                  "price": "{{ produkt.preis }}",
+                  "priceCurrency": "EUR",
+                  "url": "{{ url_for('produkt_detail', produkt_id=produkt.id, _external=True) }}"
                 }
               }
               </script>
 
+              <!-- Bildblock über Komponenten -->
               <div class="image-wrapper">
-                <img 
-                  {% if produkt.bilder and produkt.bilder|length > 0 %}
-                    {% if produkt.bilder[0].startswith('http') %}
-                      src="{{ produkt.bilder[0] }}"
-                    {% else %}
-                      src="{{ url_for('static', filename=produkt.bilder[0]) }}"
-                    {% endif %}
+
+                {% if produkt.bilder and produkt.bilder|length > 0 %}
+                  {% if produkt.bilder[0].startswith('http') %}
+                    {% set src = produkt.bilder[0] %}
                   {% else %}
-                    src="{{ url_for('static', filename='images/default.jpg') }}"
+                    {% set src = url_for('static', filename=produkt.bilder[0]) %}
                   {% endif %}
-                  alt="{{ produkt.name }}">
+                {% else %}
+                  {% set src = url_for('static', filename='images/default.jpg') %}
+                {% endif %}
+
+                {% set alt = produkt.name ~ " – Bilderbuch für Kinder" %}
+                {% include "components/image.html" %}
 
                 <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}" class="hover-btn">
                   Mehr erfahren
@@ -125,10 +135,7 @@
 
   {% include 'footer.html' %}
 
-  <script src="{{ url_for('static', filename='script.js') }}">
-  </script>
-
-
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
   
 </body>
 </html>
