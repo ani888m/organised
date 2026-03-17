@@ -1,12 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="description" content="Geschichten und Bilder, die bleiben: Ganz besondere Bilderbücher – liebevoll gestaltet, hochwertig illustriert und online erhältlich bei I B K.
-Ein besonderes Geschenk für kleine und große Leser*innen.">
+  <meta name="description" content="Liebevoll illustrierte Bilderbücher für Kinder entdecken ✓ Klassiker & Neuerscheinungen, alles Besondere ✓ Hochwertige Kinderbücher online kaufen bei I B K. Ein besonderes Geschenk für kleine und große LeserInnen.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>I B K | Ausgewählte Illustrationen und Bilderbücher: Neuerscheinungen, Klassiker und alles Besondere</title>
+  <title>Bilderbücher für Kinder kaufen | Kunstvoll illustrierte Kinderbücher – I B K</title>
   <link rel="icon" type="image/x-icon" href="static/ficon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Montserrat&display=swap" rel="stylesheet">
@@ -22,19 +20,19 @@ Ein besonderes Geschenk für kleine und große Leser*innen.">
       
       <!-- Folie 1 -->
       <div class="carousel-slide">
-        <img src="{{ url_for('static', filename='images/Sleid511.jpg') }}" class="carousel-image" alt="Slide 5">
+        <img src="{{ url_for('static', filename='images/Sleid511.jpg') }}" class="carousel-image" alt="Illustriertes Kinderbuch Jacominus Gainsborough" loading="lazy">
         <button class="slide-btn" onclick="window.location.href='{{ url_for('index') }}#Jacominus_Gainsborough'">Zu den Büchern</button>
       </div>
 
       <!-- Folie 2 -->
       <div class="carousel-slide">
-        <img src="{{ url_for('static', filename='images/Angsthase.jpg') }}" class="carousel-image" alt="Slide 4">
+        <img src="{{ url_for('static', filename='images/Angsthase.jpg') }}" class="carousel-image" alt="Illustrierte Kinderbücher über Angst" loading="lazy">
         <button class="slide-btn" onclick="window.location.href='{{ url_for('index') }}#Mut_oder_Angst'">Zu den Büchern</button>
       </div>
 
       <!-- Folie 3 -->
       <div class="carousel-slide active">
-        <img src="{{ url_for('static', filename='images/klassiker11.jpg') }}" class="carousel-image" alt="Slide 3">
+        <img src="{{ url_for('static', filename='images/klassiker11.jpg') }}" class="carousel-image" alt="Kinderbuchklassiker" loading="lazy">
         <button class="slide-btn" onclick="window.location.href='{{ url_for('index') }}#Klassiker'">Zu den Büchern</button>
       </div> 
       
@@ -49,7 +47,7 @@ Ein besonderes Geschenk für kleine und große Leser*innen.">
   
   <main>
 
-    <h1> AUSGEWÄHLTE BILDERBÜCHER<br>Neuerscheinungen, Klassiker und noch viel mehr</h1>
+    <h1> BILDERBÜCHER FÜR KINDER UND NICHT NUR </h1>
 
     {% set visiblePerClick = 3 %}  {# Anzahl Kategorien pro Klick #}
 
@@ -63,6 +61,19 @@ Ein besonderes Geschenk für kleine und große Leser*innen.">
         <div class="book-list">
           {% for produkt in liste %}
             <div class="book">
+              <script type="application/ld+json">
+                  {
+                "@context": "https://schema.org",
+                "@type": "Product",
+                "name": "{{ produkt.name }}",
+                "image": "{{ produkt.bilder[0] }}",
+                "offers": {
+                "@type": "Offer",
+                "price": "{{ produkt.preis }}",
+                "priceCurrency": "EUR"
+                }
+              }
+              </script>
 
               <div class="image-wrapper">
                 <img 
@@ -97,7 +108,7 @@ Ein besonderes Geschenk für kleine und große Leser*innen.">
     {% endfor %}
 
     <div style="text-align:center; margin:30px;">
-      <button id="showMoreBtn">Weitere Produkte anzeigen</button>
+      <button id="showMoreBtn">Weitere Bücher anzeigen</button>
     </div>
 
     <section class="newsletter-section">
@@ -114,6 +125,10 @@ Ein besonderes Geschenk für kleine und große Leser*innen.">
 
   {% include 'footer.html' %}
 
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script src="{{ url_for('static', filename='script.js') }}">
+  </script>
+
+
+  
 </body>
 </html>
