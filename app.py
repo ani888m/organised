@@ -3,6 +3,7 @@
 
 
 
+
 import os
 import json
 import logging
@@ -33,10 +34,6 @@ from models import db, Bestellung, BestellPosition
 from datetime import timedelta
 
 from functools import lru_cache
-
-import re
-
-
 
 
 # =====================================================
@@ -846,11 +843,12 @@ def suche():
         ergebnisse=ergebnisse
     )
 
+# Produkt Detail
 
-    
-@app.route('/produkt/<int:produkt_id>/<int:produkt_name>')
-def produkt_detail(produkt_id, product_name):
+  
 
+@app.route('/produkt/<int:produkt_id>')
+def produkt_detail(produkt_id):
 
     # 1️⃣ lokale Zusatzdaten (Bilder / Leseprobe)
     lokale_daten = next(
@@ -893,8 +891,7 @@ def produkt_detail(produkt_id, product_name):
     )
 
 
-    
-    
+
 # ============================
 # CART ROUTES
 # ============================
@@ -1120,8 +1117,5 @@ def bestelldanke():
 # START (RENDER READY)
 # =====================================================
 
-
-
-    
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
