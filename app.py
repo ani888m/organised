@@ -854,8 +854,8 @@ def slugify(text):
     text = re.sub(r'[^a-z0-9äöüß ]', '', text)
     return text.replace(" ", "-")
 
-for p in produkte:
-    p["slug"] = slugify(p.get("name", "produkt"))
+for produkt in produkte:
+    produkt["slug"] = slugify(produkt.get("name", "produkt"))
     
 @app.route('/produkt/<int:produkt_id>/<slug>')
 def produkt_detail(produkt_id, slug):
@@ -1130,5 +1130,12 @@ def bestelldanke():
 # START (RENDER READY)
 # =====================================================
 
+
+with app.app_context():
+    for produkt in Produkt.query.all():
+        if not produkt.slug and produkt.name:
+            produkt.slug = slugify(produkt.name)
+    db.session.commit()
+    
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
