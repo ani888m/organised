@@ -24,10 +24,16 @@
       <li >
         <a href="{{ url_for('suche') }}"> &#x1F50D; </a>
       </li>
-      <li class="cart"><a href="{{ url_for('cart') }}">🛒 <span id="cart-count">0</span></a></li>
-
+      <li class="cart">
+        <a href="{{ url_for('cart') }}">🛒 <span id="cart-count">0</span></a>
+      </li>
   
-      
+      <li class="user-info"> <a href="{{ url_for('login') }}" class="user-icon">👤
+        {% if current_user %}
+         <span class="user-points">{{ current_user.punkte }}</span>
+        {% endif %}
+       </a>
+      </li>
 
     </ul>
   </nav>
