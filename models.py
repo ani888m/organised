@@ -116,6 +116,9 @@ class Produkt(db.Model):
     lagerbestand = db.Column(db.Integer)
 
     bild_url = db.Column(db.String(500))
+        
+    slug = db.Column(db.String(255), unique=True, index=True)  # ✅ NEU
+
 
     zuletzt_aktualisiert = db.Column(
         db.DateTime,
