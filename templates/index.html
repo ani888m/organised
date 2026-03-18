@@ -92,7 +92,7 @@
                 {% set alt = produkt.name ~ " – Bilderbuch für Kinder" %}
                 {% include "components/image.html" %}
 
-                <a href="{{ url_for('produkt_detail', produkt_id=produkt.id, slug=produkt.slug) }}" class="hover-btn">
+                <a href="{{ url_for('produkt_detail', produkt_id=produkt.id, produkt_name=produkt.name) }}" class="hover-btn">
                   Mehr erfahren
                 </a>
               </div>
