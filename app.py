@@ -846,55 +846,41 @@ def suche():
         ergebnisse=ergebnisse
     )
 
-# Produkt Detail
 
-  
-def slugify(text):
-    text = text.lower()
-    text = re.sub(r'[^a-z0-9äöüß ]', '', text)
-    return text.replace(" ", "-")
-
-for produkt in produkte:
-    produkt["slug"] = slugify(produkt.get("name", "produkt"))
     
-@app.route('/produkt/<int:produkt_id>/<slug>')
-def produkt_detail(produkt_id, slug):
+@app.route('/produkt/<int:produkt_id>/<int:produkt_name>')
+def produkt_detail(produkt_id, product_name):
 
+
+    # 1️⃣ lokale Zusatzdaten (Bilder / Leseprobe)
     lokale_daten = next(
-        (p.copy() for p in produkte if p["id"] == produkt_id),
-        None
+         (p.copy() for p in produkte if p["id"] == produkt_id),
+         None
     )
 
     if not lokale_daten:
         abort(404)
-
-    # ✅ richtigen slug berechnen
-    richtiger_slug = lokale_daten.get("slug")
-
-    # 🔥 WICHTIG: redirect wenn falsch
-    if slug != richtiger_slug:
-        return redirect(url_for(
-            "produkt_detail",
-            produkt_id=produkt_id,
-            slug=richtiger_slug
-        ), code=301)
 
     ean = lokale_daten.get("ean")
 
     if not ean:
         abort(404)
 
+    # 2️⃣ Produkt von Buchbutler laden
     produkt = cached_lade_produkt_von_api(ean)
 
     if not produkt:
         abort(404)
 
+    # 3️⃣ Bestand + Preis laden
     movement = lade_bestand_von_api(ean)
     if movement:
         produkt.update(movement)
 
+    # 4️⃣ eigene Daten hinzufügen
     produkt.update(lokale_daten)
 
+    # 5️⃣ Defaults (WICHTIG)
     produkt.setdefault("bestand", "n/a")
     produkt.setdefault("preis", 0)
     produkt.setdefault("handling_zeit", "n/a")
@@ -902,9 +888,13 @@ def produkt_detail(produkt_id, slug):
 
     return render_template(
         "produkt.html",
-        produkt=produkt
+        produkt=produkt,
+        user_email=session.get("user_email")
     )
 
+
+    
+    
 # ============================
 # CART ROUTES
 # ============================
@@ -1131,11 +1121,7 @@ def bestelldanke():
 # =====================================================
 
 
-with app.app_context():
-    for produkt in Produkt.query.all():
-        if not produkt.slug and produkt.name:
-            produkt.slug = slugify(produkt.name)
-    db.session.commit()
+
     
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
