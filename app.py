@@ -125,9 +125,109 @@ else:
     produkte = []
 
 
+# =====================================================
+# LOGIN
+# =====================================================
+
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        if User.query.filter_by(email=email).first():
+            flash("E-Mail existiert bereits", "error")
+            return redirect("/register")
+
+        user = User(email=email)
+        user.set_password(password)
+
+        db.session.add(user)
+        db.session.commit()
+
+        session["user_id"] = user.id
+
+        return redirect("/")
+
+    return render_template("register.html")
 
 
 
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        user = User.query.filter_by(email=email).first()
+
+        if not user or not user.check_password(password):
+            flash("Login fehlgeschlagen", "error")
+            return redirect("/login")
+
+        session["user_id"] = user.id
+        return redirect("/")
+
+    return render_template("login.html")
+
+
+@app.route("/logout")
+def logout():
+    session.pop("user_id", None)
+    return redirect("/")
+
+
+
+user_id = session.get("user_id")
+
+if user_id:
+    user = User.query.get(user_id)
+
+    # Beispiel: 1€ = 1 Punkt
+    punkte = int(calculate_total(cart_items))
+
+    user.punkte += punkte
+
+    # 🎁 Gutschein bei 100 Punkten
+    if user.punkte >= 100:
+        code = str(uuid.uuid4())[:8]
+
+        gutschein = Gutschein(
+            code=code,
+            wert=10,  # z.B. 10€
+            user_id=user.id
+        )
+
+        user.punkte -= 100
+
+        db.session.add(gutschein)
+
+        send_email(
+            subject="Dein Gutschein 🎁",
+            body=f"Dein Code: {code}",
+            recipient=user.email
+        )
+
+    db.session.commit()
+
+
+@app.context_processor
+def inject_user():
+    user = None
+    if "user_id" in session:
+        user = User.query.get(session["user_id"])
+    return dict(current_user=user)
+
+
+@app.route("/meine-gutscheine")
+def meine_gutscheine():
+    if "user_id" not in session:
+        return redirect("/login")
+
+    gutscheine = Gutschein.query.filter_by(user_id=session["user_id"]).all()
+
+    return render_template("gutscheine.html", gutscheine=gutscheine)
 
 # =====================================================
 # PAYPAL
