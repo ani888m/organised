@@ -71,7 +71,7 @@
                   "@type": "Offer",
                   "price": "{{ produkt.preis }}",
                   "priceCurrency": "EUR",
-                  "url": "{{ url_for('produkt_detail', produkt_id=produkt.id, _external=True) }}"
+                 "url": "{{ url_for('produkt_detail', produkt_id=produkt.id, slug=produkt.slug if produkt.slug else produkt.name|lower|replace(' ', '-'), _external=True) }}"
                 }
               }
               </script>
@@ -93,6 +93,7 @@
                 {% include "components/image.html" %}
 
                 <a href="{{ url_for('produkt_detail', produkt_id=produkt.id) }}" class="hover-btn">
+                <a href="{{ url_for('produkt_detail', produkt_id=produkt.id, slug=produkt.slug) }}" class="hover-btn">
                   Mehr erfahren
                 </a>
               </div>
