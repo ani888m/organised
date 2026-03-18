@@ -1,4 +1,5 @@
 
+
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -13,7 +14,7 @@ class Gutschein(db.Model):
     code = db.Column(db.String(50), unique=True)
     wert = db.Column(db.Float)
 
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id")) 
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     eingelöst = db.Column(db.Boolean, default=False)
 
 # ----------------------
@@ -116,9 +117,6 @@ class Produkt(db.Model):
     lagerbestand = db.Column(db.Integer)
 
     bild_url = db.Column(db.String(500))
-        
-    slug = db.Column(db.String(255), unique=True, index=True)  # ✅ NEU
-
 
     zuletzt_aktualisiert = db.Column(
         db.DateTime,
