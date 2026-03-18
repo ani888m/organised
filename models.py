@@ -13,7 +13,7 @@ class Gutschein(db.Model):
     code = db.Column(db.String(50), unique=True)
     wert = db.Column(db.Float)
 
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id")) 
     eingelöst = db.Column(db.Boolean, default=False)
 
 # ----------------------
