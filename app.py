@@ -179,37 +179,6 @@ def logout():
 
 
 
-user_id = session.get("user_id")
-
-if user_id:
-    user = User.query.get(user_id)
-
-    # Beispiel: 1€ = 1 Punkt
-    punkte = int(calculate_total(cart_items))
-
-    user.punkte += punkte
-
-    # 🎁 Gutschein bei 100 Punkten
-    if user.punkte >= 100:
-        code = str(uuid.uuid4())[:8]
-
-        gutschein = Gutschein(
-            code=code,
-            wert=10,  # z.B. 10€
-            user_id=user.id
-        )
-
-        user.punkte -= 100
-
-        db.session.add(gutschein)
-
-        send_email(
-            subject="Dein Gutschein 🎁",
-            body=f"Dein Code: {code}",
-            recipient=user.email
-        )
-
-    db.session.commit()
 
 
 @app.context_processor
@@ -228,6 +197,31 @@ def meine_gutscheine():
     gutscheine = Gutschein.query.filter_by(user_id=session["user_id"]).all()
 
     return render_template("gutscheine.html", gutscheine=gutscheine)
+
+
+def update_user_punkte_und_gutschein(user, cart_items):
+    """Fügt Punkte hinzu und vergibt ggf. Gutschein"""
+    punkte = int(calculate_total(cart_items))
+    user.punkte += punkte
+
+    # 🎁 Gutschein bei 100 Punkten
+    if user.punkte >= 100:
+        code = str(uuid.uuid4())[:8]
+        gutschein = Gutschein(
+            code=code,
+            wert=10,  # z.B. 10€
+            user_id=user.id
+        )
+        user.punkte -= 100
+        db.session.add(gutschein)
+
+        send_email(
+            subject="Dein Gutschein 🎁",
+            body=f"Dein Code: {code}",
+            recipient=user.email
+        )
+
+    db.session.commit()
 
 # =====================================================
 # PAYPAL
@@ -990,6 +984,26 @@ def checkout():
         if not email or not cart_items:
             flash("Bitte gültige Daten eingeben.", "error")
             return redirect(url_for("checkout"))
+
+
+         # Kunde erfassen / Punkte vergeben
+        if "user_id" in session:
+            user = User.query.get(session["user_id"])
+            punkte = int(total)  # Beispiel: 1€ = 1 Punkt
+            user.punkte += punkte
+
+            # Gutschein vergeben bei 100 Punkten
+            if user.punkte >= 100:
+                code = str(uuid.uuid4())[:8]
+                gutschein = Gutschein(code=code, wert=10, user_id=user.id)
+                user.punkte -= 100
+                db.session.add(gutschein)
+                send_email(
+                    subject="Dein Gutschein 🎁",
+                    body=f"Dein Code: {code}",
+                    recipient=user.email
+                )
+            db.session.commit()
 
         try:
             session["checkout_email"] = request.form.get("email")
