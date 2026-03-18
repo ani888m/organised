@@ -34,6 +34,10 @@ from datetime import timedelta
 
 from functools import lru_cache
 
+import re
+
+
+
 
 # =====================================================
 # CONFIG
@@ -845,9 +849,16 @@ def suche():
 # Produkt Detail
 
   
+def slugify(text):
+    text = text.lower()
+    text = re.sub(r'[^a-z0-9äöüß ]', '', text)
+    return text.replace(" ", "-")
 
-@app.route('/produkt/<int:produkt_id>')
-def produkt_detail(produkt_id):
+for p in produkte:
+    p["slug"] = slugify(p.get("name", "produkt"))
+    
+@app.route('/produkt/<int:produkt_id>/<slug>')
+def produkt_detail(produkt_id, slug):
 
     # 1️⃣ lokale Zusatzdaten (Bilder / Leseprobe)
     lokale_daten = next(
