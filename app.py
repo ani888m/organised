@@ -155,6 +155,7 @@ def register():
 
 
 @app.route("/login", methods=["GET", "POST"])
+@csrf.exempt
 def login():
     if request.method == "POST":
         email = request.form.get("email")
