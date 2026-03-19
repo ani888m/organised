@@ -6,8 +6,8 @@
 
 [
   {
-    "name": "Jacominus Gainsborough",
-    "beschreibung": "Entdecke die zauberhafte Welt von Jacominus und seinen Abenteuern.",
+    "kategorie": "Jacominus Gainsborough",
+    "katbeschreibung": "Entdecke die zauberhafte Welt von Jacominus und seinen Abenteuern.",
     "featured_rows": [
       {
         "type": "books_left",
@@ -26,8 +26,7 @@
               "images/jacominus/jacominus5.jpg",
               "images/jacominus/jacominus6.jpg",
               "images/jacominus/jacominus7.jpg"
-            ],
-            "kategorie": "Jacominus Gainsborough"
+            ]
           },
           {
             "id": 2,
@@ -41,8 +40,7 @@
               "images/punkt/punkt-12(3).jpg",
               "images/punkt/punkt-12(4).jpg",
               "images/punkt/punkt-12(5).jpg"
-            ],
-            "kategorie": "Jacominus Gainsborough"
+            ]
           }
         ],
         "text": {
@@ -63,8 +61,7 @@
             "bilder": [
               "images/winzsekunde/eine-winzig-kleine-sekunde_cover.jpg",
               "images/winzsekunde/eine-winzig-kleine-sekunde1.jpg"
-            ],
-            "kategorie": "Jacominus Gainsborough"
+            ]
           },
           {
             "id": 4,
@@ -74,8 +71,7 @@
             "bilder": [
               "images/wbaresache/eine-wunderbare-sache_cover.jpg",
               "images/wbaresache/eine-wunderbare-sache1.jpg"
-            ],
-            "kategorie": "Jacominus Gainsborough"
+            ]
           }
         ],
         "text": {
