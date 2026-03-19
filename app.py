@@ -35,6 +35,10 @@ from datetime import timedelta
 
 from functools import lru_cache
 
+import re
+
+
+
 
 # =====================================================
 # CONFIG
@@ -846,39 +850,52 @@ def suche():
 # Produkt Detail
 
   
+def slugify(text):
+    text = text.lower()
+    text = re.sub(r'[^a-z0-9äöüß ]', '', text)
+    return text.replace(" ", "-")
 
-@app.route('/produkt/<int:produkt_id>/<int:produkt_name>')
-def produkt_detail(produkt_id):
+for p in produkte:
+    p["slug"] = slugify(p.get("name", "produkt"))
+    
+@app.route('/produkt/<int:produkt_id>/<slug>')
+def produkt_detail(produkt_id, slug):
 
-    # 1️⃣ lokale Zusatzdaten (Bilder / Leseprobe)
     lokale_daten = next(
-         (p.copy() for p in produkte if p["id"] == produkt_id),
-         None
+        (p.copy() for p in produkte if p["id"] == produkt_id),
+        None
     )
 
     if not lokale_daten:
         abort(404)
+
+    # ✅ richtigen slug berechnen
+    richtiger_slug = lokale_daten.get("slug")
+
+    # 🔥 WICHTIG: redirect wenn falsch
+    if slug != richtiger_slug:
+        return redirect(url_for(
+            "produkt_detail",
+            produkt_id=produkt_id,
+            slug=richtiger_slug
+        ), code=301)
 
     ean = lokale_daten.get("ean")
 
     if not ean:
         abort(404)
 
-    # 2️⃣ Produkt von Buchbutler laden
     produkt = cached_lade_produkt_von_api(ean)
 
     if not produkt:
         abort(404)
 
-    # 3️⃣ Bestand + Preis laden
     movement = lade_bestand_von_api(ean)
     if movement:
         produkt.update(movement)
 
-    # 4️⃣ eigene Daten hinzufügen
     produkt.update(lokale_daten)
 
-    # 5️⃣ Defaults (WICHTIG)
     produkt.setdefault("bestand", "n/a")
     produkt.setdefault("preis", 0)
     produkt.setdefault("handling_zeit", "n/a")
@@ -886,11 +903,8 @@ def produkt_detail(produkt_id):
 
     return render_template(
         "produkt.html",
-        produkt=produkt,
-        user_email=session.get("user_email")
+        produkt=produkt
     )
-
-
 
 # ============================
 # CART ROUTES
