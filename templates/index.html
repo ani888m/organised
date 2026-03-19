@@ -50,19 +50,21 @@
 
     {% set visiblePerClick = 3 %}  {# Anzahl Kategorien pro Klick #}
 
-    {% for titel, liste in kategorien %}
-      <div 
-        id="{{ titel|replace(' ', '_')|replace('?', '')|replace('!', '')|replace('ä','ae')|replace('ö','oe')|replace('ü','ue') }}"
-        class="category {% if loop.index > visiblePerClick %}hidden-category{% endif %}">
+    {% for titel, liste, katbeschreibung in kategorien %}
+      <div id="{{ titel|replace(' ', '_')|replace('?', '')|replace('!', '')|replace('ä','ae')|replace('ö','oe')|replace('ü','ue') }}"
+           class="category {% if loop.index > visiblePerClick %}hidden-category{% endif %}">
 
-        <h2>{{ titel }}</h2>
+         <h2>{{ titel }}</h2>
+
+    <!-- Kategorie-Beschreibung -->
+        <p class="category-description">{{ katbeschreibung }}</p>
 
         <div class="book-list">
           {% for produkt in liste %}
-            <div class="book">
+        <div class="book">
 
               <!-- JSON-LD pro Produkt -->
-              <script type="application/ld+json">
+            <script type="application/ld+json">
               {
                 "@context": "https://schema.org",
                 "@type": "Product",
@@ -75,10 +77,10 @@
                  "url": "{{ url_for('produkt_detail', produkt_id=produkt.id, slug=produkt.slug if produkt.slug else produkt.name|lower|replace(' ', '-'), _external=True) }}"
                 }
               }
-              </script>
+           </script>
 
               <!-- Bildblock über Komponenten -->
-              <div class="image-wrapper">
+           <div class="image-wrapper">
 
                 {% if produkt.bilder and produkt.bilder|length > 0 %}
                   {% if produkt.bilder[0].startswith('http') %}
