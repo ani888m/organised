@@ -1,4 +1,6 @@
 from kategorien import kategorie_beschreibungen
+from app import app, produkte  # wichtig: app importieren
+
 
 @app.route("/")
 def index():
