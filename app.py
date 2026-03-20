@@ -769,28 +769,7 @@ def admin_bestellungen():
         "admin_bestellungen.html",
         bestellungen=alle
     )
-# Homepage
-@app.route("/")
-def index():
-    kategorien = []
 
-    for kat in produkte:  # produkte = JSON aus Datei
-        titel = kat["kategorie"]
-        katbeschreibung = kat.get("katbeschreibung", "")
-
-        # Alle Bücher aus featured_rows sammeln
-        buch_liste = []
-        for row in kat.get("featured_rows", []):
-            buch_liste.extend(row.get("books", []))
-
-        kategorien.append((titel, buch_liste, katbeschreibung))
-
-    return render_template(
-        "index.html",
-        kategorien=kategorien,
-        user_email=session.get("user_email")
-    )
-    
 
 @app.route("/admin/sync-buchbutler/<int:index>")
 def sync_buchbutler(index):
