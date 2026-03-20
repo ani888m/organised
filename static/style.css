@@ -806,6 +806,7 @@ button[type="submit"]:hover {
 .category-text {
   max-width: 600px;
   margin-bottom: 15px;
+  margin-left: 200px;
 }
 
 .text-short {
