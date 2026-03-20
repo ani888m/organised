@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -6,6 +5,7 @@
   <meta name="description" content="Liebevoll illustrierte Bilderbücher für Kinder entdecken ✓ Klassiker & Neuerscheinungen, alles Besondere ✓ Hochwertige Kinderbücher online kaufen bei I B K. Ein besonderes Geschenk für kleine und große LeserInnen.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bilderbücher für Kinder kaufen | Kunstvoll illustrierte Kinderbücher – I B K</title>
+
   <link rel="icon" type="image/x-icon" href="static/ficon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Montserrat&display=swap" rel="stylesheet">
@@ -13,126 +13,165 @@
 </head>
 
 <body>
-  {% include 'navbar.html' %}
-  <div id="navbar-placeholder"></div>
 
-  <div class="carousel">
-    <div class="slides">
-      
-      <!-- Folie 1 -->
-      <div class="carousel-slide">
-        <img src="{{ url_for('static', filename='images/Sleid511.jpg') }}" class="carousel-image" alt="Illustriertes Kinderbuch Jacominus Gainsborough">
-        <button class="slide-btn" onclick="window.location.href='{{ url_for('index') }}#Jacominus_Gainsborough'">Zu den Büchern</button>
-      </div>
+{% include 'navbar.html' %}
 
-      <!-- Folie 2 -->
-      <div class="carousel-slide">
-        <img src="{{ url_for('static', filename='images/Angsthase.jpg') }}" class="carousel-image" alt="Illustrierte Kinderbücher über Angst" loading="lazy">
-        <button class="slide-btn" onclick="window.location.href='{{ url_for('index') }}#Mut_oder_Angst'">Zu den Büchern</button>
-      </div>
+<!-- 🔹 CAROUSEL -->
+<div class="carousel">
+  <div class="slides">
 
-      <!-- Folie 3 -->
-      <div class="carousel-slide active">
-        <img src="{{ url_for('static', filename='images/klassiker11.jpg') }}" class="carousel-image" alt="Kinderbuchklassiker" loading="lazy">
-        <button class="slide-btn" onclick="window.location.href='{{ url_for('index') }}#Klassiker'">Zu den Büchern</button>
-      </div> 
-      
+    <div class="carousel-slide">
+      <img src="{{ url_for('static', filename='images/Sleid511.jpg') }}" class="carousel-image">
+      <button class="slide-btn" onclick="window.location.href='{{ url_for('index') }}#Jacominus_Gainsborough'">
+        Zu den Büchern
+      </button>
     </div>
 
-    <!-- Navigation -->
-    <button class="prev">❮</button>
-    <button class="next">❯</button>
+    <div class="carousel-slide">
+      <img src="{{ url_for('static', filename='images/Angsthase.jpg') }}" class="carousel-image">
+      <button class="slide-btn" onclick="window.location.href='{{ url_for('index') }}#Mut_oder_Angst'">
+        Zu den Büchern
+      </button>
+    </div>
+
+    <div class="carousel-slide active">
+      <img src="{{ url_for('static', filename='images/klassiker11.jpg') }}" class="carousel-image">
+      <button class="slide-btn" onclick="window.location.href='{{ url_for('index') }}#Klassiker'">
+        Zu den Büchern
+      </button>
+    </div>
+
   </div>
-  
-  <main>
 
-    <h1>I B K - BUCHHANDLUNG FÜR ILLUSTRATION UND KINDERBÜCHER</h1>
+  <button class="prev">❮</button>
+  <button class="next">❯</button>
+</div>
 
-    {% set visiblePerClick = 3 %}  {# Anzahl Kategorien pro Klick #}
+<!-- 🔹 MAIN -->
+<main>
 
-    {% for titel, liste, katbeschreibung in kategorien %}
-      <div id="{{ titel|replace(' ', '_')|replace('?', '')|replace('!', '')|replace('ä','ae')|replace('ö','oe')|replace('ü','ue') }}"
-           class="category {% if loop.index > visiblePerClick %}hidden-category{% endif %}">
+<h1>I B K - BUCHHANDLUNG FÜR ILLUSTRATION UND KINDERBÜCHER</h1>
 
-         <h2>{{ titel }}</h2>
+{% set visiblePerClick = 3 %}
 
-    <!-- Kategorie-Beschreibung -->
-        <p class="category-description">{{ katbeschreibung }}</p>
+{% for titel, liste in kategorien %}
 
-        <div class="book-list">
-          {% for produkt in liste %}
-        <div class="book">
+<div 
+  id="{{ titel|replace(' ', '_')|replace('?', '')|replace('!', '')|replace('ä','ae')|replace('ö','oe')|replace('ü','ue') }}"
+  class="category {% if loop.index > visiblePerClick %}hidden-category{% endif %}">
 
-              <!-- JSON-LD pro Produkt -->
-            <script type="application/ld+json">
-              {
-                "@context": "https://schema.org",
-                "@type": "Product",
-                "name": "{{ produkt.name }}",
-                "image": "{{ url_for('static', filename=produkt.bilder[0], _external=True) }}",
-                "offers": {
-                  "@type": "Offer",
-                  "price": "{{ produkt.preis }}",
-                  "priceCurrency": "EUR",
-                 "url": "{{ url_for('produkt_detail', produkt_id=produkt.id, slug=produkt.slug if produkt.slug else produkt.name|lower|replace(' ', '-'), _external=True) }}"
-                }
-              }
-           </script>
+  <!-- 🔹 KATEGORIE TITEL -->
+  <h2>{{ titel }}</h2>
 
-              <!-- Bildblock über Komponenten -->
-           <div class="image-wrapper">
+  <!-- 🔥 NEU: KATEGORIE TEXT -->
+  {% set text = kategorie_beschreibungen.get(titel) %}
+  {% if text %}
+    <div class="category-text">
 
-                {% if produkt.bilder and produkt.bilder|length > 0 %}
-                  {% if produkt.bilder[0].startswith('http') %}
-                    {% set src = produkt.bilder[0] %}
-                  {% else %}
-                    {% set src = url_for('static', filename=produkt.bilder[0]) %}
-                  {% endif %}
-                {% else %}
-                  {% set src = url_for('static', filename='images/default.jpg') %}
-                {% endif %}
+      <p class="text-short">
+        {{ text.kurz }}
+      </p>
 
-                {% set alt = produkt.name ~ " – Bilderbuch für Kinder" %}
-                {% include "components/image.html" %}
+      <p class="text-long">
+        {{ text.lang }}
+      </p>
 
-                <a href="{{ url_for('produkt_detail', produkt_id=produkt.id, slug=produkt.slug) }}" class="hover-btn">
-                  Mehr erfahren
-                </a>
-              </div>
+      <button class="toggle-text">Mehr lesen</button>
 
-              <h3>{{ produkt.name }}</h3>
-              <p>{{ produkt.preis }} €</p>
+    </div>
+  {% endif %}
 
-              <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}', '{{ produkt.ean }}')">
-                In den Warenkorb
-              </button>
+  <!-- 🔹 PRODUKTE -->
+  <div class="book-list">
+    {% for produkt in liste %}
+      <div class="book">
 
-            </div>
-          {% endfor %}
+        <!-- SEO JSON -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "name": "{{ produkt.name }}",
+          "image": "{{ url_for('static', filename=produkt.bilder[0], _external=True) }}",
+          "offers": {
+            "@type": "Offer",
+            "price": "{{ produkt.preis }}",
+            "priceCurrency": "EUR",
+            "url": "{{ url_for('produkt_detail', produkt_id=produkt.id, slug=produkt.slug if produkt.slug else produkt.name|lower|replace(' ', '-'), _external=True) }}"
+          }
+        }
+        </script>
+
+        <!-- Bild -->
+        <div class="image-wrapper">
+
+          {% if produkt.bilder and produkt.bilder|length > 0 %}
+            {% if produkt.bilder[0].startswith('http') %}
+              {% set src = produkt.bilder[0] %}
+            {% else %}
+              {% set src = url_for('static', filename=produkt.bilder[0]) %}
+            {% endif %}
+          {% else %}
+            {% set src = url_for('static', filename='images/default.jpg') %}
+          {% endif %}
+
+          <a href="{{ url_for('produkt_detail', produkt_id=produkt.id, slug=produkt.slug) }}">
+            <img src="{{ src }}" alt="{{ produkt.name }}" loading="lazy">
+          </a>
+
         </div>
+
+        <h3>{{ produkt.name }}</h3>
+        <p>{{ produkt.preis }} €</p>
+
+        <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }}, '{{ url_for('static', filename=produkt.bilder[0]) }}', '{{ produkt.ean }}')">
+          In den Warenkorb
+        </button>
 
       </div>
     {% endfor %}
+  </div>
 
-    <div style="text-align:center; margin:30px;">
-      <button id="showMoreBtn">Weitere Bücher anzeigen</button>
-    </div>
+</div>
 
-    <section class="newsletter-section">
-      <h3>Melde dich zu unserem Newsletter an!</h3>
-      <p>Erhalte exklusive Neuigkeiten und Angebote rund um unsere Kinderbücher.</p>
-      <form action="{{ url_for('newsletter') }}" method="POST">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required /><br>
-        <button type="submit">Anmelden</button>
-      </form>
-    </section>
+{% endfor %}
 
-  </main>
+<!-- 🔹 BUTTON -->
+<div style="text-align:center; margin:30px;">
+  <button id="showMoreBtn">Weitere Bücher anzeigen</button>
+</div>
 
-  {% include 'footer.html' %}
+<!-- 🔹 NEWSLETTER -->
+<section class="newsletter-section">
+  <h3>Melde dich zu unserem Newsletter an!</h3>
+  <p>Erhalte exklusive Neuigkeiten und Angebote rund um unsere Kinderbücher.</p>
 
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
-  
+  <form action="{{ url_for('newsletter') }}" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required /><br>
+    <button type="submit">Anmelden</button>
+  </form>
+</section>
+
+</main>
+
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+<!-- 🔥 NEU: Toggle Script -->
+<script>
+document.querySelectorAll(".toggle-text").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const parent = btn.parentElement;
+    parent.classList.toggle("open");
+
+    btn.textContent = parent.classList.contains("open")
+      ? "Weniger anzeigen"
+      : "Mehr lesen";
+  });
+});
+</script>
+
 </body>
 </html>
