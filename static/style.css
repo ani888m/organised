@@ -801,3 +801,36 @@ button[type="submit"]:hover {
     line-height: 1.4;
   }
 }
+
+
+.category-text {
+  max-width: 600px;
+  margin-bottom: 15px;
+}
+
+.text-short {
+  font-weight: 500;
+}
+
+.text-long {
+  display: none;
+  color: #555;
+  margin-top: 5px;
+}
+
+.category-text.open .text-long {
+  display: block;
+}
+
+.category-text.open .toggle-text::after {
+  content: " weniger anzeigen";
+}
+
+.toggle-text {
+  background: none;
+  border: none;
+  color: #0077cc;
+  cursor: pointer;
+  padding: 0;
+  font-size: 14px;
+}
