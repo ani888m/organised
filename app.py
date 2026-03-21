@@ -1121,7 +1121,8 @@ def index():
 
     kategorie_beschreibungen = {
         "Jacominus Gainsborough": {
-            "kurz": "Poetische Bilderbücher über das Leben und große Gefühle.",
+            "kurz": "Einer, der sich erinnert.
+Und manchmal auch vergisst.",
             "lang": "Diese Werke erzählen von Erinnerungen, Verlust, Liebe und Neubeginn. Kunstvoll illustriert und tief berührend – für Kinder und Erwachsene."
         },
         "Klassiker": {
