@@ -337,7 +337,7 @@ main {
   background-color: var(--color-primary);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 100px;
   font-size: 16px;
   cursor: pointer;
   z-index: 5;
