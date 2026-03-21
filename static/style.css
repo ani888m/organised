@@ -429,7 +429,7 @@ button.next { right: 10px; }
    BOOK LIST
 ========================================= */
 
-.book-list {
+.book-list,.category-text {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
@@ -453,7 +453,7 @@ button.next { right: 10px; }
 }
 
 @media (max-width: 600px) {
-  .book-list {
+  .book-list, .category-text {
     grid-template-columns: repeat(2, 1fr);
     margin: 2px;
   }
@@ -806,7 +806,6 @@ button[type="submit"]:hover {
 .category-text {
   max-width: 600px;
   margin-bottom: 15px;
-  margin-left: 200px;
 }
 
 .text-short {
