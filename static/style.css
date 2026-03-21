@@ -830,13 +830,11 @@ button[type="submit"]:hover {
 }
 
 
-.category h2 {
+.category h2, .category-text  {
   text-align: right;
-  padding-right: 80px; /* schöner Abstand */
+  padding-right: 80px;
+   margin-left: auto;
+  max-width: 900px;
 }
 
-.category-text {
-  text-align: right;
-  margin-left: auto;
-  max-width: 600px;
-}
+
