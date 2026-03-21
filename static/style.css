@@ -2,6 +2,7 @@
 
 
 
+
 /* =========================================
    1. IMPORTS & RESET
 ========================================= */
@@ -429,7 +430,7 @@ button.next { right: 10px; }
    BOOK LIST
 ========================================= */
 
-.book-list,{
+.book-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
@@ -806,7 +807,7 @@ button[type="submit"]:hover {
 .category-text {
   max-width: 600px;
   margin-bottom: 15px;
-  marfin-left:150px;
+  margin-left: 200px;
 }
 
 .text-short {
