@@ -832,4 +832,11 @@ button[type="submit"]:hover {
   padding-right: 20px;
 }
 
+@media screen and (max-width: 768px) {
+   .category h2, .category-text  {
+        padding-right: 0px;
+   }
+}
+      
+   
 
