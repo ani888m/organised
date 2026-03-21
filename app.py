@@ -1121,8 +1121,7 @@ def index():
 
     kategorie_beschreibungen = {
         "Jacominus Gainsborough": {
-            "kurz": "Einer, der sich erinnert.
-Und manchmal auch vergisst.",
+            "kurz": "Einer, der sich erinnert. Und manchmal auch vergisst.",
             "lang": "Diese Werke erzählen von Erinnerungen, Verlust, Liebe und Neubeginn. Kunstvoll illustriert und tief berührend – für Kinder und Erwachsene."
         },
         "Klassiker": {
