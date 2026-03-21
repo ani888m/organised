@@ -1126,8 +1126,7 @@ def index():
             Es sind die kleinen Sekunden, die zählen. Die kaum sichtbaren Augenblicke zwischen zwei Herzschlägen, in denen sich alles entscheiden kann. Ein Blick. Ein Lächeln. Ein Wiedersehen.<br>
             Und irgendwo ist immer jemand unterwegs. Über Wiesen, durch Straßen, vorbei an flüchtigen Begegnungen. Schritt für Schritt, einer Verabredung entgegen. Vielleicht Punkt zwölf. Vielleicht genau im richtigen Moment.<br>
             So entfaltet sich ein Leben – nicht laut, nicht spektakulär, sondern in Bildern, die bleiben. In Erinnerungen, die kommen und gehen. In Begegnungen, die alles verändern können.<br>Und am Ende ist es vielleicht genau das:<br>
-            kein außergewöhnliches Leben.<br>
-            Und doch ein ganz besonderes."
+            kein außergewöhnliches Leben.<br>Und doch ein ganz besonderes."
         },
         "Klassiker": {
             "kurz": "Zeitlose Kinderbuchklassiker für jede Generation.",
