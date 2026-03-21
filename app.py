@@ -1122,11 +1122,7 @@ def index():
     kategorie_beschreibungen = {
         "Jacominus Gainsborough": {
             "kurz": "Einer, der sich erinnert. Und manchmal auch vergisst.",
-            "lang": "Jacominus sitzt im Garten, denkt nach, lauscht dem Wind. Eine Erinnerung streift ihn – kaum greifbar, wie ein Traum, der sich beim Aufwachen auflöst. Und doch ist da etwas, das bleibt: ein Gefühl, warm und vertraut.<br>
-            Es sind die kleinen Sekunden, die zählen. Die kaum sichtbaren Augenblicke zwischen zwei Herzschlägen, in denen sich alles entscheiden kann. Ein Blick. Ein Lächeln. Ein Wiedersehen.<br>
-            Und irgendwo ist immer jemand unterwegs. Über Wiesen, durch Straßen, vorbei an flüchtigen Begegnungen. Schritt für Schritt, einer Verabredung entgegen. Vielleicht Punkt zwölf. Vielleicht genau im richtigen Moment.<br>
-            So entfaltet sich ein Leben – nicht laut, nicht spektakulär, sondern in Bildern, die bleiben. In Erinnerungen, die kommen und gehen. In Begegnungen, die alles verändern können.<br>Und am Ende ist es vielleicht genau das:<br>
-            kein außergewöhnliches Leben.<br>Und doch ein ganz besonderes."
+            "lang": "Jacominus sitzt im Garten, denkt nach, lauscht dem Wind. Eine Erinnerung streift ihn – kaum greifbar, wie ein Traum, der sich beim Aufwachen auflöst. Und doch ist da etwas, das bleibt: ein Gefühl, warm und vertraut.<br>Es sind die kleinen Sekunden, die zählen. Die kaum sichtbaren Augenblicke zwischen zwei Herzschlägen, in denen sich alles entscheiden kann. Ein Blick. Ein Lächeln. Ein Wiedersehen.<br>Und irgendwo ist immer jemand unterwegs. Über Wiesen, durch Straßen, vorbei an flüchtigen Begegnungen. Schritt für Schritt, einer Verabredung entgegen. Vielleicht Punkt zwölf. Vielleicht genau im richtigen Moment.<br>So entfaltet sich ein Leben – nicht laut, nicht spektakulär, sondern in Bildern, die bleiben. In Erinnerungen, die kommen und gehen. In Begegnungen, die alles verändern können.<br>Und am Ende ist es vielleicht genau das:<br>kein außergewöhnliches Leben.<br>Und doch ein ganz besonderes."
         },
         "Klassiker": {
             "kurz": "Zeitlose Kinderbuchklassiker für jede Generation.",
