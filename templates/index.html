@@ -84,42 +84,9 @@
   <!-- 🔹 PRODUKTE -->
 
 
-  <div class="book-rows">
-
-  <!-- 🔹 Reihe 1 -->
-  <div class="book-row">
-    <div class="side-text">
-      <p>Dein erster Text (Intro / Empfehlung)</p>
-    </div>
-
-    <div class="book-pair">
-      {% for produkt in liste[:2] %}
-        <div class="book">
-          <!-- dein bestehender Book-Code -->
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-
-  <!-- 🔹 Reihe 2 -->
-  <div class="book-row reverse">
-    <div class="book-pair">
-      {% for produkt in liste[2:4] %}
-        <div class="book">
-          <!-- dein bestehender Book-Code -->
-        </div>
-      {% endfor %}
-    </div>
-
-    <div class="side-text">
-      <p>Dein zweiter Text (Story / Empfehlung)</p>
-    </div>
-  </div>
-
-</div>
-  
+ 
   <div class="book-list">
-  {% for produkt in liste[4:] %}
+  {% for produkt in liste %}
     <div class="book">
 
         <!-- SEO JSON -->
