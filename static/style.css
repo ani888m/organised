@@ -799,11 +799,6 @@ button[type="submit"]:hover {
 }
 
 
-.category-text {
-  max-width: 600px;
-  margin-bottom: 25px;
-  margin-left: 150px;
-}
 
 .text-short {
   font-weight: 500;
@@ -832,8 +827,7 @@ button[type="submit"]:hover {
 
 .category h2, .category-text  {
   text-align: right;
-  padding-right: 80px;
-   margin-left: auto;
+  margin-left: auto;
   max-width: 900px;
 }
 
