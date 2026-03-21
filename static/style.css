@@ -453,7 +453,7 @@ button.next { right: 10px; }
 }
 
 @media (max-width: 600px) {
-  .book-list, .category-text {
+  .book-list {
     grid-template-columns: repeat(2, 1fr);
     margin: 2px;
   }
@@ -806,6 +806,7 @@ button[type="submit"]:hover {
 .category-text {
   max-width: 600px;
   margin-bottom: 15px;
+  marfin-left:150px;
 }
 
 .text-short {
