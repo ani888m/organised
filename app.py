@@ -1120,12 +1120,12 @@ def newsletter():
     confirm_url = url_for("confirm_newsletter", token=token, _external=True)
 
     send_email(
-    subject="Bitte bestätige deine Newsletter-Anmeldung",
-    body=f"Klicke hier zur Bestätigung: {confirm_url}",
-    html=f"""
-        <p>Danke für deine Anmeldung!</p>
-        <p>Klicke auf den Button, um deine E-Mail zu bestätigen:</p>
-
+        subject="Bitte bestätige deine Newsletter-Anmeldung",
+        body=f"Klicke hier zur Bestätigung: {confirm_url}",
+        html=f"""
+           <p>Danke für deine Anmeldung!</p>
+           <p>Klicke auf den Button, um deine E-Mail zu bestätigen:</p>
+           
         <a href="{confirm_url}" 
            style="
                display: inline-block;
@@ -1144,7 +1144,6 @@ def newsletter():
     """,
     recipient=email
     )
-
     flash("Bitte bestätige deine Anmeldung per E-Mail.", "success")
     return redirect("/danke")
 
