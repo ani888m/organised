@@ -1058,22 +1058,6 @@ def submit():
 # NEWSLETTER
 # ============================
 
-@app.route("/newslettr", methods=["POST"])
-def newslettr():
-    email = request.form.get("email")
-    if not email:
-        flash("Bitte gib eine gültige E-Mail-Adresse ein.", "error")
-        return redirect("/")
-    try:
-        send_email(
-            subject="Neue Newsletter-Anmeldung",
-            body=f"Neue Anmeldung: {email}",
-            recipient=EMAIL_SENDER
-        )
-        flash("Danke! Newsletter-Anmeldung erfolgreich.", "success")
-    except Exception as e:
-        flash(f"Fehler beim Newsletter-Versand: {e}", "error")
-    return redirect("/danke")
 
 
 @app.route("/admin/newsletter")
@@ -1165,6 +1149,21 @@ def send_newsletter():
         )
 
     return f"{len(subscribers)} Emails gesendet ✅"
+
+
+@app.route("/newsletter/unsubscribe/<token>")
+def unsubscribe_newsletter(token):
+    subscriber = NewsletterSubscriber.query.filter_by(token=token).first()
+
+    if not subscriber:
+        flash("Ungültiger Abmeldelink.", "error")
+        return redirect("/")
+
+    db.session.delete(subscriber)
+    db.session.commit()
+
+    flash("Du hast dich erfolgreich vom Newsletter abgemeldet.", "success")
+    return redirect("/")
     
 # ============================
 # RECHTLICHES
