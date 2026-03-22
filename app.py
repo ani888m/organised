@@ -4,6 +4,7 @@
 
 
 
+
 import os
 import json
 import logging
@@ -80,19 +81,9 @@ database_url = database_url.replace("postgres://", "postgresql://")
 app.config["SQLALCHEMY_DATABASE_URI"] = database_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-
-
 db.init_app(app)
 with app.app_context():
     db.create_all()
-
-# ---------- Blueprint Registrierungen ----------
-from newsletter import newsletter_bp
-app.register_blueprint(newsletter_bp)
-
-# andere Blueprints, z.B.
-# from bestellungen import bestellungen_bp
-# app.register_blueprint(bestellungen_bp)
 
 
 
@@ -1066,25 +1057,22 @@ def submit():
 # NEWSLETTER
 # ============================
 
-#@app.route("/newsletter", methods=["POST"])
-#def newsletter():
- #   email = request.form.get("email")
-  #  if not email:
-   #     flash("Bitte gib eine gültige E-Mail-Adresse ein.", "error")
-    #    return redirect("/")
-    #try:
-     #   send_email(
-      #      subject="Neue Newsletter-Anmeldung",
-       #     body=f"Neue Anmeldung: {email}",
-        #    recipient=EMAIL_SENDER
-        #)
-        #flash("Danke! Newsletter-Anmeldung erfolgreich.", "success")
-    #except Exception as e:
-     #   flash(f"Fehler beim Newsletter-Versand: {e}", "error")
-    #return redirect("/danke")
-
-
-
+@app.route("/newsletter", methods=["POST"])
+def newsletter():
+    email = request.form.get("email")
+    if not email:
+        flash("Bitte gib eine gültige E-Mail-Adresse ein.", "error")
+        return redirect("/")
+    try:
+        send_email(
+            subject="Neue Newsletter-Anmeldung",
+            body=f"Neue Anmeldung: {email}",
+            recipient=EMAIL_SENDER
+        )
+        flash("Danke! Newsletter-Anmeldung erfolgreich.", "success")
+    except Exception as e:
+        flash(f"Fehler beim Newsletter-Versand: {e}", "error")
+    return redirect("/danke")
 
 # ============================
 # RECHTLICHES
