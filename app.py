@@ -1056,22 +1056,25 @@ def submit():
 # NEWSLETTER
 # ============================
 
-@app.route("/newsletter", methods=["POST"])
-def newsletter():
-    email = request.form.get("email")
-    if not email:
-        flash("Bitte gib eine gültige E-Mail-Adresse ein.", "error")
-        return redirect("/")
-    try:
-        send_email(
-            subject="Neue Newsletter-Anmeldung",
-            body=f"Neue Anmeldung: {email}",
-            recipient=EMAIL_SENDER
-        )
-        flash("Danke! Newsletter-Anmeldung erfolgreich.", "success")
-    except Exception as e:
-        flash(f"Fehler beim Newsletter-Versand: {e}", "error")
-    return redirect("/danke")
+#@app.route("/newsletter", methods=["POST"])
+#def newsletter():
+ #   email = request.form.get("email")
+  #  if not email:
+   #     flash("Bitte gib eine gültige E-Mail-Adresse ein.", "error")
+    #    return redirect("/")
+    #try:
+     #   send_email(
+      #      subject="Neue Newsletter-Anmeldung",
+       #     body=f"Neue Anmeldung: {email}",
+        #    recipient=EMAIL_SENDER
+        #)
+        #flash("Danke! Newsletter-Anmeldung erfolgreich.", "success")
+    #except Exception as e:
+     #   flash(f"Fehler beim Newsletter-Versand: {e}", "error")
+    #return redirect("/danke")
+
+
+
 
 # ============================
 # RECHTLICHES
