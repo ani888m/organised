@@ -1075,6 +1075,21 @@ def newslettr():
     return redirect("/danke")
 
 
+@app.route("/admin/newsletter")
+def admin_newsletter():
+
+    if not session.get("admin"):
+        abort(403)
+
+    subscribers = NewsletterSubscriber.query.order_by(
+        NewsletterSubscriber.created_at.desc()
+    ).all()
+
+    return render_template(
+        "admin_newsletter.html",
+        subscribers=subscribers
+    )
+
 @app.route("/newsletter", methods=["POST"])
 def newsletter():
     email = request.form.get("email")
