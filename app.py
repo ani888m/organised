@@ -1074,6 +1074,82 @@ def newsletter():
         flash(f"Fehler beim Newsletter-Versand: {e}", "error")
     return redirect("/danke")
 
+
+@app.route("/newsletter", methods=["POST"])
+def newsletter():
+    email = request.form.get("email")
+
+    if not email:
+        flash("Bitte gib eine gültige E-Mail-Adresse ein.", "error")
+        return redirect("/")
+
+    # Prüfen ob schon vorhanden
+    existing = NewsletterSubscriber.query.filter_by(email=email).first()
+    if existing:
+        flash("Du bist bereits angemeldet.", "info")
+        return redirect("/")
+
+    # Token erzeugen (für Bestätigung)
+    token = str(uuid.uuid4())
+
+    subscriber = NewsletterSubscriber(
+        email=email,
+        token=token,
+        confirmed=False
+    )
+
+    db.session.add(subscriber)
+    db.session.commit()
+
+    # Bestätigungslink
+    confirm_url = url_for("confirm_newsletter", token=token, _external=True)
+
+    send_email(
+        subject="Bitte bestätige deine Newsletter-Anmeldung",
+        body=f"Klicke hier zur Bestätigung:\n{confirm_url}",
+        recipient=email
+    )
+
+    flash("Bitte bestätige deine Anmeldung per E-Mail.", "success")
+    return redirect("/danke")
+
+
+
+@app.route("/newsletter/confirm/<token>")
+def confirm_newsletter(token):
+    subscriber = NewsletterSubscriber.query.filter_by(token=token).first()
+
+    if not subscriber:
+        flash("Ungültiger Bestätigungslink.", "error")
+        return redirect("/")
+
+    subscriber.confirmed = True
+    subscriber.token = None
+    db.session.commit()
+
+    flash("Newsletter erfolgreich bestätigt 🎉", "success")
+    return redirect("/")
+
+
+@app.route("/admin/send-newsletter", methods=["POST"])
+def send_newsletter():
+    if not session.get("admin"):
+        abort(403)
+
+    subject = request.form.get("subject")
+    content = request.form.get("content")
+
+    subscribers = NewsletterSubscriber.query.filter_by(confirmed=True).all()
+
+    for sub in subscribers:
+        send_email(
+            subject=subject,
+            body=content,
+            recipient=sub.email
+        )
+
+    return f"{len(subscribers)} Emails gesendet ✅"
+    
 # ============================
 # RECHTLICHES
 # ============================
