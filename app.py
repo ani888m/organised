@@ -1057,8 +1057,8 @@ def submit():
 # NEWSLETTER
 # ============================
 
-@app.route("/newsletter", methods=["POST"])
-def newsletter():
+@app.route("/newslettr", methods=["POST"])
+def newslettr():
     email = request.form.get("email")
     if not email:
         flash("Bitte gib eine gültige E-Mail-Adresse ein.", "error")
