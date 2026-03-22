@@ -80,9 +80,19 @@ database_url = database_url.replace("postgres://", "postgresql://")
 app.config["SQLALCHEMY_DATABASE_URI"] = database_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+
+
 db.init_app(app)
 with app.app_context():
     db.create_all()
+
+# ---------- Blueprint Registrierungen ----------
+from newsletter import newsletter_bp
+app.register_blueprint(newsletter_bp)
+
+# andere Blueprints, z.B.
+# from bestellungen import bestellungen_bp
+# app.register_blueprint(bestellungen_bp)
 
 
 
