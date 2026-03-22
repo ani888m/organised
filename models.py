@@ -1,8 +1,8 @@
 
 
+
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -127,23 +127,6 @@ class Produkt(db.Model):
         default=datetime.utcnow,
         onupdate=datetime.utcnow
     )
-
-
-
-
-class NewsletterSubscriber(db.Model):
-    __tablename__ = "newsletter_subscribers"
-
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    confirm_token = db.Column(db.String(255), nullable=False)
-    unsubscribe_token = db.Column(db.String(255), nullable=False)
-    is_active = db.Column(db.Boolean, default=False)
-    confirmed_at = db.Column(db.DateTime)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-    def __repr__(self):
-        return f"<NewsletterSubscriber {self.email}>"
 
     def __repr__(self):
         return f"<Produkt {self.name}>"
