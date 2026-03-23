@@ -30,5 +30,4 @@ flask-limiter
 
 paypal-checkout-serversdk
 
-pip install Flask-Mail
 
