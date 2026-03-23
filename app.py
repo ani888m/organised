@@ -1117,7 +1117,6 @@ def newsletter():
     </div>
     """
 
-    # ✅ RICHTIG eingerückt!
     send_email(
         subject="Bitte bestätige deine Newsletter-Anmeldung",
         recipient=email,
@@ -1208,6 +1207,11 @@ def datenschutz():
 @app.route("/impressum")
 def impressum():
     return render_template("impressum.html", user_email=session.get("user_email"))
+
+@app.route("/kontakt")
+def kontakt():
+    return render_template("kontakt.html", user_email=session.get("user_email"))
+
 
 # ============================
 # DANKE SEITEN
