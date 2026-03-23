@@ -1095,7 +1095,6 @@ def newsletter():
 
     # Bestätigungslink
     confirm_url = url_for("confirm_newsletter", token=token, _external=True)
-
     # HTML-Mail
     html_body = f"""
     <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px;">
@@ -1115,11 +1114,6 @@ def newsletter():
            ">
            Jetzt bestätigen
         </a>
-
-        <p style="margin-top:20px; font-size:12px; color: gray;">
-            Falls der Button nicht funktioniert, kopiere diesen Link:<br>
-            {confirm_url}
-        </p>
     </div>
     """
 
