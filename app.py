@@ -1057,7 +1057,15 @@ def submit():
 # ============================
 # NEWSLETTER
 # ============================
+from flask_mail import Message
 
+def send_email(subject, recipient, html):
+    msg = Message(
+        subject=subject,
+        recipients=[recipient],
+        html=html
+    )
+    mail.send(msg)
 
 
 @app.route("/admin/newsletter")
@@ -1104,11 +1112,37 @@ def newsletter():
     # Bestätigungslink
     confirm_url = url_for("confirm_newsletter", token=token, _external=True)
 
-    send_email(
-        subject="Bitte bestätige deine Newsletter-Anmeldung",
-        body=f"Klicke hier zur Bestätigung:\n{confirm_url}",
-        recipient=email
-    )
+    html_body = f"""
+    <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px;">
+        <h2>Newsletter bestätigen</h2>
+        <p>Danke für deine Anmeldung!</p>
+        <p>Klicke auf den Button, um deine E-Mail zu bestätigen:</p>
+
+    <a href="{confirm_url}" 
+       style="
+           display: inline-block;
+           padding: 12px 20px;
+           background-color: #4CAF50;
+           color: white;
+           text-decoration: none;
+           border-radius: 6px;
+           font-weight: bold;
+       ">
+       Jetzt bestätigen
+    </a>
+
+    <p style="margin-top:20px; font-size:12px; color: gray;">
+        Falls der Button nicht funktioniert, kopiere diesen Link:<br>
+        {confirm_url}
+    </p>
+</div>
+"""
+
+send_email(
+    subject="Bitte bestätige deine Newsletter-Anmeldung",
+    recipient=email,
+    html=html_body  
+)
 
     flash("Bitte bestätige deine Anmeldung per E-Mail.", "success")
     return redirect("/danke")
@@ -1137,20 +1171,32 @@ def send_newsletter():
         abort(403)
 
     subject = request.form.get("subject")
-    content = request.form.get("content")
+    content = request.form.get("content")  # hier kann HTML stehen
 
     subscribers = NewsletterSubscriber.query.filter_by(confirmed=True).all()
 
     for sub in subscribers:
+        # Optionaler Abmeldelink
+        unsubscribe_url = url_for("unsubscribe_newsletter", token=sub.token, _external=True)
+
+        html_body = f"""
+        <div style="font-family: Arial, sans-serif; padding: 20px;">
+            {content}
+            <p style="margin-top:20px; font-size:12px; color: gray;">
+                <a href="{unsubscribe_url}">Abmelden vom Newsletter</a>
+            </p>
+        </div>
+        """
+
         send_email(
             subject=subject,
-            body=content,
-            recipient=sub.email
+            recipient=sub.email,
+            html=html_body  # <--- HTML statt body
         )
 
     return f"{len(subscribers)} Emails gesendet ✅"
 
-
+    
 @app.route("/newsletter/unsubscribe/<token>")
 def unsubscribe_newsletter(token):
     subscriber = NewsletterSubscriber.query.filter_by(token=token).first()
