@@ -1031,15 +1031,25 @@ def checkout():
 # NEWSLETTER
 # ============================
 
-from flask_mail import Message
 
 def send_email(subject, recipient, html):
-    msg = Message(
+    if not SENDGRID_API_KEY or not EMAIL_SENDER:
+        logger.warning("SendGrid nicht konfiguriert")
+        return
+
+    message = Mail(
+        from_email=EMAIL_SENDER,
+        to_emails=recipient,
         subject=subject,
-        recipients=[recipient],
-        html=html
+        html_content=html   # ✅ HTML statt plain_text
     )
-    mail.send(msg)
+
+    sg = SendGridAPIClient(SENDGRID_API_KEY)
+
+    try:
+        sg.send(message)
+    except Exception:
+        logger.exception("Email Versand fehlgeschlagen")
 
 
 @app.route("/admin/newsletter")
