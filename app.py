@@ -1107,7 +1107,7 @@ def newsletter():
            style="
                display: inline-block;
                padding: 12px 20px;
-               background-color: #4CAF50;
+               background-color: #7393B3;
                color: white;
                text-decoration: none;
                border-radius: 6px;
