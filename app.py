@@ -1037,11 +1037,14 @@ def send_email(subject, recipient, html):
         logger.warning("SendGrid nicht konfiguriert")
         return
 
+  
+
     message = Mail(
         from_email=EMAIL_SENDER,
         to_emails=recipient,
         subject=subject,
-        html_content=html   # ✅ HTML statt plain_text
+        html_content=html,
+        plain_text_content=f"Bestätige deine Anmeldung: {confirm_url}"
     )
 
     sg = SendGridAPIClient(SENDGRID_API_KEY)
