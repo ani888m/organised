@@ -1125,7 +1125,7 @@ def newsletter():
     )
 
     flash("Bitte bestätige deine Anmeldung per E-Mail.", "success")
-    return redirect("/newsletterbestätigung")
+    return redirect("/newsletterbesteatigung")
 
 
 @app.route("/newsletter/confirm/<token>")
@@ -1230,9 +1230,9 @@ def kontaktdanke():
 def bestelldanke():
     return render_template("bestelldanke.html", user_email=session.get("user_email"))
 
-@app.route("/newsletterbestätigung")
-def newsletterbestätigung():
-    return render_template("newsletterbestätigung.html", user_email=session.get("user_email"))
+@app.route("/newsletterbesteatigung")
+def newsletterbesteatigung():
+    return render_template("newsletterbesteatigung.html", user_email=session.get("user_email"))
     
 
 # ============================
