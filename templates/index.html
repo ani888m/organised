@@ -153,16 +153,20 @@ Neuerscheinungen, Klassiker und alles besondere</h1>
 </div>
 
 <!-- 🔹 NEWSLETTER -->
-<section class="newsletter-section">
-  <h3>Melde dich zu unserem Newsletter an!</h3>
-  <p>Erhalte exklusive Neuigkeiten und Angebote rund um unsere Kinderbücher.</p>
 
-  <form action="{{ url_for('newsletter') }}" method="POST">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required /><br>
-    <button type="submit">Anmelden</button>
-  </form>
-</section>
+
+ <section class="newsletter-section">
+      <h3>Melde dich zu unserem Newsletter an!</h3>
+      <p>Erhalte exklusive Neuigkeiten und Angebote rund um unsere Kinderbücher.</p>
+    <!--  <form action="{{ url_for('newsletter') }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required /><br> 
+        <button type="submit">Anmelden</button>-->
+         <a href="https://manage.kmail-lists.com/subscriptions/subscribe?a=Rh6GQj&g=V3yYyY">
+      <button>Zur Anmeldung</button>
+  </a>
+      </form>
+    </section>
 
 </main>
 
