@@ -1125,7 +1125,7 @@ def newsletter():
     )
 
     flash("Bitte bestätige deine Anmeldung per E-Mail.", "success")
-    return redirect("/danke")
+    return redirect("/newsletterbestätigung")
 
 
 @app.route("/newsletter/confirm/<token>")
@@ -1141,7 +1141,7 @@ def confirm_newsletter(token):
     db.session.commit()
 
     flash("Newsletter erfolgreich bestätigt 🎉", "success")
-    return redirect("/")
+    return redirect("/danke")
 
 
 @app.route("/admin/send-newsletter", methods=["POST"])
@@ -1229,6 +1229,11 @@ def kontaktdanke():
 @app.route("/bestelldanke")
 def bestelldanke():
     return render_template("bestelldanke.html", user_email=session.get("user_email"))
+
+@app.route("/newsletterbestätigung")
+def newsletterbestätigung():
+    return render_template("newsletterbestätigung.html", user_email=session.get("user_email"))
+    
 
 # ============================
 # INDEX HAUPTSEITE
