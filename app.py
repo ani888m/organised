@@ -1032,19 +1032,17 @@ def checkout():
 # ============================
 
 
-def send_email(subject, recipient, html):
+def send_email(subject, recipient, html, plain_text=None):
     if not SENDGRID_API_KEY or not EMAIL_SENDER:
         logger.warning("SendGrid nicht konfiguriert")
         return
-
-  
 
     message = Mail(
         from_email=EMAIL_SENDER,
         to_emails=recipient,
         subject=subject,
         html_content=html,
-        plain_text_content=f"Bestätige deine Anmeldung: {confirm_url}"
+        plain_text_content=plain_text
     )
 
     sg = SendGridAPIClient(SENDGRID_API_KEY)
