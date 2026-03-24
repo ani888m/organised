@@ -158,14 +158,41 @@ Neuerscheinungen, Klassiker und alles besondere</h1>
  <section class="newsletter-section">
       <h3>Melde dich zu unserem Newsletter an!</h3>
       <p>Erhalte exklusive Neuigkeiten und Angebote rund um unsere Kinderbücher.</p>
-    <!--  <form action="{{ url_for('newsletter') }}" method="POST">
+   
+<form id="newsletter-form">
+  <input type="email" name="email" placeholder="Deine E-Mail" required>
+  <button type="submit">Anmelden</button>
+</form>
+
+<script>
+document.getElementById("newsletter-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = e.target.email.value;
+
+  await fetch("/api/newsletter", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email })
+  });
+
+  alert("Danke! Bitte bestätige deine E-Mail.");
+});
+</script>
+
+<!--  <section class="newsletter-section">
+      <h3>Melde dich zu unserem Newsletter an!</h3>
+      <p>Erhalte exklusive Neuigkeiten und Angebote rund um unsere Kinderbücher.</p>
+     <form action="{{ url_for('newsletter') }}" method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required /><br> 
-        <button type="submit">Anmelden</button>-->
+        <button type="submit">Anmelden</button>
          <a href="https://manage.kmail-lists.com/subscriptions/subscribe?a=Rh6GQj&g=V3yYyY">
       <button>Zur Anmeldung</button>
   </a>
-      </form>
+      </form>-->
     </section>
 
 </main>
