@@ -65,8 +65,6 @@ function toggleMobileMenu() {
   if (hamburger) hamburger.classList.toggle('hide');
 
  
-  // hamburgermenü auch für die Hauptseite
-  document.body.classList.toggle('menu-open');
 }
 
 
