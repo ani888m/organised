@@ -836,6 +836,11 @@ button[type="submit"]:hover {
         padding-right: 0px;
    }
 }
-      
+
+#showMoreBtn {
+   color: var(--color-secondary);
+   background-color: #ffffff;
+   border-color:  var(--color-secondary);
+}
    
 
