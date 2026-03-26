@@ -1,4 +1,6 @@
 
+
+
 /* ========================================
    1. IMPORTS & RESET
 ========================================= */
@@ -70,7 +72,7 @@ img {
 ========================================= */
 /* Scroll-Offset für Sprungziel */
 :target {
-  scroll-margin-top: 150px; /* Höhe deines Headers anpassen */
+  scroll-margin-top: 50px; /* Höhe deines Headers anpassen */
 }
 
 
@@ -82,7 +84,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 90px;
+  padding: 5px 80px;
   flex-wrap: wrap;
   box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
 }
@@ -103,8 +105,7 @@ header {
   object-fit: contain;
    
   position: absolute;
-  top: 10%;              /* mittig in Navbar */
-  transform: translateY(20%); /* nach unten rausziehen */
+  ransform: translateY(20%); /* nach unten rausziehen */
   z-index: 10;           /* Logo über Nav-Links */
 }
 
@@ -153,58 +154,10 @@ header {
    NAVIGATION
 ========================================= */
 
-nav {
-  position: relative;
-  z-index: 9999;
-}
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-  position: relative;
-  margin-top: 70px;
-  padding-right: 40px;
-}
 
-.nav-links li {
-  position: relative;
-}
 
-.nav-links li a {
-  color: var(--color-primary);
-  display: block;
-  padding: 8px 10px;
-  font-size: 25px;
-  font-family: var(--font-heading);
-  font-weight: 300;
-}
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f7f6f4;
-  min-width: 180px;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  border-radius: 5px;
-}
-
-.dropdown-content li a {
-  padding: 10px;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.mobile-menu,
-.close-menu {
-  display: none;
-}
-
-@media (max-width: 768px) {
   .mobile-menu {
     display: block;
     z-index: 10000;
@@ -213,6 +166,7 @@ nav {
     color: var(--color-primary);
     color: #000000;
     cursor: pointer;
+    padding: 70px;
   }
 
   .nav-links {
@@ -229,6 +183,8 @@ nav {
     gap: 30px;
     z-index: 9998;
     display: none;
+    left: 70%;   /* 👈 startet außerhalb */
+    width: 30%;    /* 👈 HALBE Breite */
   }
 
   .nav-links.show {
@@ -246,6 +202,19 @@ nav {
     cursor: pointer;
   }
 
+  .nav-links {
+  list-style: none;
+  }
+
+  .nav-links li a {
+  color: var(--color-primary);
+  display: block;
+  padding: 8px 10px;
+  font-size: 25px;
+  font-family: var(--font-heading);
+  font-weight: 300;
+}
+
   .close-menu.show {
     display: block;
   }
@@ -253,7 +222,7 @@ nav {
   .mobile-menu.hide {
     display: none;
   }
-}
+
 
 /* =========================================
    FOOTER
