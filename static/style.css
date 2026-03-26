@@ -841,6 +841,7 @@ button[type="submit"]:hover {
    color: var(--color-secondary);
    background-color: #ffffff;
    border-color:  var(--color-secondary);
+   border-style: solid;
 }
    
 
