@@ -198,6 +198,15 @@ header {
     cursor: pointer;
   }
 
+  .nav-links li a {
+  color: var(--color-primary);
+  display: block;
+  padding: 8px 10px;
+  font-size: 25px;
+  font-family: var(--font-heading);
+  font-weight: 300;
+}
+
   .close-menu.show {
     display: block;
   }
