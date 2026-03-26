@@ -203,7 +203,10 @@ nav {
   display: block;
 }
 
-.mobile-menu,
+.mobile-menu {
+  display: block;
+}
+
 .close-menu {
   display: none;
 }
