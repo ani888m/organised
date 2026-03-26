@@ -856,4 +856,6 @@ button[type="submit"]:hover {
    border-style: solid;
 }
    
-
+.mobile-menu {
+  display: block !important;
+}
