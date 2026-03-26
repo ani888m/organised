@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 import os
 import json
 import logging
@@ -392,28 +384,7 @@ def paypal_webhook():
 
     return "", 200
 
-# =====================================================
-# EMAIL
-# =====================================================
 
-
-def send_email(subject, body, recipient):
-    if not SENDGRID_API_KEY or not EMAIL_SENDER:
-        logger.warning("SendGrid nicht konfiguriert")
-        return
-
-    message = Mail(
-        from_email=EMAIL_SENDER,
-        to_emails=recipient,
-        subject=subject,
-        plain_text_content=body
-    )
-
-    sg = SendGridAPIClient(SENDGRID_API_KEY)
-    try:
-            sg.send(message)
-    except Exception:
-            logger.exception("Email Versand fehlgeschlagen")
 # =====================================================
 # HILFSFUNKTIONEN
 # =====================================================
@@ -1026,7 +997,38 @@ def checkout():
         total=total
     )
 
-    
+# ============================
+# KONTAKT
+# ============================
+
+@app.route("/kontakt")  
+def kontakt():
+    return render_template("kontakt.html", user_email=session.get("user_email"))
+
+@app.route("/submit", methods=["POST"])
+@csrf.exempt
+def submit():
+    name = request.form.get("name")
+    email = request.form.get("email")
+    message = request.form.get("message")
+    if not name or not email or not message:
+        flash("Bitte fülle alle Felder aus!", "error")
+        return redirect("/kontakt")
+    try:
+        send_email(
+            subject=f"Neue Nachricht von {name}",
+            recipient=EMAIL_SENDER,
+            html=f"""
+                <p><b>Von:</b> {name} ({email})</p>
+                <p>{message}</p>
+            """,
+            plain_text=f"Von: {name} <{email}>\n\n{message}"
+        )
+        flash("Danke! Deine Nachricht wurde gesendet.", "success")
+    except Exception as e:
+        flash(f"Fehler beim Senden: {e}", "error")
+    return redirect("/kontaktdanke")
+
 # ============================
 # NEWSLETTER
 # ============================
@@ -1209,9 +1211,6 @@ def datenschutz():
 def impressum():
     return render_template("impressum.html", user_email=session.get("user_email"))
 
-@app.route("/kontakt")
-def kontakt():
-    return render_template("kontakt.html", user_email=session.get("user_email"))
 
 
 # ============================
@@ -1234,7 +1233,10 @@ def bestelldanke():
 def newsletterbesteatigung():
     return render_template("newsletterbesteatigung.html", user_email=session.get("user_email"))
     
-
+@app.route("/newsletteranmeldung")
+def newsletteranmeldung():
+    return render_template("newsletteranmeldung.html", user_email=session.get("user_email"))
+    
 # ============================
 # INDEX HAUPTSEITE
 # ============================
@@ -1253,10 +1255,6 @@ def index():
         "Jacominus Gainsborough": {
             "kurz": "Einer, der sich erinnert. Und manchmal auch vergisst.",
             "lang": "Jacominus sitzt im Garten, denkt nach, lauscht dem Wind. Eine Erinnerung streift ihn – kaum greifbar, wie ein Traum, der sich beim Aufwachen auflöst. Und doch ist da etwas, das bleibt: ein Gefühl, warm und vertraut. Es sind die winzig kleinen Sekunden, die zählen. Die kaum sichtbaren Augenblicke zwischen zwei Herzschlägen, in denen sich alles entscheiden kann. Ein Blick. Ein Lächeln. Ein Wiedersehen. Und irgendwo ist immer jemand unterwegs. Über Wiesen, durch Straßen, vorbei an flüchtigen Begegnungen. Schritt für Schritt, einer Verabredung entgegen. Vielleicht Punkt zwölf. Vielleicht genau im richtigen Moment. So entfaltet sich ein Leben – nicht laut und in Bildern und Worten, die bleiben. In Begegnungen, die alles verändern können. Kein außergewöhnliches Leben. Und doch ein ganz besonderes. Das Leben von Jacominus Gainsborough"
-        },
-        "Klassiker": {
-            "kurz": "Zeitlose Kinderbuchklassiker für jede Generation.",
-            "lang": "Diese Bücher haben Generationen geprägt und begeistern noch heute durch ihre Geschichten, Illustrationen und Werte."
         }
     }
 
