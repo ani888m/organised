@@ -203,6 +203,10 @@ nav {
   display: none;
 }
 
+body.menu-open {
+  overflow: hidden;
+}
+
 @media (max-width: 768px) {
   .mobile-menu {
     display: block;
