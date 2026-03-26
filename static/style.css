@@ -70,7 +70,7 @@ img {
 ========================================= */
 /* Scroll-Offset für Sprungziel */
 :target {
-  scroll-margin-top: 150px; /* Höhe deines Headers anpassen */
+  scroll-margin-top: 50px; /* Höhe deines Headers anpassen */
 }
 
 
@@ -103,7 +103,6 @@ header {
   object-fit: contain;
    
   position: absolute;
-  top: 5%;              /* mittig in Navbar */
   transform: translateY(20%); /* nach unten rausziehen */
   z-index: 10;           /* Logo über Nav-Links */
 }
