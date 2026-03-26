@@ -63,7 +63,12 @@ function toggleMobileMenu() {
   if (navLinks) navLinks.classList.toggle('show');
   if (closeBtn) closeBtn.classList.toggle('show');
   if (hamburger) hamburger.classList.toggle('hide');
+
+ 
+  // hamburgermenü auch für die Hauptseite
+  document.body.classList.toggle('menu-open');
 }
+
 
 // -----------------------------
 // Carousel-Slider
