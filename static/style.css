@@ -181,8 +181,8 @@ header {
     gap: 30px;
     z-index: 9998;
     display: none;
-    left: -70%;   /* 👈 startet außerhalb */
-    width: 40%;    /* 👈 HALBE Breite */
+    left: 70%;   /* 👈 startet außerhalb */
+    width: 30%;    /* 👈 HALBE Breite */
   }
 
   .nav-links.show {
