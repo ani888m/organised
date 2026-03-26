@@ -165,6 +165,7 @@ header {
     color: var(--color-primary);
     color: #000000;
     cursor: pointer;
+    padding: 70px;
   }
 
   .nav-links {
