@@ -807,7 +807,7 @@ button[type="submit"]:hover {
    }
 }
 
-#showMoreBtn {
+#showMoreBtn, .slide-btn {
    color: var(--color-secondary);
    background-color: #ffffff;
    border-color:  var(--color-secondary);
