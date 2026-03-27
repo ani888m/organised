@@ -157,8 +157,8 @@ Neuerscheinungen, Klassiker und alles besondere</h1>
 
 
 
- <section class="newsletter-section">
-      <h3>Melden Sie sich zu unserem Newsletter an!</h3> <br>
+ <section class="newsletter-section" id="newsletter">
+      <h3 ><a href="#newsletter">Melden Sie sich zu unserem Newsletter an!</a></h3> <br>
       <p>Erhalten Sie exklusive Neuigkeiten und Angebote rund um unsere Bilderbücher.</p>
      <form action="{{ url_for('newsletter') }}" method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
