@@ -84,7 +84,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 45px 80px;
+  adding: 45px 80px;
   flex-wrap: wrap;
   box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
 }
