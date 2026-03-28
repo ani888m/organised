@@ -6,7 +6,7 @@
     </a>
   </div>
 
-  <nav id="navbar">
+  <nav id="navbar" class="mobile-menu" onclick="toggleMobileMenu()">
     <!-- Hamburger & Close Icon -->
     <div class="mobile-menu" onclick="toggleMobileMenu()">
       <i class="fas fa-bars"></i>
@@ -18,13 +18,13 @@
     <!-- Mobile & Desktop Nav Links -->
     <ul class="nav-links" id="nav-links">
       <li>
-        <a href="{{ url_for('index') }}#Jacominus_Gainsborough"> I B K </a>
+        <a href="{{ url_for('index') }}#Jacominus_Gainsborough"> Bücher </a>
       </li>
       
       <li >
         <a href="{{ url_for('suche') }}"> &#x1F50D; </a>
       </li>
-   <!--   <li class="cart">
+     <li class="cart">
         <a href="{{ url_for('cart') }}">🛒 <span id="cart-count">0</span></a>
       </li> -->
 
