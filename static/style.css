@@ -846,5 +846,48 @@ button[type="submit"]:hover {
    border-color:  var(--color-secondary);
    border-style: solid;
 }
-   
+
+
+/* Hamburger */
+.menu-toggle {
+  font-size: 26px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+/* Menü standardmäßig versteckt */
+.nav-links {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: white;
+  position: absolute;
+  top: 60px; /* unter Navbar */
+  left: 0;
+  width: 100%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Sichtbar wenn aktiv */
+.nav-links.active {
+  display: block;
+}
+
+/* Links Styling */
+.nav-links li {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: black;
+  display: block;
+}
+
+/* Hover Effekt */
+.nav-links li:hover {
+  background: #f5f5f5;
+}
    
