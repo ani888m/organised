@@ -6,8 +6,8 @@
     </a>
   </div>
 
-  <nav id="navbar" class="mobile-menu">
-    <!-- Hamburger & Close Icon -->
+<!--  <nav id="navbar" class="mobile-menu">
+    <!-- Hamburger & Close Icon --
     <div class="mobile-menu" onclick="toggleMobileMenu()">
       <i class="fas fa-bars"></i>
     </div>
@@ -15,7 +15,7 @@
       <i class="fas fa-times"></i>
     </div>
     
-    <!-- Mobile & Desktop Nav Links -->
+    <!-- Mobile & Desktop Nav Links --
     <ul class="nav-links" id="nav-links" ">
       <li>
         <a href="{{ url_for('index') }}#Jacominus_Gainsborough"> Bücher </a>
@@ -26,7 +26,7 @@
       </li>
      <li class="cart">
         <a href="{{ url_for('cart') }}">🛒 <span id="cart-count">0</span></a>
-      </li> -->
+      </li> --
 
       
       <li class="user-info"> <a href="{{ url_for('login') }}" class="user-icon">👤
@@ -38,5 +38,33 @@
     
 
     </ul>
-  </nav>
+  </nav>-->
+
+
+  <nav id="navbar">
+
+  <!-- Hamburger -->
+  <div class="menu-toggle" onclick="toggleMenu()">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <!-- Dropdown Menu -->
+  <ul class="nav-links" id="nav-links">
+    <li>
+      <a href="{{ url_for('index') }}#Jacominus_Gainsborough">Bücher</a>
+    </li>
+    <li>
+      <a href="{{ url_for('suche') }}">🔍 Suche</a>
+    </li>
+    <li class="cart">
+      <a href="{{ url_for('cart') }}">🛒 <span id="cart-count">0</span></a>
+    </li>
+    <li class="user-info">
+      <a href="{{ url_for('login') }}">👤</a>
+    </li>
+  </ul>
+
+</nav>
+
+  
 </header>
