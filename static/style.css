@@ -78,12 +78,12 @@ img {
 header {
   position: sticky;
   top: 0;
-  z-index: 10000;
+  z-index: 1000;
   background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 90px;
+  padding: 30px 90px;
   flex-wrap: wrap;
   box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
 }
