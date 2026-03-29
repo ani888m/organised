@@ -863,10 +863,11 @@ button[type="submit"]:hover {
   margin: 0;
   background: white;
   position: absolute;
-  top: 60px; /* unter Navbar */
   left: 0;
-  width: 100%;
+  width: 30%;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  height: 100vh;     /* ganze Bildschirmhöhe */
+  background: white;
 }
 
 /* Sichtbar wenn aktiv */
