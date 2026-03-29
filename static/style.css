@@ -764,7 +764,7 @@ button[type="submit"]:hover {
   background: white;
   position: absolute;
   left: 0;
-  width: 30%;
+  width: -30%;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   height: 100vh;     /* ganze Bildschirmhöhe */
   background: white;
