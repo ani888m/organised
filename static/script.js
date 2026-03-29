@@ -55,7 +55,7 @@ function addToCart(title, price, image, ean) {
 // -----------------------------
 // Mobile Menü
 // -----------------------------
-function toggleMobileMenu() {
+function toggleMenu() {
   const navLinks = document.querySelector('.nav-links');
   const closeBtn = document.querySelector('.close-menu');
   const hamburger = document.querySelector('.mobile-menu');
