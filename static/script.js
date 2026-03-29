@@ -52,20 +52,6 @@ function addToCart(title, price, image, ean) {
 }
 
 
-// -----------------------------
-// Mobile Menü
-// -----------------------------
-function toggleMenu() {
-  const navLinks = document.querySelector('.nav-links');
-  const closeBtn = document.querySelector('.close-menu');
-  const hamburger = document.querySelector('.mobile-menu');
-
-  if (navLinks) navLinks.classList.toggle('show');
-  if (closeBtn) closeBtn.classList.toggle('show');
-  if (hamburger) hamburger.classList.toggle('hide');
-
- 
-}
 
 
 // -----------------------------
