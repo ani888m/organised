@@ -762,6 +762,7 @@ button[type="submit"]:hover {
   margin: 0;
   background: white;
   position: fixed;
+     transform: translateY(-100%); /* START: versteckt oben */
   right: 0;
   width: 30%;
   ox-shadow: 0 4px 10px rgba(0,0,0,0.1);
