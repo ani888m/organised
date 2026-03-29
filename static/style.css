@@ -761,9 +761,9 @@ button[type="submit"]:hover {
   padding: 0;
   margin: 0;
   background: white;
-  position: absolute;
-  left: 0;
-  width: 40%;
+  position: fixed;
+  right: 0;
+  width: 30%;
   ox-shadow: 0 4px 10px rgba(0,0,0,0.1);
   height: 100vh;     /* ganze Bildschirmhöhe */
   background: white;
