@@ -770,6 +770,10 @@ button[type="submit"]:hover {
   background: white;
 }
 
+@media screen and (max-width: 768px) {
+   .nav-links {
+      width: 50%;}
+}
 /* Sichtbar wenn aktiv */
 .nav-links.active {
   display: block;
