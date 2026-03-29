@@ -83,7 +83,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 30px 90px;
+  padding: 35px 90px;
   flex-wrap: wrap;
   box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
 }
@@ -102,7 +102,6 @@ header {
   transition: height 0.3s ease;
   display: block;
   object-fit: contain;
-   
   position: absolute;
   top: 10%;              /* mittig in Navbar */
   transform: translateY(20%); /* nach unten rausziehen */
@@ -764,8 +763,8 @@ button[type="submit"]:hover {
   background: white;
   position: absolute;
   left: 0;
-  width: -30%;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 40%;
+  ox-shadow: 0 4px 10px rgba(0,0,0,0.1);
   height: 100vh;     /* ganze Bildschirmhöhe */
   background: white;
 }
