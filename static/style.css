@@ -764,7 +764,7 @@ button[type="submit"]:hover {
   position: fixed;
   top:0;
   right: 0;
-  width: 30%;
+  width: 80%;
   ox-shadow: 0 4px 10px rgba(0,0,0,0.1);
   height: 100vh;     /* ganze Bildschirmhöhe */
   background: white;
@@ -811,7 +811,7 @@ button[type="submit"]:hover {
 
 
 body.menu-open {
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.2);
 }
 
 /* besser (empfohlen 👇) */
@@ -819,7 +819,7 @@ body.menu-open::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.3);
   z-index: 800;
 }
 
