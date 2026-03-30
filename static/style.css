@@ -759,16 +759,16 @@ button[type="submit"]:hover {
   display: none;
   list-style: none;
   padding: 0;
-  margin: auto  0;
+  margin: 0 auto;
   background: white;
   position: fixed;
   top:0;
   right: 0;
-  width: 68%;
+  width: 48%;
   ox-shadow: 0 4px 10px rgba(0,0,0,0.1);
   height: 100vh;     /* ganze Bildschirmhöhe */
   background: white;
-  color: var(--color-primary);
+  color: var(--color-secondary);
   padding: 8px 10px;
   font-size: 25px;
   font-family: var(--font-heading);
