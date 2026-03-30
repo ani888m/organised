@@ -167,8 +167,13 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-function toggleMenu() {
+document.addEventListener("click", (e) => {
   const menu = document.getElementById("nav-links");
-  document.body.classList.toggle("menu-open");
-  menu.classList.toggle("active");
-}
+
+  if (document.body.classList.contains("menu-open") &&
+      !menu.contains(e.target) &&
+      !e.target.classList.contains("menu-toggle")) {
+    menu.classList.remove("active");
+    document.body.classList.remove("menu-open");
+  }
+});
