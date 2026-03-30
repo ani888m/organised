@@ -808,3 +808,22 @@ button[type="submit"]:hover {
 .close-btn:hover {
   background: none;
 }
+
+
+body.menu-open {
+  background: rgba(0,0,0,0.4);
+}
+
+/* besser (empfohlen 👇) */
+body.menu-open::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 800;
+}
+
+/* dein Menü muss drüber liegen */
+.nav-links {
+  z-index: 1000;
+}
