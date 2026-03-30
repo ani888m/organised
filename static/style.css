@@ -759,15 +759,20 @@ button[type="submit"]:hover {
   display: none;
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: auto  0;
   background: white;
   position: fixed;
   top:0;
   right: 0;
-  width: 80%;
+  width: 68%;
   ox-shadow: 0 4px 10px rgba(0,0,0,0.1);
   height: 100vh;     /* ganze Bildschirmhöhe */
   background: white;
+  color: var(--color-primary);
+  padding: 8px 10px;
+  font-size: 25px;
+  font-family: var(--font-heading);
+  font-weight: 300;
 }
 
 @media screen and (max-width: 768px) {
@@ -800,7 +805,7 @@ button[type="submit"]:hover {
 .close-btn {
   font-size: 28px;
   text-align: right;
-  padding: 20px;
+  padding: 40px;
   cursor: pointer;
   border-bottom: none;
 }
