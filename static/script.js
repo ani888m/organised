@@ -169,5 +169,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function toggleMenu() {
   const menu = document.getElementById("nav-links");
+  document.body.classList.toggle("menu-open");
   menu.classList.toggle("active");
 }
