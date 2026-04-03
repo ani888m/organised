@@ -27,6 +27,7 @@ class Gutschein(db.Model):
 
     erstellt_am = db.Column(db.DateTime, default=datetime.utcnow)
     gueltig_bis = db.Column(db.DateTime)
+    paypal_order_id = db.Column(db.String(100), unique=True)
 
 # ----------------------
 # Newsletter
