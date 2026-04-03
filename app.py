@@ -1290,6 +1290,10 @@ def newsletterbesteatigung():
 @app.route("/newsletteranmeldung")
 def newsletteranmeldung():
     return render_template("newsletteranmeldung.html", user_email=session.get("user_email"))
+
+@app.route("/gutschein")
+def gutschein():
+    return render_template("gutschein.html", user_email=session.get("user_email"))
     
 # ============================
 # INDEX HAUPTSEITE
