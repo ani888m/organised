@@ -16,18 +16,12 @@ db = SQLAlchemy()
 
 class Gutschein(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    code = db.Column(db.String(20), unique=True, nullable=False)
+    code = db.Column(db.String(50), unique=True, nullable=False)
     wert = db.Column(db.Float, nullable=False)
-
-    erstellt_fuer_email = db.Column(db.String(120))  # Geschenk möglich
-    gekauft_von_user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    verwendet = db.Column(db.Boolean, default=False)
-    verwendet_am = db.Column(db.DateTime)
-
+    aktiv = db.Column(db.Boolean, default=True)
+    user_id = db.Column(db.Integer, nullable=True)
     erstellt_am = db.Column(db.DateTime, default=datetime.utcnow)
-    gueltig_bis = db.Column(db.DateTime)
-    paypal_order_id = db.Column(db.String(100), unique=True)
+    eingelöst_am = db.Column(db.DateTime, nullable=True)
 
 # ----------------------
 # Newsletter
