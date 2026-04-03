@@ -189,40 +189,24 @@ def inject_user():
     return dict(current_user=user)
 
 
-@app.route("/meine-gutscheine")
-def meine_gutscheine():
-    if "user_id" not in session:
-        return redirect("/login")
 
-    gutscheine = Gutschein.query.filter_by(user_id=session["user_id"]).all()
+@app.route("/apply-gutschein", methods=["POST"])
+def apply_gutschein():
+    code = request.form.get("code")
 
-    return render_template("gutscheine.html", gutscheine=gutscheine)
+    gutschein = Gutschein.query.filter_by(code=code, aktiv=True).first()
 
+    if not gutschein:
+        flash("Ungültiger Gutschein", "error")
+        return redirect("/cart")
 
-def update_user_punkte_und_gutschein(user, cart_items):
-    """Fügt Punkte hinzu und vergibt ggf. Gutschein"""
-    punkte = int(calculate_total(cart_items))
-    user.punkte += punkte
+    session["gutschein"] = {
+        "code": gutschein.code,
+        "wert": gutschein.wert
+    }
 
-    # 🎁 Gutschein bei 100 Punkten
-    if user.punkte >= 100:
-        code = str(uuid.uuid4())[:8]
-        gutschein = Gutschein(
-            code=code,
-            wert=10,  # z.B. 10€
-            user_id=user.id
-        )
-        user.punkte -= 100
-        db.session.add(gutschein)
-
-        send_email(
-            subject="Dein Gutschein 🎁",
-            body=f"Dein Code: {code}",
-            recipient=user.email
-        )
-
-    db.session.commit()
-
+    flash("Gutschein angewendet!", "success")
+    return redirect("/cart")
 # =====================================================
 # PAYPAL
 # =====================================================
@@ -290,10 +274,17 @@ def capture_paypal_order(order_id):
         data = response.json()
 
         if data.get("status") != "COMPLETED":
-            return jsonify({"status": "error", "message": "PayPal-Zahlung nicht abgeschlossen", "data": data}), 400
+            return jsonify({
+                "status": "error",
+                "message": "PayPal-Zahlung nicht abgeschlossen",
+                "data": data
+            }), 400
 
         cart_items = get_cart()
 
+        # =========================
+        # Bestellung speichern
+        # =========================
         bestellung = Bestellung(
             email=session.get("checkout_email"),
             vorname=session.get("checkout_vorname"),
@@ -322,19 +313,75 @@ def capture_paypal_order(order_id):
 
         db.session.commit()
 
+        # =========================
+        # 🎁 Gutschein ERSTELLEN (wenn gekauft)
+        # =========================
+        for item in cart_items:
+            if str(item.get("ean", "")).startswith("GUTSCHEIN"):
+
+                code = str(uuid.uuid4())[:8]
+
+                gutschein = Gutschein(
+                    code=code,
+                    wert=item["price"],
+                    aktiv=True
+                )
+
+                db.session.add(gutschein)
+
+                send_email(
+                    subject="Dein Gutschein 🎁",
+                    recipient=bestellung.email,
+                    html=f"""
+                        <h2>Dein Gutschein-Code</h2>
+                        <p><b>{code}</b></p>
+                        <p>Wert: {item['price']}€</p>
+                    """
+                )
+
+        # =========================
+        # 💸 Gutschein EINLÖSEN
+        # =========================
+        gutschein_data = session.get("gutschein")
+
+        if gutschein_data:
+            gutschein = Gutschein.query.filter_by(
+                code=gutschein_data["code"],
+                aktiv=True
+            ).first()
+
+            if gutschein:
+                gutschein.aktiv = False
+                gutschein.eingelöst_am = datetime.utcnow()
+
+        # Änderungen speichern
+        db.session.commit()
+
+        # =========================
+        # Buchbutler senden
+        # =========================
         try:
             sende_bestellung_an_buchbutler(bestellung, cart_items)
         except Exception:
             logger.exception("Buchbutler Bestellung fehlgeschlagen")
 
-        # Warenkorb leeren
+        # =========================
+        # Session aufräumen
+        # =========================
         session.pop("cart", None)
+        session.pop("gutschein", None)
 
-        return jsonify({"status": "success", "order_id": order_id})
+        return jsonify({
+            "status": "success",
+            "order_id": order_id
+        })
 
     except Exception as e:
         logger.exception("Fehler beim Capturen der PayPal-Zahlung")
-        return jsonify({"status": "error", "message": str(e)}), 500
+        return jsonify({
+            "status": "error",
+            "message": str(e)
+        }), 500
 
 def verify_webhook(headers, body):
 
@@ -397,8 +444,15 @@ def save_cart(cart):
     session.modified = True
 
 def calculate_total(cart):
-    return sum(item["price"] * item["quantity"] for item in cart)
 
+    total = sum(item["price"] * item["quantity"] for item in cart)
+
+    gutschein = session.get("gutschein")
+
+    if gutschein:
+        total -= gutschein["wert"]
+
+    return max(total, 0)
 
 def check_auth():
     if not BUCHBUTLER_USER or not BUCHBUTLER_PASSWORD:
