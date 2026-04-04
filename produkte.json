@@ -752,6 +752,16 @@
     "images/einmalkatzesein/einmalkatzesein4.jpg"
   ],
  "kategorie": "Kinder und Gefühle"
+},
+
+ {
+  "id": 9999,
+  "name": "Gutschein",
+  "kategorie": "Gutscheine",
+  "preis": 0,
+  "ean": "GUTSCHEIN_CUSTOM",
+  "beschreibung": "Flexibler Gutschein, Betrag wählbar",
+  "slug": "gutschein"
 }
 
 ]
