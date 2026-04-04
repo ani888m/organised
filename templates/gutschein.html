@@ -1,4 +1,6 @@
 <form method="POST" action="/add-gutschein">
+        {{ csrf_token() }}
+
     <button name="amount" value="10">10€</button>
     <button name="amount" value="25">25€</button>
     <button name="amount" value="50">50€</button>
