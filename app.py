@@ -195,18 +195,27 @@ def inject_user():
 
 @app.route("/add-gutschein", methods=["POST"])
 def add_gutschein():
-    try:
-        amount = float(request.form.get("amount"))
-    except:
-        flash("Ungültiger Betrag", "error")
+
+    preset = request.form.get("preset")
+    custom = request.form.get("custom_amount")
+
+    if preset:
+        amount = float(preset)
+    elif custom:
+        try:
+            amount = float(custom)
+        except:
+            flash("Ungültiger Betrag", "error")
+            return redirect("/gutschein")
+    else:
+        flash("Bitte Betrag auswählen", "error")
         return redirect("/gutschein")
 
-    # 🔒 Sicherheitscheck
+    # Sicherheitscheck
     if amount < 5 or amount > 500:
         flash("Betrag muss zwischen 5€ und 500€ liegen", "error")
         return redirect("/gutschein")
 
-    # 🧠 WICHTIG: Betrag speichern (für sichere Verarbeitung später!)
     session["gutschein_amount"] = amount
 
     cart = get_cart()
@@ -221,7 +230,6 @@ def add_gutschein():
 
     save_cart(cart)
 
-    flash("Gutschein wurde zum Warenkorb hinzugefügt!", "success")
     return redirect("/cart")
 
 @app.route("/apply-gutschein", methods=["POST"])
