@@ -198,7 +198,7 @@ document.querySelectorAll(".toggle-text").forEach(btn => {
 });
 
 
-  function addGutscheinToCart(event, name, image, ean) {
+  function addGutscheinToCart(event, name, image) {
     event.preventDefault();
     const form = event.target;
     const preisInput = form.querySelector('input[name="preis"]');
@@ -209,7 +209,7 @@ document.querySelectorAll(".toggle-text").forEach(btn => {
         return;
     }
 
-    addToCart(name, preis, image, ean); // Nutzt deine bestehende Funktion
+    addToCart(name, preis, image); // Nutzt deine bestehende Funktion
 }
 </script>
 
