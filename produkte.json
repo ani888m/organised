@@ -755,13 +755,15 @@
 },
 
  {
-  "id": 9999,
+  "id": 100,
   "name": "Gutschein",
   "kategorie": "Gutscheine",
   "preis": 0,
   "ean": "GUTSCHEIN_CUSTOM",
   "beschreibung": "Flexibler Gutschein, Betrag wählbar",
-  "slug": "gutschein"
+  "slug": "gutschein",
+    "kategorie": "Kinder und Gefühle"
+
 }
 
 ]
