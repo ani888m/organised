@@ -195,7 +195,6 @@ def inject_user():
 
 @app.route("/add-gutschein", methods=["POST"])
 def add_gutschein():
-
     preset = request.form.get("preset")
     custom = request.form.get("custom_amount")
 
@@ -211,26 +210,34 @@ def add_gutschein():
         flash("Bitte Betrag auswählen", "error")
         return redirect("/gutschein")
 
-    # Sicherheitscheck
     if amount < 5 or amount > 500:
         flash("Betrag muss zwischen 5€ und 500€ liegen", "error")
         return redirect("/gutschein")
 
-    session["gutschein_amount"] = amount
+    # Gutscheinprodukt aus JSON laden
+    produkt = next((p for p in produkte if p.get("ean") == "GUTSCHEIN_CUSTOM"), None)
+    if not produkt:
+        flash("Gutscheinprodukt nicht gefunden!", "error")
+        return redirect("/gutschein")
+
+    # Kopie erstellen und Preis setzen
+    produkt = produkt.copy()
+    produkt["price"] = amount
+    produkt["title"] = f"Gutschein {amount}€"
 
     cart = get_cart()
-
     cart.append({
-        "id": str(uuid.uuid4()),
-        "title": f"Gutschein {amount}€",
-        "price": amount,
+        "id": str(uuid.uuid4()),  # eindeutige Session-ID
+        "title": produkt["title"],
+        "price": produkt["price"],
         "quantity": 1,
-        "ean": "GUTSCHEIN_CUSTOM"
+        "ean": produkt["ean"]
     })
-
     save_cart(cart)
 
     return redirect("/cart")
+
+
 
 @app.route("/apply-gutschein", methods=["POST"])
 def apply_gutschein():
