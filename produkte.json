@@ -762,7 +762,10 @@
   "ean": "GUTSCHEIN_CUSTOM",
   "beschreibung": "Flexibler Gutschein, Betrag wählbar",
   "slug": "gutschein",
-    "kategorie": "Kinder und Gefühle"
+  "bilder": [
+    "images/einmalkatzesein/einmalkatzesein.jpg",
+  ],
+ "kategorie": "Kinder und Gefühle"
 
 }
 
