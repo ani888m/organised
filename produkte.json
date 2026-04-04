@@ -755,17 +755,13 @@
 },
 
  {
-  "id": 100,
+  "id": 9999,
   "name": "Gutschein",
-  "kategorie": "Gutscheine",
-  "preis": 0,
-  "ean": "GUTSCHEIN_CUSTOM",
-  "beschreibung": "Flexibler Gutschein, Betrag wählbar",
+  "preis": null,
+  "beschreibung": "Flexibler Gutscheinbetrag – wähle deinen Wunschwert",
   "slug": "gutschein",
-  "bilder": [
-    "images/einmalkatzesein/einmalkatzesein.jpg"
-  ],
- "kategorie": "Kinder und Gefühle"
+  "bilder": ["images/gutschein.jpg"],
+  "flexible_preis": true
 }
 
 ]
