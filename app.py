@@ -189,6 +189,40 @@ def inject_user():
     return dict(current_user=user)
 
 
+# =====================================================
+# GUTSCHEIN 
+# =====================================================
+
+@app.route("/add-gutschein", methods=["POST"])
+def add_gutschein():
+    try:
+        amount = float(request.form.get("amount"))
+    except:
+        flash("Ungültiger Betrag", "error")
+        return redirect("/gutschein")
+
+    # 🔒 Sicherheitscheck
+    if amount < 5 or amount > 500:
+        flash("Betrag muss zwischen 5€ und 500€ liegen", "error")
+        return redirect("/gutschein")
+
+    # 🧠 WICHTIG: Betrag speichern (für sichere Verarbeitung später!)
+    session["gutschein_amount"] = amount
+
+    cart = get_cart()
+
+    cart.append({
+        "id": str(uuid.uuid4()),
+        "title": f"Gutschein {amount}€",
+        "price": amount,
+        "quantity": 1,
+        "ean": "GUTSCHEIN_CUSTOM"
+    })
+
+    save_cart(cart)
+
+    flash("Gutschein wurde zum Warenkorb hinzugefügt!", "success")
+    return redirect("/cart")
 
 @app.route("/apply-gutschein", methods=["POST"])
 def apply_gutschein():
