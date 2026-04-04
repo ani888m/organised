@@ -164,3 +164,34 @@ window.addEventListener('DOMContentLoaded', () => {
 // --- Optional: global verfügbar machen ---
 window.loadCart = loadCart;
 window.setupCheckoutButton = setupCheckoutButton;
+
+
+
+function addVoucher(amount) {
+
+  const voucher = {
+    id: crypto.randomUUID(),
+    title: `Gutschein ${amount}€`,
+    price: amount,
+    quantity: 1,
+    ean: "GUTSCHEIN_CUSTOM",
+    image: "" // optional
+  };
+
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  cart.push(voucher);
+
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  // 🔥 WICHTIG: an Flask schicken
+  fetch("/sync-cart", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(cart)
+  }).then(() => {
+    window.location.href = "/cart";
+  });
+}
