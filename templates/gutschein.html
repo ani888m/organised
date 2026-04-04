@@ -1,11 +1,14 @@
 <form method="POST" action="/add-gutschein">
+    
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-    <button name="amount" value="10">10€</button>
-    <button name="amount" value="25">25€</button>
-    <button name="amount" value="50">50€</button>
+    <!-- Preset Buttons -->
+    <button type="submit" name="preset" value="10">10€</button>
+    <button type="submit" name="preset" value="25">25€</button>
+    <button type="submit" name="preset" value="50">50€</button>
 
-    <input type="number" name="amount" placeholder="Eigener Betrag" min="5" max="500">
-    
+    <!-- Freie Eingabe -->
+    <input type="number" name="custom_amount" placeholder="Eigener Betrag" min="5" max="500">
+
     <button type="submit">In den Warenkorb</button>
 </form>
