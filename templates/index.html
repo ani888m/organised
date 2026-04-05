@@ -136,7 +136,7 @@ Neuerscheinungen, Klassiker und alles besondere</h1>
         <h3>{{ produkt.name }}</h3>
         {% if produkt.flexible_preis %}
         <form onsubmit="addGutscheinToCart(event, '{{ produkt.name }}', '{{ url_for('static', filename=produkt.bilder[0]) }}')">
-          <input type="number" name="preis" min="5" max="500" placeholder="Betrag wählen" required>
+          <input type="number" name="preis" min="0.01" max="500" placeholder="Betrag wählen" required>
           <button type="submit">In den Warenkorb</button>
         </form>
         {% else %}
