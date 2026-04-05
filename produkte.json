@@ -761,7 +761,9 @@
   "beschreibung": "Flexibler Gutscheinbetrag – wähle deinen Wunschwert",
   "slug": "gutschein",
   "bilder": ["images/gutschein.jpg"],
+       "kategorie": "Jacominus Gainsborough",
   "flexible_preis": true
 }
+
 
 ]
