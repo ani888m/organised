@@ -215,7 +215,7 @@ def add_gutschein():
         return redirect("/gutschein")
 
     # Gutscheinprodukt aus JSON laden
-    produkt = next((p for p in produkte if p.get("ean") == "GUTSCHEIN_CUSTOM"), None)
+    produkt = next((p for p in produkte if p.get("type") == "gutschein"), None)
     if not produkt:
         flash("Gutscheinprodukt nicht gefunden!", "error")
         return redirect("/gutschein")
@@ -231,7 +231,7 @@ def add_gutschein():
         "title": produkt["title"],
         "price": produkt["price"],
         "quantity": 1,
-        "ean": produkt["ean"]
+        "type": "gutschein"
     })
     save_cart(cart)
 
@@ -366,7 +366,7 @@ def capture_paypal_order(order_id):
         # 🎁 Gutschein ERSTELLEN (wenn gekauft)
         # =========================
         for item in cart_items:
-            if str(item.get("ean", "")).startswith("GUTSCHEIN"):
+            if item.get("type") == "gutschein":
 
                 code = str(uuid.uuid4())[:8]
 
