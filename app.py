@@ -598,6 +598,8 @@ def lade_produkt_von_api(ean):
             "hoehe": attr(attrs, "Hoehe"),
             "extra": attrs
         }
+        
+produkt["bilder"] = [attr(attrs, "bild_url") or f"https://api.buchbutler.de/image/{ean}"]
 
         return produkt
 
@@ -949,6 +951,7 @@ def produkt_detail(produkt_id, slug):
         produkt.update(movement)
 
     produkt.update(lokale_daten)
+
 
     produkt.setdefault("bestand", "n/a")
     produkt.setdefault("preis", 0)
