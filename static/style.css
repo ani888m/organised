@@ -769,6 +769,7 @@ button[type="submit"]:hover {
   background: white;
   color: var(--color-secondary);
   padding: 8px 10px;
+  margin: 0 auto;
   font-size: 25px;
   font-family: var(--font-heading);
   font-weight: 300;
@@ -791,7 +792,6 @@ button[type="submit"]:hover {
 
 .nav-links li a {
   text-decoration: none;
-  color: black;
   display: block;
 }
 
