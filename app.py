@@ -599,7 +599,7 @@ def lade_produkt_von_api(ean):
             "extra": attrs
         }
         
-produkt["bilder"] = [attr(attrs, "bild_url") or f"https://api.buchbutler.de/image/{ean}"]
+        produkt["bilder"] = [attr(attrs, "bild_url") or f"https://api.buchbutler.de/image/{ean}"]
 
         return produkt
 
