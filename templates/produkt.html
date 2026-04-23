@@ -1,147 +1,159 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ produkt.name }}  | I B K - Buchhandlung für Illustration und Bilderbücher </title>
+  <title>{{ produkt.name }} | I B K - Buchhandlung für Illustration und Bilderbücher</title>
   <link rel="icon" type="image/png" href="{{ url_for('static', filename='ficon.png') }}">
   <meta name="description" content="Details zum Buch '{{ produkt.name }}'. Jetzt entdecken und bestellen.">
 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='product.css') }}" />
   <script src="{{ url_for('static', filename='script.js') }}" defer></script>
-
-  
-
-
 </head>
-<body>
-  
-<header>
-    <a href="{{ url_for('index') }}" class="back-link">← Zurück zur Übersicht</a>
 
-    <ul class="nav-links" id="nav-links">
-      <li class="cart">
-        <a href="{{ url_for('cart') }}">🛒 <span id="cart-count">0</span></a>
-      </li>
-    </ul>
+<body>
+
+<header>
+  <a href="{{ url_for('index') }}" class="back-link">← Zurück zur Übersicht</a>
+
+  <ul class="nav-links" id="nav-links">
+    <li class="cart">
+      <a href="{{ url_for('cart') }}">🛒 <span id="cart-count">0</span></a>
+    </li>
+  </ul>
 </header>
 
+<main class="book-detail">
+  <div class="book-container">
 
-
-
-
-
-
-  <main class="book-detail">
-    <div class="book-container">
-      <div class="book-cover">
-
-    
-
+    <!-- Bilder -->
+    <div class="book-cover">
       <div class="carousel">
-         
-     
-     
         {% for bild in produkt.bilder %}
           <img class="carousel-image {% if loop.index0 == 0 %}active{% endif %}"
-          {% if bild.startswith('http') %}src="{{ bild }}"{% else %}src="{{ url_for('static', filename=bild) }}"{% endif %}
-            alt="{{ produkt.name }}">
-          {% endfor %}
+               {% if bild.startswith('http') %}
+                 src="{{ bild }}"
+               {% else %}
+                 src="{{ url_for('static', filename=bild) }}"
+               {% endif %}
+               alt="{{ produkt.name }}">
+        {% endfor %}
 
-
-
-         <button class="product-prev">❮</button>
-         <button class="product-next">❯</button>
+        <button class="product-prev">❮</button>
+        <button class="product-next">❯</button>
       </div>
+    </div>
 
-      </div>
+    <!-- Infos -->
+    <div class="book-info">
+      <h1>{{ produkt.name }}</h1>
+      <p class="author">{{ produkt.autor }}</p>
+      <p class="illustrator">{{ produkt.illustrator }}</p>
 
-      <div class="book-info">
-        <h1>{{ produkt.name }}</h1>
-        <p class="author"> {{ produkt.autor }}</p>
-        <p class="illustrator"> {{ produkt.illustrator }}</p>
+      <!-- 🎁 GUTSCHEIN vs 📚 PRODUKT -->
+      {% if produkt.is_gutschein %}
+
+        <p class="price">Wähle deinen Gutscheinwert</p>
+
+        <div class="anzahl">
+          <form method="POST" action="/add-to-cart">
+            <input type="hidden" name="produkt_id" value="{{ produkt.id }}">
+
+            <label>Wert:</label>
+            <select name="gutschein_wert">
+              {% for wert in produkt.preis_optionen %}
+                <option value="{{ wert }}">{{ wert }} €</option>
+              {% endfor %}
+            </select>
+
+            <button type="submit">Gutschein kaufen 🎁</button>
+          </form>
+
+          <p style="margin-top:10px;">🎁 Wird als Code per E-Mail verschickt</p>
+        </div>
+
+      {% else %}
 
         <p class="price">{{ "%.2f"|format(produkt.preis) }} €</p>
-         
-      
 
-        {% if produkt.leseprobe_pdf %}
-          <a href="{{ url_for('static', filename='leseproben/' ~ produkt.leseprobe_pdf) }}" target="_blank">
-             <button> 📄 Leseprobe (PDF)</button>
-         </a>
-        {% endif %}
+        <div class="anzahl">
+          <label for="quantity">Anzahl:</label>
+          <input type="number" id="quantity" value="1" min="1">
 
-        {% if produkt.leseprobe_url %}
-           <a href="{{ produkt.leseprobe_url }}" target="_blank"  rel="noopener noreferrer">
-           <button>  📖 Leseprobe  </button>
-         </a>
-        {% endif %}
-      <div class="anzahl">
-        <label for="quantity">Anzahl:</label>
-        <input type="number" id="quantity" value="1" min="1">
+          <button onclick="addToCart(
+            '{{ produkt.name }}',
+            {{ produkt.preis }},
+            '{{ url_for('static', filename=produkt.bilder[0]) }}',
+            '{{ produkt.ean }}'
+          )">
+            In den Warenkorb 🛒
+          </button>
+        </div>
 
-        <button onclick="addToCart('{{ produkt.name }}', {{ produkt.preis }},   '{{ url_for('static', filename=produkt.bilder[0]) }}',
-'{{ produkt.ean }}'
-)">In den Warenkorb 🛒</button>
-      </div>
+      {% endif %}
 
+      <!-- Leseproben -->
+      {% if produkt.leseprobe_pdf %}
+        <a href="{{ url_for('static', filename='leseproben/' ~ produkt.leseprobe_pdf) }}" target="_blank">
+          <button>📄 Leseprobe (PDF)</button>
+        </a>
+      {% endif %}
+
+      {% if produkt.leseprobe_url %}
+        <a href="{{ produkt.leseprobe_url }}" target="_blank" rel="noopener noreferrer">
+          <button>📖 Leseprobe</button>
+        </a>
+      {% endif %}
+
+      <!-- Details -->
       <div class="info-details">
+        <div class="info-header" onclick="toggleInfoDetails()">
+          <span>Weitere Details</span>
+          <span class="info-arrow" id="info-arrow">❯</span>
+        </div>
 
-<div class="info-header" onclick="toggleInfoDetails()">
-    <span>Weitere Details</span>
-    <span class="info-arrow" id="info-arrow">❯</span>
-  </div>
+        <div class="info-content" id="info-content">
+          <p><strong>ISBN:</strong> {{ produkt.isbn or "–" }}</p>
+          <p><strong>Seiten:</strong> {{ produkt.seiten or "–" }}</p>
+          <p><strong>Format:</strong> {{ produkt.format or "–" }}</p>
+          <p><strong>Verlag:</strong> {{ produkt.verlag or "–" }}</p>
+          <p><strong>Sprache:</strong> {{ produkt.sprache or "–" }}</p>
+          <p><strong>Erscheinungsjahr:</strong> {{ produkt.erscheinungsjahr or "–" }}</p>
 
-  <div class="info-content" id="info-content">
-    <p><strong>ISBN:</strong> {{ produkt.isbn if produkt.isbn else "–" }}</p>
-    <p><strong>Seiten:</strong> {{ produkt.seiten if produkt.seiten else "–" }}</p>
-    <p><strong>Format:</strong> {{ produkt.format if produkt.format else "–" }}</p>
-    
-    <p><strong>Verlag:</strong> {{ produkt.verlag if produkt.verlag else "–" }}</p>
-    <p><strong>Sprache:</strong> {{ produkt.sprache if produkt.sprache else "–" }}</p>
-    <p><strong>Erscheinungsjahr:</strong> {{ produkt.erscheinungsjahr if produkt.erscheinungsjahr else "–" }}</p>
-    
-  <p><strong>Altersempfehlung:</strong>
-    {% if produkt.alter_von and produkt.alter_bis %}
-      {{ produkt.alter_von }}–{{ produkt.alter_bis }} Jahre
-    {% else %}
-      –
-    {% endif %}
-  </p>
+          <p><strong>Altersempfehlung:</strong>
+            {% if produkt.alter_von and produkt.alter_bis %}
+              {{ produkt.alter_von }}–{{ produkt.alter_bis }} Jahre
+            {% else %}
+              –
+            {% endif %}
+          </p>
 
-  <p><strong>Maße:</strong>
-    {% if produkt.laenge and produkt.breite and produkt.hoehe %}
-      {{ produkt.laenge }} × {{ produkt.breite }} × {{ produkt.hoehe }} mm
-    {% else %}
-      –
-    {% endif %}
-  </p>
+          <p><strong>Maße:</strong>
+            {% if produkt.laenge and produkt.breite and produkt.hoehe %}
+              {{ produkt.laenge }} × {{ produkt.breite }} × {{ produkt.hoehe }} mm
+            {% else %}
+              –
+            {% endif %}
+          </p>
 
-  <p><strong>Gewicht:</strong> {{ produkt.gewicht if produkt.gewicht else "–" }} g</p>
-
-  <p><strong>Bestand:</strong> {{ produkt.bestand if produkt.bestand else "–" }}</p>
-
-  <p><strong>Lieferzeit:</strong> {{ produkt.handling_zeit }} Werktage</p>
-
-  <p><strong>Erfüllungsrate:</strong> {{ produkt.erfuellungsrate }} %</p>
-  
-
-  </div>
-</div>
-
+          <p><strong>Gewicht:</strong> {{ produkt.gewicht or "–" }} g</p>
+          <p><strong>Bestand:</strong> {{ produkt.bestand or "–" }}</p>
+          <p><strong>Lieferzeit:</strong> {{ produkt.handling_zeit }} Werktage</p>
+          <p><strong>Erfüllungsrate:</strong> {{ produkt.erfuellungsrate }} %</p>
+        </div>
       </div>
+
     </div>
-    
-    <div class="book-description">
-       {{ produkt.beschreibung | replace('\n', '<br>') | safe }}
-    </div>
+  </div>
 
+  <!-- Beschreibung -->
+  <div class="book-description">
+    {{ produkt.beschreibung | replace('\n', '<br>') | safe }}
+  </div>
 
+</main>
 
-
-  </main>
 {% include 'footer.html' %}
 
 </body>
