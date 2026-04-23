@@ -19,25 +19,22 @@
 
   <main style="margin-left: 100px; max-width: 2000px">
       
-      <form method="POST" action="/add-gutschein">
-    
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+       <h1>🎁 Gutschein kaufen</h1>
 
-    <!-- Preset Buttons -->
-    <button type="hidden" name="preset" value="10">10€</button>
-    <button type="submit" name="preset" value="25">25€</button>
-    <button type="submit" name="preset" value="50">50€</button>
+<form method="POST">
+  <label>Betrag:</label>
+  <select name="wert">
+    <option value="10">10 €</option>
+    <option value="25">25 €</option>
+    <option value="50">50 €</option>
+    <option value="100">100 €</option>
+  </select>
 
-    <!-- Freie Eingabe -->
-    <input type="number" name="custom_amount" placeholder="Eigener Betrag" min="5" max="500">
+  <label>E-Mail des Empfängers:</label>
+  <input type="email" name="email" required>
 
-    <button type="submit">In den Warenkorb</button>
+  <button type="submit">Weiter zur Zahlung</button>
 </form>
-
-
-
-   
-  </main>
 
   {% include 'footer.html' %}
 
