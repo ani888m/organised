@@ -997,7 +997,7 @@ def add_to_cart():
 
     if not found:
         cart.append({
-            "id": produkt["id"],
+            "id": f"gutschein-{uuid.uuid4()}",
             "title": produkt["name"],
             "price": produkt.get("preis", 0),
             "quantity": 1,
