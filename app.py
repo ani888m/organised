@@ -241,6 +241,20 @@ def gutschein():
 
     return render_template("gutschein.html")
 
+
+
+code = str(uuid.uuid4())[:10]
+
+gutschein = Gutschein(
+    code=code,
+    wert=session["gutschein_wert"]
+)
+
+db.session.add(gutschein)
+db.session.commit()
+
+send_email(...)
+
 # =====================================================
 # PAYPAL
 # =====================================================
