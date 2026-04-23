@@ -755,16 +755,14 @@
  "kategorie": "Kinder und Gefühle"
 },
 
- {
-  "id": 1000,
-  "kategorie": "Jacominus Gainsborough",
-  "name": "Gutschein",
-  "preis": null,
-  "beschreibung": "Flexibler Gutscheinbetrag – wähle deinen Wunschwert",
-  "slug": "gutschein",
-  "bilder": ["images/gutschein.jpg"],
-  "flexible_preis": true,
-  "type": "gutschein"
+  {
+  "id": 999,
+  "name": "Geschenkgutschein",
+  "ean": null,
+  "is_gutschein": true,
+  "preis_optionen": [10, 25, 50, 100],
+  "kategorie": "Kinder und Gefühle",
+  "beschreibung": "Verschenke Freude mit einem Gutschein."
 }
   
 
