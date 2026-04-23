@@ -1,3 +1,12 @@
+
+
+
+
+
+
+
+
+
 import os
 import json
 import logging
@@ -189,73 +198,40 @@ def inject_user():
     return dict(current_user=user)
 
 
-# =====================================================
-# GUTSCHEIN 
-# =====================================================
+@app.route("/meine-gutscheine")
+def meine_gutscheine():
+    if "user_id" not in session:
+        return redirect("/login")
 
-@app.route("/add-gutschein", methods=["POST"])
-def add_gutschein():
-    preset = request.form.get("preset")
-    custom = request.form.get("custom_amount")
+    gutscheine = Gutschein.query.filter_by(user_id=session["user_id"]).all()
 
-    if preset:
-        amount = float(preset)
-    elif custom:
-        try:
-            amount = float(custom)
-        except:
-            flash("Ungültiger Betrag", "error")
-            return redirect("/gutschein")
-    else:
-        flash("Bitte Betrag auswählen", "error")
-        return redirect("/gutschein")
-
-    if amount < 5 or amount > 500:
-        flash("Betrag muss zwischen 5€ und 500€ liegen", "error")
-        return redirect("/gutschein")
-
-    # Gutscheinprodukt aus JSON laden
-    produkt = next((p for p in produkte if p.get("type") == "gutschein"), None)
-    if not produkt:
-        flash("Gutscheinprodukt nicht gefunden!", "error")
-        return redirect("/gutschein")
-
-    # Kopie erstellen und Preis setzen
-    produkt = produkt.copy()
-    produkt["price"] = amount
-    produkt["title"] = f"Gutschein {amount}€"
-
-    cart = get_cart()
-    cart.append({
-        "id": str(uuid.uuid4()),  # eindeutige Session-ID
-        "title": produkt["title"],
-        "price": produkt["price"],
-        "quantity": 1,
-        "type": "gutschein"
-    })
-    save_cart(cart)
-
-    return redirect("/cart")
+    return render_template("gutscheine.html", gutscheine=gutscheine)
 
 
+def update_user_punkte_und_gutschein(user, cart_items):
+    """Fügt Punkte hinzu und vergibt ggf. Gutschein"""
+    punkte = int(calculate_total(cart_items))
+    user.punkte += punkte
 
-@app.route("/apply-gutschein", methods=["POST"])
-def apply_gutschein():
-    code = request.form.get("code")
+    # 🎁 Gutschein bei 100 Punkten
+    if user.punkte >= 100:
+        code = str(uuid.uuid4())[:8]
+        gutschein = Gutschein(
+            code=code,
+            wert=10,  # z.B. 10€
+            user_id=user.id
+        )
+        user.punkte -= 100
+        db.session.add(gutschein)
 
-    gutschein = Gutschein.query.filter_by(code=code, aktiv=True).first()
+        send_email(
+            subject="Dein Gutschein 🎁",
+            body=f"Dein Code: {code}",
+            recipient=user.email
+        )
 
-    if not gutschein:
-        flash("Ungültiger Gutschein", "error")
-        return redirect("/cart")
+    db.session.commit()
 
-    session["gutschein"] = {
-        "code": gutschein.code,
-        "wert": gutschein.wert
-    }
-
-    flash("Gutschein angewendet!", "success")
-    return redirect("/cart")
 # =====================================================
 # PAYPAL
 # =====================================================
@@ -323,17 +299,10 @@ def capture_paypal_order(order_id):
         data = response.json()
 
         if data.get("status") != "COMPLETED":
-            return jsonify({
-                "status": "error",
-                "message": "PayPal-Zahlung nicht abgeschlossen",
-                "data": data
-            }), 400
+            return jsonify({"status": "error", "message": "PayPal-Zahlung nicht abgeschlossen", "data": data}), 400
 
         cart_items = get_cart()
 
-        # =========================
-        # Bestellung speichern
-        # =========================
         bestellung = Bestellung(
             email=session.get("checkout_email"),
             vorname=session.get("checkout_vorname"),
@@ -362,75 +331,19 @@ def capture_paypal_order(order_id):
 
         db.session.commit()
 
-        # =========================
-        # 🎁 Gutschein ERSTELLEN (wenn gekauft)
-        # =========================
-        for item in cart_items:
-            if item.get("type") == "gutschein":
-
-                code = str(uuid.uuid4())[:8]
-
-                gutschein = Gutschein(
-                    code=code,
-                    wert=item["price"],
-                    aktiv=True
-                )
-
-                db.session.add(gutschein)
-
-                send_email(
-                    subject="Dein Gutschein 🎁",
-                    recipient=bestellung.email,
-                    html=f"""
-                        <h2>Dein Gutschein-Code</h2>
-                        <p><b>{code}</b></p>
-                        <p>Wert: {item['price']}€</p>
-                    """
-                )
-
-        # =========================
-        # 💸 Gutschein EINLÖSEN
-        # =========================
-        gutschein_data = session.get("gutschein")
-
-        if gutschein_data:
-            gutschein = Gutschein.query.filter_by(
-                code=gutschein_data["code"],
-                aktiv=True
-            ).first()
-
-            if gutschein:
-                gutschein.aktiv = False
-                gutschein.eingelöst_am = datetime.utcnow()
-
-        # Änderungen speichern
-        db.session.commit()
-
-        # =========================
-        # Buchbutler senden
-        # =========================
         try:
             sende_bestellung_an_buchbutler(bestellung, cart_items)
         except Exception:
             logger.exception("Buchbutler Bestellung fehlgeschlagen")
 
-        # =========================
-        # Session aufräumen
-        # =========================
+        # Warenkorb leeren
         session.pop("cart", None)
-        session.pop("gutschein", None)
 
-        return jsonify({
-            "status": "success",
-            "order_id": order_id
-        })
+        return jsonify({"status": "success", "order_id": order_id})
 
     except Exception as e:
         logger.exception("Fehler beim Capturen der PayPal-Zahlung")
-        return jsonify({
-            "status": "error",
-            "message": str(e)
-        }), 500
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 def verify_webhook(headers, body):
 
@@ -493,15 +406,8 @@ def save_cart(cart):
     session.modified = True
 
 def calculate_total(cart):
+    return sum(item["price"] * item["quantity"] for item in cart)
 
-    total = sum(item["price"] * item["quantity"] for item in cart)
-
-    gutschein = session.get("gutschein")
-
-    if gutschein:
-        total -= gutschein["wert"]
-
-    return max(total, 0)
 
 def check_auth():
     if not BUCHBUTLER_USER or not BUCHBUTLER_PASSWORD:
@@ -598,8 +504,6 @@ def lade_produkt_von_api(ean):
             "hoehe": attr(attrs, "Hoehe"),
             "extra": attrs
         }
-        
-        produkt["bilder"] = [attr(attrs, "bild_url") or f"https://api.buchbutler.de/image/{ean}"]
 
         return produkt
 
@@ -665,7 +569,7 @@ def sende_bestellung_an_buchbutler(bestellung, cart_items):
             "bestelldatum": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "bestellreferenz": f"IBK-{bestellung.id}",
             "seite": "ibk-bilderbuch.de",
-            "bestellfreigabe": 0,
+            "bestellfreigabe": 1,
             "mol_verkaufskanal_id": int(BUCHBUTLER_VERKAUFSKANAL_ID)
         },
 
@@ -952,7 +856,6 @@ def produkt_detail(produkt_id, slug):
 
     produkt.update(lokale_daten)
 
-
     produkt.setdefault("bestand", "n/a")
     produkt.setdefault("preis", 0)
     produkt.setdefault("handling_zeit", "n/a")
@@ -997,7 +900,7 @@ def add_to_cart():
 
     if not found:
         cart.append({
-            "id": f"gutschein-{uuid.uuid4()}",
+            "id": produkt["id"],
             "title": produkt["name"],
             "price": produkt.get("preis", 0),
             "quantity": 1,
@@ -1342,10 +1245,6 @@ def newsletterbesteatigung():
 @app.route("/newsletteranmeldung")
 def newsletteranmeldung():
     return render_template("newsletteranmeldung.html", user_email=session.get("user_email"))
-
-@app.route("/gutschein")
-def gutschein():
-    return render_template("gutschein.html", user_email=session.get("user_email"))
     
 # ============================
 # INDEX HAUPTSEITE
@@ -1364,7 +1263,7 @@ def index():
     kategorie_beschreibungen = {
         "Jacominus Gainsborough": {
             "kurz": "Einer, der sich erinnert. Und manchmal auch vergisst.",
-            "lang": "Jacominus sitzt im Garten, denkt nach, lauscht dem Wind. Eine Erinnerung streift ihn – kaum greifbar, wie ein Traum, der sich beim Aufwachen auflöst. Und doch ist da etwas, das bleibt: ein Gefühl, warm und vertraut.\n Es sind die winzig kleinen Sekunden, die zählen. Die kaum sichtbaren Augenblicke zwischen zwei Herzschlägen, in denen sich alles entscheiden kann. Ein Blick. Ein Lächeln. Ein Wiedersehen.\nUnd irgendwo ist immer jemand unterwegs. Über Wiesen, durch Straßen, vorbei an flüchtigen Begegnungen. Schritt für Schritt, einer Verabredung entgegen. Vielleicht Punkt zwölf. Vielleicht genau im richtigen Moment.\nSo entfaltet sich ein Leben – nicht laut und in Bildern und Worten, die bleiben. In Begegnungen, die alles verändern können. Kein außergewöhnliches Leben. Und doch ein ganz besonderes. Das Leben von Jacominus Gainsborough"
+            "lang": "Jacominus sitzt im Garten, denkt nach, lauscht dem Wind. Eine Erinnerung streift ihn – kaum greifbar, wie ein Traum, der sich beim Aufwachen auflöst. Und doch ist da etwas, das bleibt: ein Gefühl, warm und vertraut. Es sind die winzig kleinen Sekunden, die zählen. Die kaum sichtbaren Augenblicke zwischen zwei Herzschlägen, in denen sich alles entscheiden kann. Ein Blick. Ein Lächeln. Ein Wiedersehen. Und irgendwo ist immer jemand unterwegs. Über Wiesen, durch Straßen, vorbei an flüchtigen Begegnungen. Schritt für Schritt, einer Verabredung entgegen. Vielleicht Punkt zwölf. Vielleicht genau im richtigen Moment. So entfaltet sich ein Leben – nicht laut und in Bildern und Worten, die bleiben. In Begegnungen, die alles verändern können. Kein außergewöhnliches Leben. Und doch ein ganz besonderes. Das Leben von Jacominus Gainsborough"
         }
     }
 
