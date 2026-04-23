@@ -224,6 +224,24 @@ def update_user_punkte_und_gutschein(user, cart_items):
     db.session.commit()
 
 # =====================================================
+# gutschein
+# =====================================================
+
+@app.route("/gutschein", methods=["GET", "POST"])
+def gutschein():
+
+    if request.method == "POST":
+        wert = float(request.form.get("wert"))
+        email = request.form.get("email")
+
+        session["gutschein_wert"] = wert
+        session["gutschein_email"] = email
+
+        return redirect("/checkout-gutschein")
+
+    return render_template("gutschein.html")
+
+# =====================================================
 # PAYPAL
 # =====================================================
 
