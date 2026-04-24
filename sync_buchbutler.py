@@ -1,4 +1,3 @@
-
 # sync_buchbutler.py
 import os
 from app import app, db, lade_produkt_von_api, lade_bestand_von_api
