@@ -1,4 +1,3 @@
-
 [
   { "id": 1,
     "name": "Das Stundenbuch des Jacominus Gainsborough",
@@ -13,11 +12,10 @@
       "images/jacominus/jacominus5.jpg",
       "images/jacominus/jacominus6.jpg",
       "images/jacominus/jacominus7.jpg"
-    ]
+    ],
+    "kategorie": "Jacominus Gainsborough"
   },
 
-
-  
   {
     "id": 2,
     "name": "PUNKT 12",
@@ -245,6 +243,7 @@
 
 {
   "id": 16,
+  "name": "Wuetend",
   "ean": "9783791374932",
   "beschreibung": "Wut ist ein kraftvolles Gefühl. Wie ein Sturm in einem dunklen Wald packt die Heldin dieses wunderbare Bilderbuch die Wut. Sie reißt sie mit sich, und sie donnert und heult. Die Wut nimmt sie mit auf einen wilden Ritt und ihre Gefühle entladen sich wie Naturgewalten. Dieses Buch zeigt, wie Wut überwältigend, isolierend oder beängstigend sein kann – aber auch, wie sie eine Quelle von Kraft und Veränderung sein kann. (Kinder und ihre Gefühle, Band 1)\"",
   "leseprobe_pdf": "wuetend.pdf",
@@ -256,6 +255,7 @@
 
 {
   "id": 17,
+  "name": "Mutig",
   "ean": "9783791375755",
   "beschreibung": "Was wir nicht kennen, kann ganz schön furchteinflößend sein. In diesem ausdrucksstarken Bilderbuch geht Britta Teckentrup der Frage nach, was es bedeutet, mutig zu sein. Sie erzählt die Geschichte eines Mädchens, das alleine durch einen dunklen Wald wandert und sich vor einem Bären fürchtet. Zuerst macht der Bär ihr Angst, er wirkt riesig und fremd. Doch als sie sich ihm nähert, wird der Bär ihr Begleiter und schließlich ihr Freund. Dieses Buch eignet sich perfekt für die Behandlung von Angst für Kinder im Kindergarten- und Grundschulalter. Es zeigt, wie lähmend sich Angst manchmal anfühlen kann, aber auch, wie gut es tut, sich mit seinen Ängsten zu konfrontieren und sie damit zu überwinden.",  
   "preis": 18.00,
@@ -268,6 +268,7 @@
 
 {
   "id": 18,
+  "name": "Einsam",
   "ean": "9783791376189",
   "beschreibung": "Mit stimmungsvollen Illustrationen und gereimten Texten erkundet dieses Buch das Gefühl der Einsamkeit aus der Perspektive eines Kindes. Britta Teckentrups neues Buch über Emotionen ist dem leider äußerst aktuellen Thema Einsamkeit in der Kindheit gewidmet. Zwar ist das Gefühl, allein zu sein, ganz natürlich und jeder kennt es. Doch kann es auch sehr beunruhigend und beängstigend sein, wenn sich ein Kind einsam fühlt. Mit der für sie charakteristischen Sensibilität erkundet sie Momente, in denen die Welt weit entfernt scheint und man mit der schweren Stille kämpft, die uns umgibt, wenn sich Einsamkeit wie ein allumfassender Schatten über uns legt. Das Buch vermittelt Kindern, dass Einsamkeit zwar traurig und schwierig sein kann, aber ein Teil des Lebens ist, den jede*r erlebt. Es bietet einen Hoffnungsschimmer: auch in den dunkelsten Momenten liegt vor uns die Möglichkeit von Licht und Verbindung.",
   "bilder": [
@@ -279,6 +280,7 @@
 
 {
   "id": 19,
+  "name": "Schaukel",
   "ean": "9783791375366",
   "beschreibung": "Die Schaukel ist ein philosophisches Bilderbuch, das Kinder behutsam an die Höhen und Tiefen des Lebens heranführt. In vielen kleinen Miniatur-Erzählungen spielt die Schaukel eine tragende Rolle – sie weiß von Kinderträumen, Freundschaften, Sorgen und Zeiten des Wachsens. Wer sind wir, was bewegt uns gerade? Dieses Buch lädt dazu ein, über das Leben ins Gespräch zu kommen. (Ab 5 Jahren)",
   "preis": 25.00,
@@ -292,6 +294,7 @@
 
 {
   "id": 20,
+  "name": "There was an old lady",
   "ean": "9781851244942",
   "beschreibung": "One day an old lady swallows a fly and the only way she can get rid of it is to swallow a wriggling, tickling spider ... For over a century this subversive rhyme has delighted children and parents alike. Graboff's bright and startling illustrations combine beautifully with the traditional verse to bring this classic tale to life.",
   "bilder": [
@@ -310,6 +313,7 @@
 
 {
   "id": 21,
+  "name": "Hungry Goat",
   "ean": "9781851245031",
   "beschreibung": "The (very) hungry goat has a big appetite which gets him into all kinds of adventures. He’ll eat anything, from pig swill to frying pans and even barbed wire. As a result he grows fatter and fatter until one day he gobbles up something that sends him on the biggest adventure of all. Abner Graboff’s timeless illustrations bring this greedy animal to life in a comic rhyming tale for younger children.",
   "bilder": [
@@ -327,9 +331,10 @@
 
 {
   "id": 22,
+  "name": "Monster trinken keine Milch",
   "ean": "9783458643852",
   "übersetzer": "Felicia Bomhoff",
-  "beschreibung": "Monster sind wirklich merkwürdige Wesen. Und sie haben eigenartige Gewohnheiten: Sie gehen nie zum Friseur, tragen keine Schuhe, spielen nicht Klavier. Und auch leckere Erdbeermilch trinken sie nie. Doch warum tun sie all das nicht? Dieses Buch liefert die erstaunliche Antwort – und zeigt, dass man sich vor Monstern gar nicht gruseln muss. Mit knallbunten Bildern und witzigen Texten vertreibt dieses Buch die Angst vor Monstern im Nu. Empfohlen ab 3 Jahren. :contentReference[oaicite:0]{index=0}",
+  "beschreibung": "Monster sind wirklich merkwürdige Wesen. Und sie haben eigenartige Gewohnheiten: Sie gehen nie zum Friseur, tragen keine Schuhe, spielen nicht Klavier. Und auch leckere Erdbeermilch trinken sie nie. Doch warum tun sie all das nicht? Dieses Buch liefert die erstaunliche Antwort – und zeigt, dass man sich vor Monstern gar nicht gruseln muss. Mit knallbunten Bildern und witzigen Texten vertreibt dieses Buch die Angst vor Monstern im Nu. Empfohlen ab 3 Jahren.",
   "bilder": [
     "images/monstermilch/monstermilch.jpg",
     "images/monstermilch/monstermilch1.jpg", 
@@ -339,6 +344,7 @@
 },
 {
   "id": 23,
+  "name": "Unsichtbar in der großen Stadt",
   "ean": "9783848901760",
   "beschreibung": "Allein in der großen Stadt zu sein, ist manchmal unheimlich. Besonders, wenn man klein ist und alles um einen herum so laut und riesengroß. Da ist es gut, wenn es jemanden gibt, der die besten Geheimverstecke kennt, zum Beispiel unterm Haselstrauch oder hoch oben im Walnussbaum. (Ausgezeichnet mit dem Deutschen Jugendliteraturpreis 2021 in der Kategorie Bilderbuch.)",
   "bilder": [
@@ -352,6 +358,7 @@
 
 {
   "id": 24,
+  "name": "Drei kleine Handschuhe",
   "ean": "9783570181553",
  
   "beschreibung": "Pünktchen und Pünktchen sind ein perfekt zusammen-passendes Paar Handschuhe. Und in ihren Augen ist es völlig richtig, dass der partnerlose Handschuh Streifi in die dunkle Jackentasche verbannt wird! Bis sich eines Tages die Verhältnisse umkehren, als ein Pünktchen verschwindet und der zweite Streifi wieder auftaucht. Ist das jetzt noch immer gerecht? Und warum müssen eigentlich immer alle zusammenpassen? Eine Rebellion im Kleiderschrank beginnt!" ,
@@ -372,6 +379,7 @@
 
 {
   "id": 25,
+  "name": "Zwei die sich lieben",
   "ean": "9783779503712",
   "beschreibung": "Was Liebe ist, ist schwer zu sagen. Nur soviel scheint klar: irgendwas mit Küssen und so. Zwei, die sich lieben jedenfalls ist ein kleines Buch für alle, die sich ihre Gedanken machen über die Liebe. Darüber, wer wen küssen will und darf und sogar soll. Über das Davor und das Danach. Das Sehnen, das Finden, Genießen und Abschied nehmen.",
  
@@ -401,6 +409,7 @@
 
 {
   "id": 26,
+  "name": "Mut ist was Gutes",
   "ean": "9783779507123",
   "beschreibung": "Wer sein Herz in die Hand nimmt und das Zaudern überwindet, auf den wartet echtes Hochgefühl! Wolf Erlbruch hat diesen speziellen Moment in hinreißenden Bildern eingefangen. Arne Rautenberg hat sich von ihnen inspirieren lassen zu vergnüglichen Gedichten. Gedichte zu Bildern von Wolf Erlbruch.",
 
@@ -418,6 +427,7 @@
 
 {
   "id": 27,
+  "name": "MVier Kerzen drei Könige zwei Augen ein Stern",
   "ean": "9783779506201",
   "beschreibung": "24 Weihnachtsgedichte – Ein Sack voller Gedichte von Arne Rautenberg! Was drin ist, möchtet ihr wissen? Alles, was das Herz zum Fest begehrt: Kerzen, Lieder, Leckereien. Wichtel, Wünsche, Tannenbaum. Vom hohoho bis pipapo. Es fehlt also nichts, doch hat der Dichter alles einen Tick anders aufgehängt und arrangiert. So flicht er das Lametta ins Haar von Marietta. Er rettet die Weihnachtsgans, nennt sie erst Hans und tauft sie dann ganz schnell auf den Namen Isabell. Aus dem Weihnachtsmann macht er ein Weihnachtsmännchen, aus dessen großer Hand ein Händchen und aus dem Sack ein Säckchen mit winzigen Päckchen. Oft lustig und ungestüm, manchmal leise und besinnlich runden sich Rautenbergs Verse mit Katrin Stangls Illustrationen – in Weihnachtsrot und Blau und voller schöner Einfälle!",  
 
@@ -429,6 +439,7 @@
 
 {
   "id": 28,
+  "name": "Wolf Erlbruchs Adventskalender Schöne Bescherung",
   "ean": "9783779506386",
   "beschreibung": "Zwei zappelige Katzenkinder, denen das geduldige Singen vor der Bescherung sichtlich schwerfällt, während ihre Eltern davon nicht genug bekommen – dieses Bild gehört zu den schönsten Motiven aus Wolf Erlbruchs Kinderzimmerkalendern. Jetzt kommt es als Adventskalender zu neuen Ehren: Hinter 24 Klapptürchen verbergen sich ausgesuchte Motive aus dem Werk des Künstlers – täglich eine feine Überraschung auf dem Weg zum Weihnachtsfest.",
   
@@ -440,6 +451,7 @@
 
 {
   "id": 29,
+  "name": "Die große Frage",
   "ean": "9783872949486",
 
   "beschreibung": "Auf die große Frage „Warum bin ich auf der Welt?“ weiß Wolf Erlbruch selbst keine Antwort – also lässt er andere antworten. Vater, Mutter, Tiere und andere Figuren geben jeweils ihre persönliche Sichtweise, humorvoll, nachdenklich und überraschend. In wenigen Worten und einfachen Bildern widmet sich das Buch dem Sinn des Lebens aus ganz unterschiedlichen Perspektiven, regt zum Staunen und Gespräch an und lässt am Ende Raum für eigene Antworten.",
@@ -460,6 +472,7 @@
 
 {
   "id": 30,
+  "name": "Leo legt los",
   "ean": "9783957287090",
   "beschreibung": "Frau Leo schlief immer in einem Baum. Und wenn sie nicht schlief, fuhr sie ihren Bus. Jeden Tag beförderte sie Tiere von A nach B – das war eine schöne Arbeit. Bis eines Tages ein kleines dunkles Auto an ihrem Bus vorbei raste und alle Passagiere so begeistert waren, dass sie auch ein kleines Auto haben wollten. Damit gerät Frau Leos Job und ihr Zuhause in Gefahr, doch sie findet eine neue, sensationelle Idee. Ein bezauberndes Vorlesebuch mit liebenswerter Protagonistin und humorvollen Details.",
  
@@ -476,6 +489,7 @@
 
 {
   "id": 31,
+  "name": "Nussknacker",
   "ean": "9783314103544",
   "beschreibung": "Die berühmte Weihnachtsgeschichte über Clara und ihren Nussknacker: Am Weihnachtsabend schenkt ihr der geheimnisvolle Drosselmeyer einen Holz-Nussknacker, der in der folgenden Nacht lebendig wird. Gemeinsam mit ihm und seinen Soldaten kämpft sie gegen den Mäusekönig und erlebt ein zauberhaftes Abenteuer voller Fantasie und Wunder – ein Klassiker der Weihnachts- und Kindermärchenliteratur.",
   
@@ -495,6 +509,7 @@
 
 {
   "id": 32,
+  "name": "Der kleine Hawelmann",
   "ean": "9783314106668",
   "beschreibung": "Der kleine Häwelmann kann nicht einschlafen. Er möchte, dass seine Mutter ihn in seinem Bettchen herumschiebt, doch sie schläft schon. Da verwandelt er sein Bett in ein Traumschiff, sein Nachthemd wird zum Segel, und der Mond schickt einen Lichtstrahl durch das Fenster hinaus in die Nacht. Eine fantastische Reise beginnt, die ihn durch die Stadt, den Wald und bis zu den Sternen führt – ein Klassiker der Kinderliteratur mit magischen Bildern.",
   
@@ -512,6 +527,7 @@
   
   {
   "id": 33,
+  "name": "Der Vogel in mir fliegt wohin er will",
   "ean": "9783895654640",
  
   "beschreibung": "Berta wächst zu Beginn des 20. Jahrhunderts im ländlichen Norden Schwedens auf. Alles in ihr sträubt sich gegen ein vorherbestimmtes Leben auf dem Bauernhof. Frei will sie sein wie ein Vogel und studieren, was sie liebt: die Malerei. Doch ihr Vater ist dagegen und ihre Mutter, die sie versteht und unterstützt, stirbt. Berta fühlt tief in sich eine starke Kraft, die sie handeln lässt. ‚Der Vogel in mir fliegt, wohin er will‘ ist ein Buch über Trauer, Sehnsucht, Kompromisslosigkeit und die Kraft der Fantasie, die alles verändern kann – basierend auf dem Leben der schwedischen Malerin Berta Hansson.:contentReference[oaicite:0]{index=0}",
@@ -532,6 +548,7 @@
 
   {
   "id": 34,
+  "name": "Und jetzt sei fröhlich, Knochenmann",
   "ean": "9783948743307",
  
   "beschreibung": "Die Urgroßmutter des Mädchens ist alt und möchte tanzen – aber der Tod lässt auf sich warten. Also macht sich das Mädchen auf die Suche nach ihm. Auf ihrer Reise trifft sie ungewöhnliche Gefährten und lernt, dass der Tod ganz anders sein kann als erwartet. Eine philosophische Geschichte über Tod und Abschied mit farbenprächtigen, detailreichen Bildern, die an den mexikanischen Día de Muertos erinnern.",  
@@ -551,6 +568,7 @@
 
 {
   "id": 35,
+  "name": "Kindergedichte und Galgenlieder",
   "ean": "9783314102561",
   "beschreibung": "Eine liebevoll illustrierte Sammlung von klassischen Kindergedichten und Galgenliedern von Christian Morgenstern, die sowohl Kinder als auch Erwachsene begeistert. In den Gedichten entfaltet Morgenstern seinen scharfsinnigen und zugleich zarten Sprachwitz – perfekt zum Vorlesen und Wiederentdecken der Gedichteklassiker.",
 
@@ -569,6 +587,7 @@
 
 {
   "id": 36,
+  "name": "Pinocchio",
   "ean": "9783855815975",
  
   "beschreibung": "Pinocchio ist die klassische Geschichte der hölzernen Marionette, die voller guter Vorsätze ist, aber immer wieder in Schwierigkeiten gerät. Als seine Lügen wachsen, wächst auch seine Nase – und es beginnt eine abenteuerliche Reise voller Begegnungen mit Gaunern, Feen und allerlei Kuriositäten. Ein Meilenstein der Kinder- und Weltliteratur, wunderschön illustriert und für Kinder ab etwa 4–5 Jahren geeignet.",  
@@ -587,6 +606,7 @@
 
   {
   "id": 37,
+  "name": "Lupo was bedrückt dich",
   "ean": "9783480240937",
   
   "beschreibung": "Große Gefühle, k(l)eine Worte: Ein warmherziges Bilderbuch über Sorgen, Ängste, Mut und Selbstvertrauen. Lupo, der kleine Wolf, hat viele Sorgen und fühlt sich nicht groß, wild oder mutig genug. Sein Freund Pablo zeigt ihm, wie man mit solchen belastenden Gedanken umgehen kann, indem man sie teilt und zusammen Achtsamkeitstricks übt – so werden die Sorgen kleiner. Eine einfühlsame Geschichte, die zeigt, wie wichtig es ist, über Gefühle zu sprechen.",  
@@ -599,6 +619,7 @@
 },
 {
   "id": 38,
+  "name": "Heute bin ich",
   "ean": "9783905945560",
 
   "beschreibung": "Heute bin ich zufrieden. Und du? Bist du neugierig? Gelangweilt? Zornig? In diesem liebevoll illustrierten Bilderbuch drückt jeder Fisch ein anderes Gefühl aus – mal ist es eine schöne, mal eine verwirrende Stimmung, manchmal eine heftige Empfindung, manchmal eine ganz zarte. Das Buch nimmt mit auf eine Reise durch die Welt der Gefühle, regt an, über Empfindungen zu reden, sie zu benennen und besser zu verstehen. Auf jeder Doppelseite wird ein Gefühl visuell dargestellt. Für Kinder ab etwa 3 Jahren geeignet.",
@@ -614,6 +635,7 @@
 
 {
   "id": 39,
+  "name": "Ueberraschung",
   "ean": "9783905945478",
  
   "beschreibung": "Nach den Bestsellern „Heute bin ich“ und „Freunde“ hat Mies van Hout ein neues Bilderbuch gezeichnet: „Überraschung!“. In gewohnter Weise werden Gefühle und Stimmungen sehr treffend dargestellt – getreu dem Motto ‚ein Wort, ein Bild‘. Die leuchtenden, schillernden Farben aus Pastell und Wachs schaffen eine künstlerisch gestaltete Welt, die sowohl Kinder als auch Erwachsene anspricht und vielseitig in Kindergarten, Schule oder Familie eingesetzt werden kann.",
@@ -632,6 +654,7 @@
   
 {
   "id": 40,
+  "name": "Bear",
   "ean": "9783522462525",
   "beschreibung": "Bär hat alles, was sein Herz begehrt: ein spannendes Buch, einen fröhlich tanzenden Luftballon, einen knusprigen Keks – und natürlich seine allerliebste Bank. Perfekt! So lässt es sich wunderbar bärenmäßig zufrieden sein.\nDoch dann kommt der Fuchs vorbei. Und der Wolf. Und der Hase. Und schließlich sogar der Elefant! Alle möchten ein kleines Stück von Bärs Glück abhaben. Oje! Was nun? Muss Bär wirklich alles teilen? Und was ist, wenn er manches lieber für sich behalten möchte?\n\nIn dieser warmherzigen und humorvollen Geschichte erfahren Kinder gemeinsam mit dem Bären, dass es gar nicht immer leicht ist, die eigenen Wünsche zu erkennen – und noch schwieriger, sie mutig auszusprechen.\n\nMit ihren ausdrucksstarken Illustrationen und der liebenswerten Hauptfigur erzählt Natalia Shaloshvili eine Geschichte, die zum Schmunzeln einlädt und Kindern hilft, ihre Gefühle besser zu verstehen.\n\nAusgezeichnet schon vor seinem Erscheinen beim „Dipictus Unpublished Picturebook Showcase“ 2024.\n\n Eine fröhliche, kluge und bärenhafte Geschichte über das Teilen und über Gefühle.",
   "bilder": [
@@ -648,6 +671,7 @@
 
   {
   "id": 42,
+  "name": "Farbe Eule Stift und Katze",
   "ean": "9783702660055",
   "beschreibung": "Mina bekommt ein Buch mit vielen weißen Seiten geschenkt, dazu Stifte und Pinsel. Seite um Seite füllt sie, und bald sind Katze und Eule nicht nur auf dem Papier ihre ständigen Begleiterinnen. Es wird Sommer, dann kommt der Herbst, und Mina ist kritisch: Sind ihre Eulenschnäbel schief, haben ihre Katzen zu kurze Pfoten? Zeichnen kann leicht von der Hand gehen, doch der eigene Blick auf das Resultat steht einem immer wieder im Weg, so auch Mina. Als gute Freundinnen helfen ihr Katze und Eule, das Wesentliche wiederzuentdecken: die Freude an Papier, Stiften und Pinseln.",
     "bilder": [
@@ -661,6 +685,7 @@
   
   {
   "id": 43,
+  "name": "Was wenn ich mich entziehe",
   "ean": "9783948743444",
   "beschreibung": "»Was, wenn ich mich entziehe und ganz bei mir bleibe. Bleibst du dann in meiner Nähe?«<br>Was, wenn ich mich für einen Moment der Welt entziehen möchte? Wenn ich für eine Weile keine Lust mehr habe auf Gesellschaft, Stadtlärm und Gespräche? Wenn mir alles zu viel wird und Stille das einzig Heilsame ist. Bin ich dann allein? Und bleibst du trotzdem bei mir?<br>Heinz Janischs lyrische Gedanken greifen Nicole Vögelis modern-entrückte Bilder auf und verstärken die Sehnsucht nach Abgeschiedenheit und Einkehr. Zusammen entfaltet sich ein beeinduckendes Kaleidoskop der Stille eines einzelnen Tages.<br>Nicole Vögeli: »Ich arbeite hauptsächlich digital und lasse mich für meine Bilder vom Alltagsleben inspirieren. Daraus entsteht mein Illustrationsstil, bei dem ich digitale Illustrationen mit analogen Texturen mixe.«",
     "bilder": [
@@ -674,6 +699,7 @@
 
   {
   "id": 44,
+  "name": "Eisbearen",
   "ean": "9783942795821",
   "beschreibung": "»Sie zweifelte nicht daran, dass es ihr, wenn sie nur ihre Arme um seinen Hals legen konnte, gelingen würde, ihn davon zu überzeugen, dass es so etwas gab, dass eine Liebe erwachen und jeden Tag wachsen kann, während eine andere abstirbt und am Ende nichts ist als ein Kadaver, vor dem es einem graut.«<br>Marie Luise Kaschnitz’ Erzählung handelt von einer Frau und ihrem Mann, den sie damals geheiratet hat, um nicht allein zu sein und den sie heute doch liebt. Dem klar war, dass sie jedes Mal nach einem anderen Ausschau hielt, wenn sie ihren Kopf nach rechts und nach links wendete wie die Eisbären, an deren Gehege im Zoo sie sich kennengelernt hatten. Er nannte sie seinen Eisbären – ein Verdacht, den sie für einen Kosenamen hielt. In dieser Nacht sprechen sie über ihr gemeinsames Leben, über die Liebe und die Lügen, bis eine andere Wahrheit ans Licht kommt.<br>Erstmals 1966 veröffentlicht, schenkt Minden der Kurzgeschichte Kaschnitz‘ in dieser Neuausgabe eine eindringliche Bildebene. Mit ihren feinen Bleistiftillustrationen lässt sie die Leser an den Gefühlen und den Erinnerungen der Protagonistin teilhaben.",
     "bilder": [
@@ -689,6 +715,7 @@
 
   {
   "id": 45,
+  "name": "Weitrausschwimmen",
   "ean": "9783948743550",
   "beschreibung": "Das Wurzelgeflecht der Bäume bildet eine Stufe. Ich setze den rechten Fuß nach unten, hinein in das Wasser. Meine Zehen spüren den weichen Schlamm auf dem Grund, sie graben sich vorsichtig hinein, sie testen aus, ob der Boden fest genug ist. Die kühle Wassertemperatur erfasst mich ohne jede Vorwarnung. Ich verspüre eine Körperlichkeit, die sofort alle Gedanken aus meinem Bewusstsein löscht. Ich kann nicht länger ohne Bewegung bleiben.<br>Aber was passiert, wenn wir weit rausschwimmen, immer weiter, wen das Ufer, das uns Sicherheit gibt, aus dem Blick gerät, wenn Panik sich breitmacht und die Kraft zu schwinden droht? Mitten auf dem See beginnt eine Reise, die über das bloße Schwimmen hinausgeht. Der Essay taucht ein in die metaphorische Kraft des Wassers – Sinnbild für das Leben zwischen Leichtigkeit und Überforderung, Magie und Angst, Orientierungslosigkeit und Verantwortung.<br>Die Bilder der Künstlerin Ånsken Eckert halten Augenblicke fest, in denen das Wasser uns begegnet, ganz alltäglich, ganz unaufgeregt und dennoch: voller Größe. Es sind allesamt Verneigungen vor dem Element, das Leben erhält.<br>Ånsken Eckert: »Ich habe Holzbretter mit Aquarellfarben und Pastellkreide bemalt, um die Holzstrukturen heraus zu arbeiten. Anschließend habe ich diese Strukturen eingescannt und daraus digitale Collagen erstellt.«",
   "bilder": [
@@ -703,6 +730,7 @@
 }, 
   {
   "id": 46,
+  "name": "Don Giovanni",
   "ean": "9783942795555",
   "beschreibung": "Don Giovanni, ein Schürzenjäger aus Leidenschaft, kann einfach nicht anders, als seine Mitmenschen immerzu ins Unglück zu stürzen. Doch können seine Vergehen nicht ewig ungestraft bleiben. Mit seinem Handeln zieht er nicht nur den Unmut der Verflossenen auf sich, sondern weckt sogar den Groll der Untoten.<br>Anni von Bergen setzt die in der Oper gesungenen Emotionen mit ihren dramatischen und expressiven Zeichnungen gekonnt in Szene. Ein wunderbares Zusammenspiel von Musik, Text und Bild.",
   "bilder": [
@@ -716,6 +744,7 @@
 }, 
   {
   "id": 47,
+  "name": "Madeleine und der Angler",
   "ean": "9783702659684",
   "beschreibung": "Wenn Tante Charlotte in die große Kirche geht, nimmt sie Madeleine mit. Während die Tante in der Kapelle sitzt, schaut sich das Mädchen alles genau an und dann treffen sich die beiden wieder. An diesem Tag lässt Tante Charlotte auf sich warten. Madeleine spaziert hinaus ins Freie und zum Fluss hinunter, weil das Sonnenlicht so schön am Wasser glitzert und dort die Angler sitzen.Sie erfüllt sich einen lang gehegten Herzenswunsch und traut sich zu fragen, ob sie auch einmal eine Angel ins Wasser halten darf. Das genießt sie sehr, bis ein Junge sie in ein Gespräch verwickelt: Ob sie ihm den gefangenen Fisch schenken würde? Und ob sie den Fisch auch selbst töten könne? Daran hatte Madeleine noch gar nicht gedacht ... Sie gibt die Angel lieber wieder zurück und ist froh, als Tante Charlotte sie findet.<br>Mira Lobe wurde am 17. September 1913 in Görlitz in Schlesien geboren. Dass sie Talent zum Schreiben hatte, zeigte sich schon an ihren Schulaufsätzen. Sie wollte studieren und Journalistin werden, was ihr als Jüdin im nationalsozialistischen Deutschland verwehrt wurde. Daher lernte sie Maschinenstrickerin an der Berliner Modeschule. 1936 flüchtete sie nach Palästina. Dort heiratete sie den Schauspieler Friedrich Lobe, mit dem sie zwei Kinder hatte. Ab 1950 lebte sie in Wien, wo sie am 6. Februar 1995 starb. Mira Lobe hat fast 100 Kinder- und Jugendbücher geschrieben, für viele von ihnen hat sie Preise und Auszeichnungen erhalten. Zu ihren bekanntesten Werken gehören Das kleine Ich bin ich (1972), Valerie und die Gute-Nacht-Schaukel (1981), Die Geggis (1985) und Die Omama im Apfelbaum (1965).Sabine Rufener wurde 1972 in Bern in der Schweiz geboren. Schon als Kind schrieb und illustrierte sie leidenschaftlich gerne Geschichten. Nach dem Gymnasium besuchte sie unter anderem eine Fotoschule, arbeitete im Theater und gründete eine Familie, bevor sie schließlich Illustration an der Schule für Kunst und Design Zürich SKDZ studierte. Sie experimentiert gerne mit verschiedensten Drucktechniken, Collage, Frottage, aber auch mit Farbstiften und Tusche. Ihr erstes Bilderbuch wurde für den Serafina-Preis für Illustration nominiert. Sabine Rufener lebt als freie Illustratorin mit ihrer Familie und ihren Hühnern in Basel.",
   "bilder": [
@@ -729,6 +758,7 @@
 
   {
   "id": 48,
+  "name": "Huebsch",
   "ean": "9783702659479",
   "beschreibung": "Die Hexe ist sehr aufgeregt, weil sie ein Rendezvous mit dem Oger hat. Lange überlegt sie, welches Kleid sie anziehen soll, um richtig hübsch zu sein. Auf dem Weg zum Treffpunkt begegnet sie nacheinander dem Eichhörnchen, dem Kaninchen, dem Fuchs und der Maus. Jedes der Tiere bemängelt etwas an der Hexe und sie zaubert sich Schritt für Schritt ein anderes Aussehen. Als sie schließlich beim Oger ankommt, ist sie so verändert, dass er sie gar nicht erkennt und sie davonjagt.Die Hexe sieht sich im Spiegel und ist entsetzt: Sie ist ja gar nicht mehr sie selbst! Schnell zaubert sie wieder alles zurück und lädt den Oger zum Abendessen ein. Bekanntlich sind Hexen aber nicht zimperlich und so rächt sie sich fürchterlich an ihren Ratgebern.<br><br> Canizales wurde in Kolumbien geboren. Er studierte Kunst in seiner Heimatstadt Cali besuchte nach seinem Abschluss den Master-Studiengang für Animation an der Universität der Balearen. Seitdem lebt Canizales in Palma de Mallorca, wo er sich ausschließlich seiner großen Leidenschaft widmet: der Illustration.",
   "bilder": [
@@ -744,6 +774,7 @@
   {
   "id": 49,
   "ean": "9783907114056",
+  "name": "Einmal Katze sein",
   "beschreibung": "Noch nie wurde das eigensinnige Wesen unseres beliebtesten Haustiers so liebevoll inszeniert wie in den zwanzig Porträts, die Mies van Hout für dieses Buch geschaffen hat. Egal, ob man Katzen liebt oder nicht, die Zuordnung der typischenKatzenstimmungen wie verärgert, beleidigt, zufrieden und tollpatschig ziehen einen sofort in den Bann und machen dieses Buch unwiderstehlich. Mies van Hout ist nicht nur ein großer Katzenliebhaber, sie hat auch ein sehr gutes Auge für Details und es ist ihr möglich, die Gefühle von Tieren überzeugend auf Papier zu bringen. Inspiriert von ihrer eigenen Katze hatsie zwanzig Katzenemotionen dargestellt und diese in leuchtenden Ölpastellkreiden auf schwarzem Papier eingefangen.Fünf sehr bekannte niederländische Autoren, Bette Westera, Hans und Monique Hagen, Koos Meinderts sowie Sjoerd Kuyper, verfassten hierzu in ihrer jeweils eigenen Art prachtvolle Katzenpoesie, welche behutsam und sorgfältig von Rolf Erdorf in die deutsche Sprache übersetzt wurde.<br><br>Mies van Hout wurde 1962 geboren und studierte an der Kunstakademie in Groningen Grafikdesign. Seit 1989 arbeitet sie als freie Illustratorin und Grafikdesignerin und hat inzwischen über 100 Bilderbücher illustriert. Ihr gelingt es, mit einfachen Mitteln und doch sehr überzeugend auf ungewöhnliche Weise Gefühle in Figuren und Bilder umzuwandeln. Sie hält uns mit ihren Bilderbüchern immer wieder einen Spiegel vor: Monster sind Freunde, Fische haben Stimmungen und ein Oktopus sucht Hilfe. Die Illustrationen von Mies van Hout sind von großer Farbtiefe und Brillanz. Sie visualisieren Emotionen auf einzigartige Weise, lassen den Betrachter die eigene Gefühlswelt aus der Distanz sehen und öffnen so auch neue Wege, darüber zu sprechen.",
   "bilder": [
     "images/einmalkatzesein/einmalkatzesein.jpg",
@@ -754,17 +785,66 @@
   ],
  "kategorie": "Kinder und Gefühle"
 },
-
   {
-  "id": 999,
-  "name": "Geschenkgutschein",
-  "ean": null,
-  "is_gutschein": true,
-  "preis_optionen": [10, 25, 50, 100],
-  "kategorie": "Kinder und Gefühle",
-  "beschreibung": "Verschenke Freude mit einem Gutschein."
-}
+  "id": 50,
+  "name": "Bob the Artist",
+  "ean": "9781780677712",
+  "beschreibung": "Bob the bird is just like all his friends, apart from his skinny legs. When Bob is teased, he decides to try and change himself to fit in. But little does he know where all his efforts will lead him... \nAn affirming picture book for age 3+ about the power of art and of being confident enough to be yourself. \n\nAuthor of the best-selling Let's Make Some Great Art series, Marion Deuchars has a globally recognisable illustration style. Her hand-lettering and illustrations have been used on advertising campaigns from Samsung to HP, and her books have won six awards for design and illustration. She is a member of the Alliance Graphique Internationale.",
+  "bilder": [
+    "images/bobtheartist/bobtheartist.jpg",
+    "images/bobtheartist/bobtheartist1.jpg",
+    "images/bobtheartist/bobtheartist2.jpg",
+    "images/bobtheartist/bobtheartist3.jpg",
+    "images/bobtheartist/bobtheartist4.jpg",
+    "images/bobtheartist/bobtheartist5.jpg",
+    "images/bobtheartist/bobtheartist6.jpg",
+    "images/bobtheartist/bobtheartist7.jpg"
+  ],
+ "kategorie": "Bob der Künstler"
+},
   
+  {
+  "id": 51,
+  "name": "Einmal Katze sein",
+  "ean": "9783907114056",
+  "beschreibung": "Noch nie wurde das eigensinnige Wesen unseres beliebtesten Haustiers so liebevoll inszeniert wie in den zwanzig Porträts, die Mies van Hout für dieses Buch geschaffen hat. Egal, ob man Katzen liebt oder nicht, die Zuordnung der typischenKatzenstimmungen wie verärgert, beleidigt, zufrieden und tollpatschig ziehen einen sofort in den Bann und machen dieses Buch unwiderstehlich. Mies van Hout ist nicht nur ein großer Katzenliebhaber, sie hat auch ein sehr gutes Auge für Details und es ist ihr möglich, die Gefühle von Tieren überzeugend auf Papier zu bringen. Inspiriert von ihrer eigenen Katze hatsie zwanzig Katzenemotionen dargestellt und diese in leuchtenden Ölpastellkreiden auf schwarzem Papier eingefangen.Fünf sehr bekannte niederländische Autoren, Bette Westera, Hans und Monique Hagen, Koos Meinderts sowie Sjoerd Kuyper, verfassten hierzu in ihrer jeweils eigenen Art prachtvolle Katzenpoesie, welche behutsam und sorgfältig von Rolf Erdorf in die deutsche Sprache übersetzt wurde.<br><br>Mies van Hout wurde 1962 geboren und studierte an der Kunstakademie in Groningen Grafikdesign. Seit 1989 arbeitet sie als freie Illustratorin und Grafikdesignerin und hat inzwischen über 100 Bilderbücher illustriert. Ihr gelingt es, mit einfachen Mitteln und doch sehr überzeugend auf ungewöhnliche Weise Gefühle in Figuren und Bilder umzuwandeln. Sie hält uns mit ihren Bilderbüchern immer wieder einen Spiegel vor: Monster sind Freunde, Fische haben Stimmungen und ein Oktopus sucht Hilfe. Die Illustrationen von Mies van Hout sind von großer Farbtiefe und Brillanz. Sie visualisieren Emotionen auf einzigartige Weise, lassen den Betrachter die eigene Gefühlswelt aus der Distanz sehen und öffnen so auch neue Wege, darüber zu sprechen.",
+  "bilder": [
+    "images/bobtheartist/einmalkatzesein.jpg",
+    "images/einmalkatzesein/einmalkatzesein1.jpg",
+    "images/einmalkatzesein/einmalkatzesein2.jpg",
+    "images/einmalkatzesein/einmalkatzesein3.jpg",
+    "images/einmalkatzesein/einmalkatzesein4.jpg"
+  ],
+ "kategorie": "Bob der Künstler"
+},
+  {
+  "id": 52,
+  "name": "Einmal Katze sein",
+  "ean": "9783907114056",
+  "beschreibung": "Noch nie wurde das eigensinnige Wesen unseres beliebtesten Haustiers so liebevoll inszeniert wie in den zwanzig Porträts, die Mies van Hout für dieses Buch geschaffen hat. Egal, ob man Katzen liebt oder nicht, die Zuordnung der typischenKatzenstimmungen wie verärgert, beleidigt, zufrieden und tollpatschig ziehen einen sofort in den Bann und machen dieses Buch unwiderstehlich. Mies van Hout ist nicht nur ein großer Katzenliebhaber, sie hat auch ein sehr gutes Auge für Details und es ist ihr möglich, die Gefühle von Tieren überzeugend auf Papier zu bringen. Inspiriert von ihrer eigenen Katze hatsie zwanzig Katzenemotionen dargestellt und diese in leuchtenden Ölpastellkreiden auf schwarzem Papier eingefangen.Fünf sehr bekannte niederländische Autoren, Bette Westera, Hans und Monique Hagen, Koos Meinderts sowie Sjoerd Kuyper, verfassten hierzu in ihrer jeweils eigenen Art prachtvolle Katzenpoesie, welche behutsam und sorgfältig von Rolf Erdorf in die deutsche Sprache übersetzt wurde.<br><br>Mies van Hout wurde 1962 geboren und studierte an der Kunstakademie in Groningen Grafikdesign. Seit 1989 arbeitet sie als freie Illustratorin und Grafikdesignerin und hat inzwischen über 100 Bilderbücher illustriert. Ihr gelingt es, mit einfachen Mitteln und doch sehr überzeugend auf ungewöhnliche Weise Gefühle in Figuren und Bilder umzuwandeln. Sie hält uns mit ihren Bilderbüchern immer wieder einen Spiegel vor: Monster sind Freunde, Fische haben Stimmungen und ein Oktopus sucht Hilfe. Die Illustrationen von Mies van Hout sind von großer Farbtiefe und Brillanz. Sie visualisieren Emotionen auf einzigartige Weise, lassen den Betrachter die eigene Gefühlswelt aus der Distanz sehen und öffnen so auch neue Wege, darüber zu sprechen.",
+  "bilder": [
+    "images/einmalkatzesein/einmalkatzesein.jpg",
+    "images/einmalkatzesein/einmalkatzesein1.jpg",
+    "images/einmalkatzesein/einmalkatzesein2.jpg",
+    "images/einmalkatzesein/einmalkatzesein3.jpg",
+    "images/einmalkatzesein/einmalkatzesein4.jpg"
+  ],
+ "kategorie": "Bob der Künstler"
+},
+  {
+  "id": 49,
+  "name": "Einmal Katze sein",
+  "ean": "9783907114056",
+  "beschreibung": "Noch nie wurde das eigensinnige Wesen unseres beliebtesten Haustiers so liebevoll inszeniert wie in den zwanzig Porträts, die Mies van Hout für dieses Buch geschaffen hat. Egal, ob man Katzen liebt oder nicht, die Zuordnung der typischenKatzenstimmungen wie verärgert, beleidigt, zufrieden und tollpatschig ziehen einen sofort in den Bann und machen dieses Buch unwiderstehlich. Mies van Hout ist nicht nur ein großer Katzenliebhaber, sie hat auch ein sehr gutes Auge für Details und es ist ihr möglich, die Gefühle von Tieren überzeugend auf Papier zu bringen. Inspiriert von ihrer eigenen Katze hatsie zwanzig Katzenemotionen dargestellt und diese in leuchtenden Ölpastellkreiden auf schwarzem Papier eingefangen.Fünf sehr bekannte niederländische Autoren, Bette Westera, Hans und Monique Hagen, Koos Meinderts sowie Sjoerd Kuyper, verfassten hierzu in ihrer jeweils eigenen Art prachtvolle Katzenpoesie, welche behutsam und sorgfältig von Rolf Erdorf in die deutsche Sprache übersetzt wurde.<br><br>Mies van Hout wurde 1962 geboren und studierte an der Kunstakademie in Groningen Grafikdesign. Seit 1989 arbeitet sie als freie Illustratorin und Grafikdesignerin und hat inzwischen über 100 Bilderbücher illustriert. Ihr gelingt es, mit einfachen Mitteln und doch sehr überzeugend auf ungewöhnliche Weise Gefühle in Figuren und Bilder umzuwandeln. Sie hält uns mit ihren Bilderbüchern immer wieder einen Spiegel vor: Monster sind Freunde, Fische haben Stimmungen und ein Oktopus sucht Hilfe. Die Illustrationen von Mies van Hout sind von großer Farbtiefe und Brillanz. Sie visualisieren Emotionen auf einzigartige Weise, lassen den Betrachter die eigene Gefühlswelt aus der Distanz sehen und öffnen so auch neue Wege, darüber zu sprechen.",
+  "bilder": [
+    "images/einmalkatzesein/einmalkatzesein.jpg",
+    "images/einmalkatzesein/einmalkatzesein1.jpg",
+    "images/einmalkatzesein/einmalkatzesein2.jpg",
+    "images/einmalkatzesein/einmalkatzesein3.jpg",
+    "images/einmalkatzesein/einmalkatzesein4.jpg"
+  ],
+ "kategorie": "Bob der Künstler"
+}
 
-
+  
 ]
