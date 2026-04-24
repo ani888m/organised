@@ -1,12 +1,4 @@
 
-
-
-
-
-
-
-
-
 import os
 import json
 import logging
@@ -31,8 +23,7 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
 # Modelle importieren
-from models import db, Bestellung, BestellPosition, NewsletterSubscriber
-
+from models import db, Bestellung, BestellPosition, NewsletterSubscriber, Gutschein, User
 
 from datetime import timedelta
 
@@ -209,11 +200,16 @@ def capture_gutschein_order(order_id):
         empfaenger=session["gutschein_empfaenger"]
     )
 
+
+    session.pop("gutschein_wert", None)
+    session.pop("gutschein_email", None)
+    session.pop("gutschein_empfaenger", None)
+    
     db.session.add(gutschein)
     db.session.commit()
 
     send_email(
-        subject="Dein Geschenkgutschein 🎁",
+        subject="Dein Geschenkgutschein",
         recipient=gutschein.email,
         html=f"""
         <h2>Geschenkgutschein</h2>
@@ -224,6 +220,8 @@ def capture_gutschein_order(order_id):
         <h2>{gutschein.code}</h2>
         """
     )
+
+  
 
     return jsonify({"success": True})
 
@@ -271,7 +269,16 @@ def paypal_access_token():
 @csrf.exempt
 def create_paypal_order():
     cart_items = get_cart()
+
     total = calculate_total(cart_items)
+    if session.get("gutschein_code"):
+        g = Gutschein.query.filter_by(
+            code=session["gutschein_code"]
+        ).first()
+        
+        if g:
+            rabatt = min(total, g.restwert)
+            total -= rabatt
 
     if not cart_items or total <= 0:
         return jsonify({"error": "Warenkorb leer"}), 400
@@ -1109,6 +1116,7 @@ def send_email(subject, recipient, html, plain_text=None):
         logger.warning("SendGrid nicht konfiguriert")
         return
 
+    
     message = Mail(
         from_email=EMAIL_SENDER,
         to_emails=recipient,
