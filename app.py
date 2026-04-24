@@ -133,105 +133,124 @@ else:
     produkte = []
 
 
+
+
+
 # =====================================================
-# LOGIN
+# GUTSCHEIN
 # =====================================================
 
-
-@app.route("/register", methods=["GET", "POST"])
-def register():
-    if request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
-
-        if User.query.filter_by(email=email).first():
-            flash("E-Mail existiert bereits", "error")
-            return redirect("/register")
-
-        user = User(email=email)
-        user.set_password(password)
-
-        db.session.add(user)
-        db.session.commit()
-
-        session["user_id"] = user.id
-
-        return redirect("/")
-
-    return render_template("register.html")
-
-
-
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/create-gutschein-order", methods=["POST"])
 @csrf.exempt
-def login():
-    if request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
+def create_gutschein_order():
 
-        user = User.query.filter_by(email=email).first()
+    data = request.get_json()
 
-        if not user or not user.check_password(password):
-            flash("Login fehlgeschlagen", "error")
-            return redirect("/login")
+    wert = float(data["wert"])
 
-        session["user_id"] = user.id
-        return redirect("/")
+    if wert < 5:
+        return jsonify({"error": "Mindestwert 5€"}), 400
 
-    return render_template("login.html")
+    access_token = paypal_access_token()
 
+    response = requests.post(
+        f"{PAYPAL_BASE}/v2/checkout/orders",
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {access_token}",
+        },
+        json={
+            "intent": "CAPTURE",
+            "purchase_units": [{
+                "amount": {
+                    "currency_code": "EUR",
+                    "value": f"{wert:.2f}"
+                }
+            }]
+        }
+    )
 
-@app.route("/logout")
-def logout():
-    session.pop("user_id", None)
-    return redirect("/")
+    order = response.json()
 
+    session["gutschein_wert"] = wert
+    session["gutschein_email"] = data["email"]
+    session["gutschein_empfaenger"] = data["empfaenger"]
 
-
-
-
-@app.context_processor
-def inject_user():
-    user = None
-    if "user_id" in session:
-        user = User.query.get(session["user_id"])
-    return dict(current_user=user)
-
-
-@app.route("/meine-gutscheine")
-def meine_gutscheine():
-    if "user_id" not in session:
-        return redirect("/login")
-
-    gutscheine = Gutschein.query.filter_by(user_id=session["user_id"]).all()
-
-    return render_template("gutscheine.html", gutscheine=gutscheine)
+    return jsonify({"id": order["id"]})
 
 
-def update_user_punkte_und_gutschein(user, cart_items):
-    """Fügt Punkte hinzu und vergibt ggf. Gutschein"""
-    punkte = int(calculate_total(cart_items))
-    user.punkte += punkte
 
-    # 🎁 Gutschein bei 100 Punkten
-    if user.punkte >= 100:
-        code = str(uuid.uuid4())[:8]
-        gutschein = Gutschein(
-            code=code,
-            wert=10,  # z.B. 10€
-            user_id=user.id
-        )
-        user.punkte -= 100
-        db.session.add(gutschein)
+@app.route("/capture-gutschein-order/<order_id>", methods=["POST"])
+@csrf.exempt
+def capture_gutschein_order(order_id):
 
-        send_email(
-            subject="Dein Gutschein 🎁",
-            body=f"Dein Code: {code}",
-            recipient=user.email
-        )
+    access_token = paypal_access_token()
 
+    response = requests.post(
+        f"{PAYPAL_BASE}/v2/checkout/orders/{order_id}/capture",
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {access_token}",
+        }
+    )
+
+    data = response.json()
+
+    if data.get("status") != "COMPLETED":
+        return jsonify({"error": "Zahlung fehlgeschlagen"}), 400
+
+    code = str(uuid.uuid4()).replace("-", "")[:10].upper()
+
+    gutschein = Gutschein(
+        code=code,
+        wert=session["gutschein_wert"],
+        restwert=session["gutschein_wert"],
+        email=session["gutschein_email"],
+        empfaenger=session["gutschein_empfaenger"]
+    )
+
+    db.session.add(gutschein)
     db.session.commit()
 
+    send_email(
+        subject="Dein Geschenkgutschein 🎁",
+        recipient=gutschein.email,
+        html=f"""
+        <h2>Geschenkgutschein</h2>
+        <p>Hallo {gutschein.empfaenger},</p>
+        <p>Du hast einen Gutschein erhalten.</p>
+        <h1>{gutschein.wert:.2f} €</h1>
+        <p>Code:</p>
+        <h2>{gutschein.code}</h2>
+        """
+    )
+
+    return jsonify({"success": True})
+
+
+
+@app.route("/apply-gutschein", methods=["POST"])
+def apply_gutschein():
+
+    code = request.form.get("code").strip().upper()
+
+    gutschein = Gutschein.query.filter_by(
+        code=code,
+        aktiv=True
+    ).first()
+
+    if not gutschein:
+        flash("Ungültiger Gutschein", "error")
+        return redirect("/cart")
+
+    if gutschein.restwert <= 0:
+        flash("Gutschein bereits verbraucht", "error")
+        return redirect("/cart")
+
+    session["gutschein_code"] = gutschein.code
+
+    flash("Gutschein aktiviert", "success")
+    return redirect("/cart")
 # =====================================================
 # PAYPAL
 # =====================================================
@@ -330,6 +349,32 @@ def capture_paypal_order(order_id):
             )
 
         db.session.commit()
+
+
+        # ==========================
+        # GUTSCHEIN ABZIEHEN
+        # ==========================
+        if session.get("gutschein_code"):
+            g = Gutschein.query.filter_by(
+                code=session["gutschein_code"]
+            ).first()
+            
+            if g:
+                
+                rabatt = min(
+                    calculate_total(cart_items),
+                    g.restwert
+                )
+                
+                g.restwert -= rabatt
+                
+                if g.restwert <= 0:
+                    g.eingelöst = True
+                    g.aktiv = False
+                    
+                db.session.commit()
+                
+            session.pop("gutschein_code", None)
 
         try:
             sende_bestellung_an_buchbutler(bestellung, cart_items)
@@ -913,11 +958,27 @@ def add_to_cart():
 
 
 
+
+
+
 @app.route("/cart")
 def cart():
+
     cart_items = get_cart()
     total = calculate_total(cart_items)
-    return render_template("cart.html", cart_items=cart_items, total=total)
+
+    gutschein_wert = 0
+
+    if session.get("gutschein_code"):
+        g = Gutschein.query.filter_by(
+            code=session["gutschein_code"]
+        ).first()
+
+        if g:
+            gutschein_wert = min(total, g.restwert)
+            total -= gutschein_wert
+
+    return render_template("cart.html", cart_items=cart_items, total=total, gutschein=gutschein_wert )
 
 @app.route("/remove-from-cart/<int:produkt_id>")
 def remove_from_cart(produkt_id):
