@@ -1,6 +1,7 @@
 
 
 
+
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -8,20 +9,15 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
-# ----------------------
-# GUtschein
-# ----------------------
-
-
 
 class Gutschein(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    code = db.Column(db.String(50), unique=True, nullable=False)
-    wert = db.Column(db.Float, nullable=False)
-    aktiv = db.Column(db.Boolean, default=True)
-    user_id = db.Column(db.Integer, nullable=True)
-    erstellt_am = db.Column(db.DateTime, default=datetime.utcnow)
-    eingelöst_am = db.Column(db.DateTime, nullable=True)
+
+    code = db.Column(db.String(50), unique=True)
+    wert = db.Column(db.Float)
+
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id")) 
+    eingelöst = db.Column(db.Boolean, default=False)
 
 # ----------------------
 # Newsletter
