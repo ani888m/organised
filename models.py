@@ -10,15 +10,21 @@ from werkzeug.security import generate_password_hash, check_password_hash
 db = SQLAlchemy()
 
 
+
 class Gutschein(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
-    code = db.Column(db.String(50), unique=True)
-    wert = db.Column(db.Float)
+    code = db.Column(db.String(50), unique=True, nullable=False)
+    wert = db.Column(db.Float, nullable=False)
+    restwert = db.Column(db.Float, nullable=False)
 
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id")) 
+    email = db.Column(db.String(255))
+    empfaenger = db.Column(db.String(255))
+
+    aktiv = db.Column(db.Boolean, default=True)
     eingelöst = db.Column(db.Boolean, default=False)
 
+    erstellt_am = db.Column(db.DateTime, default=datetime.utcnow)
 # ----------------------
 # Newsletter
 # ----------------------
