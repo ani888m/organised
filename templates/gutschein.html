@@ -1,42 +1,194 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="{{ url_for('static', filename='ficon.png') }}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Gutschein kaufen</title>
 
-   <script src="{{ url_for('static', filename='script.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
-  <title>I B K - Buchhandlung für Illustration und Bilderbücher | Warenkorb </title>
+<script src="https://www.paypal.com/sdk/js?client-id={{ config['PAYPAL_CLIENT_ID'] }}&currency=EUR"></script>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#f8f6f2;
+color:#222;
+}
+
+.wrapper{
+max-width:700px;
+margin:auto;
+padding:40px 20px;
+}
+
+.card{
+background:white;
+border-radius:20px;
+padding:40px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+h1{
+font-size:38px;
+margin-bottom:10px;
+text-align:center;
+}
+
+.sub{
+text-align:center;
+color:#777;
+margin-bottom:35px;
+}
+
+.values{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+margin-bottom:20px;
+}
+
+.value-btn{
+padding:18px;
+border:none;
+border-radius:12px;
+background:#eee;
+font-size:22px;
+cursor:pointer;
+font-weight:bold;
+transition:0.2s;
+}
+
+.value-btn:hover{
+background:#d8c3a5;
+color:white;
+}
+
+input{
+width:100%;
+padding:16px;
+margin-bottom:15px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:16px;
+box-sizing:border-box;
+}
+
+#paypal-button-container{
+margin-top:25px;
+}
+
+.gift{
+font-size:70px;
+text-align:center;
+margin-bottom:15px;
+}
+
+.info{
+background:#faf7f1;
+padding:18px;
+border-radius:12px;
+font-size:15px;
+margin-top:25px;
+line-height:1.6;
+}
+
+@media(max-width:600px){
+.values{
+grid-template-columns:1fr;
+}
+}
+
+</style>
 </head>
-<body style="max-width: 1800px">
-  {% include 'navbar.html' %}
-  <div id="navbar-placeholder"></div>
+<body>
 
-  <main style="margin-left: 100px; max-width: 2000px">
-      
-       <h1>🎁 Gutschein kaufen</h1>
+<div class="wrapper">
 
-<form method="POST">
-  <label>Betrag:</label>
-  <select name="wert">
-    <option value="10">0.01 €</option>
-    <option value="25">25 €</option>
-    <option value="50">50 €</option>
-    <option value="100">100 €</option>
-  </select>
+<div class="card">
 
-  <label>E-Mail des Empfängers:</label>
-  <input type="email" name="email" required>
+<div class="gift">🎁</div>
 
-  <button type="submit">Weiter zur Zahlung</button>
-</form>
+<h1>Geschenkgutschein</h1>
 
-  {% include 'footer.html' %}
+<div class="sub">
+Freude schenken – sofort per E-Mail als PDF
+</div>
+
+<div class="values">
+<button class="value-btn" onclick="setValue(25)">25€</button>
+<button class="value-btn" onclick="setValue(50)">50€</button>
+<button class="value-btn" onclick="setValue(100)">100€</button>
+</div>
+
+<input type="number" id="wert" placeholder="Wunschbetrag in €">
+
+<input type="text" id="empfaenger" placeholder="Name des Beschenkten">
+
+<input type="email" id="email" placeholder="E-Mail Adresse">
+
+<div id="paypal-button-container"></div>
+
+<div class="info">
+✔ Sofortversand per Mail  
+✔ PDF Gutschein zum Ausdrucken  
+✔ Restwert bleibt erhalten  
+✔ Einlösbar auf alle Produkte
+</div>
+
+</div>
+</div>
+
+<script>
+
+function setValue(v){
+document.getElementById("wert").value = v;
+}
+
+paypal.Buttons({
+
+createOrder: function(data, actions){
+
+let wert = document.getElementById("wert").value;
+let email = document.getElementById("email").value;
+let empfaenger = document.getElementById("empfaenger").value;
+
+return fetch("/create-gutschein-order", {
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body: JSON.stringify({
+wert: wert,
+email: email,
+empfaenger: empfaenger
+})
+})
+.then(res => res.json())
+.then(data => data.id);
+
+},
+
+onApprove: function(data, actions){
+
+return fetch("/capture-gutschein-order/" + data.orderID,{
+method:"POST"
+})
+.then(res => res.json())
+.then(data => {
+
+alert("Danke! Gutschein wurde versendet 🎁");
+
+window.location="/danke";
+
+});
+
+}
+
+}).render('#paypal-button-container');
+
+</script>
 
 </body>
 </html>
