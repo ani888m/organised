@@ -21,12 +21,18 @@
   <main style="margin-left: 100px; max-width: 2000px">
     <h2 style="margin:50px">Warenkorb</h2>
     <div id="cart-items" style="padding:20px; font-size: 20px"></div>
+
+    <form method="POST" action="/apply-gutschein">
+       <input type="text" name="code" placeholder="Gutschein-Code">
+       <button type="submit">Einlösen</button>
+    </form>
       <p class="dsgvo-text">
       Kostenloser Versand. Weitere Informationen zu Versand, Rückgabe und Widerrufsrecht 
       finden Sie in unseren <a href="/agb">Allgemeinen Geschäftsbedingungen</a>.
       </p>
     <div style="display: flex; justify-content: space-between; margin: 50px; max-width: 1800px;">
       <p>Zwischensumme: <span id="total-price">0.00</span> €</p><br>
+    
       
       <button id="checkout-btn">Zur Kasse</button>   
     </div>
