@@ -134,40 +134,52 @@ else:
 @app.route("/create-gutschein-order", methods=["POST"])
 @csrf.exempt
 def create_gutschein_order():
+    try:
+        data = request.get_json()
 
-    data = request.get_json()
+        wert = float(data["wert"])
 
-    wert = float(data["wert"])
+        if wert < 5:
+            return jsonify({"error": "Mindestwert 5€"}), 400
 
-    if wert < 5:
-        return jsonify({"error": "Mindestwert 5€"}), 400
+        access_token = paypal_access_token()
 
-    access_token = paypal_access_token()
+        if not access_token:
+            return jsonify({"error": "Kein PayPal Token"}), 500
 
-    response = requests.post(
-        f"{PAYPAL_BASE}/v2/checkout/orders",
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {access_token}",
-        },
-        json={
-            "intent": "CAPTURE",
-            "purchase_units": [{
-                "amount": {
-                    "currency_code": "EUR",
-                    "value": f"{wert:.2f}"
-                }
-            }]
-        }
-    )
+        response = requests.post(
+            f"{PAYPAL_BASE}/v2/checkout/orders",
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {access_token}",
+            },
+            json={
+                "intent": "CAPTURE",
+                "purchase_units": [{
+                    "amount": {
+                        "currency_code": "EUR",
+                        "value": f"{wert:.2f}"
+                    },
+                    "description": "Geschenkgutschein"
+                }]
+            }
+        )
 
-    order = response.json()
+        order = response.json()
 
-    session["gutschein_wert"] = wert
-    session["gutschein_email"] = data["email"]
-    session["gutschein_empfaenger"] = data["empfaenger"]
+        print("PAYPAL RESPONSE:", order)
 
-    return jsonify({"id": order["id"]})
+        if "id" not in order:
+            return jsonify(order), 500
+
+        session["gutschein_wert"] = wert
+        session["gutschein_email"] = data["email"]
+        session["gutschein_empfaenger"] = data["empfaenger"]
+
+        return jsonify({"id": order["id"]})
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 
